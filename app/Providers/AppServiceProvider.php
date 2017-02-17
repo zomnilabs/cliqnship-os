@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
         // Development tools helper
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
-            $this->app->register(\Barryvdh\Debugbar\LumenServiceProvider::class);
+            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
         }
     }
 }
