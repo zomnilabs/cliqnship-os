@@ -63,9 +63,16 @@
                 margin-bottom: 30px;
             }
         </style>
+
+        <script>
+            // rename myToken as you like
+            window.Laravel =  <?php echo json_encode([
+                'csrfToken' => csrf_token(),
+            ]); ?>
+        </script>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="flex-center position-ref full-height" id="app">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
@@ -81,11 +88,9 @@
                 <div class="title m-b-md">
                     Laravel
                 </div>
-
-                <div id="app">
-                    <passport-clients />
-                </div>
             </div>
         </div>
+
+        <script src="/js/app.js"></script>
     </body>
 </html>
