@@ -2,8 +2,16 @@
 
 @section('stylesheets')
     <style>
-        .panel .panel-body{
+        .cards .panel .panel-body{
             font-size: 2em;
+        }
+        .cards .panel .panel-body a{
+            color: #636b6f;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .cards .panel .panel-body:hover{
+            color: #B1CE52;
         }
     </style>
 @endsection
@@ -16,7 +24,7 @@
                     <li class="active"> <i class="glyphicon glyphicon-home"></i> Dashboard</li>
                 </ol>
 
-                <div class="row text-center">
+                <div class="row text-center cards">
                     <div class="col-md-2">
                         <div class="panel panel-default">
                             <div class="panel-body">
@@ -29,7 +37,7 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <i class="glyphicon glyphicon-tags"></i>
-                                <p>New Products</p>
+                                <p><a href="#">New Products</a></p>
                             </div>
                         </div>
                     </div>
@@ -37,7 +45,7 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <i class="glyphicon glyphicon-tags"></i>
-                                <p>New Products</p>
+                                <p><a href="#">New Products</a></p>
                             </div>
                         </div>
                     </div>
@@ -45,7 +53,7 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <i class="glyphicon glyphicon-tags"></i>
-                                <p>New Products</p>
+                                <p><a href="#">New Products</a></p>
                             </div>
                         </div>
                     </div>
@@ -53,7 +61,7 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <i class="glyphicon glyphicon-tags"></i>
-                                <p>New Products</p>
+                                <p><a href="#">New Products</a></p>
                             </div>
                         </div>
                     </div>
@@ -61,7 +69,7 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <i class="glyphicon glyphicon-tags"></i>
-                                <p>New Products</p>
+                                <p><a href="#">New Products</a></p>
                             </div>
                         </div>
                     </div>
