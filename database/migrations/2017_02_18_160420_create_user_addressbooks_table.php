@@ -17,7 +17,7 @@ class CreateUserAddressbooksTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('identifier');
-            $table->enum('booking', ['booking', 'shipment']);
+            $table->enum('type', ['booking', 'shipment']);
             $table->string('first_name');
             $table->string('last_name');
             $table->string('middle_name')->nullable();
