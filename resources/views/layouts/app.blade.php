@@ -24,7 +24,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
-            <div style="padding-right: 20px; padding-left: 20px">
+            <div class="container-fluid">
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -44,21 +44,23 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;<li class="active"><a href="#">Dashboard <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Addressbooks</a></li>
-                        <li><a href="#">Bookings</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                role="button" aria-haspopup="true" aria-expanded="false">
-                                Shipments <span class="caret"></span></a>
+                        @if (! Auth::guest())
+                            <li class="active"><a href="#">Dashboard <span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">Addressbooks</a></li>
+                            <li><a href="#">Bookings</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                   role="button" aria-haspopup="true" aria-expanded="false">
+                                    Shipments <span class="caret"></span></a>
 
-                            <ul class="dropdown-menu">
-                                <li><a href="#">All Shipments</a></li>
-                                <li><a href="#">Returned Shipments</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Cash-on-Delivery Shipments</a></li>
-                            </ul>
-                        </li>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">All Shipments</a></li>
+                                    <li><a href="#">Returned Shipments</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Cash-on-Delivery Shipments</a></li>
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
