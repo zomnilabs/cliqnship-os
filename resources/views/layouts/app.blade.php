@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'CliqNShip') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -23,7 +23,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
+            <div style="padding-right: 20px; padding-left: 20px">
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -36,14 +36,28 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'CliqNShip') }}
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        &nbsp;<li class="active"><a href="#">Dashboard <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">Addressbooks</a></li>
+                        <li><a href="#">Bookings</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                role="button" aria-haspopup="true" aria-expanded="false">
+                                Shipments <span class="caret"></span></a>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="#">All Shipments</a></li>
+                                <li><a href="#">Returned Shipments</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Cash-on-Delivery Shipments</a></li>
+                            </ul>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -59,6 +73,9 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Profile</a></li>
+
+                                    <li role="separator" class="divider"></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
