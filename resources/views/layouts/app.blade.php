@@ -22,7 +22,7 @@
     </script>
 </head>
 <body>
-    <div id="app">
+    <div id="{{ !Auth::guest() ? 'app' : 'guest' }}">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -99,6 +99,11 @@
         </nav>
 
         @yield('content')
+
+        <!-- Fix for vue -->
+        @if(Auth::guest())
+            <div id="app"></div>
+        @endif
     </div>
 
     <!-- Scripts -->

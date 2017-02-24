@@ -48,11 +48,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'profile.first_name' => 'required|min:2',
-            'profile.last_name'  => 'required|min:2',
-            'profile.gender'     => 'in:male,female',
+            'first_name' => 'required|min:2',
+            'last_name'  => 'required|min:2',
+            'gender'     => 'in:male,female',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:5|confirmed',
+            'g-recaptcha-response' => 'required|captcha'
         ]);
     }
 
@@ -65,11 +66,20 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = User::create([
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'email'         => $data['email'],
+            'password'      => bcrypt($data['password']),
+            'account_id'    => strtoupper(uniqid()),
+            'user_group_id' => 5,
+            'account_type'  => 'individual',
+            'login_type'    => 'email'
         ]);
 
-        $user->profile()->create($data['profile']);
+        $user->profile()->create([
+            'first_name'    => $data['first_name'],
+            'last_name'     => $data['last_name'],
+            'gender'        => $data['gender'],
+            'birthdate'     => isset($data['birthdate']) ? $data['birthdate'] : null
+        ]);
 
         return $user;
     }
