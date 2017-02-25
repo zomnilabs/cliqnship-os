@@ -5,9 +5,8 @@
         .mcontent{
             padding:15px;
         }
-        input[type=checkbox]{
-            width: 50px;
-            height: 50px;
+        .pull-right button{
+            margin-right:20px;
         }
     </style>
 @endsection
@@ -49,8 +48,8 @@
                         <div class="form-group">
                             <label for="Identifier">Type</label>
                             <select name="filter_type_operation" class="form-control">
-                                <option value="equals" {{ old('filter_province_operation') === 'equals' ? 'selected' : '' }}>Equals</option>
-                                <option value="contains" {{ old('filter_province_operation') === 'contains' ? 'selected' : '' }}>Contains</option>
+                                <option value="equals" {{ old('filter_type_operation') === 'equals' ? 'selected' : '' }}>Booking/PickUpAddress</option>
+                                <option value="contains" {{ old('filter_type_operation') === 'contains' ? 'selected' : '' }}>Contains</option>
                             </select>
                         </div>
                     </div>
@@ -150,7 +149,10 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="AddressType">Address Type</label>
-                            <input type="text" class="form-control" name="addresstype"/>
+                            <select name="filter_type_operation" class="form-control">
+                                <option value="equals" {{ old('filter_type_operation') === 'equals' ? 'selected' : '' }}>Resedential</option>
+                                <option value="contains" {{ old('filter_type_operation') === 'contains' ? 'selected' : '' }}>Contains</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -161,8 +163,10 @@
                     </div>
                     <div class="col-md-3"></div>
                 </div>
-                <div class="pull-right">
-                    <button class="btn btn-primary">Save</button>
+                <div class="row">
+                    <div class="pull-right">
+                        <button class="btn btn-primary">Save</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -300,7 +304,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-md-4">
-                                                <button type="button" class="btn btn-primary btn-lg">
+                                                <button type="button" class="btn btn-primary">
                                                     Clear Filter
                                                 </button>
                                             </div>
