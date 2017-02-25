@@ -15,13 +15,17 @@
                 </div>
 
                 <div class="page-actions pull-right">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <button class="btn btn-primary">
-                                <i class="glyphicon glyphicon-plus"></i>
-                                New Booking</button>
-                        </div>
-                    </div>
+                    <button class="btn btn-primary">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        New Booking</button>
+
+                    <button class="btn btn-primary">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        Import Bookings</button>
+
+                    <button class="btn btn-primary">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        Export Bookings</button>
                 </div>
             </div>
         </div>
