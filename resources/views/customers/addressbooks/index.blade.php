@@ -7,25 +7,17 @@
                 <div class="breadcrumbs">
                     <ol class="breadcrumb">
                         <li><a href="/customers">Dashboard</a></li>
-                        <li class="active">Shipments</li>
+                        <li class="active">Addressbooks</li>
                     </ol>
                 </div>
                 <div class="header-title pull-left">
-                    <h1>Shipments</h1>
+                    <h1>Addressbooks</h1>
                 </div>
 
                 <div class="page-actions pull-right">
                     <button class="btn btn-primary">
                         <i class="glyphicon glyphicon-plus"></i>
-                        New Shipment</button>
-
-                    <button class="btn btn-primary">
-                        <i class="glyphicon glyphicon-plus"></i>
-                        Import Shipments</button>
-
-                    <button class="btn btn-primary">
-                        <i class="glyphicon glyphicon-plus"></i>
-                        Export Shipments</button>
+                        New Addressbooks</button>
                 </div>
             </div>
         </div>
@@ -37,36 +29,14 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
 
-                        <div class="filter-categories">
-                            <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-sm btn-default active">
-                                    <input type="radio" name="filter" id="option1" value="all" autocomplete="off" checked> [{{ number_of_bookings(Auth::user()->id, 'all') }}] All
-                                </label>
-                                <label class="btn btn-sm btn-warning">
-                                    <input type="radio" name="filter" id="option2" value="pending" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'pending') }}] Pending
-                                </label>
-                                <label class="btn btn-sm btn-primary">
-                                    <input type="radio" name="filter" id="option3" value="accepted" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'accepted') }}] Accepted
-                                </label>
-
-                                <label class="btn btn-sm btn-success">
-                                    <input type="radio" name="filter" id="option3" value="completed" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'completed') }}] Completed
-                                </label>
-
-                                <label class="btn btn-sm btn-danger">
-                                    <input type="radio" name="filter" id="option3" value="rejected" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'rejected') }}] Rejected
-                                </label>
-                            </div>
-                        </div>
-
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>Booking #</th>
-                                <th>Pickup Date</th>
-                                <th>Pickup Address</th>
-                                <th># of Items</th>
-                                <th>Remarks</th>
+                                <th>Id #</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Contact #</th>
+                                <th>Email Address</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -74,12 +44,12 @@
 
                             <tbody>
                             <tr>
-                                <td>KJLKJLJL</td>
-                                <td>February 25, 2017</td>
-                                <td>29 Anonas Quezon City</td>
-                                <th>1</th>
-                                <th>Pending</th>
-                                <th>This is a remarks</th>
+                                <td>1</td>
+                                <td>Edward Lim</td>
+                                <th>Talaga, Capas, Tarlac</th>
+                                <th>09123456789</th>
+                                <th>edward@gmail.com</th>
+                                <th>active</th>
                                 <th>
                                     <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
                                     <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
@@ -87,12 +57,12 @@
                             </tr>
 
                             <tr>
-                                <td>KJLKJLJL</td>
-                                <td>February 25, 2017</td>
-                                <td>29 Anonas Quezon City</td>
-                                <th>1</th>
-                                <th>Pending</th>
-                                <th>This is a remarks</th>
+                                <td>2</td>
+                                <td>Jackilyn Damulag</td>
+                                <th>San Miguel, Tarlac</th>
+                                <th>09993456789</th>
+                                <th>jackilyn@gmail.com</th>
+                                <th>active</th>
                                 <th>
                                     <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
                                     <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
@@ -100,12 +70,12 @@
                             </tr>
 
                             <tr>
-                                <td>KJLKJLJL</td>
-                                <td>February 25, 2017</td>
-                                <td>29 Anonas Quezon City</td>
-                                <th>1</th>
-                                <th>Pending</th>
-                                <th>This is a remarks</th>
+                                <td>3</td>
+                                <td>John Castro</td>
+                                <th>Concepcion, Tarlac</th>
+                                <th>09323456789</th>
+                                <th>john@gmail.com</th>
+                                <th>active</th>
                                 <th>
                                     <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
                                     <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
@@ -126,12 +96,12 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="col-md-12">Booking #</label>
+                                        <label class="col-md-12">Identifier</label>
 
                                         <div class="col-md-6">
-                                            <select name="filter_booking_no_operation" class="form-control">
-                                                <option value="equals" {{ old('filter_booking_no_operation') === 'equals' ? 'selected' : '' }}>Equals</option>
-                                                <option value="contains" {{ old('filter_booking_no_operation') === 'contains' ? 'selected' : '' }}>Contains</option>
+                                            <select name="filter_addressbook_no_operation" class="form-control">
+                                                <option value="equals" {{ old('filter_identifier_no_operation') === 'equals' ? 'selected' : '' }}>Equals</option>
+                                                <option value="contains" {{ old('filter_identifier_no_operation') === 'contains' ? 'selected' : '' }}>Contains</option>
                                             </select>
                                         </div>
 
@@ -177,14 +147,18 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <div class="col-md-6">
-                                            <button type="submit" class="btn btn-primary">
-                                                Filter
-                                            </button>
-
-                                            <button type="button" class="btn btn-primary">
-                                                Clear Filter
-                                            </button>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-4">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Filter
+                                                </button>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button type="button" class="btn btn-primary">
+                                                    Clear Filter
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

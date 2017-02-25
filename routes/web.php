@@ -22,10 +22,14 @@ Auth::routes();
 Route::group(['prefix' => 'customers', 'namespace' => 'Customers', 'middleware' => 'auth'], function() {
     Route::get('/', 'DashboardController@index');
 
+    Route::group(['prefix' => 'addressbooks', 'namespace' => 'Addressbooks'], function() {
+        Route::get('/', 'AddressbooksController@index');
+    });
     Route::group(['prefix' => 'bookings', 'namespace' => 'Bookings'], function() {
         Route::get('/', 'BookingsController@index');
     });
     Route::group(['prefix' => 'shipments', 'namespace' => 'Shipments'], function() {
         Route::get('/', 'ShipmentsController@index');
+        Route::get('/returned', 'ReturnShipmentsController@index');
     });
 });
