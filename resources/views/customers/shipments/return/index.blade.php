@@ -14,28 +14,18 @@
                 <div class="header-title pull-left">
                     <h1>Returned Shipments</h1>
                 </div>
+                <div class="page-actions pull-right">
+                    <button class="btn btn-primary">
+                        <i class="fa fa-download"></i>
+                        Export Shipments</button>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8">
-                <div class="page-actions">
-                    <button class="btn btn-primary">
-                        <i class="glyphicon glyphicon-plus"></i>
-                        New Shipment</button>
-
-                    <button class="btn btn-primary">
-                        <i class="glyphicon glyphicon-plus"></i>
-                        Import Shipments</button>
-
-                    <button class="btn btn-primary">
-                        <i class="glyphicon glyphicon-plus"></i>
-                        Export Shipments</button>
-                </div>
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-md-offset-8">
                 <input type="text" placeholder="Search Shipments" class="form-control">
             </div>
             <div class="col-md-12">
