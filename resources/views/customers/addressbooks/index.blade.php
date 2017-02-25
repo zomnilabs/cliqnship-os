@@ -295,21 +295,13 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-2"></div>
-                                            <div class="col-md-4">
-                                                <button type="submit" class="btn btn-primary">
-                                                    Filter
-                                                </button>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <button type="button" class="btn btn-primary">
-                                                    Clear Filter
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        Submit Filter
+                                    </button>
+
+                                    <button type="button" class="btn btn-danger">
+                                        Clear Filter
+                                    </button>
                                 </div>
                             </div>
                         </form>
