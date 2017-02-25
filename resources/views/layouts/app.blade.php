@@ -45,10 +45,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if (! Auth::guest())
-                            <li class="active"><a href="/customers/dashboard">Dashboard <span class="sr-only">(current)</span></a></li>
-                            <li><a href="/customers/addressbooks">Addressbooks</a></li>
-                            <li><a href="/customers/bookings">Bookings</a></li>
-                            <li class="dropdown">
+                            <li class="{{ set_active(['customers']) }}"><a href="/customers">Dashboard <span class="sr-only">(current)</span></a></li>
+                            <li class="{{ set_active(['customers/addressbooks*']) }}"><a href="/customers/addressbooks">Addressbooks</a></li>
+                            <li class="{{ set_active(['customers/bookings*']) }}"><a href="/customers/bookings">Bookings</a></li>
+                            <li class="{{ set_active(['customers/shipments*']) }} dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                                    role="button" aria-haspopup="true" aria-expanded="false">
                                     Shipments <span class="caret"></span></a>
