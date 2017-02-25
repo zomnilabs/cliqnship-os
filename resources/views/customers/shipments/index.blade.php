@@ -244,6 +244,20 @@
             $("#bookingImage").change(function(){
                 readURL(this);
             });
+            $("#cod").click(function (e) {
+                if($('.cod').hasClass('hide')) {
+                    $('.cod').removeClass('hide');
+                } else {
+                    $('.cod').addClass('hide');
+                }
+            });;
+            $("#insurance").click(function (e) {
+                if($('.insurance').hasClass('hide')) {
+                    $('.insurance').removeClass('hide');
+                } else {
+                    $('.insurance').addClass('hide');
+                }
+            });
         });
 
         function nextTab(elem) {
