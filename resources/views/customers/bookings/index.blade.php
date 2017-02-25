@@ -143,12 +143,29 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="col-md-12">City</label>
+                                        <label class="col-md-12">Type</label>
 
                                         <div class="col-md-6">
                                             <select name="filter_city_operation" class="form-control">
                                                 <option value="equals" {{ old('filter_city_operation') === 'equals' ? 'selected' : '' }}>Equals</option>
                                                 <option value="contains" {{ old('filter_city_operation') === 'contains' ? 'selected' : '' }}>Contains</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <input id="city" type="text" class="form-control" name="filter_city_term" value="{{ old('filter_city_term') }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-md-12">City</label>
+
+                                        <div class="col-md-6">
+                                            <select name="filter_province_operation" class="form-control">
+                                                <option value="equals" {{ old('filter_province_operation') === 'equals' ? 'selected' : '' }}>Equals</option>
+                                                <option value="contains" {{ old('filter_province_operation') === 'contains' ? 'selected' : '' }}>Contains</option>
                                             </select>
                                         </div>
 
@@ -177,14 +194,17 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <div class="col-md-6">
-                                            <button type="submit" class="btn btn-primary">
-                                                Filter
-                                            </button>
-
-                                            <button type="button" class="btn btn-primary">
-                                                Clear Filter
-                                            </button>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Filter
+                                                </button>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" class="btn btn-primary">
+                                                    Clear Filter
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
