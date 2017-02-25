@@ -157,7 +157,7 @@
                             <div class="caption">
                                 <h4>SECURITY AND INSURANCE</h4>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.</p></br>
+                                    tempor incididunt ut labore et dolore magna aliqua.</p> <br />
                                 <a href="#" class="btn-security-rates">VIEW RATES</a>
                             </div>
                         </div>
@@ -166,7 +166,7 @@
                             <div class="caption">
                                 <h4>INTERNATIONAL SHIPPING</h4>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.</p></br>
+                                    tempor incididunt ut labore et dolore magna aliqua.</p> <br />
                                 <a href="#" class="btn-security-rates">VIEW RATES</a>
                             </div>
                         </div>
@@ -175,7 +175,7 @@
                             <div class="caption">
                                 <h4>ROUND THE CLOCK ONLINE TRACKING</h4>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.</p></br>
+                                    tempor incididunt ut labore et dolore magna aliqua.</p> <br />
                                 <a href="#" class="btn-security-rates">VIEW RATES</a>
                             </div>
                         </div>
@@ -184,40 +184,40 @@
                 <div class="supply-lower">
                     <div class="row">
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <img src="images/pick-pack.jpg"/>
                             <div class="caption">
+                                <img src="images/pick-pack.jpg"/>
                                 <h4>FREE PICK AND PACK</h4>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna.</p></br>
-                                <a href="#" class="btn-security-rates">VIEW RATES</a>
+                                    tempor incididunt ut labore et dolore magna.</p>
                             </div>
+                            <a href="#" class="btn-security-rates">VIEW RATES</a>
                         </div>
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <img src="images/storage.jpg"/>
                             <div class="caption">
+                                <img src="images/storage.jpg"/>
                                 <h4>STORAGE SPACE AND WAREHOUSE</h4>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore.</p></br>
-                                <a href="#" class="btn-security-rates">VIEW RATES</a>
+                                    tempor incididunt ut labore et dolore.</p>
                             </div>
+                            <a href="#" class="btn-security-rates">VIEW RATES</a>
                         </div>
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <img src="images/truck.jpg"/>
                             <div class="caption">
+                                <img src="images/truck.jpg"/>
                                 <h4>BUSINESS SERVICE</h4>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.</p></br>
-                                <a href="#" class="btn-security-rates">VIEW RATES</a>
+                                    tempor incididunt ut labore et dolore magna aliqua.</p>
                             </div>
+                            <a href="#" class="btn-security-rates">VIEW RATES</a>
                         </div>
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <img id="img-collect-deposit" src="images/collect.png"/></br></br>
                             <div class="caption">
+                                <img id="img-collect-deposit" src="images/collect.png"/>
                                 <h4>COLLECT AND DEPOSITE</h4>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.</p></br>
-                                <a href="#" class="btn-security-rates">VIEW RATES</a>
+                                    tempor incididunt ut labore et dolore magna aliqua.</p>
                             </div>
+                            <a href="#" class="btn-security-rates">VIEW RATES</a>
                         </div>
                     </div>
                 </div>
