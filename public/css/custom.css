@@ -1,0 +1,32 @@
+.header-info {
+    width: 100%;
+    height: 100px;
+    background-color: #535353;
+    margin-top: -22px;
+    margin-bottom: 20px;
+}
+
+.header-title > h1 {
+    color: #e0e0e0;
+    font-weight: 600;
+    margin-top: 0;
+}
+
+/*override border-color of default nav*/
+.navbar-default {
+    border-color: #434343;
+}
+
+/*override breadcrumb background color*/
+.breadcrumb {
+    background-color: #535353;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+/*override breadcrumb link colors*/
+.breadcrumb li a {
+    color: #b6b6b6;
+    cursor: pointer;
+}

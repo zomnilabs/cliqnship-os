@@ -13,6 +13,10 @@
         .cards .panel .panel-body:hover{
             color: #B1CE52;
         }
+
+        .navbar-default {
+            border-color: #434343;
+        }
     </style>
 @endsection
 
@@ -20,10 +24,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <ol class="breadcrumb">
-                    <li class="active"> <i class="glyphicon glyphicon-home"></i> Dashboard</li>
-                </ol>
-
                 <div class="row text-center cards">
                     <div class="col-md-2">
                         <div class="panel panel-default">

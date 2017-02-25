@@ -1,6 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="header-info container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumbs">
+                    <ol class="breadcrumb">
+                        <li><a href="/customers">Dashboard</a></li>
+                        <li class="active">Bookings</li>
+                    </ol>
+                </div>
+                <div class="header-title pull-left">
+                    <h1>Bookings</h1>
+                </div>
+
+                <div class="page-actions pull-right">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button class="btn btn-primary">
+                                <i class="glyphicon glyphicon-plus"></i>
+                                New Booking</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
