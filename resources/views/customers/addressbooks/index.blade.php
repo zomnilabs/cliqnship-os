@@ -16,7 +16,7 @@
 
                 <div class="page-actions pull-right">
                     <button class="btn btn-primary">
-                        <i class="glyphicon glyphicon-address-book"></i>
+                        <i class="glyphicon glyphicon-plus"></i>
                         New Addressbooks</button>
                 </div>
             </div>
@@ -100,8 +100,8 @@
 
                                         <div class="col-md-6">
                                             <select name="filter_addressbook_no_operation" class="form-control">
-                                                <option value="equals" {{ old('filter_addressbook_no_operation') === 'equals' ? 'selected' : '' }}>Equals</option>
-                                                <option value="contains" {{ old('filter_addressbook_no_operation') === 'contains' ? 'selected' : '' }}>Contains</option>
+                                                <option value="equals" {{ old('filter_identifier_no_operation') === 'equals' ? 'selected' : '' }}>Equals</option>
+                                                <option value="contains" {{ old('filter_identifier_no_operation') === 'contains' ? 'selected' : '' }}>Contains</option>
                                             </select>
                                         </div>
 
@@ -147,14 +147,18 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <div class="col-md-6">
-                                            <button type="submit" class="btn btn-primary">
-                                                Filter
-                                            </button>
-
-                                            <button type="button" class="btn btn-primary">
-                                                Clear Filter
-                                            </button>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-4">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Filter
+                                                </button>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button type="button" class="btn btn-primary">
+                                                    Clear Filter
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
