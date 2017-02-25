@@ -31,5 +31,6 @@ Route::group(['prefix' => 'customers', 'namespace' => 'Customers', 'middleware' 
     Route::group(['prefix' => 'shipments', 'namespace' => 'Shipments'], function() {
         Route::get('/', 'ShipmentsController@index');
         Route::get('/returned', 'ReturnShipmentsController@index');
+        Route::get('/cash-on-delivery', 'CodShipmentsController@index');
     });
 });
