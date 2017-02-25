@@ -51,7 +51,8 @@
                                 </div>
                             </div>
                         </a>
-                    </div> <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body">
@@ -60,7 +61,8 @@
                                 </div>
                             </div>
                         </a>
-                    </div> <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body">
@@ -69,7 +71,8 @@
                                 </div>
                             </div>
                         </a>
-                    </div> <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body">
@@ -78,7 +81,8 @@
                                 </div>
                             </div>
                         </a>
-                    </div> <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body">
@@ -87,7 +91,8 @@
                                 </div>
                             </div>
                         </a>
-                    </div> <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body">

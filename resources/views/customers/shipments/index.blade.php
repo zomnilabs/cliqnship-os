@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('stylesheets')
+    <link rel="stylesheet" href="{{ asset('css/wizard.css') }}">
+@endsection
+
 @section('content')
     <div class="header-info container-fluid">
         <div class="row">
@@ -15,16 +19,16 @@
                 </div>
 
                 <div class="page-actions pull-right">
-                    <button class="btn btn-primary">
-                        <i class="glyphicon glyphicon-plus"></i>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#createShippingModal">
+                        <i class="fa fa-plus"></i>
                         New Shipment</button>
 
                     <button class="btn btn-primary">
-                        <i class="glyphicon glyphicon-plus"></i>
+                        <i class="fa fa-upload"></i>
                         Import Shipments</button>
 
                     <button class="btn btn-primary">
-                        <i class="glyphicon glyphicon-plus"></i>
+                        <i class="fa fa-download"></i>
                         Export Shipments</button>
                 </div>
             </div>
@@ -197,4 +201,69 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="createShippingModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                @include('customers.shipments.wizard')
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            //Initialize tooltips
+            $('.nav-tabs > li a[title]').tooltip();
+
+            //Wizard
+            $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+
+                let $target = $(e.target);
+
+                if ($target.parent().hasClass('disabled')) {
+                    return false;
+                }
+            });
+
+            $(".next-step").click(function (e) {
+
+                let $active = $('.wizard .nav-tabs li.active');
+                $active.next().removeClass('disabled');
+                nextTab($active);
+
+            });
+            $(".prev-step").click(function (e) {
+
+                let $active = $('.wizard .nav-tabs li.active');
+                prevTab($active);
+
+            });
+
+            // Image input onchange
+            $("#bookingImage").change(function(){
+                readURL(this);
+            });
+        });
+
+        function nextTab(elem) {
+            $(elem).next().find('a[data-toggle="tab"]').click();
+        }
+        function prevTab(elem) {
+            $(elem).prev().find('a[data-toggle="tab"]').click();
+        }
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.preview img').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endsection

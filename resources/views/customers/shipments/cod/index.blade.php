@@ -1,5 +1,23 @@
 @extends('layouts.app')
 
+@section('stylesheets')
+    <style>
+        .cards .panel .panel-body{
+            color: #636b6f;
+        }
+        .cards .panel .panel-body a{
+            color: #636b6f;
+            cursor: pointer;
+        }
+        .cards a {
+            text-decoration: none !important;
+        }
+        .cards .panel .panel-body:hover{
+            color: #B1CE52;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="header-info container-fluid">
         <div class="row">
@@ -8,11 +26,11 @@
                     <ol class="breadcrumb">
                         <li><a href="/customers">Dashboard</a></li>
                         <li><a href="/customers/shipments">Shipments</a></li>
-                        <li class="active">Returned Shipments</li>
+                        <li class="active">Cash-on-Delivery Shipments</li>
                     </ol>
                 </div>
                 <div class="header-title pull-left">
-                    <h1>Returned Shipments</h1>
+                    <h1>Cash-on-Delivery Shipments</h1>
                 </div>
                 <div class="page-actions pull-right">
                     <button class="btn btn-primary">
@@ -25,11 +43,49 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4 col-md-offset-8">
-                <input type="text" placeholder="Search Shipments" class="form-control">
-            </div>
             <div class="col-md-12">
-                <hr>
+                <div class="row text-center cards">
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4>Pending Collections</h4>
+                                    <h1>21</h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4>Successful Collections</h4>
+                                    <h1>4</h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4>Failed Collections</h4>
+                                    <h1>5</h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4>Total Wallet</h4>
+                                    <h1>P 560, 000</h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
