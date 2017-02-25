@@ -51,3 +51,12 @@
 input[type="radio"]:focus {
     outline: none !important;
 }
+
+.preview {
+    margin-bottom: 10px;
+    border: 2px solid #7a7a7a;
+}
+
+.preview img {
+    width: 100%;
+}

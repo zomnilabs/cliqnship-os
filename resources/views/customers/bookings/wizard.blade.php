@@ -60,7 +60,16 @@
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step2">
                             <h3>Step 2</h3>
-                            <p>This is step 2</p>
+                            <p>Select an image for this booking / pickup (<span class="text-primary text-capitalize">not required</span>)</p>
+
+                            <div class="form-group">
+                                <input type="file" id="bookingImage" class="form-control">
+                            </div>
+
+                            <div class="preview">
+                                <img src="http://placehold.it/550x150?text=Image+Preview" alt="">
+                            </div>
+
                             <ul class="list-inline pull-right">
                                 <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                                 <li><button type="button" class="btn btn-primary next-step">Next</button></li>
