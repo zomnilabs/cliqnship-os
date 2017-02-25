@@ -101,49 +101,53 @@
             </div>
 
             <div class="col-md-12">
-                <h2>Recently completed shipments</h2>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2>Recently completed shipments</h2>
 
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Booking Number</th>
-                            <th>Item Description</th>
-                            <th>Service Type</th>
-                            <th>Remarks</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>58AD64AEDA281</td>
-                            <td>T-shirt</td>
-                            <td>Metro Manila</td>
-                            <td>Testing</td>
-                            <td>Completed</td>
-                        </tr>
-                        <tr>
-                            <td>58AD64AEDA255</td>
-                            <td>Food</td>
-                            <td>Metro Manila</td>
-                            <td>Handle with Care</td>
-                            <td>Completed</td>
-                        </tr>
-                        <tr>
-                            <td>58HFA4AEDA281</td>
-                            <td>Testing</td>
-                            <td>Metro Manila</td>
-                            <td>Fragile</td>
-                            <td>Completed</td>
-                        </tr>
-                        <tr>
-                            <td>58AD64AEHNN62</td>
-                            <td>Testttttt</td>
-                            <td>Metro Manila</td>
-                            <td>Handle with Care</td>
-                            <td>Completed</td>
-                        </tr>
-                    </tbody>
-                </table>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Booking Number</th>
+                                    <th>Item Description</th>
+                                    <th>Service Type</th>
+                                    <th>Remarks</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>58AD64AEDA281</td>
+                                    <td>T-shirt</td>
+                                    <td>Metro Manila</td>
+                                    <td>Testing</td>
+                                    <td>Completed</td>
+                                </tr>
+                                <tr>
+                                    <td>58AD64AEDA255</td>
+                                    <td>Food</td>
+                                    <td>Metro Manila</td>
+                                    <td>Handle with Care</td>
+                                    <td>Completed</td>
+                                </tr>
+                                <tr>
+                                    <td>58HFA4AEDA281</td>
+                                    <td>Testing</td>
+                                    <td>Metro Manila</td>
+                                    <td>Fragile</td>
+                                    <td>Completed</td>
+                                </tr>
+                                <tr>
+                                    <td>58AD64AEHNN62</td>
+                                    <td>Testttttt</td>
+                                    <td>Metro Manila</td>
+                                    <td>Handle with Care</td>
+                                    <td>Completed</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
