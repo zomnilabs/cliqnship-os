@@ -18,7 +18,7 @@ class CreateBookingsTable extends Migration
             $table->string('booking_no');
             $table->integer('user_id')->unsigned();
             $table->integer('source_id')->unsigned();
-            $table->integer('addressbook_id')->unsigned();
+            $table->integer('user_addressbook_id')->unsigned();
             $table->string('remarks');
             $table->string('status');
             $table->string('signature');
@@ -37,8 +37,8 @@ class CreateBookingsTable extends Migration
                 ->references('id')->on('users')
                 ->onDelete('cascade');
 
-            $table->foreign('addressbook_id')
-                ->references('id')->on('addressbooks')
+            $table->foreign('user_addressbook_id')
+                ->references('id')->on('user_addressbooks')
                 ->onDelete('cascade');
 
             $table->foreign('source_id')
