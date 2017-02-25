@@ -30,3 +30,23 @@
     color: #b6b6b6;
     cursor: pointer;
 }
+
+.filter-categories {
+    margin-bottom: 10px;
+}
+
+.filter-categories label {
+    width: 200px;
+}
+
+.btn:focus {
+    outline: none !important;
+}
+
+.btn.active:focus {
+    outline: none !important;
+}
+
+input[type="radio"]:focus {
+    outline: none !important;
+}
