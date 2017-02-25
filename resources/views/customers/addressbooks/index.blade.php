@@ -1,5 +1,17 @@
 @extends('layouts.app')
 
+@section('stylesheets')
+    <style>
+        .mcontent{
+            padding:15px;
+        }
+        input[type=checkbox]{
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="header-info container-fluid">
         <div class="row">
@@ -15,9 +27,142 @@
                 </div>
 
                 <div class="page-actions pull-right">
-                    <button class="btn btn-primary">
+                    <button data-toggle="modal" data-target=".bs-modal-lg" class="btn btn-primary">
                         <i class="glyphicon glyphicon-plus"></i>
                         New Addressbooks</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content mcontent">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Identifier">Identifier</label>
+                            <input type="text" class="form-control" name="identifier"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Identifier">Type</label>
+                            <select name="filter_type_operation" class="form-control">
+                                <option value="equals" {{ old('filter_province_operation') === 'equals' ? 'selected' : '' }}>Equals</option>
+                                <option value="contains" {{ old('filter_province_operation') === 'contains' ? 'selected' : '' }}>Contains</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="firstname">Contact Person First Name</label>
+                            <input type="text" class="form-control" name="firstname"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="lastname">Contact Person Last Name</label>
+                            <input type="text" class="form-control" name="lastname"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="middlename">Contact Person Middle Name</label>
+                            <input type="text" class="form-control" name="middlename"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="contactno">Contact Number</label>
+                            <input type="text" class="form-control" name="contactno"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="text" class="form-control" name="email"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="AddressLine1">Address Line 1</label>
+                            <input type="text" class="form-control" name="addressline1"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="addressline2">Address Line 2</label>
+                            <input type="text" class="form-control" name="addressline2"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="barangay">Barangay</label>
+                            <input type="text" class="form-control" name="barangay"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="City">City</label>
+                            <input type="text" class="form-control" name="city"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Province">Province</label>
+                            <input type="text" class="form-control" name="province"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" class="form-control" name="country"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="zipcode">Zipcode</label>
+                            <input type="text" class="form-control" name="zipcode"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Landmarks">LandMarks</label>
+                            <input type="text" class="form-control" name="landmarks"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="AddressType">Address Type</label>
+                            <input type="text" class="form-control" name="addresstype"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="checkbox">Is this your primary address?</label>
+                            <input type="checkbox" name="checkbox"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="pull-right">
+                    <button class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
@@ -155,7 +300,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-md-4">
-                                                <button type="button" class="btn btn-primary">
+                                                <button type="button" class="btn btn-primary btn-lg">
                                                     Clear Filter
                                                 </button>
                                             </div>
