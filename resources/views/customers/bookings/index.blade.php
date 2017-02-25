@@ -24,11 +24,11 @@
                         New Booking</button>
 
                     <button class="btn btn-primary">
-                        <i class="glyphicon glyphicon-plus"></i>
+                        <i class="fa fa-upload"></i>
                         Import Bookings</button>
 
                     <button class="btn btn-primary">
-                        <i class="glyphicon glyphicon-plus"></i>
+                        <i class="fa fa-download"></i>
                         Export Bookings</button>
                 </div>
             </div>
@@ -82,8 +82,21 @@
                                     <td>February 25, 2017</td>
                                     <td>29 Anonas Quezon City</td>
                                     <th>1</th>
-                                    <th>Pending</th>
                                     <th>This is a remarks</th>
+                                    <th>{!! format_booking_status('pending') !!}</th>
+                                    <th>
+                                        <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                                        <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                    </th>
+                                </tr>
+
+                                <tr>
+                                    <td>KJLKJLJL</td>
+                                    <td>February 25, 2017</td>
+                                    <td>29 Anonas Quezon City</td>
+                                    <th>1</th>
+                                    <th>This is a remarks</th>
+                                    <th>{!! format_booking_status('accepted') !!}</th>
                                     <th>
                                         <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
                                         <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
@@ -96,20 +109,7 @@
                                     <td>29 Anonas Quezon City</td>
                                     <th>1</th>
                                     <th>Pending</th>
-                                    <th>This is a remarks</th>
-                                    <th>
-                                        <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
-                                        <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
-                                    </th>
-                                </tr>
-
-                                <tr>
-                                    <td>KJLKJLJL</td>
-                                    <td>February 25, 2017</td>
-                                    <td>29 Anonas Quezon City</td>
-                                    <th>1</th>
-                                    <th>Pending</th>
-                                    <th>This is a remarks</th>
+                                    <th>{!! format_booking_status('rejected') !!}</th>
                                     <th>
                                         <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
                                         <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
