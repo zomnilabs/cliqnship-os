@@ -4,6 +4,7 @@
     background-color: #535353;
     margin-top: -22px;
     margin-bottom: 20px;
+    border-bottom: 1px solid #3d3d3d;
 }
 
 .header-title > h1 {

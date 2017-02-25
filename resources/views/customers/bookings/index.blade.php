@@ -123,24 +123,76 @@
 
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="GET">
-                            {{ csrf_field() }}
-
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                                        <label for="gender" class="col-md-4 control-label">Gender</label>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Booking #</label>
 
                                         <div class="col-md-6">
-                                            <select name="gender" id="gender" class="form-control">
-                                                <option value="male" {{ old('gender') === 'male' ? 'selected' : '' }}>Male</option>
-                                                <option value="female" {{ old('gender') === 'female' ? 'selected' : '' }}>Female</option>
+                                            <select name="filter_booking_no_operation" class="form-control">
+                                                <option value="equals" {{ old('filter_booking_no_operation') === 'equals' ? 'selected' : '' }}>Equals</option>
+                                                <option value="contains" {{ old('filter_booking_no_operation') === 'contains' ? 'selected' : '' }}>Contains</option>
                                             </select>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <input id="booking_no" type="text" class="form-control" name="filter_booking_no_term" value="{{ old('filter_booking_no_operation') }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-md-12">City</label>
+
+                                        <div class="col-md-6">
+                                            <select name="filter_city_operation" class="form-control">
+                                                <option value="equals" {{ old('filter_city_operation') === 'equals' ? 'selected' : '' }}>Equals</option>
+                                                <option value="contains" {{ old('filter_city_operation') === 'contains' ? 'selected' : '' }}>Contains</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <input id="city" type="text" class="form-control" name="filter_city_term" value="{{ old('filter_city_term') }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Province</label>
+
+                                        <div class="col-md-6">
+                                            <select name="filter_province_operation" class="form-control">
+                                                <option value="equals" {{ old('filter_province_operation') === 'equals' ? 'selected' : '' }}>Equals</option>
+                                                <option value="contains" {{ old('filter_province_operation') === 'contains' ? 'selected' : '' }}>Contains</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <input id="city" type="text" class="form-control" name="filter_city_term" value="{{ old('filter_city_term') }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <button type="submit" class="btn btn-primary">
+                                                Filter
+                                            </button>
+
+                                            <button type="button" class="btn btn-primary">
+                                                Clear Filter
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </form>
+
                     </div>
+
                 </div>
             </div>
         </div>
