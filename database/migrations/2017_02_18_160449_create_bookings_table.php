@@ -34,15 +34,15 @@ class CreateBookingsTable extends Migration
 
             // References
             $table->foreign('user_id')
-                ->references('users')->on('id')
+                ->references('id')->on('users')
                 ->onDelete('cascade');
 
             $table->foreign('addressbook_id')
-                ->references('addressbooks')->on('id')
+                ->references('id')->on('addressbooks')
                 ->onDelete('cascade');
 
             $table->foreign('source_id')
-                ->references('sources')->on('id')
+                ->references('id')->on('sources')
                 ->onDelete('cascade');
         });
     }
