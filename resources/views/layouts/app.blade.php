@@ -56,7 +56,7 @@
                                     Shipments <span class="caret"></span></a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="/customers/shipments/shipments">All Shipments</a></li>
+                                    <li><a href="/customers/shipments">All Shipments</a></li>
                                     <li><a href="/customers/shipments/returned">Returned Shipments</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="/customers/shipments/cash-on-delivery">Cash-on-Delivery Shipments</a></li>
