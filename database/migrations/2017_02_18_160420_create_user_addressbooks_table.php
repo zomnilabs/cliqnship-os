@@ -28,7 +28,7 @@ class CreateUserAddressbooksTable extends Migration
             $table->string('barangay');
             $table->string('city');
             $table->string('province');
-            $table->string('zip_cide');
+            $table->string('zip_code');
             $table->string('country');
             $table->enum('address_type', ['office', 'residential']);
             $table->string('landmarks');
