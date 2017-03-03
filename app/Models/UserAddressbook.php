@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class UserAddressbook extends Model
 {
     use SoftDeletes;
-
+    
     protected $guarded = ['id'];
+
 }
