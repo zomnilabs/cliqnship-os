@@ -10,7 +10,12 @@
             $('.table thead tr.searchable th').each( function () {
                 var title = $(this).text();
                 if (title) {
-                    $(this).html( '<input type="text" style="width: 100%" placeholder="Search '+title+'" />' );
+                    if (title === 'Pickup Date') {
+                        $(this).html( '<input type="date" style="width: 100%" placeholder="Search '+title+'" />' );
+                    } else {
+                        $(this).html( '<input type="text" style="width: 100%" placeholder="Search '+title+'" />' );
+                    }
+
                 }
             });
 
@@ -82,23 +87,21 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr class="searchable">
-                                <th>Id #</th>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Address Type</th>
-                                <th>Address</th>
-                                <th>Contact #</th>
-                                <th>Email Address</th>
+                                <th class="hide">Id #</th>
+                                <th>Booking #</th>
+                                <th>Pickup Date</th>
+                                <th>Pickup Address</th>
+                                <th>Remarks</th>
+                                <th>Status</th>
                                 <th></th>
                             </tr>
                             <tr>
-                                <th>Id #</th>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Address Type</th>
-                                <th>Address</th>
-                                <th>Contact #</th>
-                                <th>Email Address</th>
+                                <th class="hide">Id #</th>
+                                <th>Booking #</th>
+                                <th>Pickup Date</th>
+                                <th>Pickup Address</th>
+                                <th>Remarks</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
