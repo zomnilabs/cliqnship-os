@@ -69,3 +69,11 @@ input[type="radio"]:focus {
     width: 29px;
     height: 29px;
 }
+
+.searchable {
+    background-color: #f2f2f2;
+}
+
+.filter-footer {
+    display: table-header-group;
+}

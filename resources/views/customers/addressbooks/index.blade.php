@@ -14,14 +14,49 @@
 @section('scripts')
     <script>
         (function() {
-            $('.table thead tr.searchable th').each( function () {
-                var title = $(this).text();
+            $('.table tfoot tr.searchable td').each( function () {
+                let title = $(this).text();
                 if (title) {
-                    $(this).html( '<input type="text" class="form-control" style="width: 100%" class="form-control" placeholder="Search '+title+'" />' );
+                    switch (title) {
+                        case 'Type':
+                            let selectHTML = '<select class="form-control filter-type" style="width: 100%">';
+                            selectHTML += '<option>Filter Type</option>';
+                            selectHTML += '<option value="booking">Booking</option>';
+                            selectHTML += '<option value="shipment">Shipment</option>';
+                            selectHTML += '</select>';
+
+                            $(this).html(selectHTML);
+
+                            break;
+                        case 'Address Type':
+                            let selectHTML2 = '<select class="form-control filter" style="width: 100%">';
+                            selectHTML2 += '<option>Filter Address Type</option>';
+                            selectHTML2 += '<option value="office">Office</option>';
+                            selectHTML2 += '<option value="residential">Residential</option>';
+                            selectHTML2 += '</select>';
+
+                            $(this).html(selectHTML2);
+                            break;
+                        default:
+                            $(this).html( '<input class="form-control filter" type="text" style="width: 100%" placeholder="Search '+title+'" />' );
+                    }
                 }
             });
 
-           $('.table').dataTable();
+            let table = $('.table').DataTable();
+
+            // Apply the search
+            table.columns().every( function () {
+                let that = this;
+                $( '.filter', this.footer() ).on( 'keyup change', function () {
+                    if ( that.search() !== this.value ) {
+                        console.log(that.data());
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+            } );
         }())
     </script>
 @endsection
@@ -57,33 +92,36 @@
                         @include('components.errors')
 
                         <table class="table table-bordered">
+                            <tfoot class="filter-footer">
+                                <tr class="searchable">
+                                    <td>Id #</td>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Address Type</td>
+                                    <td>Address</td>
+                                    <td>Contact #</td>
+                                    <td>Email Address</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+
                             <thead>
-                            <tr class="searchable">
-                                <th class="hide">Id #</th>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Address Type</th>
-                                <th>Address</th>
-                                <th>Contact #</th>
-                                <th>Email Address</th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <th class="hide">Id #</th>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Address Type</th>
-                                <th>Address</th>
-                                <th>Contact #</th>
-                                <th>Email Address</th>
-                                <th>Actions</th>
-                            </tr>
+                                <tr>
+                                    <th>Id #</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Address Type</th>
+                                    <th>Address</th>
+                                    <th>Contact #</th>
+                                    <th>Email Address</th>
+                                    <th>Actions</th>
+                                </tr>
                             </thead>
 
                             <tbody>
                                 @foreach($addressbooks as $addressbook)
                                     <tr id="addressbook-{{$addressbook->id}}">
-                                        <td class="hide">{{$addressbook->id}}</td>
+                                        <td>{{$addressbook->id}}</td>
                                         <td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>
                                         <td>{{ ucwords($addressbook->type) }}</td>
                                         <td>{{ ucwords($addressbook->address_type) }}</td>
