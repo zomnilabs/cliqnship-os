@@ -74,7 +74,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->profile->full_name }} <span class="caret"></span>
+                                    <img src="http://lorempixel.com/400/200/people" alt="avatar" class="avatar img-circle"> {{ Auth::user()->profile->full_name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">

@@ -60,3 +60,12 @@ input[type="radio"]:focus {
 .preview img {
     width: 100%;
 }
+
+.nav {
+    font-size: 1.3em;
+}
+
+.avatar {
+    width: 29px;
+    height: 29px;
+}
