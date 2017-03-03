@@ -34,7 +34,7 @@ class StoreAddressbookRequest extends FormRequest
             'city' => 'required',
             'province' => 'required',
             'zip_code' => 'required',
-            'address_type' => 'required',
+            'address_type' => 'required|in:residential,office',
         ];
     }
 }
