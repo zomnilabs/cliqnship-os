@@ -7,6 +7,13 @@
             </div>
             <form encType="multipart/form-data" action="" method="POST">
                 <div class="modal-body">
+                    <h4>Templates</h4>
+                    If you want to import bookings using a new address, download this template -> <a href="#">Booking With New Address XLSX Template</a>
+                    <br>
+                    If you want to import bookings using your primary address, download this template -> <a href="#">Booking Using Primary Address XLSX Template</a>
+                    <br>
+                    <br>
+
                     <div class="row">
                         {{ csrf_field() }}
 
