@@ -16,11 +16,17 @@ class AddressbooksController extends Controller
         return view('customers.addressbooks.index', compact('addressbooks'));
     }
 
-    public function store($request)
+    public function store(StoreAddressbookRequest $request)
     {
-        $input = $request->all();
+//        $user = $request->user()->toArray();
+//        dd($user);
+//        $input = $request->all();
+//        $input['user_id'] = $user['id'];
+//
+//        $addressbook = UserAddressbook::create($input);
+//
+//        return redirect()->back();
 
-        $addressbooks= UserAddressbook::create($input);
-
+        echo 'bwisit';
     }
 }
