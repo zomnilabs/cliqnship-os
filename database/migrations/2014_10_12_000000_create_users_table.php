@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->enum('account_type', ['company', 'individual']);
             $table->enum('login_type', ['email', 'facebook', 'google'])->default('email');
+            $table->tinyInteger('can_use_api');
             $table->rememberToken();
             $table->timestamps();
         });
