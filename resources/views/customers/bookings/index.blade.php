@@ -8,12 +8,26 @@
     <script>
         (function() {
             $('.table thead tr.searchable th').each( function () {
-                var title = $(this).text();
+                let title = $(this).text();
                 if (title) {
-                    if (title === 'Pickup Date') {
-                        $(this).html( '<input type="date" style="width: 100%" placeholder="Search '+title+'" />' );
-                    } else {
-                        $(this).html( '<input type="text" style="width: 100%" placeholder="Search '+title+'" />' );
+                    switch (title) {
+                        case 'Pickup Date':
+                            $(this).html( '<input type="date" class="form-control" style="width: 100%" placeholder="Search '+title+'" />' );
+
+                            break;
+                        case 'Status':
+                            let selectHTML = '<select class="form-control" style="width: 100%">';
+                            selectHTML += '<option value="">Filter Status</option>';
+                            selectHTML += '<option value="pending">Pending</option>';
+                            selectHTML += '<option value="accepted">Accepted</option>';
+                            selectHTML += '<option value="completed">Completed</option>';
+                            selectHTML += '<option value="rejected">Rejected</option>';
+                            selectHTML += '</select>';
+
+                            $(this).html(selectHTML);
+                            break;
+                        default:
+                            $(this).html( '<input class="form-control" type="text" style="width: 100%" placeholder="Search '+title+'" />' );
                     }
 
                 }

@@ -17,7 +17,7 @@
             $('.table thead tr.searchable th').each( function () {
                 var title = $(this).text();
                 if (title) {
-                    $(this).html( '<input type="text" style="width: 100%" class="form-control" placeholder="Search '+title+'" />' );
+                    $(this).html( '<input type="text" class="form-control" style="width: 100%" class="form-control" placeholder="Search '+title+'" />' );
                 }
             });
 
