@@ -18,15 +18,19 @@ class AddressbooksController extends Controller
 
     public function store(StoreAddressbookRequest $request)
     {
-//        $user = $request->user()->toArray();
-//        dd($user);
-//        $input = $request->all();
-//        $input['user_id'] = $user['id'];
-//
-//        $addressbook = UserAddressbook::create($input);
-//
-//        return redirect()->back();
+        $user = $request->user()->toArray();
+        $input = $request->all();
+        $input['user_id'] = $user['id'];
 
-        echo 'bwisit';
+        $addressbook = UserAddressbook::create($input);
+
+        // Change primary
+        if ($addressbook->primary) {
+            UserAddressbook::where('primary', 1)
+                ->where('id', '!=', $addressbook->id)
+                ->update(['primary', 0]);
+        }
+
+        return redirect()->back();
     }
 }

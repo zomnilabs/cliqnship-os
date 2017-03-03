@@ -61,6 +61,8 @@
                             <tr class="searchable">
                                 <th>Id #</th>
                                 <th>Name</th>
+                                <th>Type</th>
+                                <th>Address Type</th>
                                 <th>Address</th>
                                 <th>Contact #</th>
                                 <th>Email Address</th>
@@ -69,6 +71,8 @@
                             <tr>
                                 <th>Id #</th>
                                 <th>Name</th>
+                                <th>Type</th>
+                                <th>Address Type</th>
                                 <th>Address</th>
                                 <th>Contact #</th>
                                 <th>Email Address</th>
@@ -81,6 +85,8 @@
                                     <tr id="addressbook-{{$addressbook->id}}">
                                         <td>{{$addressbook->id}}</td>
                                         <td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>
+                                        <td>{{ ucwords($addressbook->type) }}</td>
+                                        <td>{{ ucwords($addressbook->address_type) }}</td>
                                         <th>{{$addressbook->address_line_1}}</th>
                                         <th>{{$addressbook->contact_number}}</th>
                                         <th>{{$addressbook->email}}</th>
@@ -296,7 +302,7 @@
                             <div class="form-group{{ $errors->has('address_type') ? ' has-error' : '' }}">
                                 <label for="address_type">Address Type</label>
                                 <select name="address_type" class="form-control" id="address_type">
-                                    <option value="resedential">Resedential</option>
+                                    <option value="residential">Resedential</option>
                                     <option value="office">Office</option>
                                 </select>
                                 @if ($errors->has('address_type'))
