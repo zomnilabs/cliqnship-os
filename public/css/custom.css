@@ -65,6 +65,11 @@ input[type="radio"]:focus {
     font-size: 1.3em;
 }
 
+.dropdown-menu {
+    min-width: 240px !important;
+    font-size: 1em !important;
+}
+
 .avatar {
     width: 29px;
     height: 29px;
