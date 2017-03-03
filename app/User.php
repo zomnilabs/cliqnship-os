@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\UserGroup;
 use App\Models\UserProfile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -30,5 +31,10 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne(UserProfile::class);
+    }
+
+    public function group()
+    {
+        return $this->belongsTo(UserGroup::class);
     }
 }
