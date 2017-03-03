@@ -26,20 +26,15 @@ class StoreAddressbookRequest extends FormRequest
         return [
             'identifier' => 'required',
             'type' => 'required',
-            'firstname' => 'required|string|min:2|max:56',
-            'middlename' => 'required|string|min:1|max:56',
-            'lastname' => 'required|string|min:2|max:56',
+            'first_name' => 'required|string|min:2',
+            'last_name' => 'required|string|min:2',
             'contact_number' => 'required',
-            'email' => 'required|email|max:56',
-            'address_line_1' => 'required|min:5',
-            'address_line_2' => 'required|min:5',
-            'barangay' => 'required',
+            'email' => 'required|email',
+            'address_line_1' => 'required|min:2',
             'city' => 'required',
             'province' => 'required',
             'zip_code' => 'required',
-            'country' => 'required',
             'address_type' => 'required',
-            'landmarks' => 'required'
         ];
     }
 }
