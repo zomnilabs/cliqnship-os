@@ -58,7 +58,7 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr class="searchable">
-                                <th>Id #</th>
+                                <th class="hide">Id #</th>
                                 <th>Name</th>
                                 <th>Type</th>
                                 <th>Address Type</th>
@@ -68,7 +68,7 @@
                                 <th></th>
                             </tr>
                             <tr>
-                                <th>Id #</th>
+                                <th class="hide">Id #</th>
                                 <th>Name</th>
                                 <th>Type</th>
                                 <th>Address Type</th>
@@ -82,7 +82,7 @@
                             <tbody>
                                 @foreach($addressbooks as $addressbook)
                                     <tr id="addressbook-{{$addressbook->id}}">
-                                        <td>{{$addressbook->id}}</td>
+                                        <td class="hide">{{$addressbook->id}}</td>
                                         <td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>
                                         <td>{{ ucwords($addressbook->type) }}</td>
                                         <td>{{ ucwords($addressbook->address_type) }}</td>
