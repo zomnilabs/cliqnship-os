@@ -17,7 +17,7 @@
             $('.table thead tr.searchable th').each( function () {
                 var title = $(this).text();
                 if (title) {
-                    $(this).html( '<input type="text" style="width: 100%" placeholder="Search '+title+'" />' );
+                    $(this).html( '<input type="text" style="width: 100%" class="form-control" placeholder="Search '+title+'" />' );
                 }
             });
 
@@ -110,8 +110,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <div class="modal-header">
-                    <h4 class="modal-title" id="gridSystemModalLabel">Create Addressbook</h4>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title" id="gridSystemModalLabel">Create Address Book</h4>
                 </div><br/>
                 <form method="POST" action="/customers/addressbooks" >
                     {{ csrf_field() }}
@@ -145,7 +145,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class0.="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                                <label for="first_name">Contact Person First Name</label>
+                                <label for="first_name">First Name</label>
                                 <input type="text" class="form-control" name="first_name" id="first_name" required/>
                                  @if ($errors->has('first_name'))
                                     <span class="help-block">
@@ -156,7 +156,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                                <label for="last_name">Contact Person Last Name</label>
+                                <label for="last_name">Last Name</label>
                                 <input type="text" class="form-control" name="last_name" id="last_name" required/>
                                  @if ($errors->has('last_name'))
                                     <span class="help-block">
@@ -167,7 +167,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group{{ $errors->has('middle_name') ? ' has-error' : '' }}">
-                                <label for="middle_name">Contact Person Middle Name</label>
+                                <label for="middle_name">Middle Name</label>
                                 <input type="text" class="form-control" name="middle_name" id="middle_name" required/>
                                  @if ($errors->has('middle_name'))
                                     <span class="help-block">
