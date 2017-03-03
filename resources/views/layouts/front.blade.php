@@ -47,21 +47,33 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     @if (! Auth::guest())
-                        <li class="{{ set_active(['customers']) }}"><a href="/customers">Dashboard <span class="sr-only">(current)</span></a></li>
-                        <li class="{{ set_active(['customers/addressbooks*']) }}"><a href="/customers/addressbooks">Addressbooks</a></li>
-                        <li class="{{ set_active(['customers/bookings*']) }}"><a href="/customers/bookings">Bookings</a></li>
-                        <li class="{{ set_active(['customers/shipments*']) }} dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                               role="button" aria-haspopup="true" aria-expanded="false">
-                                Shipments <span class="caret"></span></a>
+                        @if (Auth::user()->user_group_id == 1)
+                            <li class="{{ set_active(['admin']) }}"><a href="/admin">Dashboard <span class="sr-only">(current)</span></a></li>
+                            <li class="{{ set_active(['admin/dispatching*']) }}"><a href="/admin/dispatching">Dispatching</a></li>
+                            <li class="{{ set_active(['admin/riders*']) }}"><a href="/admin/riders">Riders</a></li>
+                            <li class="{{ set_active(['admin/customers*']) }}"><a href="/admin/customers">Customers</a></li>
+                            <li class="{{ set_active(['admin/users*']) }}"><a href="/admin/users">Users</a></li>
+                            <li class="{{ set_active(['admin/bookings*']) }}"><a href="/admin/bookings">Bookings</a></li>
+                            <li class="{{ set_active(['admin/shipments*']) }}"><a href="/admin/shipments">Shipments</a></li>
+                            <li class="{{ set_active(['admin/reports*']) }}"><a href="/admin/reports">Reports</a></li>
+                            <li class="{{ set_active(['admin/cms*']) }}"><a href="/admin/cms">CMS</a></li>
+                        @else
+                            <li class="{{ set_active(['customers']) }}"><a href="/customers">Dashboard <span class="sr-only">(current)</span></a></li>
+                            <li class="{{ set_active(['customers/addressbooks*']) }}"><a href="/customers/addressbooks">Addressbooks</a></li>
+                            <li class="{{ set_active(['customers/bookings*']) }}"><a href="/customers/bookings">Bookings</a></li>
+                            <li class="{{ set_active(['customers/shipments*']) }} dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                   role="button" aria-haspopup="true" aria-expanded="false">
+                                    Shipments <span class="caret"></span></a>
 
-                            <ul class="dropdown-menu">
-                                <li><a href="/customers/shipments">All Shipments</a></li>
-                                <li><a href="/customers/shipments/returned">Returned Shipments</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="/customers/shipments/cash-on-delivery">Cash-on-Delivery Shipments</a></li>
-                            </ul>
-                        </li>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/customers/shipments">All Shipments</a></li>
+                                    <li><a href="/customers/shipments/returned">Returned Shipments</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="/customers/shipments/cash-on-delivery">Cash-on-Delivery Shipments</a></li>
+                                </ul>
+                            </li>
+                        @endif
                     @endif
                 </ul>
 
