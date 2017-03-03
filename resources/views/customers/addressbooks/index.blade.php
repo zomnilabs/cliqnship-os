@@ -314,7 +314,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group" style="padding-top: 35px;">
                                     <label for="primary">
                                         <input type="checkbox" value="1" id="primary" name="primary"/> Is this your primary address?
                                     </label>
