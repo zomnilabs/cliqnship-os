@@ -70,7 +70,7 @@
                         <i class="glyphicon glyphicon-plus"></i>
                         New Booking</button>
 
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#importBookingModal">
+                    <button class="btn btn-primary">
                         <i class="fa fa-upload"></i>
                         Import Bookings</button>
 
@@ -167,8 +167,6 @@
             </div>
         </div>
     </div>
-
-    @include('customers.bookings.modals.import');
 @endsection
 
 @section('scripts')

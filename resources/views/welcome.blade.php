@@ -7,27 +7,33 @@
         <div class="overlay"></div>
         <div class="front_txt">
             <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="col-md-6 col-md-offset-6 col-sm-6 col-xs-12">
                     <p class="title"><strong>IS YOUR SHIPMENT READY?</strong></p>
-                    <p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    <p class="main-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse</p>
-                    <div class="small-title">Wanna have something shipped for your business</div>
-                    <div class="front_signup">
-                        <span>SIGN-UP HERE! AND HAVE IT SHIPPED</span>
-                    </div>
-                    <div class="small-title"><span>Packed and shipped already? Find out  where it is?</span></div>
-                    <div class="front_signup">
-                        <span>LET'S LOCATE IT!</span>
-                    </div>
+                    {{--<div class="small-title">Wanna have something shipped for your business</div>--}}
+                    {{--<div class="front_signup">--}}
+                        {{--<span>SIGN-UP HERE! AND HAVE IT SHIPPED</span>--}}
+                    {{--</div>--}}
+                    {{--<div class="small-title"><span>Packed and shipped already? Find out  where it is?</span></div>--}}
+                    {{--<div class="front_signup">--}}
+                        {{--<span>LET'S LOCATE IT!</span>--}}
+                    {{--</div>--}}
+                    <a href="#" class="app-link">
+                        <img src="images/play_store.png" alt="Get it on play store">
+                    </a>
+                    <a href="#" class="app-link">
+                        <img src="images/app_store.png" alt="Get it on app store">
+                    </a>
                 </div>
             </div>
         </div>
     </div> <!--- End of Main front -->
 
     <!---Bussiness Signup -->
-    <div id="bussiness-signup">
+    <div id="bussiness-signup" style="min-height: 75vh;">
         <div class="container">
             <div class="bs-content">
                 <div class="bs-title">
@@ -39,21 +45,20 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="bs-thumbnail" id="bs-collect-deposit">
-                            <img class="img-responsive hidden slide-left" src="images/collect-deposit.png"/>
-                            <img class="img-responsive hidden slide-left" src="images/online-tracking.png"/>
+                            <img class="img-responsive slide-left" src="images/online-tracking.png" style="height: 130px; width: auto;"/>
                             <div class="caption">
                                 <h3>SIGN UP</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                                     consequat.</p>
-                                <p><a href="#" class="bs-btn-signup">SIGN UP HERE</a></p>
                             </div>
                         </div>
+                        <a href="#" class="bs-btn-signup">SIGN UP HERE</a>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="bs-thumbnail" id="bs-free-logo">
-                            <img class="img-responsive hidden" id="bs-img-middle" src="images/free.png"/>
+                            <img class="img-responsive " id="bs-img-middle" src="images/free.png" style="height: 130px; width: auto;"/>
                             <div class="caption">
                                 <h3>PACK AND SCHEDULE</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -65,16 +70,16 @@
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="bs-thumbnail" id="bs-track-logo">
-                            <img class="img-responsive hidden slide-right" src="images/pick-pack.png"/>
+                            <img class="img-responsive  slide-right" src="images/pick-pack.png" style="height: 130px; width: auto;"/>
                             <div class="caption">
                                 <h3>WE PICK IT UP!</br>
                                     AND IT SHIPPED OUT
                                 </h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                     tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p><a href="#" class="bs-btn-signup">TRACK IT NOW</a></p>
                             </div>
                         </div>
+                        <a href="#" class="bs-btn-signup">TRACK IT NOW</a>
                     </div>
                 </div><!--end of row -->
             </div>
@@ -122,7 +127,7 @@
                 </div>
                 <div class="grow-main-content">
                     <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-8 col-sm-6 col-xs-12">
                             <div class="grow-content">
                                 <p class="title-content"><b>BIG</b> <span class="or">or</span> small</br></br></p>
                                 We aim to see them grow
@@ -131,7 +136,7 @@
                                 potential together
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6">
+                        <div class="col-md-4 col-sm-6">
                             <img class="img-responsive img-tree" src="images/tree.png">
                         </div>
                     </div>
@@ -145,8 +150,7 @@
     </div><!-- End of Grow -->
     <!--- Supply -->
     <div id="supply">
-        <div class="bg-top"></div>
-        <div class="container">
+        <div class="content">
             <div class="supply-wrapper">
                 <div class="supply-upper">
                     <img class="img-robo slideanim" src="images/robo.png"/>

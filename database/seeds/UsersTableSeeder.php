@@ -15,8 +15,7 @@ class UsersTableSeeder extends Seeder
 
         for ($i = 0; $i < 50; $i++) {
             $user = \App\User::create([
-                'account_id'    => uniqid(),
-                'user_group_id' => 5,
+                'user_id'    => uniqid(),
                 'email'         => $faker->email,
                 'password'      => Hash::make('password'),
                 'account_type'  => \App\User::TYPE_INDIVIDUAL
