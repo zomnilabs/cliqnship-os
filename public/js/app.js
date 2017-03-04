@@ -44649,11 +44649,19 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
         addressSelected: function addressSelected(val) {
             this.user_addressbook_id = val.value;
         },
+        nextTab: function nextTab(elem) {
+            var $active = $('.wizard .nav-tabs li.active');
+            $active.next().removeClass('disabled');
+            $($active).next().find('a[data-toggle="tab"]').click();
+        },
+        prevTab: function prevTab(elem) {
+            var $active = $('.wizard .nav-tabs li.active');
+            $($active).prev().find('a[data-toggle="tab"]').click();
+        },
         getAddress: function getAddress() {
             var _this = this;
 
             axios.get('/api/v1/address-books/' + this.user_id).then(function (response) {
-                console.log(_this.user_id);
                 var addressbooks = response.data;
 
                 var _iteratorNormalCompletion = true;
@@ -44664,7 +44672,7 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
                     for (var _iterator = addressbooks[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                         var address = _step.value;
 
-                        _this.addressbookOptions.push({ label: '' + address.address_line_1, value: address.id });
+                        _this.addressbookOptions.push({ label: address.address_line_1 + ', ' + address.barangay + ', ' + address.city, value: address.id });
                     }
                 } catch (err) {
                     _didIteratorError = true;
@@ -44689,7 +44697,7 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
 
             var data = {
                 user_addressbook_id: this.user_addressbook_id,
-                bookingImage: this.bookingImage,
+                //                    bookingImage: this.bookingImage,
                 number_of_items: this.number_of_items,
                 type_of_items: this.type_of_items,
                 length: this.length,
@@ -44697,11 +44705,12 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
                 height: this.height,
                 weight: this.weight,
                 pickup_date: this.pickup_date,
-                remarks: this.remarks
+                remarks: this.remarks,
+                user_id: this.user_id
             };
 
             var url = '/api/v1/customers/bookings';
-            this.$http.post(url, data).then(function (response) {
+            axios.post(url, data).then(function (response) {
                 console.log(response);
 
                 _this2.$events.fire('reload-table');
@@ -81216,7 +81225,7 @@ var Component = __webpack_require__(5)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/alleoindong/Public/projects/aindong/cliqnship-os/resources/assets/js/components/Example.vue"
+Component.options.__file = "/Users/nkmcheng/Public/projects/zomnilabs/cliqnship-os/resources/assets/js/components/Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -81250,7 +81259,7 @@ var Component = __webpack_require__(5)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/alleoindong/Public/projects/aindong/cliqnship-os/resources/assets/js/components/customer/booking/wizard-form.vue"
+Component.options.__file = "/Users/nkmcheng/Public/projects/zomnilabs/cliqnship-os/resources/assets/js/components/customer/booking/wizard-form.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] wizard-form.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -81288,7 +81297,7 @@ var Component = __webpack_require__(5)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/alleoindong/Public/projects/aindong/cliqnship-os/resources/assets/js/components/passport/AuthorizedClients.vue"
+Component.options.__file = "/Users/nkmcheng/Public/projects/zomnilabs/cliqnship-os/resources/assets/js/components/passport/AuthorizedClients.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] AuthorizedClients.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -81326,7 +81335,7 @@ var Component = __webpack_require__(5)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/alleoindong/Public/projects/aindong/cliqnship-os/resources/assets/js/components/passport/Clients.vue"
+Component.options.__file = "/Users/nkmcheng/Public/projects/zomnilabs/cliqnship-os/resources/assets/js/components/passport/Clients.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Clients.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -81364,7 +81373,7 @@ var Component = __webpack_require__(5)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/alleoindong/Public/projects/aindong/cliqnship-os/resources/assets/js/components/passport/PersonalAccessTokens.vue"
+Component.options.__file = "/Users/nkmcheng/Public/projects/zomnilabs/cliqnship-os/resources/assets/js/components/passport/PersonalAccessTokens.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] PersonalAccessTokens.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -81414,13 +81423,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "on-change": _vm.addressSelected,
       "options": _vm.addressbookOptions
     }
-  })], 1), _vm._v(" "), _vm._m(1)]), _vm._v(" "), _c('div', {
+  })], 1), _vm._v(" "), _c('ul', {
+    staticClass: "list-inline pull-right"
+  }, [_c('li', [_c('button', {
+    staticClass: "btn btn-primary next-step",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.nextTab
+    }
+  }, [_vm._v("Next")])])])]), _vm._v(" "), _c('div', {
     staticClass: "tab-pane",
     attrs: {
       "role": "tabpanel",
       "id": "step2"
     }
-  }, [_c('h3', [_vm._v("Step 2")]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('div', {
+  }, [_c('h3', [_vm._v("Step 2")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('input', {
     staticClass: "form-control",
@@ -81434,7 +81453,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "input": _vm.inputChange
     }
-  })]), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4)]), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('ul', {
+    staticClass: "list-inline pull-right"
+  }, [_c('li', [_c('button', {
+    staticClass: "btn btn-default prev-step",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.prevTab
+    }
+  }, [_vm._v("Previous")])]), _vm._v(" "), _c('li', [_c('button', {
+    staticClass: "btn btn-primary next-step",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.nextTab
+    }
+  }, [_vm._v("Next")])])])]), _vm._v(" "), _c('div', {
     staticClass: "tab-pane",
     attrs: {
       "role": "tabpanel",
@@ -81613,7 +81650,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "input": _vm.inputChange
     }
-  })])])]), _vm._v(" "), _vm._m(5)]), _vm._v(" "), _c('div', {
+  })])])]), _vm._v(" "), _c('ul', {
+    staticClass: "list-inline pull-right"
+  }, [_c('li', [_c('button', {
+    staticClass: "btn btn-default prev-step",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.prevTab
+    }
+  }, [_vm._v("Previous")])]), _vm._v(" "), _c('li', [_c('button', {
+    staticClass: "btn btn-primary next-step",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.nextTab
+    }
+  }, [_vm._v("Next")])])])]), _vm._v(" "), _c('div', {
     staticClass: "tab-pane",
     attrs: {
       "role": "tabpanel",
@@ -81621,7 +81676,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('h3', [_vm._v("Step 4")]), _vm._v(" "), _c('p', [_vm._v("Would you like to request a pouch?")]), _vm._v(" "), _c('div', {
     staticClass: "row"
-  }, [_vm._m(6), _vm._v(" "), _c('div', {
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "col-md-5"
   }, [_c('div', {
     staticClass: "form-group"
@@ -81642,15 +81697,41 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "input": _vm.inputChange
     }
-  })])]), _vm._v(" "), _vm._m(7), _vm._v(" "), _vm._m(8)]), _vm._v(" "), _vm._m(9)]), _vm._v(" "), _c('div', {
+  })])]), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5)]), _vm._v(" "), _c('ul', {
+    staticClass: "list-inline pull-right"
+  }, [_c('li', [_c('button', {
+    staticClass: "btn btn-default prev-step",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.prevTab
+    }
+  }, [_vm._v("Previous")])]), _vm._v(" "), _c('li', [_c('button', {
+    staticClass: "btn btn-primary btn-info-full next-step",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.nextTab
+    }
+  }, [_vm._v("Next")])])])]), _vm._v(" "), _c('div', {
     staticClass: "tab-pane",
     attrs: {
       "role": "tabpanel",
       "id": "step5"
     }
-  }, [_c('h3', [_vm._v("Step 5")]), _vm._v(" "), _vm._m(10), _vm._v(" "), _vm._m(11), _vm._v(" "), _c('ul', {
+  }, [_c('h3', [_vm._v("Step 5")]), _vm._v(" "), _vm._m(6), _vm._v(" "), _vm._m(7), _vm._v(" "), _c('ul', {
     staticClass: "list-inline pull-right"
-  }, [_vm._m(12), _vm._v(" "), _c('li', [_c('button', {
+  }, [_c('li', [_c('button', {
+    staticClass: "btn btn-default prev-step",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.prevTab
+    }
+  }, [_vm._v("Previous")])]), _vm._v(" "), _c('li', [_c('button', {
     staticClass: "btn btn-primary btn-info-full next-step",
     attrs: {
       "type": "button"
@@ -81658,7 +81739,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.saveProject
     }
-  }, [_vm._v("Save and Continue")])])])]), _vm._v(" "), _vm._m(13), _vm._v(" "), _c('div', {
+  }, [_vm._v("Save and Continue")])])])]), _vm._v(" "), _vm._m(8), _vm._v(" "), _c('div', {
     staticClass: "clearfix"
   })])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -81775,15 +81856,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "glyphicon glyphicon-ok"
   })])])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "list-inline pull-right"
-  }, [_c('li', [_c('button', {
-    staticClass: "btn btn-primary next-step",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._v("Next")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', [_vm._v("Select an image for this booking / pickup ("), _c('span', {
     staticClass: "text-primary text-capitalize"
   }, [_vm._v("not required")]), _vm._v(")")])
@@ -81796,34 +81868,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "alt": ""
     }
   })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "list-inline pull-right"
-  }, [_c('li', [_c('button', {
-    staticClass: "btn btn-default prev-step",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._v("Previous")])]), _vm._v(" "), _c('li', [_c('button', {
-    staticClass: "btn btn-primary next-step",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._v("Next")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "list-inline pull-right"
-  }, [_c('li', [_c('button', {
-    staticClass: "btn btn-default prev-step",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._v("Previous")])]), _vm._v(" "), _c('li', [_c('button', {
-    staticClass: "btn btn-primary next-step",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._v("Next")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "col-md-5"
@@ -81883,20 +81927,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "table table-hover"
   }, [_c('thead', [_c('tr', [_c('th', [_vm._v("Pouch Size")]), _vm._v(" "), _c('th', [_vm._v("Quantity")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("Medium")]), _vm._v(" "), _c('td', [_vm._v("2")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Large")]), _vm._v(" "), _c('td', [_vm._v("10")])])])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "list-inline pull-right"
-  }, [_c('li', [_c('button', {
-    staticClass: "btn btn-default prev-step",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._v("Previous")])]), _vm._v(" "), _c('li', [_c('button', {
-    staticClass: "btn btn-primary btn-info-full next-step",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._v("Next")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "preview"
   }, [_c('img', {
@@ -81929,13 +81959,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('label', [_vm._v("Remarks:")]), _vm._v(" "), _c('p', [_vm._v("Please use a motorcycle as the place is hard to go for a car.")])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-12"
   }, [_c('label', [_vm._v("Pouch Request:")]), _vm._v(" "), _c('ul', [_c('li', [_vm._v("2x Medium")]), _vm._v(" "), _c('li', [_vm._v("10x Large")])])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('button', {
-    staticClass: "btn btn-default prev-step",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._v("Previous")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "tab-pane",

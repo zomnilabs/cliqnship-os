@@ -22,7 +22,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function() {
     // users
     Route::group(['prefix' => 'customers'], function () {
         Route::group(['prefix' => 'bookings'], function () {
-            Route::post('/', 'UsersController@store');
+            Route::post('/', 'BookingController@store');
         });
     });
 

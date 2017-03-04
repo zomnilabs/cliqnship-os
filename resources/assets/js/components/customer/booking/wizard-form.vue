@@ -68,7 +68,7 @@
                                 </div>
 
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-primary next-step">Next</button></li>
+                                    <li><button type="button" class="btn btn-primary next-step" @click="nextTab">Next</button></li>
                                 </ul>
                             </div>
                             <div class="tab-pane" role="tabpanel" id="step2">
@@ -85,8 +85,8 @@
                                 </div>
 
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                    <li><button type="button" class="btn btn-primary next-step">Next</button></li>
+                                    <li><button type="button" class="btn btn-default prev-step" @click="prevTab">Previous</button></li>
+                                    <li><button type="button" class="btn btn-primary next-step" @click="nextTab">Next</button></li>
                                 </ul>
                             </div>
 
@@ -163,8 +163,8 @@
                                 </div>
 
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                    <li><button type="button" class="btn btn-primary next-step">Next</button></li>
+                                    <li><button type="button" class="btn btn-default prev-step" @click="prevTab">Previous</button></li>
+                                    <li><button type="button" class="btn btn-primary next-step" @click="nextTab">Next</button></li>
                                 </ul>
                             </div>
 
@@ -220,8 +220,8 @@
                                     </div>
                                 </div>
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                    <li><button type="button" class="btn btn-primary btn-info-full next-step">Next</button></li>
+                                    <li><button type="button" class="btn btn-default prev-step" @click="prevTab">Previous</button></li>
+                                    <li><button type="button" class="btn btn-primary btn-info-full next-step" @click="nextTab">Next</button></li>
                                 </ul>
                             </div>
 
@@ -282,7 +282,7 @@
                                 </div>
 
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                    <li><button type="button" class="btn btn-default prev-step" @click="prevTab">Previous</button></li>
                                     <li><button type="button" class="btn btn-primary btn-info-full next-step" @click="saveProject">Save and Continue</button></li>
                                 </ul>
                             </div>
@@ -356,13 +356,21 @@
             addressSelected(val) {
                 this.user_addressbook_id = val.value
             },
+            nextTab(elem) {
+                let $active = $('.wizard .nav-tabs li.active');
+                $active.next().removeClass('disabled');
+                $($active).next().find('a[data-toggle="tab"]').click();
+            },
+            prevTab(elem) {
+                let $active = $('.wizard .nav-tabs li.active');
+                $($active).prev().find('a[data-toggle="tab"]').click();
+            },
             getAddress() {
                 axios.get(`/api/v1/address-books/${this.user_id}`).then(response => {
-                    console.log(this.user_id);
                     let addressbooks = response.data;
 
                     for (let address of addressbooks) {
-                        this.addressbookOptions.push({label: `${address.address_line_1}`, value: address.id});
+                        this.addressbookOptions.push({label: `${address.address_line_1}, ${address.barangay}, ${address.city}`, value: address.id});
                     }
                 }).catch(error => {
                     console.log(error);
@@ -372,7 +380,7 @@
 
                 let data = {
                     user_addressbook_id: this.user_addressbook_id,
-                    bookingImage: this.bookingImage,
+//                    bookingImage: this.bookingImage,
                     number_of_items: this.number_of_items,
                     type_of_items: this.type_of_items,
                     length: this.length,
@@ -381,10 +389,11 @@
                     weight: this.weight,
                     pickup_date: this.pickup_date,
                     remarks: this.remarks,
+                    user_id: this.user_id,
                 }
 
                 let url = `/api/v1/customers/bookings`;
-                this.$http.post(url, data).then(response => {
+                axios.post(url, data).then(response => {
                     console.log(response)
 
                 this.$events.fire('reload-table')

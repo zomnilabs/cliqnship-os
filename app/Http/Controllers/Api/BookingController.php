@@ -15,6 +15,8 @@ class BookingController extends Controller {
         // Create the booking
         \DB::transaction(function() use ($input, &$booking) {
             $input['booking_no'] = strtoupper(uniqid());
+            $input['source_id'] = "2";
+            $input['status'] = "pending";
 
             $data = Booking::create($input);
 
