@@ -23,7 +23,7 @@ class BookingsController extends Controller {
         $file = $request->file('file');
         \Excel::load($file, function($reader) use ($user) {
             $results = $reader->get();
-            print_r($results->toArray());
+
             foreach ($results as $booking) {
                 if (! (isset($booking['contact_person_first_name']) && $booking['contact_person_first_name'])) {
                     $this->importWithPrimaryAddress($booking, $user);
