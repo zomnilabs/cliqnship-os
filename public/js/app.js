@@ -44611,6 +44611,7 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
             user_addressbook_id: '',
             addressbooks: [],
             addressbookOptions: [],
+            addressPreview: '',
             bookingImage: '',
             number_of_items: '',
             type_of_items: '',
@@ -44648,6 +44649,7 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
         },
         addressSelected: function addressSelected(val) {
             this.user_addressbook_id = val.value;
+            this.addressPreview = val.label;
         },
         nextTab: function nextTab(elem) {
             var $active = $('.wizard .nav-tabs li.active');
@@ -81721,7 +81723,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "role": "tabpanel",
       "id": "step5"
     }
-  }, [_c('h3', [_vm._v("Step 5")]), _vm._v(" "), _vm._m(6), _vm._v(" "), _vm._m(7), _vm._v(" "), _c('ul', {
+  }, [_c('h3', [_vm._v("Step 5")]), _vm._v(" "), _vm._m(6), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-12"
+  }, [_c('label', [_vm._v("Pickup Address")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.addressPreview))])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-4"
+  }, [_c('label', [_vm._v("Pickup Date:")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.pickup_date))])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-4"
+  }, [_c('label', [_vm._v("Number of Items:")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.number_of_items) + " Items")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-4"
+  }, [_c('label', [_vm._v("Type of Items:")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.type_of_items))])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-3"
+  }, [_c('label', [_vm._v("Length:")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.length))])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-3"
+  }, [_c('label', [_vm._v("Width:")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.width))])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-3"
+  }, [_c('label', [_vm._v("Height:")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.height))])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-3"
+  }, [_c('label', [_vm._v("Weight:")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.weight) + " Kg")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-12"
+  }, [_c('label', [_vm._v("Remarks:")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.remarks))])]), _vm._v(" "), _vm._m(7)]), _vm._v(" "), _c('ul', {
     staticClass: "list-inline pull-right"
   }, [_c('li', [_c('button', {
     staticClass: "btn btn-default prev-step",
@@ -81937,28 +81959,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
     staticClass: "col-md-12"
-  }, [_c('label', [_vm._v("Pickup Address")]), _vm._v(" "), _c('p', [_vm._v("29 Sampaguita Street. San Vicente, Tarlac City Philippines")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-4"
-  }, [_c('label', [_vm._v("Pickup Date:")]), _vm._v(" "), _c('p', [_vm._v("February 28, 2017")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-4"
-  }, [_c('label', [_vm._v("Number of Items:")]), _vm._v(" "), _c('p', [_vm._v("5 Items")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-4"
-  }, [_c('label', [_vm._v("Type of Items:")]), _vm._v(" "), _c('p', [_vm._v("T-Shirts")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-3"
-  }, [_c('label', [_vm._v("Length:")]), _vm._v(" "), _c('p', [_vm._v("40")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-3"
-  }, [_c('label', [_vm._v("Width:")]), _vm._v(" "), _c('p', [_vm._v("30")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-3"
-  }, [_c('label', [_vm._v("Height:")]), _vm._v(" "), _c('p', [_vm._v("60")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-3"
-  }, [_c('label', [_vm._v("Weight:")]), _vm._v(" "), _c('p', [_vm._v("20 Kg")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-12"
-  }, [_c('label', [_vm._v("Remarks:")]), _vm._v(" "), _c('p', [_vm._v("Please use a motorcycle as the place is hard to go for a car.")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-12"
-  }, [_c('label', [_vm._v("Pouch Request:")]), _vm._v(" "), _c('ul', [_c('li', [_vm._v("2x Medium")]), _vm._v(" "), _c('li', [_vm._v("10x Large")])])])])
+  }, [_c('label', [_vm._v("Pouch Request:")]), _vm._v(" "), _c('ul', [_c('li', [_vm._v("2x Medium")]), _vm._v(" "), _c('li', [_vm._v("10x Large")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "tab-pane",

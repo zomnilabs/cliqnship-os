@@ -235,41 +235,41 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label>Pickup Address</label>
-                                        <p>29 Sampaguita Street. San Vicente, Tarlac City Philippines</p>
+                                        <p>{{ addressPreview }}</p>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Pickup Date:</label>
-                                        <p>February 28, 2017</p>
+                                        <p>{{ pickup_date }}</p>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Number of Items:</label>
-                                        <p>5 Items</p>
+                                        <p>{{ number_of_items }} Items</p>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Type of Items:</label>
-                                        <p>T-Shirts</p>
+                                        <p>{{ type_of_items }}</p>
                                     </div>
 
                                     <div class="col-md-3">
                                         <label>Length:</label>
-                                        <p>40</p>
+                                        <p>{{ length }}</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Width:</label>
-                                        <p>30</p>
+                                        <p>{{ width }}</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Height:</label>
-                                        <p>60</p>
+                                        <p>{{ height }}</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Weight:</label>
-                                        <p>20 Kg</p>
+                                        <p>{{ weight }} Kg</p>
                                     </div>
 
                                     <div class="col-md-12">
                                         <label>Remarks:</label>
-                                        <p>Please use a motorcycle as the place is hard to go for a car.</p>
+                                        <p>{{ remarks }}</p>
                                     </div>
 
                                     <div class="col-md-12">
@@ -319,6 +319,7 @@
                 user_addressbook_id: '',
                 addressbooks: [],
                 addressbookOptions: [],
+                addressPreview: '',
                 bookingImage: '',
                 number_of_items: '',
                 type_of_items: '',
@@ -355,13 +356,14 @@
             },
             addressSelected(val) {
                 this.user_addressbook_id = val.value
+                this.addressPreview = val.label
             },
-            nextTab(elem) {
+            nextTab() {
                 let $active = $('.wizard .nav-tabs li.active');
                 $active.next().removeClass('disabled');
                 $($active).next().find('a[data-toggle="tab"]').click();
             },
-            prevTab(elem) {
+            prevTab() {
                 let $active = $('.wizard .nav-tabs li.active');
                 $($active).prev().find('a[data-toggle="tab"]').click();
             },
@@ -398,7 +400,7 @@
 
                 this.$events.fire('reload-table')
                 this.resetForm()
-                $('#createBookingModal').modal('hide')
+                this.nextTab()
             }, error => {
                     console.log(error)
                 })

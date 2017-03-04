@@ -7,7 +7,7 @@
 @section('scripts')
     <script>
         (function() {
-            $('.table tfoot tr.searchable td').each( function () {
+            $('#bookingTable tfoot tr.searchable td').each( function () {
                 let title = $(this).text();
                 if (title) {
                     switch (title) {
@@ -33,7 +33,7 @@
                 }
             });
 
-            let table = $('.table').DataTable();
+            let table = $('#bookingTable').DataTable();
 
             // Apply the search
             table.columns().every( function () {
@@ -111,7 +111,7 @@
                             </div>
                         </div>
 
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" id="bookingTable">
                             <tfoot>
                                 <tr class="searchable">
                                     <td class="hide">Id #</td>
