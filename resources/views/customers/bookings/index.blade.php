@@ -7,16 +7,16 @@
 @section('scripts')
     <script>
         (function() {
-            $('#bookingTable thead tr.searchable th').each( function () {
+            $('.table tfoot tr.searchable td').each( function () {
                 let title = $(this).text();
                 if (title) {
                     switch (title) {
                         case 'Pickup Date':
-                            $(this).html( '<input type="date" class="form-control" style="width: 100%" placeholder="Search '+title+'" />' );
+                            $(this).html( '<input type="date" class="form-control filter" style="width: 100%" placeholder="Search '+title+'" />' );
 
                             break;
                         case 'Status':
-                            let selectHTML = '<select class="form-control" style="width: 100%">';
+                            let selectHTML = '<select class="form-control filter" style="width: 100%">';
                             selectHTML += '<option value="">Filter Status</option>';
                             selectHTML += '<option value="pending">Pending</option>';
                             selectHTML += '<option value="accepted">Accepted</option>';
@@ -27,13 +27,26 @@
                             $(this).html(selectHTML);
                             break;
                         default:
-                            $(this).html( '<input class="form-control" type="text" style="width: 100%" placeholder="Search '+title+'" />' );
+                            $(this).html( '<input class="form-control filter" type="text" style="width: 100%" placeholder="Search '+title+'" />' );
                     }
 
                 }
             });
 
-            $('#bookingTable').dataTable();
+            $('.table').DataTable();
+
+            // Apply the search
+            table.columns().every( function () {
+                let that = this;
+                $( '.filter', this.footer() ).on( 'keyup change', function () {
+                    if ( that.search() !== this.value ) {
+                        console.log(that.data());
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+            } );
         }())
     </script>
 @endsection
@@ -98,26 +111,29 @@
                             </div>
                         </div>
 
-                        <table class="table table-bordered" id="bookingTable">
+                        <table class="table table-bordered">
+                            <tfoot>
+                                <tr class="searchable">
+                                    <td class="hide">Id #</td>
+                                    <td>Booking #</td>
+                                    <td>Pickup Date</td>
+                                    <td>Pickup Address</td>
+                                    <td>Remarks</td>
+                                    <td>Status</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+
                             <thead>
-                            <tr class="searchable">
-                                <th class="hide">Id #</th>
-                                <th>Booking #</th>
-                                <th>Pickup Date</th>
-                                <th>Pickup Address</th>
-                                <th>Remarks</th>
-                                <th>Status</th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <th class="hide">Id #</th>
-                                <th>Booking #</th>
-                                <th>Pickup Date</th>
-                                <th>Pickup Address</th>
-                                <th>Remarks</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
+                                <tr>
+                                    <th class="hide">Id #</th>
+                                    <th>Booking #</th>
+                                    <th>Pickup Date</th>
+                                    <th>Pickup Address</th>
+                                    <th>Remarks</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -147,8 +163,7 @@
     <div class="modal fade" id="createBookingModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
-                <booking-wizard></booking-wizard>
+                @include('customers.bookings.wizard')
             </div>
         </div>
     </div>

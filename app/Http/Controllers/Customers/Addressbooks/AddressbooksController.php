@@ -4,14 +4,16 @@ namespace App\Http\Controllers\Customers\Addressbooks;
 use App\Http\Controllers\Controller;
 use App\Models\UserAddressbook;
 use App\Http\Requests\Addressbooks\StoreAddressbookRequest;
+use Illuminate\Http\Request;
 
 
 class AddressbooksController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $addressbooks = UserAddressbook::all();
+        $user = $request->user()->toArray();
+        $addressbooks = UserAddressbook::where('user_id', $user['id'])->get();
 
         return view('customers.addressbooks.index', compact('addressbooks'));
     }
