@@ -19,6 +19,50 @@
         .navbar-default {
             border-color: #434343;
         }
+
+        .white-text {
+            color: #fdfdfd !important;
+        }
+
+        .panel-body-danger {
+            background-color: #ea435e;
+        }
+
+        .panel-body-pending {
+            background-color: #eac976;
+        }
+
+        .panel-body-enroute {
+            background-color: #688bea;
+        }
+
+        .panel-body-completed {
+            background-color: #7bea88;
+        }
+
+        .panel-body-wallet {
+            background-color: #ead756;
+        }
+
+        .stats {
+            position: relative;
+            min-height: 130px;
+        }
+
+        .stats-label {
+            background-color: #494949;
+            padding: 10px 20px;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            margin: 0;
+            font-size: 1em;
+        }
+
+        .stats-value {
+            margin-top: 5px !important;
+        }
     </style>
 @endsection
 
@@ -45,9 +89,9 @@
                     <div class="col-md-2">
                         <a href="#">
                             <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4>Pending Pickup/Bookings</h4>
-                                    <h1>10</h1>
+                                <div class="panel-body panel-body-pending white-text stats">
+                                    <h1 class="stats-value">10</h1>
+                                    <h4 class="stats-label">Pending Pickup/Bookings</h4>
                                 </div>
                             </div>
                         </a>
@@ -55,9 +99,9 @@
                     <div class="col-md-2">
                         <a href="#">
                             <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4>Pending Shipments</h4>
-                                    <h1>10</h1>
+                                <div class="panel-body panel-body-pending white-text stats">
+                                    <h1 class="stats-value">10</h1>
+                                    <h4 class="stats-label">Pending Shipments</h4>
                                 </div>
                             </div>
                         </a>
@@ -65,9 +109,9 @@
                     <div class="col-md-2">
                         <a href="#">
                             <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4>En-Route Shipments</h4>
-                                    <h1>5</h1>
+                                <div class="panel-body panel-body-enroute white-text stats">
+                                    <h1 class="stats-value">5</h1>
+                                    <h4 class="stats-label">En-Route Shipments</h4>
                                 </div>
                             </div>
                         </a>
@@ -75,9 +119,19 @@
                     <div class="col-md-2">
                         <a href="#">
                             <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4>Completed Shipments</h4>
-                                    <h1>21</h1>
+                                <div class="panel-body panel-body-completed white-text stats">
+                                    <h1 class="stats-value">21</h1>
+                                    <h4 class="stats-label">Completed Shipments</h4>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="#">
+                            <div class="panel panel-danger">
+                                <div class="panel-body panel-body-danger white-text stats">
+                                    <h1 class="stats-value">4</h1>
+                                    <h4 class="stats-label">Returned Shipments</h4>
                                 </div>
                             </div>
                         </a>
@@ -85,19 +139,9 @@
                     <div class="col-md-2">
                         <a href="#">
                             <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4>Returned Shipments</h4>
-                                    <h1>4</h1>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-2">
-                        <a href="#">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4>Wallet</h4>
-                                    <h1>P 560, 000</h1>
+                                <div class="panel-body panel-body-wallet white-text stats">
+                                    <h1 class="stats-value">P 560, 000</h1>
+                                    <h4 class="stats-label">Wallet</h4>
                                 </div>
                             </div>
                         </a>
