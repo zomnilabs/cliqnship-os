@@ -7,7 +7,7 @@
 @section('scripts')
     <script>
         (function() {
-            $('.table thead tr.searchable th').each( function () {
+            $('#bookingTable thead tr.searchable th').each( function () {
                 let title = $(this).text();
                 if (title) {
                     switch (title) {
@@ -33,7 +33,7 @@
                 }
             });
 
-            $('.table').dataTable();
+            $('#bookingTable').dataTable();
         }())
     </script>
 @endsection
@@ -98,7 +98,7 @@
                             </div>
                         </div>
 
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" id="bookingTable">
                             <thead>
                             <tr class="searchable">
                                 <th class="hide">Id #</th>
@@ -147,7 +147,8 @@
     <div class="modal fade" id="createBookingModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                @include('customers.bookings.wizard')
+                <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
+                <booking-wizard></booking-wizard>
             </div>
         </div>
     </div>

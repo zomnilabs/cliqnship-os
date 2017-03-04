@@ -4193,6 +4193,10 @@ vue-loader@^10.0.2:
     vue-style-loader "^2.0.0"
     vue-template-es2015-compiler "^1.2.2"
 
+vue-select@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/vue-select/-/vue-select-2.0.0.tgz#e6dd66b9eae53c70c35cde1b5841b31c8ca10bd9"
+
 vue-style-loader@^2.0.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-2.0.3.tgz#b464ffb6279702d4137a80ac81b5c12ac440f0a0"

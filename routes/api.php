@@ -16,3 +16,18 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function() {
+
+    // users
+    Route::group(['prefix' => 'customers'], function () {
+        Route::group(['prefix' => 'bookings'], function () {
+            Route::post('/', 'UsersController@store');
+        });
+    });
+
+    // Address book
+    Route::group(['prefix' => 'address-books'], function() {
+        Route::get('/{userId}', 'AddressBookController@index');
+    });
+});

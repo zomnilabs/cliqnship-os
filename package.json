@@ -19,6 +19,7 @@
     "vue": "^2.0.1"
   },
   "dependencies": {
-    "chart.js": "^2.5.0"
+    "chart.js": "^2.5.0",
+    "vue-select": "^2.0.0"
   }
 }

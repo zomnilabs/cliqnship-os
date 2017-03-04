@@ -30,6 +30,8 @@ Vue.component(
     require('./components/passport/PersonalAccessTokens.vue')
 );
 
+Vue.component('booking-wizard', require('./components/customer/booking/wizard-form.vue'));
+
 const app = new Vue({
     el: '#app'
 });
