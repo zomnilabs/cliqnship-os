@@ -163,7 +163,7 @@
     <div class="modal fade" id="createBookingModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                @include('customers.bookings.wizard')
+                <booking-wizard></booking-wizard>
             </div>
         </div>
     </div>
