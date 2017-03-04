@@ -311,7 +311,7 @@
 <script>
     import vSelect from 'vue-select'
 
-    Vue.component('v-select', vSelect)
+    Vue.component('v-select', vSelect);
 
     export default {
         data() {
@@ -333,6 +333,8 @@
             }
         },
         mounted() {
+            this.user_id = $('#user_id').val();
+
             this.getAddress()
         },
         methods: {
@@ -355,15 +357,15 @@
                 this.user_addressbook_id = val.value
             },
             getAddress() {
-                this.$http.get('/api/v1/address-books/'+ this.user_id).then(response => {
+                axios.get(`/api/v1/address-books/${this.user_id}`).then(response => {
                     console.log(this.user_id);
                     let addressbooks = response.data;
 
-                for (let address of addressbooks) {
-                    this.addressbookOptions.push({label: `${address.address_line_1}`, value: address.id});
-                }
-            }, error => {
-                    console.log(error)
+                    for (let address of addressbooks) {
+                        this.addressbookOptions.push({label: `${address.address_line_1}`, value: address.id});
+                    }
+                }).catch(error => {
+                    console.log(error);
                 });
             },
             saveProject(e) {

@@ -33,7 +33,7 @@
                 }
             });
 
-            $('.table').DataTable();
+            let table = $('.table').DataTable();
 
             // Apply the search
             table.columns().every( function () {
@@ -167,6 +167,8 @@
             </div>
         </div>
     </div>
+
+    <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
 @endsection
 
 @section('scripts')

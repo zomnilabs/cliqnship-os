@@ -44625,6 +44625,8 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
         };
     },
     mounted: function mounted() {
+        this.user_id = $('#user_id').val();
+
         this.getAddress();
     },
 
@@ -44650,7 +44652,7 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
         getAddress: function getAddress() {
             var _this = this;
 
-            this.$http.get('/api/v1/address-books/' + this.user_id).then(function (response) {
+            axios.get('/api/v1/address-books/' + this.user_id).then(function (response) {
                 console.log(_this.user_id);
                 var addressbooks = response.data;
 
@@ -44678,7 +44680,7 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
                         }
                     }
                 }
-            }, function (error) {
+            }).catch(function (error) {
                 console.log(error);
             });
         },
@@ -81214,7 +81216,7 @@ var Component = __webpack_require__(5)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/nkmcheng/Public/projects/zomnilabs/cliqnship-os/resources/assets/js/components/Example.vue"
+Component.options.__file = "/Users/alleoindong/Public/projects/aindong/cliqnship-os/resources/assets/js/components/Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -81248,7 +81250,7 @@ var Component = __webpack_require__(5)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/nkmcheng/Public/projects/zomnilabs/cliqnship-os/resources/assets/js/components/customer/booking/wizard-form.vue"
+Component.options.__file = "/Users/alleoindong/Public/projects/aindong/cliqnship-os/resources/assets/js/components/customer/booking/wizard-form.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] wizard-form.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -81286,7 +81288,7 @@ var Component = __webpack_require__(5)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/nkmcheng/Public/projects/zomnilabs/cliqnship-os/resources/assets/js/components/passport/AuthorizedClients.vue"
+Component.options.__file = "/Users/alleoindong/Public/projects/aindong/cliqnship-os/resources/assets/js/components/passport/AuthorizedClients.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] AuthorizedClients.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -81324,7 +81326,7 @@ var Component = __webpack_require__(5)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/nkmcheng/Public/projects/zomnilabs/cliqnship-os/resources/assets/js/components/passport/Clients.vue"
+Component.options.__file = "/Users/alleoindong/Public/projects/aindong/cliqnship-os/resources/assets/js/components/passport/Clients.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Clients.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -81362,7 +81364,7 @@ var Component = __webpack_require__(5)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/nkmcheng/Public/projects/zomnilabs/cliqnship-os/resources/assets/js/components/passport/PersonalAccessTokens.vue"
+Component.options.__file = "/Users/alleoindong/Public/projects/aindong/cliqnship-os/resources/assets/js/components/passport/PersonalAccessTokens.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] PersonalAccessTokens.vue: functional components are not supported with templates, they should use render functions.")}
 
