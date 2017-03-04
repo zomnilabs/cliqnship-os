@@ -215,9 +215,18 @@
             });
         }());
     </script>
+
+    @if (! $withPrimaryAddress)
+    <script>
+        $(function() {
+            $('#createAddressbookModal').modal('show');
+        });
+    </script>
+    @endif
 @endsection
 
 @section('content')
+    @include('customers.primary-addressbook-modal')
     <div class="header-info container-fluid">
         <div class="row">
             <div class="col-md-12">
