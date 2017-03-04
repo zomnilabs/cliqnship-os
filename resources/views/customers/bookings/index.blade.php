@@ -70,7 +70,7 @@
                         <i class="glyphicon glyphicon-plus"></i>
                         New Booking</button>
 
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#importBookingModal">
                         <i class="fa fa-upload"></i>
                         Import Bookings</button>
 
@@ -169,6 +169,7 @@
     </div>
 
     <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
+    @include('customers.bookings.modals.import')
 @endsection
 
 @section('scripts')

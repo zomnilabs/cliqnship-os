@@ -5,7 +5,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Import Bookings</h4>
             </div>
-            <form encType="multipart/form-data" action="" method="POST">
+            <form encType="multipart/form-data" action="/customers/bookings/import" method="POST">
                 <div class="modal-body">
                     <h4>Templates</h4>
                     If you want to import bookings using a new address, download this template -> <a href="#">Booking With New Address XLSX Template</a>
