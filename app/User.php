@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\UserAddressbook;
 use App\Models\UserGroup;
 use App\Models\UserProfile;
 use Illuminate\Notifications\Notifiable;
@@ -36,5 +37,10 @@ class User extends Authenticatable
     public function group()
     {
         return $this->belongsTo(UserGroup::class);
+    }
+
+    public function addressbook()
+    {
+        return $this->hasMany(UserAddressbook::class);
     }
 }
