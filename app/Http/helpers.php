@@ -13,6 +13,12 @@ function number_of_bookings($userId, $status) {
         ->where('user_id', $userId)->count();
 }
 
+function findById($addressbookId) {
+    $user = Auth::user()->id;
+
+    return $addressbookIds;
+}
+
 function format_booking_status($status) {
     $statusHTML = '';
     $upperStatus = strtoupper($status);

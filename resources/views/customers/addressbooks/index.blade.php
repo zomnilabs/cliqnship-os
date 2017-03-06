@@ -13,13 +13,29 @@
 
 @section('scripts')
     <script>
+        function findById($data) {
+            var dataArray = Object.getOwnPropertyNames($data).sort();
+            var allTags = document.getElementById('viewForm').getElementsByTagName("input");
+
+            for (var i = 0; i < allTags.length; i++) {
+                for(var k = 0; k < dataArray.length;k++){
+                    if(dataArray[k] == allTags[i].name){
+                        allTags[i].value = $data[dataArray[k]];
+                    }
+                }
+            }
+            document.getElementById("viewForm").action =
+                "/customers/addressbook/"+ $data.id;
+
+        }
+
         (function() {
             $('.table tfoot tr.searchable td').each( function () {
                 let title = $(this).text();
                 if (title) {
                     switch (title) {
                         case 'Type':
-                            let selectHTML = '<select class="form-control filter-type" style="width: 100%">';
+                            let selectHTML = '<select class="form-control filter" style="width: 100%">';
                             selectHTML += '<option>Filter Type</option>';
                             selectHTML += '<option value="booking">Booking</option>';
                             selectHTML += '<option value="shipment">Shipment</option>';
@@ -130,7 +146,10 @@
                                         <th>{{$addressbook->email}}</th>
                                         <th>
                                             <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
-                                            <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                            <button class="btn btn-default"
+                                                    data-toggle="modal"
+                                                    data-target="#viewAddressbookModal"
+                                                    onClick="findById({{$addressbook}})"><i class="glyphicon glyphicon-eye-open"></i></button>
                                         </th>
                                     </tr>
                                 @endforeach
@@ -140,7 +159,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>on(
 
     @include('customers.addressbooks.modals.create');
+    @include('customers.addressbooks.modals.view');
 @endsection
