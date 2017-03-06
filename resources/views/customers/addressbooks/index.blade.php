@@ -13,9 +13,9 @@
 
 @section('scripts')
     <script>
-        function findById($data) {
+        function viewData($data) {
             var dataArray = Object.getOwnPropertyNames($data).sort();
-            var allTags = document.getElementById('viewForm').getElementsByTagName("input");
+            var allTags = document.getElementById('viewForm').elements;
 
             for (var i = 0; i < allTags.length; i++) {
                 for(var k = 0; k < dataArray.length;k++){
@@ -26,6 +26,7 @@
             }
             document.getElementById("viewForm").action =
                 "/customers/addressbook/"+ $data.id;
+            console.log(allTags);
 
         }
 
@@ -149,7 +150,7 @@
                                             <button class="btn btn-default"
                                                     data-toggle="modal"
                                                     data-target="#viewAddressbookModal"
-                                                    onClick="findById({{$addressbook}})"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                                    onClick="viewData({{$addressbook}})"><i class="glyphicon glyphicon-eye-open"></i></button>
                                         </th>
                                     </tr>
                                 @endforeach
