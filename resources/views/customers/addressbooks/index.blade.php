@@ -26,7 +26,6 @@
             }
             document.getElementById("viewForm").action =
                 "/customers/addressbook/"+ $data.id;
-            console.log(allTags);
 
         }
 

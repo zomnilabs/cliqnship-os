@@ -35,4 +35,9 @@ class AddressbooksController extends Controller
 
         return redirect()->back();
     }
+
+    public function find(UserAddressbook $id)
+    {
+        return $id;
+    }
 }

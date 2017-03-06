@@ -24,6 +24,7 @@ Route::group(['prefix' => 'customers', 'namespace' => 'Customers', 'middleware' 
 
     Route::group(['prefix' => 'addressbooks', 'namespace' => 'Addressbooks'], function() {
         Route::get('/', 'AddressbooksController@index');
+        Route::get('/{addressbookId}', 'AddressbooksControler@find');
         Route::post('/', 'AddressbooksController@store');
     });
 
