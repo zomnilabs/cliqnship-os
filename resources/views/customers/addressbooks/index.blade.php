@@ -13,20 +13,39 @@
 
 @section('scripts')
     <script>
+        $('#delAddressbook').click(function () {
+            var id = $(this).val();
+            var parent = $('#addressbook-'+id);
+            $.ajax({
+                type: "delete",
+                url: '/customers/addressbooks/'+ $(this).val(),
+                data: {"_token": "{{ csrf_token() }}"},
+                beforeSend: function() {
+                    parent.css('backgroundColor','#fb6c6c');
+                },
+                success: function(){
+                    parent.fadeOut(400,function() {
+                        parent.remove();
+                    });
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+        });
+
         function viewData($data) {
-            var dataArray = Object.getOwnPropertyNames($data).sort();
+            var dataArray = Object.getOwnPropertyNames($data);
             var allTags = document.getElementById('viewForm').elements;
 
             for (var i = 0; i < allTags.length; i++) {
-                for(var k = 0; k < dataArray.length;k++){
-                    if(dataArray[k] == allTags[i].name){
+                for(var k = 0; k < dataArray.length;k++) {
+                    if (dataArray[k] === allTags[i].name) {
+                        allTags[i].value = "";
                         allTags[i].value = $data[dataArray[k]];
                     }
                 }
             }
-            document.getElementById("viewForm").action =
-                "/customers/addressbook/"+ $data.id;
-
         }
 
         (function() {
@@ -138,19 +157,19 @@
                                 @foreach($addressbooks as $addressbook)
                                     <tr id="addressbook-{{$addressbook->id}}">
                                         <td>{{$addressbook->id}}</td>
-                                        <td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>
+                                        <td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->first_name}}</td>
                                         <td>{{ ucwords($addressbook->type) }}</td>
                                         <td>{{ ucwords($addressbook->address_type) }}</td>
-                                        <th>{{$addressbook->address_line_1}}</th>
-                                        <th>{{$addressbook->contact_number}}</th>
-                                        <th>{{$addressbook->email}}</th>
-                                        <th>
-                                            <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                                        <td>{{$addressbook->address_line_1}}</td>
+                                        <td>{{$addressbook->contact_number}}</td>
+                                        <td>{{$addressbook->email}}</td>
+                                        <td>
+                                            <button class="btn btn-danger" value="{{$addressbook->id}}" id="delAddressbook"><i class="glyphicon glyphicon-trash"></i></button>
                                             <button class="btn btn-default"
                                                     data-toggle="modal"
                                                     data-target="#viewAddressbookModal"
                                                     onClick="viewData({{$addressbook}})"><i class="glyphicon glyphicon-eye-open"></i></button>
-                                        </th>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -159,8 +178,8 @@
                 </div>
             </div>
         </div>
-    </div>on(
+    </div>
 
-    @include('customers.addressbooks.modals.create');
-    @include('customers.addressbooks.modals.view');
+    @include('customers.addressbooks.modals.create')
+    @include('customers.addressbooks.modals.view')
 @endsection
