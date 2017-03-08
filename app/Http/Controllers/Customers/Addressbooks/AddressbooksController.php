@@ -36,8 +36,17 @@ class AddressbooksController extends Controller
         return redirect()->back();
     }
 
-    public function find(UserAddressbook $id)
+    public function update(StoreAddressbookRequest $request, $addressbookId)
     {
-        return $id;
+
+        $input = $request->all();
+
+        UserAddressbook::where('id',$addressbookId)
+            ->update($input);
+    }
+
+    public function destroy($addressbookId)
+    {
+        UserAddressbook::destroy($addressbookId);
     }
 }
