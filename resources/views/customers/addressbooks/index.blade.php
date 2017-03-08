@@ -13,13 +13,31 @@
 
 @section('scripts')
     <script>
+        // Prepare reset.
+        function resetModalFormErrors() {
+            $('.form-group').removeClass('has-error');
+            $('.form-group').find('.help-block').remove();
+        }
+        //Prepare clear fields
+        function clearformData(classNameFields) {
+            var len = document.getElementsByClassName(classNameFields);
+
+            for(i = 0; i <len.length; i++){
+                len[i].value = '';
+            }
+        }
+        //Reset and clear textfields everytime modal closed
+        $('.modal').on('hidden.bs.modal', function(){
+            resetModalFormErrors();
+            clearformData('dataField');
+        });
+        //deleting data
         $('#delAddressbook').click(function () {
             var id = $(this).val();
             var parent = $('#addressbook-'+id);
             $.ajax({
                 type: "delete",
                 url: '/customers/addressbooks/'+ $(this).val(),
-                data: {"_token": "{{ csrf_token() }}"},
                 beforeSend: function() {
                     parent.css('backgroundColor','#fb6c6c');
                 },
@@ -33,19 +51,85 @@
                 }
             });
         });
+        //checking if what modal will use
+        function viewModalForm(data = false){
+            (data) ? viewData(data) : viewNewForm();
+            console.log(data);
+        }
+        //form for save
+        function viewNewForm(){
+            var formButton = document.getElementById("formSubmit");
+            formButton.removeAttribute('name');
+            formButton.removeAttribute('value');
+            document.getElementById('modalTitle').innerHTML = 'Create Addressbook';
+            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"> '+'Save Addressbook';
+        }
 
+        //Transfer all data to modal or edit
         function viewData($data) {
             var dataArray = Object.getOwnPropertyNames($data);
-            var allTags = document.getElementById('viewForm').elements;
+            var formData = document.getElementsByClassName('dataField');
 
-            for (var i = 0; i < allTags.length; i++) {
+            for (var i = 0; i < formData.length; i++) {
                 for(var k = 0; k < dataArray.length;k++) {
-                    if (dataArray[k] === allTags[i].name) {
-                        allTags[i].value = "";
-                        allTags[i].value = $data[dataArray[k]];
+                    if (dataArray[k] === formData[i].name) {
+                        formData[i].value = $data[dataArray[k]];
                     }
                 }
             }
+            var formButton = document.getElementById("formSubmit");
+            formButton.value = $data.id;
+            formButton.setAttribute('name','edit');
+            document.getElementById('modalTitle').innerHTML = 'Update Addressbook';
+            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"> '+ 'Update Addressbook';
+
+        }
+        //Save or update data
+        function storeData() {
+            var list = {};
+            var formData= document.getElementsByClassName('dataField');
+            for(var i = 0; i< formData.length;i++){
+                list[formData[i].name]= formData[i].value;
+            }
+
+            //used to determine the http verb to use [add=POST], [update=PUT]
+            var state = this.name;
+            var type = 'POST'; //for creating new resource
+            var item_id = $('#user_id').val();
+            var url = '/customers/addressbooks/';
+
+            if (state == "edit"){
+                type = 'PUT';
+                url += this.value;
+            }
+
+            console.log(list);
+
+            $.ajax({
+                type: type,
+                url: url,
+                data: list,
+                success: function () {
+                    location.reload();
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                }
+            }).always(function(err){
+                resetModalFormErrors();
+                //checking for errors and display
+                console.log('error');
+                if (err.status == 422) {
+                    var errors = $.parseJSON(err.responseText);
+                    var arr = Object.keys(errors);
+                    $.each(errors, function(field, message) {
+                        console.error(field + ': ' + message);
+                        var formGroup = $('[name='+field+']').closest('.form-group');
+                        formGroup.addClass('has-error').append('<p class="help-block">'+message+'</p>');
+                    });
+                    $('[name='+arr[0]+']').focus();
+                }
+            });
         }
 
         (function() {
@@ -111,7 +195,7 @@
                 </div>
 
                 <div class="page-actions pull-right">
-                    <button data-toggle="modal" data-target="#createAddressbookModal" class="btn btn-primary">
+                    <button data-toggle="modal" data-target="#viewAddressbookModal" class="btn btn-primary" onclick="viewModalForm()">
                         <i class="glyphicon glyphicon-plus"></i>
                         New Addressbooks</button>
                 </div>
@@ -168,7 +252,7 @@
                                             <button class="btn btn-default"
                                                     data-toggle="modal"
                                                     data-target="#viewAddressbookModal"
-                                                    onClick="viewData({{$addressbook}})"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                                    onClick="viewModalForm({{$addressbook}})"><i class="glyphicon glyphicon-eye-open"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -179,7 +263,5 @@
             </div>
         </div>
     </div>
-
-    @include('customers.addressbooks.modals.create')
     @include('customers.addressbooks.modals.view')
 @endsection
