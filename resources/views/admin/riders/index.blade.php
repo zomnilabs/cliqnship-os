@@ -13,26 +13,184 @@
 
 @section('scripts')
     <script>
+        // Prepare reset.
+        function resetModalFormErrors() {
+            $('.form-group').removeClass('has-error');
+            $('.form-group').find('.help-block').remove();
+        }
+        //Prepare clearing fields
+        function clearformData(classNameFields) {
+            var len = document.getElementsByClassName(classNameFields);
+            for(i = 0; i <len.length; i++){
+                len[i].value = '';
+            }
+        }
+        //Reset and clear textfields everytime modal closed
+        $('.modal').on('hidden.bs.modal', function(){
+            resetModalFormErrors();
+            clearformData('dataField');
+        });
+        //deleting data
+        $('#delRider').click(function () {
+            var id = $(this).val();
+            var parent = $('#rider-'+id);
+            $.ajax({
+                type: "delete",
+                url: '/admin/riders/'+ $(this).val(),
+                beforeSend: function() {
+                    parent.css('backgroundColor','#fb6c6c');
+                },
+                success: function(){
+                    parent.fadeOut(400,function() {
+                        parent.remove();
+                    });
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+        });
+        //checking if what modal will use
+        function viewModalForm(data = false){
+            (data) ? viewData(data) : viewNewForm();
+            console.log(data);
+        }
+        //form for save
+        function viewNewForm(){
+            //change HTML display for Save
+            var formButton = document.getElementById("formSubmit");
+            formButton.removeAttribute('name');
+            formButton.removeAttribute('value');
+            document.getElementById('modalTitle').innerHTML = 'Create New Rider';
+            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"> '+'Save New Rider';
+        }
+
+        //Transfer all data to modal or edit
+        function viewData(data) {
+            var dataArray = Object.getOwnPropertyNames(data);
+            var formData = document.getElementsByClassName('dataField');
+            var arr = Object.getOwnPropertyNames(data[dataArray[9]]);
+            var profile = Object.values(data[dataArray[9]]);
+
+            for (var i = 0; i < formData.length; i++) {
+                for(var k = 0; k < dataArray.length;k++) {
+                    if (dataArray[k] === formData[i].name) {
+                        formData[i].value = data[dataArray[k]];
+                    }
+                }
+                if(arr){
+                    for(var j= 0; j < arr.length;j++){
+                        if(arr[j] === formData[i].name){
+                            formData[i].value = profile[j];
+                        }
+                    }
+                }
+            }
+            //Change HTML display for Update
+            var formButton = document.getElementById('formSubmit');
+            formButton.value = data.id;
+            formButton.setAttribute('name','edit');
+            document.getElementById('modalTitle').innerHTML = 'Update Rider';
+            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"> '+ 'Update Rider';
+
+        }
+        //Save or update data
+        function storeData() {
+            var list = {};
+            var formData = document.getElementsByClassName('dataField');
+            for(var i = 0; i< formData.length;i++){
+                list[formData[i].name]= formData[i].value;
+            }
+            //used to determine the http verb to use [add=POST], [update=PUT]
+            var state = this.name;
+            var type = 'POST'; //for creating new resource
+            var url = '/admin/riders/';
+
+            if (state == "edit"){
+                type = 'PUT';
+                url += this.value;
+            }
+            console.log(list);
+            $.ajax({
+                type: type,
+                url: url,
+                data: list,
+                success: function () {
+                    location.reload();
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                }
+            }).always(function(err){
+                resetModalFormErrors();
+                //checking for errors and display it
+                if (err.status == 422) {
+                    var errors = $.parseJSON(err.responseText);
+                    var arr = Object.keys(errors);
+                    $.each(errors, function(field, message) {
+                        console.error(field + ': ' + message);
+                        var formGroup = $('[name='+field+']').closest('.form-group');
+                        formGroup.addClass('has-error').append('<p class="help-block">'+message+'</p>');
+                    });
+                    $('[name='+arr[0]+']').focus();
+                }
+            });
+        }
+
         (function() {
-            $('.table thead tr.searchable th').each( function () {
-                var title = $(this).text();
+            $('.table tfoot tr.searchable td').each( function () {
+                let title = $(this).text();
                 if (title) {
-                    $(this).html( '<input type="text" style="width: 100%" placeholder="Search '+title+'" />' );
+                    switch (title) {
+                        case 'Type':
+                            let selectHTML = '<select class="form-control filter" style="width: 100%">';
+                            selectHTML += '<option>Filter Type</option>';
+                            selectHTML += '<option value="booking">Booking</option>';
+                            selectHTML += '<option value="shipment">Shipment</option>';
+                            selectHTML += '</select>';
+
+                            $(this).html(selectHTML);
+
+                            break;
+                        case 'Address Type':
+                            let selectHTML2 = '<select class="form-control filter" style="width: 100%">';
+                            selectHTML2 += '<option>Filter Address Type</option>';
+                            selectHTML2 += '<option value="office">Office</option>';
+                            selectHTML2 += '<option value="residential">Residential</option>';
+                            selectHTML2 += '</select>';
+
+                            $(this).html(selectHTML2);
+                            break;
+                        default:
+                            $(this).html( '<input class="form-control filter" type="text" style="width: 100%" placeholder="Search '+title+'" />' );
+                    }
                 }
             });
 
-            $('.table').dataTable();
+            let table = $('.table').DataTable();
+
+            // Apply the search
+            table.columns().every( function () {
+                let that = this;
+                $( '.filter', this.footer() ).on( 'keyup change', function () {
+                    if ( that.search() !== this.value ) {
+                        console.log(that.data());
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+            } );
         }())
     </script>
 @endsection
-
 @section('content')
     <div class="header-info container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcrumbs">
                     <ol class="breadcrumb">
-                        <li><a href="/admin">Dashboard</a></li>
+                        <li><a href="/customers">Dashboard</a></li>
                         <li class="active">Riders</li>
                     </ol>
                 </div>
@@ -41,9 +199,9 @@
                 </div>
 
                 <div class="page-actions pull-right">
-                    <button data-toggle="modal" data-target=".bs-modal-lg" class="btn btn-primary">
+                    <button data-toggle="modal" data-target="#viewRiderModal" class="btn btn-primary" onclick="viewModalForm()">
                         <i class="glyphicon glyphicon-plus"></i>
-                        Create New Riders</button>
+                        New Riders</button>
                 </div>
             </div>
         </div>
@@ -54,70 +212,52 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="hide">
-                            <div class="filter-categories">
-                                <div class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-sm btn-default active">
-                                        <input type="radio" name="filter" id="option1" value="all" autocomplete="off" checked> [{{ number_of_bookings(Auth::user()->id, 'all') }}] All
-                                    </label>
-                                    <label class="btn btn-sm btn-warning">
-                                        <input type="radio" name="filter" id="option2" value="pending" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'pending') }}] Pending
-                                    </label>
-                                    <label class="btn btn-sm btn-primary">
-                                        <input type="radio" name="filter" id="option3" value="accepted" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'accepted') }}] Accepted
-                                    </label>
-
-                                    <label class="btn btn-sm btn-success">
-                                        <input type="radio" name="filter" id="option3" value="completed" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'completed') }}] Completed
-                                    </label>
-
-                                    <label class="btn btn-sm btn-danger">
-                                        <input type="radio" name="filter" id="option3" value="rejected" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'rejected') }}] Rejected
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
+                        @include('components.errors')
                         <table class="table table-bordered">
+                            <tfoot class="filter-footer">
+                                <tr class="searchable">
+                                    <td>Id #</td>
+                                    <td>Account Id</td>
+                                    <td>Name</td>
+                                    <td>Email</td>
+                                    <td>Account Type</td>
+                                    <td>Login Type</td>
+                                    <td>Actions</td>
+                                </tr>
+                            </tfoot>
+
                             <thead>
-                            <tr class="searchable">
-                                <th>Id #</th>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Address Type</th>
-                                <th>Address</th>
-                                <th>Contact #</th>
-                                <th>Email Address</th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <th>Id #</th>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Address Type</th>
-                                <th>Address</th>
-                                <th>Contact #</th>
-                                <th>Email Address</th>
-                                <th>Actions</th>
-                            </tr>
+                                <tr>
+                                    <td>Id #</td>
+                                    <td>Account Id</td>
+                                    <td>Name</td>
+                                    <td>Email</td>
+                                    <td>Account Type</td>
+                                    <td>Login Type</td>
+                                    <td>Actions</td>
+                                </tr>
                             </thead>
 
                             <tbody>
-                            {{--@foreach($addressbooks as $addressbook)--}}
-                            {{--<tr id="addressbook-{{$addressbook->id}}">--}}
-                            {{--<td>{{$addressbook->id}}</td>--}}
-                            {{--<td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>--}}
-                            {{--<td>{{ ucwords($addressbook->type) }}</td>--}}
-                            {{--<td>{{ ucwords($addressbook->address_type) }}</td>--}}
-                            {{--<th>{{$addressbook->address_line_1}}</th>--}}
-                            {{--<th>{{$addressbook->contact_number}}</th>--}}
-                            {{--<th>{{$addressbook->email}}</th>--}}
-                            {{--<th>--}}
-                            {{--<button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>--}}
-                            {{--<button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>--}}
-                            {{--</th>--}}
-                            {{--</tr>--}}
-                            {{--@endforeach--}}
+                            @if($riders)
+                                @foreach($riders as $rider)
+                                    <tr id="rider-{{$rider->id}}">
+                                        <td>{{$rider->id}}</td>
+                                        <td>{{$rider->account_id or ''}}</td>
+                                        <td>{{$rider->profile->last_name}} {{$rider->profile->middle_name}} {{$rider->profile->first_name}}</td>
+                                        <td>{{$rider->email or ''}}</td>
+                                        <td>{{$rider->account_type or ''}}</td>
+                                        <td>{{$rider->login_type or ''}}</td>
+                                        <td>
+                                            <button class="btn btn-danger" value="{{$rider->id}}" id="delRider"><i class="glyphicon glyphicon-trash"></i></button>
+                                            <button class="btn btn-default"
+                                                    data-toggle="modal"
+                                                    data-target="#viewRiderModal"
+                                                    onClick="viewModalForm({{$rider}})"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                             </tbody>
                         </table>
                     </div>
@@ -125,152 +265,5 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content mcontent">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="modal-header">
-                    <center><b>
-                            <h4 class="modal-title" id="gridSystemModalLabel">Create New Rider</h4></b>
-                    </center>
-                </div></br>
-                <form method="POST" action="{{ url('/admin/riders') }}" >
-                    {{ csrf_field() }}
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="Identifier">Identifier</label>
-                                <input type="text" class="form-control" name="identifier" id="identifier"required/>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="Type">Type</label>
-                                <select name="filter_type_operation" class="form-control" id="type">
-                                    <option value="booking">Booking</option>
-                                    <option value="shipmemt">Shipment</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class0.="form-group">
-                                <label for="firstname">Contact Person First Name</label>
-                                <input type="text" class="form-control" name="first_name" id="first_name" required/>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="lastname">Contact Person Last Name</label>
-                                <input type="text" class="form-control" name="last_name" id="last_name" required/>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="middlename">Contact Person Middle Name</label>
-                                <input type="text" class="form-control" name="middle_name" id="middle_name" required/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="contact_number">Contact Number</label>
-                                <input type="number" class="form-control" name="contact_number" id="contact_number" required/>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="text" class="form-control" name="email" id="email" required/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="AddressLine1">Address Line 1</label>
-                                <input type="text" class="form-control" name="address_line_1" id="address_line_1" required/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="addressline2">Address Line 2</label>
-                                <input type="text" class="form-control" name="address_line_2" id="address_line_2"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="barangay">Barangay</label>
-                                <input type="text" class="form-control" name="barangay" id="barangay" required/>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="City">City</label>
-                                <input type="text" class="form-control" name="city" id="city" required/>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="Province">Province</label>
-                                <input type="text" class="form-control" name="province" id="province" required/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="country">Country</label>
-                                <input type="text" class="form-control" name="country" id="country" required/>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="zipcode">Zipcode</label>
-                                <input type="text" class="form-control" name="zip_code" id="zip_code" required/>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="Landmarks">LandMarks</label>
-                                <input type="text" class="form-control" name="landmarks" id="landmarks" required/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="AddressType">Address Type</label>
-                                <select name="address_type" class="form-control" id="address_type">
-                                    <option value="resedential">Resedential</option>
-                                    <option value="office">Office</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="checkbox">Is this your primary address?</label>
-                                <input type="checkbox" name="checkbox"/>
-                            </div>
-                        </div>
-                        <div class="col-md-3"></div>
-                    </div>
-                    <div class="row">
-                        <div class="pull-right">
-                            <button class="btn btn-primary" type="submit">Save</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    @include('admin.riders.modals.view')
 @endsection
