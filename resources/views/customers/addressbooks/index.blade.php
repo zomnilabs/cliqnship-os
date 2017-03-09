@@ -18,10 +18,9 @@
             $('.form-group').removeClass('has-error');
             $('.form-group').find('.help-block').remove();
         }
-        //Prepare clear fields
+        //Prepare clearing fields
         function clearformData(classNameFields) {
             var len = document.getElementsByClassName(classNameFields);
-
             for(i = 0; i <len.length; i++){
                 len[i].value = '';
             }
@@ -54,10 +53,10 @@
         //checking if what modal will use
         function viewModalForm(data = false){
             (data) ? viewData(data) : viewNewForm();
-            console.log(data);
         }
         //form for save
         function viewNewForm(){
+            //change HTML display for Save
             var formButton = document.getElementById("formSubmit");
             formButton.removeAttribute('name');
             formButton.removeAttribute('value');
@@ -66,19 +65,23 @@
         }
 
         //Transfer all data to modal or edit
-        function viewData($data) {
-            var dataArray = Object.getOwnPropertyNames($data);
+        function viewData(data) {
+            var dataArray = Object.getOwnPropertyNames(data);
             var formData = document.getElementsByClassName('dataField');
 
             for (var i = 0; i < formData.length; i++) {
                 for(var k = 0; k < dataArray.length;k++) {
                     if (dataArray[k] === formData[i].name) {
-                        formData[i].value = $data[dataArray[k]];
+                        formData[i].value = data[dataArray[k]];
                     }
                 }
             }
-            var formButton = document.getElementById("formSubmit");
-            formButton.value = $data.id;
+            var formButton = document.getElementById('formSubmit');
+            var checkbox = document.getElementById('primary');
+            //checking for checkbox
+            (data.primary == 1) ? checkbox.setAttribute('checked', true) : checkbox.removeAttribute('checked', false);
+            //Change HTML display for Update
+            formButton.value = data.id;
             formButton.setAttribute('name','edit');
             document.getElementById('modalTitle').innerHTML = 'Update Addressbook';
             document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"> '+ 'Update Addressbook';
@@ -87,24 +90,24 @@
         //Save or update data
         function storeData() {
             var list = {};
-            var formData= document.getElementsByClassName('dataField');
+            var formData = document.getElementsByClassName('dataField');
             for(var i = 0; i< formData.length;i++){
                 list[formData[i].name]= formData[i].value;
             }
+            // if checkbox is check
+            var checkbox = document.getElementById('primary');
+            (checkbox.checked) ? list.primary = 1 : list.primary = 0;
 
             //used to determine the http verb to use [add=POST], [update=PUT]
             var state = this.name;
             var type = 'POST'; //for creating new resource
-            var item_id = $('#user_id').val();
             var url = '/customers/addressbooks/';
 
             if (state == "edit"){
                 type = 'PUT';
                 url += this.value;
             }
-
             console.log(list);
-
             $.ajax({
                 type: type,
                 url: url,
@@ -117,8 +120,7 @@
                 }
             }).always(function(err){
                 resetModalFormErrors();
-                //checking for errors and display
-                console.log('error');
+                //checking for errors and display it
                 if (err.status == 422) {
                     var errors = $.parseJSON(err.responseText);
                     var arr = Object.keys(errors);
