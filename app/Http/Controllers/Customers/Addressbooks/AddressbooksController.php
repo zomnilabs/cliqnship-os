@@ -34,7 +34,8 @@ class AddressbooksController extends Controller
 
         $input = $request->all();
 
-        $addressbookId->update($input);
+        UserAddressbook::where('id',$addressbookId)
+            ->update($input);
     }
 
     public function destroy(UserAddressbook $addressbookId)
