@@ -29,17 +29,16 @@ class AddressbooksController extends Controller
         return redirect()->back();
     }
 
-    public function update(StoreAddressbookRequest $request, $addressbookId)
+    public function update(StoreAddressbookRequest $request, UserAddressbook $addressbookId)
     {
 
         $input = $request->all();
 
-        UserAddressbook::where('id',$addressbookId)
-            ->update($input);
+        $addressbookId->update($input);
     }
 
-    public function destroy($addressbookId)
+    public function destroy(UserAddressbook $addressbookId)
     {
-        UserAddressbook::destroy($addressbookId);
+        $addressbookId->delete($addressbookId);
     }
 }
