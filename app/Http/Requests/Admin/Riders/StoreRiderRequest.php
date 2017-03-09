@@ -24,7 +24,7 @@ class StoreRiderRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|max:56|unique',
+            'email' => 'required|email|unique:users',
             'first_name' =>'required',
             'middle_name'=>'required',
             'last_name'  => 'required',
