@@ -49,6 +49,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
     });
     Route::group(['prefix' => 'riders', 'namespace' => 'Riders'], function() {
         Route::get('/', 'RidersController@index');
+        Route::post('/', 'RidersController@store');
+        Route::put('/{riderId}', 'RidersController@update');
+        Route::delete('/{riderId}', 'RidersController@destroy');
     });
     Route::group(['prefix' => 'customers', 'namespace' => 'Customers'], function() {
         Route::get('/', 'CustomersController@index');
