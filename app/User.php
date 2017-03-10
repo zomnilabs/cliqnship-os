@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Booking;
 use App\Models\UserAddressbook;
 use App\Models\UserGroup;
 use App\Models\UserProfile;
@@ -42,5 +43,10 @@ class User extends Authenticatable
     public function addressbook()
     {
         return $this->hasMany(UserAddressbook::class);
+    }
+
+    public function booking()
+    {
+        return $this->hasMany(Booking::class);
     }
 }
