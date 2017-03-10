@@ -64,6 +64,6 @@ class RidersController extends Controller
 
     public function destroy(User $riderId)
     {
-        $riderId->delete($riderId);
+        $riderId->delete();
     }
 }
