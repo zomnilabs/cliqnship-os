@@ -55,6 +55,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
     });
     Route::group(['prefix' => 'customers', 'namespace' => 'Customers'], function() {
         Route::get('/', 'CustomersController@index');
+        Route::post('/', 'CustomersController@store');
+        Route::put('/{customerId}', 'CustomersController@update');
+        Route::delete('/{customerId}', 'CustomersController@destroy');
     });
     Route::group(['prefix' => 'users', 'namespace' => 'Users'], function() {
         Route::get('/', 'UsersController@index');
