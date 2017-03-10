@@ -25,6 +25,7 @@ class UpdateRiderRequest extends FormRequest
     {
         return [
             'email'      => 'required|email|max:56|unique:users,email,' .$this->getSegmentFromEnd().',id',
+            'password'   => 'required',
             'first_name' =>'required',
             'middle_name'=>'required',
             'last_name'  => 'required',
