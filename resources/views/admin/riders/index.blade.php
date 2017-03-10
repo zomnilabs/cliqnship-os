@@ -31,7 +31,7 @@
             clearformData('dataField');
         });
         //deleting data
-        $('#delRider').click(function () {
+        $('.delRider').click(function () {
             var id = $(this).val();
             var parent = $('#rider-'+id);
             $.ajax({
@@ -249,7 +249,7 @@
                                         <td>{{$rider->account_type or ''}}</td>
                                         <td>{{$rider->login_type or ''}}</td>
                                         <td>
-                                            <button class="btn btn-danger" value="{{$rider->id}}" id="delRider"><i class="glyphicon glyphicon-trash"></i></button>
+                                            <button class="btn btn-danger delRider" value="{{$rider->id}}"><i class="glyphicon glyphicon-trash"></i></button>
                                             <button class="btn btn-default"
                                                     data-toggle="modal"
                                                     data-target="#viewRiderModal"
