@@ -190,7 +190,7 @@
             <div class="col-md-12">
                 <div class="breadcrumbs">
                     <ol class="breadcrumb">
-                        <li><a href="/customers">Dashboard</a></li>
+                        <li><a href="/admin">Dashboard</a></li>
                         <li class="active">Riders</li>
                     </ol>
                 </div>
