@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Riders;
+namespace App\Http\Requests\Admin\Customers;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,8 +26,8 @@ class UpdateCustomerRequest extends FormRequest
         return [
             'email'      => 'required|email|max:56|unique:users,email,' .$this->getSegmentFromEnd().',id',
             'password'   => 'required',
-            'first_name' =>'required',
-            'middle_name'=>'required',
+            'first_name' => 'required',
+            'middle_name'=> 'required',
             'last_name'  => 'required',
             'birthdate'  => 'required'
         ];
