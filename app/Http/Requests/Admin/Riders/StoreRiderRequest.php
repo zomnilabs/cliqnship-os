@@ -25,6 +25,7 @@ class StoreRiderRequest extends FormRequest
     {
         return [
             'email' => 'required|email|unique:users',
+            'password'   => 'required',
             'first_name' =>'required',
             'middle_name'=>'required',
             'last_name'  => 'required',
