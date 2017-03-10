@@ -31,7 +31,7 @@
             clearformData('dataField');
         });
         //deleting data
-        $('#delAddressbook').click(function () {
+        $('.delAddressbook').click(function () {
             var id = $(this).val();
             var parent = $('#addressbook-'+id);
             $.ajax({
@@ -250,7 +250,7 @@
                                         <td>{{$addressbook->contact_number}}</td>
                                         <td>{{$addressbook->email}}</td>
                                         <td>
-                                            <button class="btn btn-danger" value="{{$addressbook->id}}" id="delAddressbook"><i class="glyphicon glyphicon-trash"></i></button>
+                                            <button class="btn btn-danger delAddressbook" value="{{$addressbook->id}}"><i class="glyphicon glyphicon-trash"></i></button>
                                             <button class="btn btn-default"
                                                     data-toggle="modal"
                                                     data-target="#viewAddressbookModal"
