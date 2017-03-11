@@ -58,6 +58,8 @@
         //form for save
         function viewNewForm(){
             //change HTML display for Save
+            var row = document.getElementsByClassName('row');
+            row[6].classList.remove("hide");
             var formButton = document.getElementById("formSubmit");
             formButton.removeAttribute('name');
             formButton.removeAttribute('value');
@@ -69,8 +71,8 @@
         function viewData(data) {
             var dataArray = Object.getOwnPropertyNames(data);
             var formData = document.getElementsByClassName('dataField');
-            var arr = Object.getOwnPropertyNames(data[dataArray[9]]);
-            var profile = Object.values(data[dataArray[9]]);
+            var arr = Object.getOwnPropertyNames(data['profile']);
+            var profile = Object.values(data['profile']);
 
             for (var i = 0; i < formData.length; i++) {
                 for(var k = 0; k < dataArray.length;k++) {
@@ -88,6 +90,8 @@
             }
             //Change HTML display for Update
             var formButton = document.getElementById('formSubmit');
+            var row = document.getElementsByClassName('row');
+            row[6].classList.add("hide");
             formButton.value = data.id;
             formButton.setAttribute('name','edit');
             document.getElementById('modalTitle').innerHTML = 'Update Rider';
