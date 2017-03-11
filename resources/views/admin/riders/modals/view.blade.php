@@ -11,33 +11,6 @@
                 <div class="modal-body">
                     {{csrf_field()}}
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group{{ $errors->has('account_id') ? ' has-error' : '' }}">
-                                <label for="account_id">Acount ID</label>
-                                <input type="text" class="form-control dataField" name="account_id" id="account_id"/>
-                                @if ($errors->has('account_id'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('account_id') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                                <label for="gender">Gender</label>
-                                <select name="gender" class="form-control dataField" id="gender">
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                </select>
-                                @if ($errors->has('gender'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('gender') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                                 <label for="first_name">First Name</label>
@@ -97,7 +70,21 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                                <label for="gender">Gender</label>
+                                <select name="gender" class="form-control dataField" id="gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                                @if ($errors->has('gender'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('gender') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group{{ $errors->has('company_name') ? ' has-error' : '' }}">
                                 <label for="company_name">Company Name</label>
                                 <input type="text" class="form-control dataField" name="company_name" id="contact_number"/>
@@ -108,7 +95,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group{{ $errors->has('birthdate') ? ' has-error' : '' }}">
                                 <label for="birthdate">Birthday</label>
                                 <input type="date" class="form-control dataField" name="birthdate" id="birthdate"/>
@@ -123,7 +110,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                    <button type="button" class="btn btn-success" id="formSubmit" onclick="storeData.call(this)"><i class="fa fa-floppy-o"></i> Update Addressbook</button>
+                    <button type="button" class="btn btn-success" id="formSubmit" onclick="storeData.call(this)"><i class="fa fa-floppy-o"></i> Update Riders</button>
                 </div>
             </form>
         </div>
