@@ -21,19 +21,19 @@ class CustomersController extends Controller
     {
         $input = $request->all();
         $user = [
-            'account_id'=> $input['account_id'],
+            'account_id'=> strtoupper(uniqid()),
             'user_group_id'=> 5,
             'email'=>$input['email'],
             'password' => encrypt($input['password'])
         ];
 
         $profile = [
-            'first_name'=> $input['first_name'],
-            'last_name'=> $input['last_name'],
-            'middle_name'=>$input['middle_name'],
-            'company_name' => $input['company_name'],
-            'gender'=> $input['gender'],
-            'birthdate' => $input['birthdate']
+            'first_name'  => $input['first_name'],
+            'last_name'   => $input['last_name'],
+            'middle_name' =>$input['middle_name'],
+            'company_name'=> $input['company_name'],
+            'gender'      => $input['gender'],
+            'birthdate'   => $input['birthdate']
         ];
         $users = User::create($user);
         $users->profile()->create($profile);
@@ -44,8 +44,7 @@ class CustomersController extends Controller
     {
         $input = $request->all();
         $user = [
-            'account_id'=> $input['account_id'],
-            'email'=>$input['email'],
+            'email'    =>$input['email'],
             'password' => bcrypt($input['password'])
         ];
 
