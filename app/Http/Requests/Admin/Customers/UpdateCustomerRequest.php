@@ -24,17 +24,10 @@ class UpdateCustomerRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'      => 'required|email|max:56|unique:users,email,' .$this->getSegmentFromEnd().',id',
-            'password'   => 'required',
             'first_name' => 'required',
             'middle_name'=> 'required',
             'last_name'  => 'required',
             'birthdate'  => 'required'
         ];
-    }
-
-    private function getSegmentFromEnd($position_from_end = 1) {
-        $segments =$this->segments();
-        return $segments[sizeof($segments) - $position_from_end];
     }
 }
