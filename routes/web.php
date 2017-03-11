@@ -61,6 +61,10 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
     });
     Route::group(['prefix' => 'users', 'namespace' => 'Users'], function() {
         Route::get('/', 'UsersController@index');
+        Route::get('/', 'UsersController@index');
+        Route::post('/', 'UsersController@store');
+        Route::put('/{userId}', 'UsersController@update');
+        Route::delete('/{userId}', 'UsersController@destroy');
     });
     Route::group(['prefix' => 'bookings', 'namespace' => 'Bookings'], function() {
         Route::get('/', 'BookingsController@index');
