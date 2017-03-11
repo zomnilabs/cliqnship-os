@@ -35,7 +35,7 @@ class User extends Authenticatable
         return $this->hasOne(UserProfile::class);
     }
 
-    public function group()
+    public function userGroup()
     {
         return $this->belongsTo(UserGroup::class);
     }
