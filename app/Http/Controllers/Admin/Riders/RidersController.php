@@ -21,7 +21,7 @@ class RidersController extends Controller
     {
         $input = $request->all();
         $user = [
-            'account_id'=> $input['account_id'],
+            'account_id'=> strtoupper(uniqid()),
             'user_group_id'=> 4,
             'email'=>$input['email'],
             'password' => encrypt($input['password'])
@@ -44,7 +44,6 @@ class RidersController extends Controller
     {
         $input = $request->all();
         $user = [
-            'account_id'=> $input['account_id'],
             'email'=>$input['email'],
             'password' => encrypt($input['password'])
         ];
