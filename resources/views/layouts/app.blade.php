@@ -26,7 +26,7 @@
     </script>
 </head>
 <body class="hold-transition skin-green sidebar-mini">
-    <div id="{{ !Auth::guest() ? 'app' : 'guest' }}">
+    <div id="{{ !Auth::guest() ? 'app' : 'guest' }}" style="position: relative">
         <header class="main-header">
 
             <!-- Logo -->
@@ -92,8 +92,6 @@
                     </div>
                     <div class="pull-left info">
                         <p>{{ Auth::user()->profile->full_name }}</p>
-                        <!-- Status -->
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
 

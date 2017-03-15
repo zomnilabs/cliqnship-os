@@ -53,166 +53,185 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-7">
-                <div class="col-md-12">
-                    <div class="header-title pull-left">
-                        <h1>Bookings</h1>
+                <div class="box box-primary ">
+                    <div class="box-header col-md-12">
+                        <div class="box-title header-title pull-left">
+                            <h1>Bookings</h1>
+                        </div>
+                        <div class="page-actions pull-right">
+                            <button class="btn btn-primary">
+                                <i class="fa fa-plus"></i>
+                                Add booking Assignment</button>
+                        </div>
                     </div>
-                    <div class="page-actions pull-right">
-                        <button class="btn btn-primary">
-                            <i class="fa fa-plus"></i>
-                            Add booking Assignment</button>
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Id #</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Address Type</th>
+                                <th>Address</th>
+                                <th>Contact #</th>
+                                <th>Email Address</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Edward Lim</td>
+                                <td>Booking</td>
+                                <th>Residential</th>
+                                <th>San-miguel Tarlac</th>
+                                <th>09123456789</th>
+                                <th>edward@gmail.com</th>
+                                <th>
+                                    <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                                    <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                </th>
+                            </tr>
+                            {{--@foreach($addressbooks as $addressbook)--}}
+                            {{--<tr id="addressbook-{{$addressbook->id}}">--}}
+                            {{--<td>{{$addressbook->id}}</td>--}}
+                            {{--<td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>--}}
+                            {{--<td>{{ ucwords($addressbook->type) }}</td>--}}
+                            {{--<td>{{ ucwords($addressbook->address_type) }}</td>--}}
+                            {{--<th>{{$addressbook->address_line_1}}</th>--}}
+                            {{--<th>{{$addressbook->contact_number}}</th>--}}
+                            {{--<th>{{$addressbook->email}}</th>--}}
+                            {{--<th>--}}
+                            {{--<button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>--}}
+                            {{--<button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>--}}
+                            {{--</th>--}}
+                            {{--</tr>--}}
+                            {{--@endforeach--}}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Id #</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Address Type</th>
-                        <th>Address</th>
-                        <th>Contact #</th>
-                        <th>Email Address</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Edward Lim</td>
-                            <td>Booking</td>
-                            <th>Residential</th>
-                            <th>San-miguel Tarlac</th>
-                            <th>09123456789</th>
-                            <th>edward@gmail.com</th>
-                            <th>
-                                <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
-                                <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
-                            </th>
-                        </tr>
-                    {{--@foreach($addressbooks as $addressbook)--}}
-                    {{--<tr id="addressbook-{{$addressbook->id}}">--}}
-                    {{--<td>{{$addressbook->id}}</td>--}}
-                    {{--<td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>--}}
-                    {{--<td>{{ ucwords($addressbook->type) }}</td>--}}
-                    {{--<td>{{ ucwords($addressbook->address_type) }}</td>--}}
-                    {{--<th>{{$addressbook->address_line_1}}</th>--}}
-                    {{--<th>{{$addressbook->contact_number}}</th>--}}
-                    {{--<th>{{$addressbook->email}}</th>--}}
-                    {{--<th>--}}
-                    {{--<button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>--}}
-                    {{--<button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>--}}
-                    {{--</th>--}}
-                    {{--</tr>--}}
-                    {{--@endforeach--}}
-                    </tbody>
-                </table><hr/>
-                <div class="col-md-12">
-                    <div class="header-title pull-left">
-                        <h1>Shipments</h1>
-                    </div>
-                    <div class="page-actions pull-right">
-                        <button class="btn btn-primary">
-                            <i class="fa fa-plus"></i>
-                            Add Shipment Assignment</button>
-                    </div>
-                </div>
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Id #</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Address Type</th>
-                        <th>Address</th>
-                        <th>Contact #</th>
-                        <th>Email Address</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Edward Lim</td>
-                            <td>Booking</td>
-                            <th>Residential</th>
-                            <th>San-miguel Tarlac</th>
-                            <th>09123456789</th>
-                            <th>edward@gmail.com</th>
-                            <th>
-                                <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
-                                <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
-                            </th>
-                        </tr>
-                    {{--@foreach($addressbooks as $addressbook)--}}
-                    {{--<tr id="addressbook-{{$addressbook->id}}">--}}
-                    {{--<td>{{$addressbook->id}}</td>--}}
-                    {{--<td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>--}}
-                    {{--<td>{{ ucwords($addressbook->type) }}</td>--}}
-                    {{--<td>{{ ucwords($addressbook->address_type) }}</td>--}}
-                    {{--<th>{{$addressbook->address_line_1}}</th>--}}
-                    {{--<th>{{$addressbook->contact_number}}</th>--}}
-                    {{--<th>{{$addressbook->email}}</th>--}}
-                    {{--<th>--}}
-                    {{--<button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>--}}
-                    {{--<button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>--}}
-                    {{--</th>--}}
-                    {{--</tr>--}}
-                    {{--@endforeach--}}
-
-                    </tbody>
-                </table>
             </div>
             <div class="col-md-4">
-                <table class="table table-bordered">
-                    <div class="header-title">
-                        <h1>Riders</h1>
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <div class="box-title header-title pull-left">
+                            <h1>Rider</h1>
+                        </div>
                     </div>
+                    <div class="box-body">
+                        <table class="table table-bordered">
 
-                    <thead>
-                    <tr>
-                        <th>Rider Name</th>
-                        <th>Assign Areas</th>
-                        <th>#Bookings</th>
-                        <th>Shipments</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
 
-                    <tbody>
-                        <tr>
-                            <td>John Paras</td>
-                            <td>Tarlac</td>
-                            <th>29</th>
-                            <th>San-miguel Tarlac</th>
-                            <th>pending</th>
-                        </tr>
-                    {{--@foreach($addressbooks as $addressbook)--}}
-                    {{--<tr id="addressbook-{{$addressbook->id}}">--}}
-                    {{--<td>{{$addressbook->id}}</td>--}}
-                    {{--<td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>--}}
-                    {{--<td>{{ ucwords($addressbook->type) }}</td>--}}
-                    {{--<td>{{ ucwords($addressbook->address_type) }}</td>--}}
-                    {{--<th>{{$addressbook->address_line_1}}</th>--}}
-                    {{--<th>{{$addressbook->contact_number}}</th>--}}
-                    {{--<th>{{$addressbook->email}}</th>--}}
-                    {{--<th>--}}
-                    {{--<button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>--}}
-                    {{--<button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>--}}
-                    {{--</th>--}}
-                    {{--</tr>--}}
-                    {{--@endforeach--}}
-                    </tbody>
-                </table>
+                            <thead>
+                            <tr>
+                                <th>Rider Name</th>
+                                <th>Assign Areas</th>
+                                <th>#Bookings</th>
+                                <th>Shipments</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>John Paras</td>
+                                <td>Tarlac</td>
+                                <th>29</th>
+                                <th>San-miguel Tarlac</th>
+                                <th>pending</th>
+                            </tr>
+                            {{--@foreach($addressbooks as $addressbook)--}}
+                            {{--<tr id="addressbook-{{$addressbook->id}}">--}}
+                            {{--<td>{{$addressbook->id}}</td>--}}
+                            {{--<td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>--}}
+                            {{--<td>{{ ucwords($addressbook->type) }}</td>--}}
+                            {{--<td>{{ ucwords($addressbook->address_type) }}</td>--}}
+                            {{--<th>{{$addressbook->address_line_1}}</th>--}}
+                            {{--<th>{{$addressbook->contact_number}}</th>--}}
+                            {{--<th>{{$addressbook->email}}</th>--}}
+                            {{--<th>--}}
+                            {{--<button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>--}}
+                            {{--<button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>--}}
+                            {{--</th>--}}
+                            {{--</tr>--}}
+                            {{--@endforeach--}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+
+            <div class="col-md-7">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <div class="box-title header-title pull-left">
+                            <h1>Shipment</h1>
+                        </div>
+                        <div class="page-actions pull-right">
+                            <button class="btn btn-primary">
+                                <i class="fa fa-plus"></i>
+                                Add shipment Assignment</button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Id #</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Address Type</th>
+                                <th>Address</th>
+                                <th>Contact #</th>
+                                <th>Email Address</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Edward Lim</td>
+                                <td>Booking</td>
+                                <th>Residential</th>
+                                <th>San-miguel Tarlac</th>
+                                <th>09123456789</th>
+                                <th>edward@gmail.com</th>
+                                <th>
+                                    <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                                    <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                </th>
+                            </tr>
+                            {{--@foreach($addressbooks as $addressbook)--}}
+                            {{--<tr id="addressbook-{{$addressbook->id}}">--}}
+                            {{--<td>{{$addressbook->id}}</td>--}}
+                            {{--<td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>--}}
+                            {{--<td>{{ ucwords($addressbook->type) }}</td>--}}
+                            {{--<td>{{ ucwords($addressbook->address_type) }}</td>--}}
+                            {{--<th>{{$addressbook->address_line_1}}</th>--}}
+                            {{--<th>{{$addressbook->contact_number}}</th>--}}
+                            {{--<th>{{$addressbook->email}}</th>--}}
+                            {{--<th>--}}
+                            {{--<button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>--}}
+                            {{--<button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>--}}
+                            {{--</th>--}}
+                            {{--</tr>--}}
+                            {{--@endforeach--}}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div><hr/>
+    </div>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="header-title pull-left">
+        <div class="box box-primary">
+            <div class="box-header">
+                <div class="box-title header-title pull-left">
                     <h1>Returned Shipments</h1>
                 </div>
                 <div class="page-actions pull-right">
@@ -221,7 +240,7 @@
                         Add Returned Shipment</button>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="box-body">
                 <table class="table table-bordered">
                     <thead>
                         <tr>

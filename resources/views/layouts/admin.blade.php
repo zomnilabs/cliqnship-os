@@ -14,7 +14,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
-@yield('stylesheets')
+    <link rel="stylesheet" href="{{ asset('vendor/adminLte/css/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/adminLte/css/skins/skin-blue.min.css') }}">
+    @yield('stylesheets')
 
 <!-- Scripts -->
     <script>
@@ -23,78 +25,127 @@
         ]) !!};
     </script>
 </head>
-<body>
-<div id="{{ !Auth::guest() ? 'app' : 'guest' }}">
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
+<body class="hold-transition skin-blue sidebar-mini">
+<div id="{{ !Auth::guest() ? 'app' : 'guest' }}" style="position: relative">
+    <header class="main-header">
 
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>C</b>LIQ</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg">Cliq<b>N</b>Ship</span>
+        </a>
 
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'CliqNShip') }}
-                </a>
-            </div>
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
 
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    @if (! Auth::guest())
-                        <li class="{{ set_active(['admin']) }}"><a href="/admin">Dashboard <span class="sr-only">(current)</span></a></li>
-                        <li class="{{ set_active(['admin/dispatching*']) }}"><a href="/admin/dispatching">Dispatching</a></li>
-                        <li class="{{ set_active(['admin/riders*']) }}"><a href="/admin/riders">Riders</a></li>
-                        <li class="{{ set_active(['admin/customers*']) }}"><a href="/admin/customers">Customers</a></li>
-                        <li class="{{ set_active(['admin/users*']) }}"><a href="/admin/users">Users</a></li>
-                        <li class="{{ set_active(['admin/bookings*']) }}"><a href="/admin/bookings">Bookings</a></li>
-                        <li class="{{ set_active(['admin/shipments*']) }}"><a href="/admin/shipments">Shipments</a></li>
-                        <li class="{{ set_active(['admin/reports*']) }}"><a href="/admin/reports">Reports</a></li>
-                        <li class="{{ set_active(['admin/cms*']) }}"><a href="/admin/cms">CMS</a></li>
-                    @endif
-                </ul>
+                    <!-- User Account Menu -->
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- The user image in the navbar-->
+                            <img src="http://lorempixel.com/500/500/people" class="user-image" alt="User Image">
+                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                            <span class="hidden-xs">{{ Auth::user()->profile->full_name }} <span style="font-size: 0.8em;">[{{ Auth::user()->account_id }}]</span> <span class="caret"></span></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="fa fa-user fa-lg"></i> &nbsp;&nbsp;&nbsp;Profile</a></li>
+                            <li><a href="#"><i class="fa fa-cogs fa-lg"></i> &nbsp;&nbsp;&nbsp;Settings</a></li>
 
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->profile->full_name }} <span class="caret"></span>
-                            </a>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    <i class="fa fa-sign-out fa-lg"></i> &nbsp;&nbsp;&nbsp;Logout
+                                </a>
 
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Profile</a></li>
-
-                                <li role="separator" class="divider"></li>
-                                <li>
-                                    <a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    @endif
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-@yield('content')
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="http://lorempixel.com/500/500/people" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>{{ Auth::user()->profile->full_name }}</p>
+                </div>
+            </div>
+
+            <!-- search form (Optional) -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu">
+                @if (! Auth::guest())
+
+                    <li class="{{ set_active(['admin']) }}">
+                        <a href="/admin"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a>
+                    </li>
+                    <li class="{{ set_active(['admin/dispatching*']) }}">
+                        <a href="/admin/dispatching"><i class="fa fa-sitemap"></i> <span>Dispatching</span></a>
+                    </li>
+                    <li class="{{ set_active(['admin/riders*']) }}">
+                        <a href="/admin/riders"><i class="fa fa-motorcycle"></i> <span>Riders</span></a>
+                    </li>
+                    <li class="{{ set_active(['admin/customers*']) }}">
+                        <a href="/admin/customers"><i class="fa fa-users"></i> <span>Customers</span></a>
+                    </li>
+                    <li class="{{ set_active(['admin/users*']) }}">
+                        <a href="/admin/users"><i class="fa fa-users"></i> <span>Users</span></a>
+                    </li>
+                    <li class="{{ set_active(['admin/bookings*']) }}">
+                        <a href="/admin/bookings"><i class="fa fa-book"></i> <span>Bookings</span></a>
+                    </li>
+                    <li class="{{ set_active(['admin/shipments*']) }}">
+                        <a href="/admin/shipments"><i class="fa fa-truck"></i> <span>Shipments</span></a>
+                    </li>
+                    <li class="{{ set_active(['admin/reports*']) }}">
+                        <a href="/admin/reports"><i class="fa fa-bar-chart-o"></i> <span>Reports</span></a>
+                    </li>
+                    <li class="{{ set_active(['admin/cms*']) }}">
+                        <a href="/admin/cms"><i class="fa fa-object-group"></i> <span>CMS</span></a>
+                    </li>
+                @endif
+            </ul>
+        </section>
+    </aside>
+
+    <div class="content-wrapper">
+        @yield('content')
+    </div>
 
 <!-- Fix for vue -->
     @if(Auth::guest())
