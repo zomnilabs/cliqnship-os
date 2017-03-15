@@ -369,6 +369,7 @@
                 }
             },
             fileSelected(e) {
+                this.bookingImage = e.target;
                 this.readURL(e.target);
             },
             inputChange(e) {
