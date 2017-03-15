@@ -19,11 +19,11 @@ class CreateBookingsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('source_id')->unsigned();
             $table->integer('user_addressbook_id')->unsigned();
-            $table->string('remarks');
+            $table->string('remarks')->default('');
             $table->string('status');
             $table->string('signature')->nullable();
             $table->date('pickup_date');
-            $table->integer('number_of_items');
+            $table->integer('number_of_items')->nullable();
             $table->string('type_of_items')->nullable();
             $table->double('length')->nullable();
             $table->double('width')->nullable();

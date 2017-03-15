@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                                <label for="first_name">First Name</label>
+                                <label for="first_name">First Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control dataField" name="first_name" id="first_name"/>
                                 @if ($errors->has('first_name'))
                                     <span class="help-block">
@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                                <label for="last_name">Last Name</label>
+                                <label for="last_name">Last Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control dataField" name="last_name" id="last_name"/>
                                 @if ($errors->has('last_name'))
                                     <span class="help-block">
@@ -48,7 +48,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group{{ $errors->has('user_group_id') ? ' has-error' : '' }}">
-                                <label for="user_group_id">Address Type</label>
+                                <label for="user_group_id">Address Type <span class="text-danger">*</span></label>
                                 <select name="user_group_id" class="form-control dataField" id="user_group_id">
                                     <option value="5">Customer</option>
                                     <option value="4">Rider</option>
@@ -65,7 +65,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                                <label for="gender">Gender</label>
+                                <label for="gender">Gender <span class="text-danger">*</span></label>
                                 <select name="gender" class="form-control dataField" id="gender">
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group{{ $errors->has('birthdate') ? ' has-error' : '' }}">
-                                <label for="birthdate">Birthday</label>
+                                <label for="birthdate">Birthday <span class="text-danger">*</span></label>
                                 <input type="date" class="form-control dataField" name="birthdate" id="birthdate"/>
                                 @if ($errors->has('birthdate'))
                                     <span class="help-block">
@@ -92,7 +92,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="email">Email</label>
+                                <label for="email">Email <span class="text-danger">*</span></label>
                                 <input type="email" class="form-control dataField" name="email" id="email"/>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -103,7 +103,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password">Password</label>
+                                <label for="password">Password <span class="text-danger">*</span></label>
                                 <input type="password" class="form-control dataField" name="password" id="password"/>
                                 @if ($errors->has('password'))
                                     <span class="help-block">
