@@ -64,7 +64,7 @@
             formButton.removeAttribute('name');
             formButton.removeAttribute('value');
             document.getElementById('modalTitle').innerHTML = 'Create New User';
-            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"> '+'Save New User';
+            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"></i> '+'Save New User';
         }
 
         //Transfer all data to modal or edit
@@ -95,7 +95,7 @@
             formButton.value = data.id;
             formButton.setAttribute('name','edit');
             document.getElementById('modalTitle').innerHTML = 'Update User';
-            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"> '+ 'Update User';
+            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"></i> '+ 'Update User';
 
         }
         //Save or update data
@@ -225,22 +225,17 @@
                                     <td>Account Id</td>
                                     <td>Name</td>
                                     <td>Email</td>
-                                    <td>Account Type</td>
-                                    <td>Login Type</td>
                                     <td>Actions</td>
                                 </tr>
                             </tfoot>
 
                             <thead>
                                 <tr>
-                                    <td>Id #</td>
-                                    <td>Position</td>
-                                    <td>Account Id</td>
-                                    <td>Name</td>
-                                    <td>Email</td>
-                                    <td>Account Type</td>
-                                    <td>Login Type</td>
-                                    <td>Actions</td>
+                                    <th>Id #</th>
+                                    <th>Account Id</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
 
@@ -253,14 +248,12 @@
                                         <td>{{$user->account_id or ''}}</td>
                                         <td>{{$user->profile->last_name}} {{$user->profile->middle_name}} {{$user->profile->first_name}}</td>
                                         <td>{{$user->email or ''}}</td>
-                                        <td>{{$user->account_type or ''}}</td>
-                                        <td>{{$user->login_type or ''}}</td>
                                         <td>
-                                            <button class="btn btn-danger delUser" value="{{$user->id}}"><i class="glyphicon glyphicon-trash"></i></button>
+                                            <button class="btn btn-danger delUser" value="{{$user->id}}"><i class="fa fa-trash"></i></button>
                                             <button class="btn btn-default"
                                                     data-toggle="modal"
                                                     data-target="#viewUserModal"
-                                                    onClick="viewModalForm({{$user}})"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                                    onClick="viewModalForm({{$user}})"><i class="fa fa-edit"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach

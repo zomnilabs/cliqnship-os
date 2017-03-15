@@ -64,7 +64,7 @@
             formButton.removeAttribute('name');
             formButton.removeAttribute('value');
             document.getElementById('modalTitle').innerHTML = 'Create New Rider';
-            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"> '+'Save New Rider';
+            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"></i> '+'Save New Rider';
         }
 
         //Transfer all data to modal or edit
@@ -95,7 +95,7 @@
             formButton.value = data.id;
             formButton.setAttribute('name','edit');
             document.getElementById('modalTitle').innerHTML = 'Update Rider';
-            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"> '+ 'Update Rider';
+            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"></i> '+ 'Update Rider';
 
         }
         //Save or update data
@@ -224,21 +224,17 @@
                                     <td>Account Id</td>
                                     <td>Name</td>
                                     <td>Email</td>
-                                    <td>Account Type</td>
-                                    <td>Login Type</td>
                                     <td>Actions</td>
                                 </tr>
                             </tfoot>
 
                             <thead>
                                 <tr>
-                                    <td>Id #</td>
-                                    <td>Account Id</td>
-                                    <td>Name</td>
-                                    <td>Email</td>
-                                    <td>Account Type</td>
-                                    <td>Login Type</td>
-                                    <td>Actions</td>
+                                    <th>Id #</th>
+                                    <th>Account Id</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
 
@@ -250,14 +246,12 @@
                                         <td>{{$rider->account_id or ''}}</td>
                                         <td>{{$rider->profile->last_name}} {{$rider->profile->middle_name}} {{$rider->profile->first_name}}</td>
                                         <td>{{$rider->email or ''}}</td>
-                                        <td>{{$rider->account_type or ''}}</td>
-                                        <td>{{$rider->login_type or ''}}</td>
                                         <td>
-                                            <button class="btn btn-danger delRider" value="{{$rider->id}}"><i class="glyphicon glyphicon-trash"></i></button>
+                                            <button class="btn btn-danger delRider" value="{{$rider->id}}"><i class="fa fa-trash"></i></button>
                                             <button class="btn btn-default"
                                                     data-toggle="modal"
                                                     data-target="#viewRiderModal"
-                                                    onClick="viewModalForm({{$rider}})"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                                    onClick="viewModalForm({{$rider}})"><i class="fa fa-edit"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
