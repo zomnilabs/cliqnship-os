@@ -79,14 +79,15 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+                                    <li><a href="#"><i class="fa fa-user fa-lg"></i> &nbsp;&nbsp;&nbsp;Profile</a></li>
+                                    <li><a href="#"><i class="fa fa-cogs fa-lg"></i> &nbsp;&nbsp;&nbsp;Settings</a></li>
 
                                     <li role="separator" class="divider"></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            <i class="fa fa-sign-out fa-lg"></i> Logout
+                                            <i class="fa fa-sign-out fa-lg"></i> &nbsp;&nbsp;&nbsp;Logout
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
