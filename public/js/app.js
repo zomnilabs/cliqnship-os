@@ -44662,6 +44662,7 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
             }
         },
         fileSelected: function fileSelected(e) {
+            this.bookingImage = e.target;
             this.readURL(e.target);
         },
         inputChange: function inputChange(e) {
