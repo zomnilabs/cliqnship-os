@@ -28,7 +28,6 @@ class StoreAddressbookRequest extends FormRequest
             'type' => 'required|in:booking,shipment',
             'first_name' => 'required|string|min:2',
             'last_name' => 'required|string|min:2',
-            'middle_name' => 'required|string|min:2',
             'contact_number' => 'required',
             'email' => 'required|email',
             'address_line_1' => 'required|min:2',
