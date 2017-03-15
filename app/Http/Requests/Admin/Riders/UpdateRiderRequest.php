@@ -25,8 +25,8 @@ class UpdateRiderRequest extends FormRequest
     {
         return [
             'first_name' =>'required',
-            'middle_name'=>'required',
             'last_name'  => 'required',
+            'gender'     => 'required',
             'birthdate'  => 'required'
         ];
     }
