@@ -47,7 +47,6 @@
     </script>
 @endsection
 
-
 @section('content')
     <div class="header-info container-fluid">
         <div class="row">
@@ -67,17 +66,6 @@
                         <i class="fa fa-download"></i>
                         Export Shipments</button>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-8">
-                <input type="text" placeholder="Search Shipments" class="form-control">
-            </div>
-            <div class="col-md-12">
-                <hr>
             </div>
         </div>
     </div>
