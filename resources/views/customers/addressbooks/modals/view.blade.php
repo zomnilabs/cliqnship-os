@@ -62,7 +62,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group{{ $errors->has('middle_name') ? ' has-error' : '' }}">
-                                <label for="middle_name">Middle Name <span class="text-danger">*</span></label>
+                                <label for="middle_name">Middle Name</label>
                                 <input type="text" class="form-control dataField" name="middle_name" id="middle_name"/>
                                 @if ($errors->has('middle_name'))
                                     <span class="help-block">
