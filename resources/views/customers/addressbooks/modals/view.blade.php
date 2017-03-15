@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group{{ $errors->has('identifier') ? ' has-error' : '' }}">
-                                <label for="Identifier">Identifier</label>
+                                <label for="Identifier">Identifier <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control dataField" name="identifier" id="identifier"/>
                                 @if ($errors->has('identifier'))
                                     <span class="help-block">
@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-                                <label for="type">Address Type</label>
+                                <label for="type">Address Type <span class="text-danger">*</span></label>
                                 <select name="type" class="form-control dataField" id="type">
                                     <option value="booking">Booking</option>
                                     <option value="shipment">Shipment</option>
@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                                <label for="first_name">First Name</label>
+                                <label for="first_name">First Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control dataField" name="first_name" id="first_name"/>
                                 @if ($errors->has('first_name'))
                                     <span class="help-block">
@@ -51,7 +51,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                                <label for="last_name">Last Name</label>
+                                <label for="last_name">Last Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control dataField" name="last_name" id="last_name"/>
                                 @if ($errors->has('last_name'))
                                     <span class="help-block">
@@ -62,7 +62,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group{{ $errors->has('middle_name') ? ' has-error' : '' }}">
-                                <label for="middle_name">Middle Name</label>
+                                <label for="middle_name">Middle Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control dataField" name="middle_name" id="middle_name"/>
                                 @if ($errors->has('middle_name'))
                                     <span class="help-block">
@@ -75,7 +75,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group{{ $errors->has('contact_number') ? ' has-error' : '' }}">
-                                <label for="contact_number">Contact Number</label>
+                                <label for="contact_number">Contact Number <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control dataField" name="contact_number" id="contact_number"/>
                                 @if ($errors->has('contact_number'))
                                     <span class="help-block">
@@ -86,7 +86,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="email">Email Address</label>
+                                <label for="email">Email Address <span class="text-danger">*</span></label>
                                 <input type="email" class="form-control dataField" name="email" id="email"/>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -99,7 +99,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group{{ $errors->has('address_line_1') ? ' has-error' : '' }}">
-                                <label for="address_line_1">Address Line 1</label>
+                                <label for="address_line_1">Address Line 1 <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control dataField" name="address_line_1" id="address_line_1"/>
                                 @if ($errors->has('address_line_1'))
                                     <span class="help-block">
@@ -125,7 +125,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group{{ $errors->has('barangay') ? ' has-error' : '' }}">
-                                <label for="barangay">Barangay</label>
+                                <label for="barangay">Barangay <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control dataField" name="barangay" id="barangay"/>
                                 @if ($errors->has('barangay'))
                                     <span class="help-block">
@@ -136,7 +136,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                                <label for="city">City</label>
+                                <label for="city">City <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control dataField" name="city" id="city"/>
                                 @if ($errors->has('city'))
                                     <span class="help-block">
@@ -147,7 +147,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group{{ $errors->has('province') ? ' has-error' : '' }}">
-                                <label for="province">Province</label>
+                                <label for="province">Province <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control dataField" name="province" id="province"/>
                                 @if ($errors->has('province'))
                                     <span class="help-block">
@@ -160,7 +160,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
-                                <label for="country">Country</label>
+                                <label for="country">Country <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control dataField" name="country" id="country"/>
                                 @if ($errors->has('country'))
                                     <span class="help-block">
@@ -171,7 +171,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group{{ $errors->has('zip_code') ? ' has-error' : '' }}">
-                                <label for="zip_code">Zipcode</label>
+                                <label for="zip_code">Zipcode <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control dataField" name="zip_code" id="zip_code"/>
                                 @if ($errors->has('zip_code'))
                                     <span class="help-block">
@@ -195,7 +195,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group{{ $errors->has('address_type') ? ' has-error' : '' }}">
-                                <label for="address_type">Address Type</label>
+                                <label for="address_type">Address Type <span class="text-danger">*</span></label>
                                 <select name="address_type" class="form-control dataField" id="address_type">
                                     <option value="residential">Resedential</option>
                                     <option value="office">Office</option>
