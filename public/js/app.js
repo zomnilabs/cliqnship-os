@@ -44600,6 +44600,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -44608,6 +44611,8 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function data() {
         return {
+            showError: false,
+            errorMessage: '',
             user_addressbook_id: '',
             addressbooks: [],
             addressbookOptions: [],
@@ -44644,17 +44649,49 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
             this.remarks = '';
             this.quantity = '';
         },
+        readURL: function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.preview img').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        },
+        fileSelected: function fileSelected(e) {
+            this.readURL(e.target);
+        },
         inputChange: function inputChange(e) {
             this[e.target.id] = e.target.value;
         },
         addressSelected: function addressSelected(val) {
+            if (!val) {
+                this.user_addressbook_id = 0;
+                this.addressPreview = '';
+
+                return false;
+            };
+
             this.user_addressbook_id = val.value;
             this.addressPreview = val.label;
         },
         nextTab: function nextTab() {
+            if (!this.user_addressbook_id) {
+                this.showError = true;
+                this.errorMessage = 'Please select a pickup address';
+
+                return false;
+            }
+
             var $active = $('.wizard .nav-tabs li.active');
             $active.next().removeClass('disabled');
             $($active).next().find('a[data-toggle="tab"]').click();
+
+            this.showError = false;
+            this.errorMessage = '';
         },
         prevTab: function prevTab() {
             var $active = $('.wizard .nav-tabs li.active');
@@ -81411,6 +81448,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "role": "form"
     }
   }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.showError),
+      expression: "showError"
+    }],
+    staticClass: "alert alert-danger"
+  }, [_vm._v(_vm._s(_vm.errorMessage))]), _vm._v(" "), _c('div', {
     staticClass: "tab-content"
   }, [_c('div', {
     staticClass: "tab-pane active",
@@ -81418,7 +81463,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "role": "tabpanel",
       "id": "step1"
     }
-  }, [_c('h3', [_vm._v("Step 1")]), _vm._v(" "), _c('p', [_vm._v("Which address would you like to set for this booking / pickup?")]), _vm._v(" "), _c('div', {
+  }, [_c('h3', [_vm._v("Step 1")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('v-select', {
     attrs: {
@@ -81441,7 +81486,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "role": "tabpanel",
       "id": "step2"
     }
-  }, [_c('h3', [_vm._v("Step 2")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
+  }, [_c('h3', [_vm._v("Step 2")]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('input', {
     staticClass: "form-control",
@@ -81449,13 +81494,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "file",
       "id": "bookingImage"
     },
-    domProps: {
-      "value": _vm.bookingImage
-    },
     on: {
-      "input": _vm.inputChange
+      "change": _vm.fileSelected
     }
-  })]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('ul', {
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "preview"
+  }, [_c('img', {
+    ref: "imagePreview",
+    attrs: {
+      "src": "http://placehold.it/550x150?text=Image+Preview",
+      "alt": ""
+    }
+  })]), _vm._v(" "), _c('ul', {
     staticClass: "list-inline pull-right"
   }, [_c('li', [_c('button', {
     staticClass: "btn btn-default prev-step",
@@ -81878,18 +81928,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "glyphicon glyphicon-ok"
   })])])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', [_vm._v("Which address would you like to set for this booking / pickup? ("), _c('span', {
+    staticClass: "text-danger text-capitalize"
+  }, [_vm._v("required")]), _vm._v(")")])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', [_vm._v("Select an image for this booking / pickup ("), _c('span', {
     staticClass: "text-primary text-capitalize"
   }, [_vm._v("not required")]), _vm._v(")")])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "preview"
-  }, [_c('img', {
-    attrs: {
-      "src": "http://placehold.it/550x150?text=Image+Preview",
-      "alt": ""
-    }
-  })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "col-md-5"
