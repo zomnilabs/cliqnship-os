@@ -29,7 +29,7 @@ class AddressbooksController extends Controller
         return redirect()->back();
     }
 
-    public function update(StoreAddressbookRequest $request, $addressbookId)
+    public function update(StoreAddressbookRequest $request, UserAddressbook $addressbookId)
     {
         $input = $request->all();
 
