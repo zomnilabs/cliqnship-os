@@ -243,7 +243,7 @@
                                 @foreach($addressbooks as $addressbook)
                                     <tr id="addressbook-{{$addressbook->id}}">
                                         <td>{{$addressbook->id}}</td>
-                                        <td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->first_name}}</td>
+                                        <td>{{$addressbook->first_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>
                                         <td>{{ ucwords($addressbook->type) }}</td>
                                         <td>{{ ucwords($addressbook->address_type) }}</td>
                                         <td>{{$addressbook->address_line_1}}</td>

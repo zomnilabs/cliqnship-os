@@ -24,11 +24,11 @@ class CreateBookingsTable extends Migration
             $table->string('signature')->nullable();
             $table->date('pickup_date');
             $table->integer('number_of_items');
-            $table->string('type_of_items');
-            $table->double('length');
-            $table->double('width');
-            $table->double('height');
-            $table->double('weight');
+            $table->string('type_of_items')->nullable();
+            $table->double('length')->nullable();
+            $table->double('width')->nullable();
+            $table->double('height')->nullable();
+            $table->double('weight')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

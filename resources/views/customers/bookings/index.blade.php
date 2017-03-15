@@ -112,7 +112,7 @@
                         </div>
 
                         <table class="table table-bordered" id="bookingTable">
-                            <tfoot>
+                            <tfoot class="filter-footer">
                                 <tr class="searchable">
                                     <td class="hide">Id #</td>
                                     <td>Booking #</td>
@@ -137,21 +137,20 @@
                             </thead>
 
                             <tbody>
-                            {{--@foreach($addressbooks as $addressbook)--}}
-                                {{--<tr id="addressbook-{{$addressbook->id}}">--}}
-                                    {{--<td>{{$addressbook->id}}</td>--}}
-                                    {{--<td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>--}}
-                                    {{--<td>{{ ucwords($addressbook->type) }}</td>--}}
-                                    {{--<td>{{ ucwords($addressbook->address_type) }}</td>--}}
-                                    {{--<th>{{$addressbook->address_line_1}}</th>--}}
-                                    {{--<th>{{$addressbook->contact_number}}</th>--}}
-                                    {{--<th>{{$addressbook->email}}</th>--}}
-                                    {{--<th>--}}
-                                        {{--<button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>--}}
-                                        {{--<button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>--}}
-                                    {{--</th>--}}
-                                {{--</tr>--}}
-                            {{--@endforeach--}}
+                            @foreach($bookings as $booking)
+                                <tr id="booking-{{$booking->id}}">
+                                    <td class="hide">{{ $booking->id }}</td>
+                                    <td>{{ $booking->booking_no }}</td>
+                                    <td>{{ $booking->pickup_date }}</td>
+                                    <td>{{ $booking->address->address_line_1 }} {{ $booking->address->barangay }} {{ $booking->address->city }}, {{ $booking->address->province }}. {{ $booking->address->zip_code }}</td>
+                                    <td>{{ $booking->remarks }}</td>
+                                    <td>{{ $booking->status }}</td>
+                                    <th>
+                                        <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                                        <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                    </th>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
