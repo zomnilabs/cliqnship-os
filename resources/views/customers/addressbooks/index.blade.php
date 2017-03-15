@@ -61,7 +61,7 @@
             formButton.removeAttribute('name');
             formButton.removeAttribute('value');
             document.getElementById('modalTitle').innerHTML = 'Create Addressbook';
-            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"> '+'Save Addressbook';
+            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"></i> '+'Save Addressbook';
         }
 
         //Transfer all data to modal or edit
@@ -84,7 +84,7 @@
             formButton.value = data.id;
             formButton.setAttribute('name','edit');
             document.getElementById('modalTitle').innerHTML = 'Update Addressbook';
-            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"> '+ 'Update Addressbook';
+            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"></i> '+ 'Update Addressbook';
 
         }
         //Save or update data
@@ -250,11 +250,11 @@
                                         <td>{{$addressbook->contact_number}}</td>
                                         <td>{{$addressbook->email}}</td>
                                         <td>
-                                            <button class="btn btn-danger delAddressbook" value="{{$addressbook->id}}"><i class="glyphicon glyphicon-trash"></i></button>
+                                            <button class="btn btn-danger delAddressbook" value="{{$addressbook->id}}"><i class="fa fa-trash"></i></button>
                                             <button class="btn btn-default"
                                                     data-toggle="modal"
                                                     data-target="#viewAddressbookModal"
-                                                    onClick="viewModalForm({{$addressbook}})"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                                    onClick="viewModalForm({{$addressbook}})"><i class="fa fa-edit"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
