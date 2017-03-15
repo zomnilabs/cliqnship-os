@@ -58,10 +58,12 @@
                     </div>
 
                     <form role="form">
+                        <div class="alert alert-danger" v-show="showError">{{ errorMessage }}</div>
+
                         <div class="tab-content">
                             <div class="tab-pane active" role="tabpanel" id="step1">
                                 <h3>Step 1</h3>
-                                <p>Which address would you like to set for this booking / pickup?</p>
+                                <p>Which address would you like to set for this booking / pickup? (<span class="text-danger text-capitalize">required</span>)</p>
 
                                 <div class="form-group">
                                     <v-select :on-change="addressSelected" :options="addressbookOptions"></v-select>
@@ -71,17 +73,18 @@
                                     <li><button type="button" class="btn btn-primary next-step" @click="nextTab">Next</button></li>
                                 </ul>
                             </div>
+
                             <div class="tab-pane" role="tabpanel" id="step2">
                                 <h3>Step 2</h3>
                                 <p>Select an image for this booking / pickup (<span class="text-primary text-capitalize">not required</span>)</p>
 
                                 <div class="form-group">
                                     <input type="file" id="bookingImage" class="form-control"
-                                           @input="inputChange" v-bind:value="bookingImage">
+                                           @change="fileSelected">
                                 </div>
 
                                 <div class="preview">
-                                    <img src="http://placehold.it/550x150?text=Image+Preview" alt="">
+                                    <img ref="imagePreview" src="http://placehold.it/550x150?text=Image+Preview" alt="">
                                 </div>
 
                                 <ul class="list-inline pull-right">
@@ -316,6 +319,8 @@
     export default {
         data() {
             return {
+                showError: false,
+                errorMessage: '',
                 user_addressbook_id: '',
                 addressbooks: [],
                 addressbookOptions: [],
@@ -351,17 +356,50 @@
                 this.remarks = ''
                 this.quantity = ''
             },
+            readURL(input) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('.preview img').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            },
+            fileSelected(e) {
+                this.bookingImage = e.target;
+                this.readURL(e.target);
+            },
             inputChange(e) {
                 this[e.target.id] = e.target.value
             },
             addressSelected(val) {
+                if (! val) {
+                    this.user_addressbook_id = 0
+                    this.addressPreview = ''
+
+                    return false
+                };
+
                 this.user_addressbook_id = val.value
                 this.addressPreview = val.label
             },
             nextTab() {
+                if (! this.user_addressbook_id) {
+                    this.showError = true;
+                    this.errorMessage = 'Please select a pickup address';
+
+                    return false
+                }
+
                 let $active = $('.wizard .nav-tabs li.active');
                 $active.next().removeClass('disabled');
                 $($active).next().find('a[data-toggle="tab"]').click();
+
+                this.showError = false;
+                this.errorMessage = '';
             },
             prevTab() {
                 let $active = $('.wizard .nav-tabs li.active');

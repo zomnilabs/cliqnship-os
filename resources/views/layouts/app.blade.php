@@ -155,7 +155,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 
-    <script src="{{ asset('vendor/adminLte/js/app.min.js') }}"></script>
+    {{--<script src="{{ asset('vendor/adminLte/js/app.min.js') }}"></script>--}}
     <script>
         $.ajaxSetup({
             headers: {
