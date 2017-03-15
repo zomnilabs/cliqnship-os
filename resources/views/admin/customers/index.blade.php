@@ -98,6 +98,43 @@
             document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"></i> '+ 'Update Customer';
 
         }
+        function capitalize(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+        }
+        //History
+        function historyModalForm(data) {
+            var addressbooks = Object.values(data.addressbook);
+            var bookings = Object.values(data.booking);
+            var html = "<table border='1|1'>";
+            for (var i = 0; i < addressbooks.length; i++) {
+                html+="<tr>";
+                html+="<td>"+addressbooks[i].id+"</td>";
+                html+="<td>"+capitalize(addressbooks[i].first_name)+' '+ capitalize(addressbooks[i].middle_name) +' '+ capitalize(addressbooks[i].last_name)+"</td>";
+                html+="<td>"+capitalize(addressbooks[i].address_type)+"</td>";
+                html+="<td>"+addressbooks[i].address_line_1+"</td>";
+                html+="<td>"+addressbooks[i].contact_number+"</td>";
+                html+="<td>"+addressbooks[i].email+"</td>";
+                html+="</tr>";
+
+            }
+            html+="</table>";
+            $("#addressbook-table").html(html);
+
+            var html = "<table border='1|1'>";
+            for (var i = 0; i < bookings.length; i++) {
+                html+="<tr>";
+                html+="<td>"+bookings[i].booking_no+"</td>";
+                html+="<td>"+bookings[i].status+"</td>";
+                html+="<td>"+bookings[i].type_of_items+"</td>";
+                html+="<td>"+bookings[i].number_of_items+"</td>";
+                html+="<td>"+bookings[i].pickup_date+"</td>";
+                html+="<td>"+bookings[i].remarks+"</td>";
+                html+="</tr>";
+
+            }
+            html+="</table>";
+            $("#booking-table").html(html);
+        }
         //Save or update data
         function storeData() {
             var list = {};
@@ -248,10 +285,16 @@
                                         <td>{{$customer->email or ''}}</td>
                                         <td>
                                             <button class="btn btn-danger delCustomer" value="{{$customer->id}}"><i class="fa fa-trash"></i></button>
+                                            <button class="btn btn-info"
+                                                    data-toggle="modal"
+                                                    data-target="#historyModal"
+                                                    onClick="historyModalForm({{$customer}})"
+                                                    ><i class="fa fa-history"></i></button>
                                             <button class="btn btn-default"
                                                     data-toggle="modal"
                                                     data-target="#viewCustomerModal"
                                                     onClick="viewModalForm({{$customer}})"><i class="fa fa-edit"></i></button>
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -264,4 +307,5 @@
         </div>
     </div>
     @include('admin.customers.modals.view')
+    @include('admin.customers.modals.history')
 @endsection
