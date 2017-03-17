@@ -212,7 +212,7 @@
                     <div class="panel-body">
                         @include('components.errors')
 
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" style="width: 100%">
                             <tfoot class="filter-footer">
                                 <tr class="searchable">
                                     <td>Id #</td>

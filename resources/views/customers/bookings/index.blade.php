@@ -111,7 +111,7 @@
                             </div>
                         </div>
 
-                        <table class="table table-bordered" id="bookingTable">
+                        <table class="table table-bordered" id="bookingTable" style="width: 100%">
                             <tfoot class="filter-footer">
                                 <tr class="searchable">
                                     <td class="hide">Id #</td>
@@ -146,8 +146,8 @@
                                     <td>{{ $booking->remarks }}</td>
                                     <td>{{ $booking->status }}</td>
                                     <th>
-                                        <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
-                                        <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        <button class="btn btn-default"><i class="fa fa-edit"></i></button>
                                     </th>
                                 </tr>
                             @endforeach

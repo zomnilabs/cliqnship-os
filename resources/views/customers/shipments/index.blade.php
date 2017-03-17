@@ -111,7 +111,7 @@
                             </div>
                         </div>
 
-                        <table class="table table-bordered" id="shippingTable">
+                        <table class="table table-bordered" id="shippingTable" style="width: 100%">
                             <tfoot class="filter-footer">
                             <tr class="searchable">
                                 <td class="hide">Id #</td>
