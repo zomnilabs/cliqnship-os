@@ -114,8 +114,17 @@
                     <li class="{{ set_active(['admin']) }}">
                         <a href="/admin"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a>
                     </li>
-                    <li class="{{ set_active(['admin/dispatching*']) }}">
-                        <a href="/admin/dispatching"><i class="fa fa-sitemap"></i> <span>Dispatching</span></a>
+                    <li class="{{ set_active(['admin/dispatching*']) }} dropdown treeview">
+                        <a href="#"><i class="fa fa-sitemap"></i> <span>Dispatching</span>
+                            <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/admin/dispatching">Bookings</a></li>
+                            <li><a href="/admin/dispatching">Shipments</a></li>
+                            <li><a href="/admin/dispatching">Item Requests</a></li>
+                        </ul>
                     </li>
                     <li class="{{ set_active(['admin/riders*']) }}">
                         <a href="/admin/riders"><i class="fa fa-motorcycle"></i> <span>Riders</span></a>

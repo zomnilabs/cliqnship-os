@@ -52,10 +52,10 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-7">
-                <div class="box box-primary ">
-                    <div class="box-header col-md-12">
-                        <div class="box-title header-title pull-left">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <div class="box-title pull-left">
                             <h1>Bookings</h1>
                         </div>
                         <div class="page-actions pull-right">
@@ -84,14 +84,14 @@
                                 <td>1</td>
                                 <td>Edward Lim</td>
                                 <td>Booking</td>
-                                <th>Residential</th>
-                                <th>San-miguel Tarlac</th>
-                                <th>09123456789</th>
-                                <th>edward@gmail.com</th>
-                                <th>
-                                    <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
-                                    <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
-                                </th>
+                                <td>Residential</td>
+                                <td>San-miguel Tarlac</td>
+                                <td>09123456789</td>
+                                <td>edward@gmail.com</td>
+                                <td>
+                                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                    <button class="btn btn-default"><i class="fa fa-edit"></i></button>
+                                </td>
                             </tr>
                             {{--@foreach($addressbooks as $addressbook)--}}
                             {{--<tr id="addressbook-{{$addressbook->id}}">--}}
@@ -103,57 +103,8 @@
                             {{--<th>{{$addressbook->contact_number}}</th>--}}
                             {{--<th>{{$addressbook->email}}</th>--}}
                             {{--<th>--}}
-                            {{--<button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>--}}
-                            {{--<button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>--}}
-                            {{--</th>--}}
-                            {{--</tr>--}}
-                            {{--@endforeach--}}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="box box-primary">
-                    <div class="box-header">
-                        <div class="box-title header-title pull-left">
-                            <h1>Rider</h1>
-                        </div>
-                    </div>
-                    <div class="box-body">
-                        <table class="table table-bordered">
-
-
-                            <thead>
-                            <tr>
-                                <th>Rider Name</th>
-                                <th>Assign Areas</th>
-                                <th>#Bookings</th>
-                                <th>Shipments</th>
-                                <th>Status</th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            <tr>
-                                <td>John Paras</td>
-                                <td>Tarlac</td>
-                                <th>29</th>
-                                <th>San-miguel Tarlac</th>
-                                <th>pending</th>
-                            </tr>
-                            {{--@foreach($addressbooks as $addressbook)--}}
-                            {{--<tr id="addressbook-{{$addressbook->id}}">--}}
-                            {{--<td>{{$addressbook->id}}</td>--}}
-                            {{--<td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>--}}
-                            {{--<td>{{ ucwords($addressbook->type) }}</td>--}}
-                            {{--<td>{{ ucwords($addressbook->address_type) }}</td>--}}
-                            {{--<th>{{$addressbook->address_line_1}}</th>--}}
-                            {{--<th>{{$addressbook->contact_number}}</th>--}}
-                            {{--<th>{{$addressbook->email}}</th>--}}
-                            {{--<th>--}}
-                            {{--<button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>--}}
-                            {{--<button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>--}}
+                            {{--<button class="btn btn-danger"><i class="fa fa-trash"></i></button>--}}
+                            {{--<button class="btn btn-default"><i class="fa fa-edit"></i></button>--}}
                             {{--</th>--}}
                             {{--</tr>--}}
                             {{--@endforeach--}}
@@ -163,10 +114,10 @@
                 </div>
             </div>
 
-            <div class="col-md-7">
+            <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <div class="box-title header-title pull-left">
+                        <div class="box-title pull-left">
                             <h1>Shipment</h1>
                         </div>
                         <div class="page-actions pull-right">
@@ -195,14 +146,14 @@
                                 <td>1</td>
                                 <td>Edward Lim</td>
                                 <td>Booking</td>
-                                <th>Residential</th>
-                                <th>San-miguel Tarlac</th>
-                                <th>09123456789</th>
-                                <th>edward@gmail.com</th>
-                                <th>
-                                    <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
-                                    <button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>
-                                </th>
+                                <td>Residential</td>
+                                <td>San-miguel Tarlac</td>
+                                <td>09123456789</td>
+                                <td>edward@gmail.com</td>
+                                <td>
+                                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                    <button class="btn btn-default"><i class="fa fa-edit"></i></button>
+                                </td>
                             </tr>
                             {{--@foreach($addressbooks as $addressbook)--}}
                             {{--<tr id="addressbook-{{$addressbook->id}}">--}}
@@ -214,8 +165,8 @@
                             {{--<th>{{$addressbook->contact_number}}</th>--}}
                             {{--<th>{{$addressbook->email}}</th>--}}
                             {{--<th>--}}
-                            {{--<button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>--}}
-                            {{--<button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>--}}
+                            {{--<button class="btn btn-danger"><i class="fa fa-trash"></i></button>--}}
+                            {{--<button class="btn btn-default"><i class="fa fa-edit"></i></button>--}}
                             {{--</th>--}}
                             {{--</tr>--}}
                             {{--@endforeach--}}
@@ -231,7 +182,7 @@
     <div class="container-fluid">
         <div class="box box-primary">
             <div class="box-header">
-                <div class="box-title header-title pull-left">
+                <div class="box-title pull-left">
                     <h1>Returned Shipments</h1>
                 </div>
                 <div class="page-actions pull-right">
@@ -266,8 +217,8 @@
                     {{--<th>{{$addressbook->contact_number}}</th>--}}
                     {{--<th>{{$addressbook->email}}</th>--}}
                     {{--<th>--}}
-                    {{--<button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>--}}
-                    {{--<button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>--}}
+                    {{--<button class="btn btn-danger"><i class="fa fa-trash"></i></button>--}}
+                    {{--<button class="btn btn-default"><i class="fa fa-edit"></i></button>--}}
                     {{--</th>--}}
                     {{--</tr>--}}
                     {{--@endforeach--}}

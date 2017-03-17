@@ -48,7 +48,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group{{ $errors->has('user_group_id') ? ' has-error' : '' }}">
-                                <label for="user_group_id">Address Type <span class="text-danger">*</span></label>
+                                <label for="user_group_id">User Type <span class="text-danger">*</span></label>
                                 <select name="user_group_id" class="form-control dataField" id="user_group_id">
                                     <option value="5">Customer</option>
                                     <option value="4">Rider</option>
