@@ -9,8 +9,8 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12" style="text-align: center">
-                            <button class="btn btn-default" style="background-color: #3b5998; color: #fff"> <i class="fa fa-facebook"></i> &nbsp;&nbsp;&nbsp; Sign in with Facebook</button>
-                            <button class="btn btn-default" style="background-color: #d62d20; color: #fff"> <i class="fa fa-google"></i> &nbsp;&nbsp;&nbsp; Sign in with Google</button>
+                            <a href="/auth/facebook" class="btn btn-default" style="background-color: #3b5998; color: #fff"> <i class="fa fa-facebook"></i> &nbsp;&nbsp;&nbsp; Sign in with Facebook</a>
+                            <a href="/auth/google" class="btn btn-default" style="background-color: #d62d20; color: #fff"> <i class="fa fa-google"></i> &nbsp;&nbsp;&nbsp; Sign in with Google</a>
                         </div>
                     </div>
 
