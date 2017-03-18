@@ -44638,6 +44638,9 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
     },
 
     methods: {
+        refreshPage: function refreshPage() {
+            location.reload();
+        },
         resetForm: function resetForm() {
             this.bookingImage = '';
             this.number_of_items = '';
@@ -44747,6 +44750,8 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
         saveProject: function saveProject(e) {
             var _this2 = this;
 
+            e.target.disabled = true;
+
             var data = {
                 user_addressbook_id: this.user_addressbook_id,
                 //                    bookingImage: this.bookingImage,
@@ -44765,7 +44770,7 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
             axios.post(url, data).then(function (response) {
                 console.log(response);
 
-                _this2.$events.fire('reload-table');
+                //                this.$events.fire('reload-table')
                 _this2.resetForm();
                 _this2.nextTab();
             }, function (error) {
@@ -82538,7 +82543,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.saveProject
     }
-  }, [_vm._v("Save and Continue")])])])]), _vm._v(" "), _vm._m(5), _vm._v(" "), _c('div', {
+  }, [_vm._v("Save and Continue")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "tab-pane",
+    attrs: {
+      "role": "tabpanel",
+      "id": "complete"
+    }
+  }, [_vm._m(5), _vm._v(" "), _c('ul', {
+    staticClass: "list-inline pull-right"
+  }, [_c('li', [_c('button', {
+    staticClass: "btn btn-primary btn-info-full",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.refreshPage
+    }
+  }, [_vm._v("Done")])])])]), _vm._v(" "), _c('div', {
     staticClass: "clearfix"
   })])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -82664,12 +82685,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "tab-pane",
-    attrs: {
-      "role": "tabpanel",
-      "id": "complete"
-    }
-  }, [_c('div', {
     staticClass: "text-center"
   }, [_c('i', {
     staticClass: "fa fa-check-circle text-success",
@@ -82677,15 +82692,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "font-size": "10em",
       "padding": "15px"
     }
-  }), _vm._v(" "), _c('h2', [_vm._v("You have successfully completed all steps.")])]), _vm._v(" "), _c('ul', {
-    staticClass: "list-inline pull-right"
-  }, [_c('li', [_c('button', {
-    staticClass: "btn btn-primary btn-info-full",
-    attrs: {
-      "type": "button",
-      "data-dismiss": "modal"
-    }
-  }, [_vm._v("Done")])])])])
+  }), _vm._v(" "), _c('h2', [_vm._v("You have successfully completed all steps.")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

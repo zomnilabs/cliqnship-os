@@ -20,7 +20,7 @@ class BookingController extends Controller {
 
             $data = Booking::create($input);
 
-            $booking = Booking::where('id', $data->id)->first();
+            $booking = Booking::with('address')->where('id', $data->id)->first();
         });
 
         return response()->json($booking, 201);

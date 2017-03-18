@@ -298,7 +298,7 @@
                                 </div>
 
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-primary btn-info-full" data-dismiss="modal">Done</button></li>
+                                    <li><button type="button" class="btn btn-primary btn-info-full" @click="refreshPage">Done</button></li>
                                 </ul>
 
                             </div>
@@ -345,6 +345,9 @@
             this.getAddress()
         },
         methods: {
+            refreshPage() {
+                location.reload();
+            },
             resetForm() {
                 this.bookingImage = ''
                 this.number_of_items = ''
@@ -429,6 +432,7 @@
                 });
             },
             saveProject(e) {
+                e.target.disabled = true;
 
                 let data = {
                     user_addressbook_id: this.user_addressbook_id,
@@ -442,7 +446,7 @@
                     pickup_date: this.pickup_date,
                     remarks: this.remarks,
                     user_id: this.user_id,
-                }
+                };
 
                 let url = `/api/v1/customers/bookings`;
                 axios.post(url, data).then(response => {
