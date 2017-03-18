@@ -150,7 +150,7 @@
     <div class="modal fade" id="createShippingModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                @include('customers.shipments.wizard')
+                <shipping-wizard></shipping-wizard>
             </div>
         </div>
     </div>
@@ -187,43 +187,9 @@
             });
 
             // Image input onchange
-            $("#bookingImage").change(function(){
+            $("#shippingImage").change(function(){
                 readURL(this);
             });
-            $("#cod").click(function (e) {
-                if($('.cod').hasClass('hide')) {
-                    $('.cod').removeClass('hide');
-                } else {
-                    $('.cod').addClass('hide');
-                }
-            });;
-            $("#insurance").click(function (e) {
-                if($('.insurance').hasClass('hide')) {
-                    $('.insurance').removeClass('hide');
-                } else {
-                    $('.insurance').addClass('hide');
-                }
-            });
         });
-
-        function nextTab(elem) {
-            $(elem).next().find('a[data-toggle="tab"]').click();
-        }
-        function prevTab(elem) {
-            $(elem).prev().find('a[data-toggle="tab"]').click();
-        }
-
-        function readURL(input) {
-
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('.preview img').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
     </script>
 @endsection

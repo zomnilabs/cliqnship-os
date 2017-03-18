@@ -31,16 +31,16 @@
                                 </a>
                             </li>
 
-                            <!--<li role="presentation" class="disabled">-->
-                                <!--<a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Pouch Request">-->
-                            <!--<span class="round-tab">-->
-                                <!--<i class="glyphicon glyphicon-tag"></i>-->
-                            <!--</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
+                            <li role="presentation" class="disabled">
+                                <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Service Add-on">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-tag"></i>
+                            </span>
+                                </a>
+                            </li>
 
                             <li role="presentation" class="disabled">
-                                <a href="#step5" data-toggle="tab" aria-controls="step5" role="tab" title="Booking Preview">
+                                <a href="#step5" data-toggle="tab" aria-controls="step5" role="tab" title="Shipping Preview">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-eye-open"></i>
                             </span>
@@ -58,12 +58,10 @@
                     </div>
 
                     <form role="form">
-                        <div class="alert alert-danger" v-show="showError">{{ errorMessage }}</div>
-
                         <div class="tab-content">
                             <div class="tab-pane active" role="tabpanel" id="step1">
                                 <h3>Step 1</h3>
-                                <p>Which address would you like to set for this booking / pickup? (<span class="text-danger text-capitalize">required</span>)</p>
+                                <p>Which address would you like to set for this shipment?</p>
 
                                 <div class="form-group">
                                     <v-select :on-change="addressSelected" :options="addressbookOptions"></v-select>
@@ -73,7 +71,6 @@
                                     <li><button type="button" class="btn btn-primary next-step" @click="nextTab">Next</button></li>
                                 </ul>
                             </div>
-
                             <div class="tab-pane" role="tabpanel" id="step2">
                                 <h3>Step 2</h3>
                                 <p>Select an image for this booking / pickup (<span class="text-primary text-capitalize">not required</span>)</p>
@@ -95,7 +92,7 @@
 
                             <div class="tab-pane" role="tabpanel" id="step3">
                                 <h3>Step 3</h3>
-                                <p>Give us more information for this booking</p>
+                                <p>Give us more information for this shipment</p>
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -146,14 +143,30 @@
                                                    id="weight" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="pickup_date">Pickup Date <span class="text-danger">*</span></label>
-                                            <input type="date" name="pickup_date"
-                                                   @input="inputChange" v-bind:value="pickup_date"
-                                                   id="pickup_date" class="form-control">
+                                            <h4>Services</h4>
+                                            <label><input type="radio" name="services" id="metro_manila" v-model="service_type" value="metro_manila"> Metro Manila</label>&nbsp;&nbsp;
+                                            <label><input type="radio" name="services" id="provincial" v-model="service_type" value="provincial"> Provincial</label>&nbsp;&nbsp;
+                                            <label><input type="radio" name="services" id="international" v-model="service_type" value="international"> International</label>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <h4>Package Type</h4>
+                                            <label><input type="radio" name="package_type" id="small" v-model="package_type" value="small"> Small</label>&nbsp;&nbsp;
+                                            <label><input type="radio" name="package_type" id="medium" v-model="package_type" value="medium"> Medium</label>&nbsp;&nbsp;
+                                            <label><input type="radio" name="package_type" id="large" v-model="package_type" value="large"> Large</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <h4>Paid by</h4>
+                                            <label><input type="radio" name="charge_to" id="sender" v-model="charge_to" value="sender"> Sender / Shipper</label> &nbsp;&nbsp;
+                                            <label><input type="radio" name="charge_to" id="consignee" v-model="charge_to" value="consignee"> Consignee / Receiver</label>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="remarks">Remarks</label>
@@ -171,62 +184,85 @@
                                 </ul>
                             </div>
 
-                            <!--<div class="tab-pane" role="tabpanel" id="step4">-->
-                                <!--<h3>Step 4</h3>-->
-                                <!--<p>Would you like to request a pouch?</p>-->
+                            <div class="tab-pane" role="tabpanel" id="step4">
+                                <h3>Step 4</h3>
+                                <p>Select extra shipment service</p>
 
-                                <!--<div class="row">-->
-                                    <!--<div class="col-md-5">-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label for="pouch_size">Pouch Size</label>-->
-                                            <!--<select name="pouch_size" id="pouch_size" class="form-control">-->
-                                                <!--<option value="1">Small</option>-->
-                                                <!--<option value="2">Medium</option>-->
-                                                <!--<option value="3">Large</option>-->
-                                                <!--<option value="4">Extra Large</option>-->
-                                            <!--</select>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <!--<div class="col-md-5">-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label for="quantity">Quantity</label>-->
-                                            <!--<input type="number" name="quantity"-->
-                                                   <!--@input="inputChange" v-bind:value="quantity"-->
-                                                   <!--id="quantity" class="form-control">-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <!--<div class="col-md-2">-->
-                                        <!--<button class="btn btn-success" type="button" style="margin-top: 26px;"><i class="fa fa-plus"></i> Add</button>-->
-                                    <!--</div>-->
-                                    <!--<div class="col-md-12">-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label for="remarks">Pouch Requested</label>-->
-                                            <!--<table class="table table-hover">-->
-                                                <!--<thead>-->
-                                                <!--<tr>-->
-                                                    <!--<th>Pouch Size</th>-->
-                                                    <!--<th>Quantity</th>-->
-                                                <!--</tr>-->
-                                                <!--</thead>-->
-                                                <!--<tbody>-->
-                                                <!--<tr>-->
-                                                    <!--<td>Medium</td>-->
-                                                    <!--<td>2</td>-->
-                                                <!--</tr>-->
-                                                <!--<tr>-->
-                                                    <!--<td>Large</td>-->
-                                                    <!--<td>10</td>-->
-                                                <!--</tr>-->
-                                                <!--</tbody>-->
-                                            <!--</table>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<ul class="list-inline pull-right">-->
-                                    <!--<li><button type="button" class="btn btn-default prev-step" @click="prevTab">Previous</button></li>-->
-                                    <!--<li><button type="button" class="btn btn-primary btn-info-full next-step" @click="nextTab">Next</button></li>-->
-                                <!--</ul>-->
-                            <!--</div>-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label><input type="checkbox" name="add_ons" id="collect_and_deposit"
+                                                      v-model="collect_and_deposit" value="1" @click="cod">
+                                            Collect & Deposit (COD) Metro Manila Only</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label><input type="checkbox" name="add_ons" id="insurance_declared_value"
+                                                      v-model="insurance_declared_value" value="1" @click="insurance">
+                                            Insurance Declared Value</label>
+                                    </div>
+
+                                    <div class="cod hide">
+                                        <div class="col-md-12">
+                                            <hr>
+                                            <h4>Collect & Deposit (COD) Metro Manila Only</h4>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="account_name">Account Name</label>
+                                                <input type="text" name="account_name"
+                                                       @input="inputChange" v-bind:value="account_name"
+                                                       id="account_name" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="account_number">Account Number</label>
+                                                <input type="text" name="account_number"
+                                                       @input="inputChange" v-bind:value="account_number"
+                                                       id="account_number" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="bank">Bank</label>
+                                                <input type="text" name="bank"
+                                                       @input="inputChange" v-bind:value="bank"
+                                                       id="bank" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="collect_and_deposit_amount">Amount to be collected</label>
+                                                <input type="text" name="collect_and_deposit_amount"
+                                                       @input="inputChange" v-bind:value="collect_and_deposit_amount"
+                                                       id="collect_and_deposit_amount" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="insurance hide">
+                                        <div class="col-md-12">
+                                            <hr>
+                                            <h4>Insurance Declared Value</h4>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="insurance_amount">Amount to be collected</label>
+                                                <input type="text" name="insurance_amount"
+                                                       @input="inputChange" v-bind:value="insurance_amount"
+                                                       id="insurance_amount" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+                                <ul class="list-inline pull-right">
+                                    <li><button type="button" class="btn btn-default prev-step" @click="prevTab">Previous</button></li>
+                                    <li><button type="button" class="btn btn-primary btn-info-full next-step" @click="nextTab">Next</button></li>
+                                </ul>
+                            </div>
 
                             <div class="tab-pane" role="tabpanel" id="step5">
                                 <h3>Step 5</h3>
@@ -236,52 +272,58 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Pickup Address</label>
+                                    <div class="col-md-6">
+                                        <label for="pickup_address">FROM</label>
                                         <p>{{ addressPreview }}</p>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label>Pickup Date:</label>
-                                        <p>{{ pickup_date }}</p>
+                                    <div class="col-md-6">
+                                        <label for="pickup_address">TO</label>
+                                        <p>{{ addressPreview }}</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h4>Package Details</h4>
                                     </div>
                                     <div class="col-md-4">
-                                        <label>Number of Items:</label>
-                                        <p>{{ number_of_items }} Items</p>
+                                        <label for="quantity">Service:</label>
+                                        <p>{{ service_type }}</p>
                                     </div>
                                     <div class="col-md-4">
-                                        <label>Type of Items:</label>
+                                        <label for="quantity">Number of Items:</label>
+                                        <p>{{ number_of_items }}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="item_type">Type of Items:</label>
                                         <p>{{ type_of_items }}</p>
                                     </div>
 
                                     <div class="col-md-3">
-                                        <label>Length:</label>
+                                        <label for="pickup_date">Length:</label>
                                         <p>{{ length }}</p>
                                     </div>
                                     <div class="col-md-3">
-                                        <label>Width:</label>
+                                        <label for="quantity">Width:</label>
                                         <p>{{ width }}</p>
                                     </div>
                                     <div class="col-md-3">
-                                        <label>Height:</label>
+                                        <label for="item_type">Height:</label>
                                         <p>{{ height }}</p>
                                     </div>
                                     <div class="col-md-3">
-                                        <label>Weight:</label>
+                                        <label for="item_type">Weight:</label>
                                         <p>{{ weight }} Kg</p>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label>Remarks:</label>
+                                        <label for="remarks">Remarks:</label>
                                         <p>{{ remarks }}</p>
                                     </div>
 
-                                    <!--<div class="col-md-12">-->
-                                        <!--<label>Pouch Request:</label>-->
-                                        <!--<ul>-->
-                                            <!--<li>2x Medium</li>-->
-                                            <!--<li>10x Large</li>-->
-                                        <!--</ul>-->
-                                    <!--</div>-->
+                                    <div class="col-md-12">
+                                        <label for="remarks">Service Add-on:</label>
+                                        <ul>
+                                            <li v-if="collect_and_deposit == 'true'">Collect & Deposit (COD)</li>
+                                        </ul>
+                                    </div>
                                 </div>
 
                                 <ul class="list-inline pull-right">
@@ -295,10 +337,11 @@
                                 <div class="text-center">
                                     <i class="fa fa-check-circle text-success" style="font-size: 10em; padding: 15px"></i>
                                     <h2>You have successfully completed all steps.</h2>
+                                    <h4>Here is the tracking number for this shipment: <strong><i>58AD64AEDA255</i></strong></h4>
                                 </div>
 
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-primary btn-info-full" data-dismiss="modal">Done</button></li>
+                                    <li><button type="button" class="btn btn-primary btn-info-full" @click="refreshPage">Done</button></li>
                                 </ul>
 
                             </div>
@@ -326,16 +369,25 @@
                 addressbooks: [],
                 addressbookOptions: [],
                 addressPreview: '',
-                bookingImage: '',
+                shippingImage: '',
                 number_of_items: '',
                 type_of_items: '',
                 length: '',
                 width: '',
                 height: '',
                 weight: '',
-                pickup_date: '',
                 remarks: '',
                 quantity: '',
+                service_type: '',
+                package_type: '',
+                charge_to: '',
+                collect_and_deposit: '',
+                insurance_declared_value: '',
+                account_name: '',
+                account_number: '',
+                bank: '',
+                collect_and_deposit_amount: '',
+                insurance_amount: '',
                 user_id: $('#user_id').val()
             }
         },
@@ -345,17 +397,29 @@
             this.getAddress()
         },
         methods: {
+            refreshPage() {
+                location.reload();
+            },
             resetForm() {
-                this.bookingImage = ''
+                this.shippingImage = ''
                 this.number_of_items = ''
                 this.type_of_items = ''
                 this.length = ''
                 this.width = ''
                 this.height = ''
                 this.weight = ''
-                this.pickup_date = ''
                 this.remarks = ''
                 this.quantity = ''
+                this.service_type = ''
+                this.package_type = ''
+                this.charge_to = ''
+                this.collect_and_deposit = ''
+                this.insurance_declared_value = ''
+                this.account_name = ''
+                this.account_number = ''
+                this.bank = ''
+                this.collect_and_deposit_amount = ''
+                this.insurance_amount = ''
                 this.tabPage = 1
             },
             readURL(input) {
@@ -371,7 +435,7 @@
                 }
             },
             fileSelected(e) {
-                this.bookingImage = e.target;
+                this.shippingImage = e.target;
                 this.readURL(e.target);
             },
             inputChange(e) {
@@ -396,13 +460,6 @@
                     return false
                 }
 
-                if (! this.pickup_date && this.tabPage >= 3) {
-                    this.showError = true;
-                    this.errorMessage = 'Please select a pickup date';
-
-                    return false
-                }
-
                 let $active = $('.wizard .nav-tabs li.active');
                 $active.next().removeClass('disabled');
                 $($active).next().find('a[data-toggle="tab"]').click();
@@ -421,6 +478,7 @@
                 axios.get(`/api/v1/address-books/${this.user_id}`).then(response => {
                     let addressbooks = response.data;
 
+                    console.log(addressbooks)
                     for (let address of addressbooks) {
                         this.addressbookOptions.push({label: `${address.address_line_1}, ${address.barangay}, ${address.city}`, value: address.id});
                     }
@@ -428,32 +486,56 @@
                     console.log(error);
                 });
             },
+            cod() {
+                if($('.cod').hasClass('hide')) {
+                    $('.cod').removeClass('hide');
+                } else {
+                    $('.cod').addClass('hide');
+                }
+            },
+            insurance() {
+                if($('.insurance').hasClass('hide')) {
+                    $('.insurance').removeClass('hide');
+                } else {
+                    $('.insurance').addClass('hide');
+                }
+            },
             saveProject(e) {
 
                 let data = {
                     user_addressbook_id: this.user_addressbook_id,
-//                    bookingImage: this.bookingImage,
+//                    shippingImage: this.shippingImage,
                     number_of_items: this.number_of_items,
                     type_of_items: this.type_of_items,
                     length: this.length,
                     width: this.width,
                     height: this.height,
                     weight: this.weight,
-                    pickup_date: this.pickup_date,
                     remarks: this.remarks,
                     user_id: this.user_id,
+                    service_type: this.service_type,
+                    package_type: this.package_type,
+                    charge_to: this.charge_to,
+                    collect_and_deposit: this.collect_and_deposit,
+                    insurance_declared_value: this.insurance_declared_value,
+                    account_name: this.account_name,
+                    account_number: this.account_number,
+                    bank: this.bank,
+                    collect_and_deposit_amount: this.collect_and_deposit_amount,
+                    insurance_amount: this.insurance_amount,
                 }
 
-                let url = `/api/v1/customers/bookings`;
-                axios.post(url, data).then(response => {
-                    console.log(response)
-
-//                this.$events.fire('reload-table')
-                this.resetForm()
-                this.nextTab()
-            }, error => {
-                    console.log(error)
-                })
+                let url = `/api/v1/customers/shipments`;
+                console.log(data);
+//                axios.post(url, data).then(response => {
+//                    console.log(response)
+//
+////                this.$events.fire('reload-table')
+//                this.resetForm()
+//                this.nextTab()
+//                }, error => {
+//                    console.log(error)
+//                })
             }
         }
     }

@@ -31,6 +31,7 @@ Vue.component(
 );
 
 Vue.component('booking-wizard', require('./components/customer/booking/wizard-form.vue'));
+Vue.component('shipping-wizard', require('./components/customer/shipping/wizard-form.vue'));
 
 const app = new Vue({
     el: '#app'
