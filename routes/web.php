@@ -58,20 +58,25 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
     Route::get('/', 'DashboardController@index');
 
     Route::group(['prefix' => 'dispatching', 'namespace' => 'Dispatching'], function() {
-        Route::get('/', 'DispatchingController@index');
+        Route::get('bookings', 'BookingsController@index');
+        Route::get('shipments', 'ShipmentsController@index');
+        Route::get('item-requests', 'ItemRequestsController@index');
     });
+
     Route::group(['prefix' => 'riders', 'namespace' => 'Riders'], function() {
         Route::get('/', 'RidersController@index');
         Route::post('/', 'RidersController@store');
         Route::put('/{riderId}', 'RidersController@update');
         Route::delete('/{riderId}', 'RidersController@destroy');
     });
+
     Route::group(['prefix' => 'customers', 'namespace' => 'Customers'], function() {
         Route::get('/', 'CustomersController@index');
         Route::post('/', 'CustomersController@store');
         Route::put('/{customerId}', 'CustomersController@update');
         Route::delete('/{customerId}', 'CustomersController@destroy');
     });
+
     Route::group(['prefix' => 'users', 'namespace' => 'Users'], function() {
         Route::get('/', 'UsersController@index');
         Route::get('/', 'UsersController@index');
@@ -79,15 +84,19 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
         Route::put('/{userId}', 'UsersController@update');
         Route::delete('/{userId}', 'UsersController@destroy');
     });
+
     Route::group(['prefix' => 'bookings', 'namespace' => 'Bookings'], function() {
         Route::get('/', 'BookingsController@index');
     });
+
     Route::group(['prefix' => 'shipments', 'namespace' => 'Shipments'], function() {
         Route::get('/', 'ShipmentsController@index');
     });
+
     Route::group(['prefix' => 'reports', 'namespace' => 'Reports'], function() {
         Route::get('/', 'ReportsController@index');
     });
+
     Route::group(['prefix' => 'cms', 'namespace' => 'CMS'], function() {
         Route::get('/', 'CMSController@index');
     });
