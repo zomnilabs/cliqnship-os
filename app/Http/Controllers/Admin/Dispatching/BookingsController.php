@@ -42,6 +42,23 @@ class BookingsController extends Controller {
                 ->get();
         }
 
+        $pendingBooking = Booking::where('status', 'pending')
+            ->whereDate('pickup_date', '=', $today->toDateString())
+            ->count();
+
+        $completedBooking = Booking::where('status', 'completed')
+            ->whereDate('pickup_date', '=', $today->toDateString())
+            ->count();
+
+        $assignedBooking = Booking::whereHas('assignment')
+            ->whereDate('pickup_date', '=', $today->toDateString())
+            ->where('status', 'approve')
+            ->count();
+
+        $approvedBooking = Booking::whereDate('pickup_date', '=', $today->toDateString())
+            ->where('status', 'approve')
+            ->count();
+
         // Riders
         $riders = User::with('profile')
             ->where('user_group_id', 4)
@@ -49,6 +66,10 @@ class BookingsController extends Controller {
 
         return view('admin.dispatching.bookings')
             ->with('bookings', $bookings)
+            ->with('pendingBooking', $pendingBooking)
+            ->with('completedBooking', $completedBooking)
+            ->with('assignedBooking', $assignedBooking)
+            ->with('approvedBooking', $approvedBooking)
             ->with('riders', $riders);
     }
 }

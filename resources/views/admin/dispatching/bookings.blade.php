@@ -111,7 +111,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <h4>Pending Bookings</h4>
-                                    <h1>1</h1>
+                                    <h1>{{ $pendingBooking }}</h1>
                                 </div>
                             </div>
                         </a>
@@ -121,7 +121,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <h4>Unassigned Bookings</h4>
-                                    <h1>4</h1>
+                                    <h1>{{ $approvedBooking - $assignedBooking }}</h1>
                                 </div>
                             </div>
                         </a>
@@ -131,7 +131,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <h4>Assigned Bookings</h4>
-                                    <h1>5</h1>
+                                    <h1>{{ $assignedBooking }}</h1>
                                 </div>
                             </div>
                         </a>
@@ -141,7 +141,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <h4>Completed Bookings</h4>
-                                    <h1>3</h1>
+                                    <h1>{{ $completedBooking }}</h1>
                                 </div>
                             </div>
                         </a>
