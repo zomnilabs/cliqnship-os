@@ -478,7 +478,6 @@
                 axios.get(`/api/v1/address-books/${this.user_id}`).then(response => {
                     let addressbooks = response.data;
 
-                    console.log(addressbooks)
                     for (let address of addressbooks) {
                         this.addressbookOptions.push({label: `${address.address_line_1}, ${address.barangay}, ${address.city}`, value: address.id});
                     }

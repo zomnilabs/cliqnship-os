@@ -154,6 +154,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
 @endsection
 
 @section('scripts')
