@@ -244,7 +244,7 @@
                                     <tr id="rider-{{$rider->id}}">
                                         <td>{{$rider->id}}</td>
                                         <td>{{$rider->account_id or ''}}</td>
-                                        <td>{{$rider->profile->last_name}} {{$rider->profile->middle_name}} {{$rider->profile->first_name}}</td>
+                                        <td>{{$rider->profile->full_name}}</td>
                                         <td>{{$rider->email or ''}}</td>
                                         <td>
                                             <button class="btn btn-danger delRider" value="{{$rider->id}}"><i class="fa fa-trash"></i></button>
