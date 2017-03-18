@@ -19,9 +19,12 @@
                             let selectHTML = '<select class="form-control filter" style="width: 100%">';
                             selectHTML += '<option value="">Filter Status</option>';
                             selectHTML += '<option value="pending">Pending</option>';
-                            selectHTML += '<option value="accepted">Accepted</option>';
-                            selectHTML += '<option value="completed">Completed</option>';
-                            selectHTML += '<option value="rejected">Rejected</option>';
+                            selectHTML += '<option value="for-pickup">For Pickup</option>';
+                            selectHTML += '<option value="courier-picked-up">Courier Picked Up</option>';
+                            selectHTML += '<option value="arrived-at-hq">Arrived at HQ</option>';
+                            selectHTML += '<option value="enroute">En Route</option>';
+                            selectHTML += '<option value="successfully-delivered">Successfully Delivered</option>';
+                            selectHTML += '<option value="returned">Returned</option>';
                             selectHTML += '</select>';
 
                             $(this).html(selectHTML);
@@ -113,33 +116,61 @@
 
                         <table class="table table-bordered" id="shippingTable" style="width: 100%">
                             <tfoot class="filter-footer">
-                            <tr class="searchable">
-                                <td class="hide">Id #</td>
-                                <td>Booking #</td>
-                                <td>Pickup Date</td>
-                                <td>Pickup Address</td>
-                                <td># of Items</td>
-                                <td>Remarks</td>
-                                <td>Status</td>
-                                <td></td>
-                            </tr>
+                                <tr class="searchable">
+                                    <td class="hide">Id #</td>
+                                    <td>Tracking #</td>
+                                    <td>Delivery Address</td>
+                                    <td># of Items</td>
+                                    <td>Service Type</td>
+                                    <td>Services Add-Ons</td>
+                                    <td>Charge To</td>
+                                    <td>Remarks</td>
+                                    <td>Status</td>
+                                    <td></td>
+                                </tr>
                             </tfoot>
 
                             <thead>
-                            <tr>
-                                <th class="hide">Id #</th>
-                                <th>Booking #</th>
-                                <th>Pickup Date</th>
-                                <th>Pickup Address</th>
-                                <th># of Items</th>
-                                <th>Remarks</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
+                                <tr>
+                                    <th class="hide">Id #</th>
+                                    <th>Tracking #</th>
+                                    <th>Delivery Address</th>
+                                    <th># of Items</th>
+                                    <th>Service Type</th>
+                                    <th>Services Add-Ons</th>
+                                    <th>Charge To</th>
+                                    <th>Remarks</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
                             </thead>
 
                             <tbody>
+                                @foreach($shipments as $shipment)
+                                    <tr id="shipment-{{$shipment->id}}">
+                                        <td class="hide">{{ $shipment->id }}</td>
+                                        <td>{{ $shipment->shipment_tracking_no }}</td>
+                                        <td>{{ $shipment->address->address_line_1 }} {{ $shipment->address->barangay }} {{ $shipment->address->city }}, {{ $shipment->address->province }}. {{ $shipment->address->zip_code }}</td>
+                                        <td>{{ $shipment->number_of_items }}</td>
+                                        <td>{{ $shipment->service_type }}</td>
+                                        <td>
+                                            @if ($shipment->collect_and_deposit)
+                                                <p>Collect And Deposit</p>
+                                            @endif
 
+                                            @if ($shipment->insurance_declared_value)
+                                                <p>Insurance declared value</p>
+                                            @endif
+                                        </td>
+                                        <td>{{ $shipment->charge_to }}</td>
+                                        <td>{{ $shipment->remarks }}</td>
+                                        <td>{{ $shipment->status }}</td>
+                                        <th>
+                                            <button class="btn btn-danger delBooking" value="{{ $shipment->id }}"><i class="fa fa-trash"></i></button>
+                                            <button class="btn btn-default"><i class="fa fa-edit"></i></button>
+                                        </th>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

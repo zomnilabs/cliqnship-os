@@ -15,6 +15,12 @@ class UserAddressbook extends Model
     {
         return $this->hasMany(Booking::class);
     }
+
+    public function shipments()
+    {
+        return $this->hasMany(Shipment::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

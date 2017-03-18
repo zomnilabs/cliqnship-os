@@ -83,10 +83,12 @@
                             <thead>
                             <tr class="searchable">
                                 <th class="hide">Id #</th>
-                                <th>Booking #</th>
-                                <th>Pickup Date</th>
-                                <th>Pickup Address</th>
+                                <th>Tracking #</th>
+                                <th>Delivery Address</th>
                                 <th># of Items</th>
+                                <th>Service Type</th>
+                                <th>Services Add-Ons</th>
+                                <th>Charge To</th>
                                 <th>Remarks</th>
                                 <th>Status</th>
                                 <th>Actions</th>
@@ -94,10 +96,12 @@
                             </tr>
                             <tr>
                                 <th class="hide">Id #</th>
-                                <th>Booking #</th>
-                                <th>Pickup Date</th>
-                                <th>Pickup Address</th>
+                                <th>Tracking #</th>
+                                <th>Delivery Address</th>
                                 <th># of Items</th>
+                                <th>Service Type</th>
+                                <th>Services Add-Ons</th>
+                                <th>Charge To</th>
                                 <th>Remarks</th>
                                 <th>Status</th>
                                 <th>Actions</th>

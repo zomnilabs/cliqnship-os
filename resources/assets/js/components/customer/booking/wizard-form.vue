@@ -421,11 +421,11 @@
                 this.tabPage--;
             },
             getAddress() {
-                axios.get(`/api/v1/address-books/${this.user_id}`).then(response => {
+                axios.get(`/api/v1/address-books/${this.user_id}?type=booking`).then(response => {
                     let addressbooks = response.data;
 
                     for (let address of addressbooks) {
-                        this.addressbookOptions.push({label: `${address.address_line_1}, ${address.barangay}, ${address.city}`, value: address.id});
+                        this.addressbookOptions.push({label: `${address.identifier} : ${address.address_line_1}, ${address.barangay}, ${address.city}`, value: address.id});
                     }
                 }).catch(error => {
                     console.log(error);
