@@ -2,7 +2,9 @@
 namespace App\Http\Controllers\Customers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use App\Models\UserAddressbook;
+use App\Models\Shipment;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller {
@@ -15,8 +17,37 @@ class DashboardController extends Controller {
             $withPrimaryAddress = true;
         }
 
+        $pendingBookings = Booking::where('status', 'pending')
+            ->where('user_id', $user['id'])
+            ->count();
+
+        $pendingShipments = Shipment::where('status', 'pending')
+            ->where('user_id', $user['id'])
+            ->count();
+
+        $enRouteShipments = Shipment::where('status', 'enroute')
+            ->where('user_id', $user['id'])
+            ->count();
+
+        $completedShipments = Shipment::where('status', 'completed')
+            ->where('user_id', $user['id'])
+            ->count();
+
+        $returnedShipments = Shipment::where('status', 'returned')
+            ->where('user_id', $user['id'])
+            ->count();
+
+        $counts = [
+            'pendingBookings'   => $pendingBookings,
+            'pendingShipments'  => $pendingShipments,
+            'enRouteShipments'  => $enRouteShipments,
+            'completedShipments'    => $completedShipments,
+            'returnedShipments' => $returnedShipments
+        ];
+
         return view('customers.dashboard')
-            ->with('withPrimaryAddress', $withPrimaryAddress);
+            ->with('withPrimaryAddress', $withPrimaryAddress)
+            ->with('counts', $counts);
     }
 
     private function havePrimaryAddress($userId)
