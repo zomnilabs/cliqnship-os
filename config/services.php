@@ -34,5 +34,14 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-
+    'google' => [
+        'client_id' => 'your-github-app-id',
+        'client_secret' => 'your-github-app-secret',
+        'redirect' => 'http://your-callback-url',
+    ],
+    'facebook' => [
+        'client_id' => '208105299538183',
+        'client_secret' => 'a3a9c2cb642005c6a8b43db8da6d5ef2',
+        'redirect' => 'http://localhost:8000/auth/facebook/callback',
+    ],
 ];

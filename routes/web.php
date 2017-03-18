@@ -19,8 +19,20 @@ Auth::routes();
 
 //Route::get('/home', 'HomeController@index');
 
+Route::group(['prefix' => 'auth'], function() {
+    Route::get('facebook', 'Auth\FacebookAuthController@redirectToProvider');
+    Route::get('facebook/callback', 'Auth\FacebookAuthController@handleProviderCallback');
+});
+
 Route::group(['prefix' => 'customers', 'namespace' => 'Customers', 'middleware' => 'auth'], function() {
     Route::get('/', 'DashboardController@index');
+
+    Route::group(['prefix' => 'item-requests', 'namespace' => 'ItemRequests'], function() {
+        Route::get('/', 'ItemRequestsController@index');
+        Route::post('/', 'ItemRequestsController@store');
+        Route::put('/{itemRequestId}', 'ItemRequestsController@update');
+        Route::delete('/{itemRequestId}', 'ItemRequestsController@destroy');
+    });
 
     Route::group(['prefix' => 'addressbooks', 'namespace' => 'Addressbooks'], function() {
         Route::get('/', 'AddressbooksController@index');

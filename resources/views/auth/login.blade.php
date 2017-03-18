@@ -7,6 +7,17 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center">
+                            <a href="/auth/facebook" class="btn btn-default" style="background-color: #3b5998; color: #fff"> <i class="fa fa-facebook"></i> &nbsp;&nbsp;&nbsp; Sign in with Facebook</a>
+                            <a href="/auth/google" class="btn btn-default" style="background-color: #d62d20; color: #fff"> <i class="fa fa-google"></i> &nbsp;&nbsp;&nbsp; Sign in with Google</a>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 20px"></div>
+
+                    <hr>
+
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
