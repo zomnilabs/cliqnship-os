@@ -35,6 +35,8 @@ window.DataTable = require('../lib/DataTables/datatables.min.js');
  */
 require('../lib/adminLte/js/app');
 
+require('../lib/xeditable/bootstrap3-editable/js/bootstrap-editable.min');
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
