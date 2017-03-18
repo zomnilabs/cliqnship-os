@@ -121,9 +121,9 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/admin/dispatching">Bookings</a></li>
-                            <li><a href="/admin/dispatching">Shipments</a></li>
-                            <li><a href="/admin/dispatching">Item Requests</a></li>
+                            <li><a href="/admin/dispatching/bookings">Bookings</a></li>
+                            <li><a href="/admin/dispatching/shipments">Shipments</a></li>
+                            <li><a href="/admin/dispatching/item-requests">Item Requests</a></li>
                         </ul>
                     </li>
                     <li class="{{ set_active(['admin/riders*']) }}">

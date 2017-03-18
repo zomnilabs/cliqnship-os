@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <section>
-                <div class="wizard">
+                <div class="wizard wizard2">
                     <div class="wizard-inner">
                         <div class="connecting-line"></div>
                         <ul class="nav nav-tabs" role="tablist">

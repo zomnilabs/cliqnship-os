@@ -32,7 +32,7 @@ class CreateShipmentsTable extends Migration
             $table->string('account_name');
             $table->string('account_number');
             $table->string('bank');
-            $table->enum('status', ['shipment-cancelled','for-pickup','courier-picked-up','arrived-at-hq','enroute','successfully-delivered','returned']);
+            $table->enum('status', ['pending', 'shipment-cancelled','for-pickup','courier-picked-up','arrived-at-hq','enroute','successfully-delivered','returned']);
             $table->enum('charge_to', ['sender','consignee']);
             $table->enum('pay_thru', ['cash','account','others']);
             $table->string('if_pay_others');

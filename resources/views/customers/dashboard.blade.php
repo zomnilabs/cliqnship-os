@@ -250,7 +250,7 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body panel-body-pending white-text stats">
-                                    <h1 class="stats-value">10</h1>
+                                    <h1 class="stats-value">{{ $counts['pendingBookings'] }}</h1>
                                     <h4 class="stats-label">Pending Pickup/Bookings</h4>
                                 </div>
                             </div>
@@ -260,7 +260,7 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body panel-body-pending white-text stats">
-                                    <h1 class="stats-value">10</h1>
+                                    <h1 class="stats-value">{{ $counts['pendingShipments'] }}</h1>
                                     <h4 class="stats-label">Pending Shipments</h4>
                                 </div>
                             </div>
@@ -270,7 +270,7 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body panel-body-enroute white-text stats">
-                                    <h1 class="stats-value">5</h1>
+                                    <h1 class="stats-value">{{ $counts['enRouteShipments'] }}</h1>
                                     <h4 class="stats-label">En-Route Shipments</h4>
                                 </div>
                             </div>
@@ -280,7 +280,7 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body panel-body-completed white-text stats">
-                                    <h1 class="stats-value">21</h1>
+                                    <h1 class="stats-value">{{ $counts['completedShipments'] }}</h1>
                                     <h4 class="stats-label">Completed Shipments</h4>
                                 </div>
                             </div>
@@ -290,7 +290,7 @@
                         <a href="#">
                             <div class="panel panel-danger">
                                 <div class="panel-body panel-body-danger white-text stats">
-                                    <h1 class="stats-value">4</h1>
+                                    <h1 class="stats-value">{{ $counts['returnedShipments'] }}</h1>
                                     <h4 class="stats-label">Returned Shipments</h4>
                                 </div>
                             </div>

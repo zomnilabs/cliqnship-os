@@ -76,6 +76,10 @@ span.round-tab:hover {
     width: 16.6%;
 }
 
+.wizard2 .nav-tabs > li {
+    width: 20%;
+}
+
 .wizard li:after {
     content: " ";
     position: absolute;

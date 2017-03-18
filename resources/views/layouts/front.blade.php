@@ -62,6 +62,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="/customers"><i class="fa fa-dashboard fa-lg"></i> &nbsp;&nbsp;&nbsp;Dashboard</a></li>
                                 <li><a href="#"><i class="fa fa-user fa-lg"></i> Profile</a></li>
 
                                 <li role="separator" class="divider"></li>
