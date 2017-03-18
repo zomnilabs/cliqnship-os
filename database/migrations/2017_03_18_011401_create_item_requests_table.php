@@ -19,6 +19,7 @@ class CreateItemRequestsTable extends Migration
             $table->integer('user_addressbook_id');
             $table->enum('size', ['small', 'medium', 'large']);
             $table->integer('quantity');
+            $table->enum('status', ['pending', 'approved', 'completed']);
             $table->timestamps();
             $table->softDeletes();
         });
