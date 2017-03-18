@@ -10,4 +10,9 @@ class ItemRequest extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+
+    public function address()
+    {
+        return $this->belongsTo(UserAddressbook::class, 'user_addressbook_id');
+    }
 }
