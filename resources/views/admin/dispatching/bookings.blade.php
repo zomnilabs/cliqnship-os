@@ -59,18 +59,20 @@
                 } );
             } );
 
+            let riders = [];
+            @foreach ($riders as $rider)
+                riders.push({
+                    value: {{ $rider->id }},
+                    text: '{{ $rider->profile->full_name }}'
+            });
+            @endforeach
+
+            $.fn.editable.defaults.mode = 'inline';
             $('.change_rider').editable({
                 type: 'select',
                 name: 'rider',
                 title: 'Change Rider',
-                source: [
-                    {value: 0, text: 'Nothing'},
-                    {value: 1, text: 'Everything'},
-                    {value: 2, text: 'Something'},
-                    {value: 3, text: 'That Thing'},
-                    {value: 4, text: 'This Thing'},
-                    {value: 5, text: 'Things'}
-                ]
+                source: riders
             });
         }())
     </script>
@@ -146,7 +148,7 @@
                                     <td>{{ $booking->pickup_date }}</td>
                                     <td>{{ $booking->address->address_line_1 }} {{ $booking->address->barangay }} {{ $booking->address->city }}, {{ $booking->address->province }}. {{ $booking->address->zip_code }}</td>
                                     <td>{{ $booking->remarks }}</td>
-                                    <td class="change_rider">{{ $booking->assignment->rider->profile->full_name }}</td>
+                                    <td class="change_rider">{{ $booking->assignment ? $booking->assignment->rider->profile->full_name : 'Not Assigned' }}</td>
                                     <td>{{ $booking->status }}</td>
                                     <th>
                                         <button class="btn btn-danger delBooking" value="{{ $booking->id }}"><i class="fa fa-trash"></i></button>
