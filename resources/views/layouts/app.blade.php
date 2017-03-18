@@ -118,6 +118,13 @@
                                 <i class="fa fa-address-book-o"></i> <span>Address Books</span>
                             </a>
                         </li>
+
+                        <li class="{{ set_active(['customers/item-requests*']) }}">
+                            <a href="/customers/item-requests">
+                                <i class="fa fa-address-book-o"></i> <span>Item Requests</span>
+                            </a>
+                        </li>
+
                         <li class="{{ set_active(['customers/bookings*']) }}">
                             <a href="/customers/bookings">
                                 <i class="fa fa-book"></i> <span>Bookings</span>
