@@ -7,6 +7,28 @@
 @section('scripts')
     <script>
         (function() {
+
+            //deleting data
+            $('.delBooking').click(function () {
+                var id = $(this).val();
+                var parent = $('#booking-'+id);
+                $.ajax({
+                    type: "delete",
+                    url: '/customers/bookings/'+ $(this).val(),
+                    beforeSend: function() {
+                        parent.css('backgroundColor','#fb6c6c');
+                    },
+                    success: function(){
+                        parent.fadeOut(400,function() {
+                            parent.remove();
+                        });
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
+            });
+
             $('#bookingTable tfoot tr.searchable td').each( function () {
                 let title = $(this).text();
                 if (title) {
@@ -146,7 +168,7 @@
                                     <td>{{ $booking->remarks }}</td>
                                     <td>{{ $booking->status }}</td>
                                     <th>
-                                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        <button class="btn btn-danger delBooking" value="{{ $booking->id }}"><i class="fa fa-trash"></i></button>
                                         <button class="btn btn-default"><i class="fa fa-edit"></i></button>
                                     </th>
                                 </tr>
