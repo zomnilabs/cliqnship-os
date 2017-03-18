@@ -337,7 +337,7 @@
                                 <div class="text-center">
                                     <i class="fa fa-check-circle text-success" style="font-size: 10em; padding: 15px"></i>
                                     <h2>You have successfully completed all steps.</h2>
-                                    <h4>Here is the tracking number for this shipment: <strong><i>58AD64AEDA255</i></strong></h4>
+                                    <h4>Here is the tracking number for this shipment: <strong><i>{{ shipment_tracking_no }}</i></strong></h4>
                                 </div>
 
                                 <ul class="list-inline pull-right">
@@ -378,9 +378,9 @@
                 weight: '',
                 remarks: '',
                 quantity: '',
-                service_type: '',
-                package_type: '',
-                charge_to: '',
+                service_type: 'metro_manila',
+                package_type: 'small',
+                charge_to: 'sender',
                 collect_and_deposit: '',
                 insurance_declared_value: '',
                 account_name: '',
@@ -388,7 +388,8 @@
                 bank: '',
                 collect_and_deposit_amount: '',
                 insurance_amount: '',
-                user_id: $('#user_id').val()
+                user_id: $('#user_id').val(),
+                shipment_tracking_no: ''
             }
         },
         mounted() {
@@ -421,6 +422,7 @@
                 this.collect_and_deposit_amount = ''
                 this.insurance_amount = ''
                 this.tabPage = 1
+                this.shipment_tracking_no = ''
             },
             readURL(input) {
 
@@ -475,11 +477,11 @@
                 this.tabPage--;
             },
             getAddress() {
-                axios.get(`/api/v1/address-books/${this.user_id}`).then(response => {
+                axios.get(`/api/v1/address-books/${this.user_id}?type=shipment`).then(response => {
                     let addressbooks = response.data;
 
                     for (let address of addressbooks) {
-                        this.addressbookOptions.push({label: `${address.address_line_1}, ${address.barangay}, ${address.city}`, value: address.id});
+                        this.addressbookOptions.push({label: `${address.identifier} : ${address.address_line_1}, ${address.barangay}, ${address.city}`, value: address.id});
                     }
                 }).catch(error => {
                     console.log(error);
@@ -502,10 +504,12 @@
             saveProject(e) {
 
                 let data = {
-                    user_addressbook_id: this.user_addressbook_id,
+                    user_addressbook: {
+                        id: this.user_addressbook_id
+                    },
 //                    shippingImage: this.shippingImage,
                     number_of_items: this.number_of_items,
-                    type_of_items: this.type_of_items,
+                    item_description: this.type_of_items,
                     length: this.length,
                     width: this.width,
                     height: this.height,
@@ -526,15 +530,17 @@
 
                 let url = `/api/v1/customers/shipments`;
                 console.log(data);
-//                axios.post(url, data).then(response => {
-//                    console.log(response)
-//
-////                this.$events.fire('reload-table')
-//                this.resetForm()
-//                this.nextTab()
-//                }, error => {
-//                    console.log(error)
-//                })
+                axios.post(url, data).then(response => {
+                    console.log(response)
+
+//                  this.$events.fire('reload-table')
+                    this.resetForm()
+                    this.nextTab()
+
+                    this.shipment_tracking_no = response.shipment_tracking_no;
+                }, error => {
+                    console.log(error)
+                })
             }
         }
     }

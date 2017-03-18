@@ -2,10 +2,18 @@
 namespace App\Http\Controllers\Customers\Shipments;
 
 use App\Http\Controllers\Controller;
+use App\Models\Shipment;
+use Illuminate\Http\Request;
 
 class ShipmentsController extends Controller {
-    public function index()
+    public function index(Request $request)
     {
-        return view('customers.shipments.index');
+        $user = $request->user()->toArray();
+
+        $shipments = Shipment::where('user_id', $user['id'])
+            ->get();
+
+        return view('customers.shipments.index')
+            ->with('shipments', $shipments);
     }
 }

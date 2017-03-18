@@ -44725,7 +44725,7 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
         getAddress: function getAddress() {
             var _this = this;
 
-            axios.get('/api/v1/address-books/' + this.user_id).then(function (response) {
+            axios.get('/api/v1/address-books/' + this.user_id + '?type=booking').then(function (response) {
                 var addressbooks = response.data;
 
                 var _iteratorNormalCompletion = true;
@@ -44736,7 +44736,7 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
                     for (var _iterator = addressbooks[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                         var address = _step.value;
 
-                        _this.addressbookOptions.push({ label: address.address_line_1 + ', ' + address.barangay + ', ' + address.city, value: address.id });
+                        _this.addressbookOptions.push({ label: address.identifier + ' : ' + address.address_line_1 + ', ' + address.barangay + ', ' + address.city, value: address.id });
                     }
                 } catch (err) {
                     _didIteratorError = true;
@@ -45178,9 +45178,9 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
             weight: '',
             remarks: '',
             quantity: '',
-            service_type: '',
-            package_type: '',
-            charge_to: '',
+            service_type: 'metro_manila',
+            package_type: 'small',
+            charge_to: 'sender',
             collect_and_deposit: '',
             insurance_declared_value: '',
             account_name: '',
@@ -45278,10 +45278,9 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
         getAddress: function getAddress() {
             var _this = this;
 
-            axios.get('/api/v1/address-books/' + this.user_id).then(function (response) {
+            axios.get('/api/v1/address-books/' + this.user_id + '?type=shipment').then(function (response) {
                 var addressbooks = response.data;
 
-                console.log(addressbooks);
                 var _iteratorNormalCompletion = true;
                 var _didIteratorError = false;
                 var _iteratorError = undefined;
@@ -45290,7 +45289,7 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
                     for (var _iterator = addressbooks[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                         var address = _step.value;
 
-                        _this.addressbookOptions.push({ label: address.address_line_1 + ', ' + address.barangay + ', ' + address.city, value: address.id });
+                        _this.addressbookOptions.push({ label: address.identifier + ' : ' + address.address_line_1 + ', ' + address.barangay + ', ' + address.city, value: address.id });
                     }
                 } catch (err) {
                     _didIteratorError = true;
@@ -45325,12 +45324,15 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
             }
         },
         saveProject: function saveProject(e) {
+            var _this2 = this;
 
             var data = {
-                user_addressbook_id: this.user_addressbook_id,
+                user_addressbook: {
+                    id: this.user_addressbook_id
+                },
                 //                    shippingImage: this.shippingImage,
                 number_of_items: this.number_of_items,
-                type_of_items: this.type_of_items,
+                item_description: this.type_of_items,
                 length: this.length,
                 width: this.width,
                 height: this.height,
@@ -45351,15 +45353,15 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
 
             var url = '/api/v1/customers/shipments';
             console.log(data);
-            //                axios.post(url, data).then(response => {
-            //                    console.log(response)
-            //
-            ////                this.$events.fire('reload-table')
-            //                this.resetForm()
-            //                this.nextTab()
-            //                }, error => {
-            //                    console.log(error)
-            //                })
+            axios.post(url, data).then(function (response) {
+                console.log(response);
+
+                //                  this.$events.fire('reload-table')
+                _this2.resetForm();
+                _this2.nextTab();
+            }, function (error) {
+                console.log(error);
+            });
         }
     }
 };
