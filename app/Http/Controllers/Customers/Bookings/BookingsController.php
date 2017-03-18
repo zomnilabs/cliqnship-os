@@ -105,4 +105,9 @@ class BookingsController extends Controller {
             Booking::create($bookingData);
         });
     }
+
+    public function destroy(Booking $bookingId)
+    {
+        $bookingId->delete();
+    }
 }

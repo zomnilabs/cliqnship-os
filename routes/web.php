@@ -44,6 +44,7 @@ Route::group(['prefix' => 'customers', 'namespace' => 'Customers', 'middleware' 
     Route::group(['prefix' => 'bookings', 'namespace' => 'Bookings'], function() {
         Route::get('/', 'BookingsController@index');
         Route::post('/import', 'BookingsController@importBookings');
+        Route::delete('/{bookingId}', 'BookingsController@destroy');
     });
 
     Route::group(['prefix' => 'shipments', 'namespace' => 'Shipments'], function() {
