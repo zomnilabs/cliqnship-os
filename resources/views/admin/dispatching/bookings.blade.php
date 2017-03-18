@@ -105,6 +105,55 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
+                <div class="row text-center cards">
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4>Pending Collections</h4>
+                                    <h1>21</h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4>Successful Collections</h4>
+                                    <h1>4</h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4>Failed Collections</h4>
+                                    <h1>5</h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4>Total Wallet</h4>
+                                    <h1>P 560, 000</h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header">
                         <div class="box-title pull-left">
