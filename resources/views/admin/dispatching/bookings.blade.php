@@ -116,16 +116,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-3">
-                        <a href="#">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4>Unassigned Bookings</h4>
-                                    <h1>{{ $approvedBooking - $assignedBooking }}</h1>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+
                     <div class="col-md-3">
                         <a href="#">
                             <div class="panel panel-default">
@@ -142,6 +133,17 @@
                                 <div class="panel-body">
                                     <h4>Completed Bookings</h4>
                                     <h1>{{ $completedBooking }}</h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4>Rejected Bookings</h4>
+                                    <h1>{{ $rejectedBooking }}</h1>
                                 </div>
                             </div>
                         </a>

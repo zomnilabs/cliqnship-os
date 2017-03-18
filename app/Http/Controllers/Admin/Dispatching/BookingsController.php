@@ -30,15 +30,15 @@ class BookingsController extends Controller {
             }
 
             $bookings = Booking::with('assignment')
-                ->whereDate('pickup_date', '=', $today->toDateString())
                 ->where('status', $status)
                 ->whereIn('id', $ids)
+                ->orderBy('pickup_date', 'DESC')
                 ->get();
 
         } else {
             $bookings = Booking::with('assignment')
-                ->whereDate('pickup_date', '=', $today->toDateString())
                 ->where('status', $status)
+                ->orderBy('pickup_date', 'DESC')
                 ->get();
         }
 
@@ -52,11 +52,11 @@ class BookingsController extends Controller {
 
         $assignedBooking = Booking::whereHas('assignment')
             ->whereDate('pickup_date', '=', $today->toDateString())
-            ->where('status', 'approve')
+            ->where('status', 'accepted')
             ->count();
 
-        $approvedBooking = Booking::whereDate('pickup_date', '=', $today->toDateString())
-            ->where('status', 'approve')
+        $rejectedBooking = Booking::whereDate('pickup_date', '=', $today->toDateString())
+            ->where('status', 'rejected')
             ->count();
 
         // Riders
@@ -69,7 +69,7 @@ class BookingsController extends Controller {
             ->with('pendingBooking', $pendingBooking)
             ->with('completedBooking', $completedBooking)
             ->with('assignedBooking', $assignedBooking)
-            ->with('approvedBooking', $approvedBooking)
+            ->with('rejectedBooking', $rejectedBooking)
             ->with('riders', $riders);
     }
 }
