@@ -24,6 +24,10 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function() {
         Route::group(['prefix' => 'bookings'], function () {
             Route::post('/', 'BookingController@store');
         });
+
+        Route::group(['prefix' => 'shipments'], function () {
+            Route::post('/', 'ShipmentsController@store');
+        });
     });
 
     // Address book
