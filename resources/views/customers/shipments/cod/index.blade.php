@@ -96,7 +96,7 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Pending Collections</h4>
+                                    <h4>Pending Deliveries</h4>
                                     <h1>21</h1>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Successful Collections</h4>
+                                    <h4>Successful Deliveries</h4>
                                     <h1>4</h1>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Failed Collections</h4>
+                                    <h4>Failed Deliveries</h4>
                                     <h1>5</h1>
                                 </div>
                             </div>
@@ -126,7 +126,7 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Total Wallet</h4>
+                                    <h4>Pending Remittance</h4>
                                     <h1>P 560, 000</h1>
                                 </div>
                             </div>
