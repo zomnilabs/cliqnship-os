@@ -1,5 +1,5 @@
 <div class="modal fade" id="historyModal" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg" role="document" style="width: 80%">
         <div class="modal-content mcontent">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -44,7 +44,7 @@
                                 </table>
                             </div>
                             <div class="tab-pane" id="tab2"><br/>
-                                <table class="table table-bordered" id="bookingTable">
+                                <table class="table table-bordered" style="width: 100%">
                                     <tfoot class="filter-footer">
                                         <tr class="searchable">
                                             <td class="hide">Id #</td>
@@ -75,7 +75,7 @@
                                 </table>
                             </div>
                             <div class="tab-pane" id="tab3"><br/>
-                                <table class="table table-bordered" id="shippingTable">
+                                <table class="table table-bordered" style="width: 100%">
                                     <tfoot class="filter-footer">
                                     <tr class="searchable">
                                         <td class="hide">Id #</td>
