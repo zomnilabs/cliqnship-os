@@ -23,6 +23,7 @@ class ItemRequestsController extends Controller
         $user  = $request->user()->toArray();
         $input = $request->all();
         $input['user_id'] = $user['id'];
+        $input['source_id'] = 2;
         $input['status'] = 'pending';
 
         ItemRequest::create($input);
