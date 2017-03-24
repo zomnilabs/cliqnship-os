@@ -171,6 +171,7 @@
                                 <td>Booking #</td>
                                 <td>Pickup Date</td>
                                 <td>Pickup Address</td>
+                                <td>Source Type</td>
                                 <td>Remarks</td>
                                 <td>Rider</td>
                                 <td>Status</td>
@@ -184,6 +185,7 @@
                                 <th>Booking #</th>
                                 <th>Pickup Date</th>
                                 <th>Pickup Address</th>
+                                <td>Source Type</td>
                                 <th>Remarks</th>
                                 <th>Rider</th>
                                 <th>Status</th>
@@ -198,6 +200,7 @@
                                     <td>{{ $booking->booking_no }}</td>
                                     <td>{{ $booking->pickup_date }}</td>
                                     <td>{{ $booking->address->address_line_1 }} {{ $booking->address->barangay }} {{ $booking->address->city }}, {{ $booking->address->province }}. {{ $booking->address->zip_code }}</td>
+                                    <td>{{$booking->source->name}}</td>
                                     <td>{{ $booking->remarks }}</td>
                                     <td class="change_rider">{{ $booking->assignment ? $booking->assignment->rider->profile->full_name : 'Not Assigned' }}</td>
                                     <td>{{ $booking->status }}</td>
