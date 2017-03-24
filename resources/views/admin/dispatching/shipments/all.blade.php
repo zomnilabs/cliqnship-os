@@ -64,6 +64,7 @@
                                 <th>Id #</th>
                                 <th>Name</th>
                                 <th>Type</th>
+                                <th>Source Type</th>
                                 <th>Address Type</th>
                                 <th>Address</th>
                                 <th>Contact #</th>
@@ -73,35 +74,21 @@
                             </thead>
 
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Edward Lim</td>
-                                <td>Booking</td>
-                                <td>Residential</td>
-                                <td>San-miguel Tarlac</td>
-                                <td>09123456789</td>
-                                <td>edward@gmail.com</td>
-                                <td>
-                                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                    <button class="btn btn-default"><i class="fa fa-edit"></i></button>
-                                </td>
-                            </tr>
-                            {{--@foreach($addressbooks as $addressbook)--}}
-                            {{--<tr id="addressbook-{{$addressbook->id}}">--}}
-                            {{--<td>{{$addressbook->id}}</td>--}}
-                            {{--<td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>--}}
-                            {{--<td>{{ ucwords($addressbook->type) }}</td>--}}
-                            {{--<td>{{ ucwords($addressbook->address_type) }}</td>--}}
-                            {{--<th>{{$addressbook->address_line_1}}</th>--}}
-                            {{--<th>{{$addressbook->contact_number}}</th>--}}
-                            {{--<th>{{$addressbook->email}}</th>--}}
-                            {{--<th>--}}
-                            {{--<button class="btn btn-danger"><i class="fa fa-trash"></i></button>--}}
-                            {{--<button class="btn btn-default"><i class="fa fa-edit"></i></button>--}}
-                            {{--</th>--}}
-                            {{--</tr>--}}
-                            {{--@endforeach--}}
-
+                                @foreach($shipments as $shipment)
+                                <tr id="shipment-{{$shipment->id}}">
+                                <td>{{$shipment->id}}</td>
+                                <td>{{$shipment->user->profile->first_name}} {{$shipment->user->profile->middle_name}} {{$shipment->user->profile->last_name}}</td>
+                                <td>{{ ucwords($shipment->source->name) or '' }}</td>
+                                <td>{{ ucwords($shipment->address->address_type or '') }}</td>
+                                <th>{{$shipment->address->address_line_1 or ''}}</th>
+                                <th>{{$shipment->address->contact_number or ''}}</th>
+                                <th>{{$shipment->user->email or ''}}</th>
+                                <th>
+                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-default"><i class="fa fa-edit"></i></button>
+                                </th>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
