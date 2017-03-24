@@ -21,4 +21,9 @@ class Shipment extends Model
     {
         return $this->belongsTo(UserAddressbook::class, 'user_addressbook_id');
     }
+
+    public function source()
+    {
+        return $this->belongsTo(Source::class);
+    }
 }
