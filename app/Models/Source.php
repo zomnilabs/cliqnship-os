@@ -15,4 +15,14 @@ class Source extends Model
     {
         return $this->hasMany(Booking::class);
     }
+
+    public function shipment()
+    {
+        return $this->hasMany(Shipment::class);
+    }
+
+    public function itemRequest()
+    {
+        return $this->hasMany(ItemRequest::class);
+    }
 }
