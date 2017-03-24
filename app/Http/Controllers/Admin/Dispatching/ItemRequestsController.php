@@ -7,7 +7,8 @@ use App\Models\ItemRequest;
 class ItemRequestsController extends Controller {
     public function index()
     {
-        $itemRequests = ItemRequest::where('status', 'pending')
+        $itemRequests = ItemRequest::with('address','source')
+            ->where('status', 'pending')
             ->get();
 
         return view('admin.dispatching.item-requests')
