@@ -26,4 +26,9 @@ class Booking extends Model
     {
         return $this->hasOne(BookingAssignment::class);
     }
+
+    public function source()
+    {
+        return $this->belongsTo(Source::class);
+    }
 }
