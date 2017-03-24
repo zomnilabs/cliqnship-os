@@ -19,7 +19,6 @@ class CreateShipmentsTable extends Migration
             $table->integer('user_id');
             $table->integer('source_id');
             $table->integer('user_addressbook_id');
-            $table->string('shipment_tracking_no');
             $table->text('remarks')->nullable();
             $table->text('item_description')->nullable();
             $table->integer('number_of_items')->nullable();
