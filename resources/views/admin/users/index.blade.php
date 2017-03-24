@@ -221,7 +221,7 @@
                             <tfoot class="filter-footer">
                                 <tr class="searchable">
                                     <td>Id #</td>
-                                    <td>Position</td>
+                                    <td>User Type</td>
                                     <td>Account Id</td>
                                     <td>Name</td>
                                     <td>Email</td>
@@ -232,6 +232,7 @@
                             <thead>
                                 <tr>
                                     <th>Id #</th>
+                                    <td>User Type</td>
                                     <th>Account Id</th>
                                     <th>Name</th>
                                     <th>Email</th>
