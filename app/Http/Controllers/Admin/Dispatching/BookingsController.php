@@ -29,14 +29,14 @@ class BookingsController extends Controller {
                 $ids[] = $assignment->booking_id;
             }
 
-            $bookings = Booking::with('assignment')
+            $bookings = Booking::with('assignment','source')
                 ->where('status', $status)
                 ->whereIn('id', $ids)
                 ->orderBy('pickup_date', 'DESC')
                 ->get();
 
         } else {
-            $bookings = Booking::with('assignment')
+            $bookings = Booking::with('assignment','source')
                 ->where('status', $status)
                 ->orderBy('pickup_date', 'DESC')
                 ->get();
