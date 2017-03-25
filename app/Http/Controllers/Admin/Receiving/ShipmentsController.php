@@ -2,14 +2,15 @@
 namespace App\Http\Controllers\Admin\Receiving;
 
 use App\Http\Controllers\Controller;
+use App\Models\Shipment;
 
 class ShipmentsController extends Controller {
     public function all()
     {
-        return view('admin.dispatching.shipments.all');
-    }
-    public function returned()
-    {
-        return view('admin.dispatching.shipments.returned');
+        $shipments = Shipment::with('user','address','source')
+            ->get();
+
+        return view('admin.receiving.shipment')
+            ->with('shipments',$shipments);
     }
 }

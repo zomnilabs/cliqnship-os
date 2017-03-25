@@ -65,10 +65,13 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
     });
 
     Route::group(['prefix' => 'receiving', 'namespace' => 'Receiving'], function() {
-        Route::get('bookings', 'BookingsController@index');
         Route::get('shipments/all', 'ShipmentsController@all');
-        Route::get('shipments/returned', 'ShipmentsController@returned');
         Route::get('item-requests', 'ItemRequestsController@index');
+    });
+
+    Route::group(['prefix' => 'cash-on-delivery', 'namespace' => 'COD'], function() {
+        Route::get('all', 'ShipmentsController@all');
+        Route::get('customer', 'CustomerController@index');
     });
 
     Route::group(['prefix' => 'riders', 'namespace' => 'Riders'], function() {

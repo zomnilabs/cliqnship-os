@@ -10,7 +10,7 @@ class ItemRequestsController extends Controller {
         $itemRequests = ItemRequest::where('status', 'pending')
             ->get();
 
-        return view('admin.dispatching.item-requests')
+        return view('admin.receiving.item-requests')
             ->with('itemRequests', $itemRequests);
     }
 }

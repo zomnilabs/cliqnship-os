@@ -143,18 +143,19 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="active dropdown treeview">
-                                <a href="#"><span>Shipments</span>
-                                    <span class="pull-right-container">
+                            <li><a href="/admin/receiving/shipments/all">All Shipments</a></li>
+                            <li><a href="/admin/receiving/item-requests">Item Requests</a></li>
+                        </ul>
+                    </li>
+                    <li class="{{ set_active(['admin/cash-on-delivery*']) }} dropdown treeview">
+                        <a href="#"><i class="fa fa-money"></i> <span>Cash-on-Deliver</span>
+                            <span class="pull-right-container">
                               <i class="fa fa-angle-left pull-right"></i>
                             </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="/admin/receiving/shipments/all">All Shipments</a></li>
-                                    <li><a href="/admin/receiving/shipments/returned">Returned Shipments</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="/admin/receiving/item-requests">Item Requests</a></li>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/admin/cash-on-delivery/all">All</a></li>
+                            <li><a href="/admin/cash-on-delivery/customer">Customer Bank</a></li>
                         </ul>
                     </li>
                     <li class="{{ set_active(['admin/riders*']) }}">
