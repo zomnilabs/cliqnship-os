@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemRequestsTable extends Migration
+class CreateShipmentTrackingNumbersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateItemRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_requests', function (Blueprint $table) {
+        Schema::create('shipment_tracking_numbers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('source_id');
-            $table->integer('user_addressbook_id');
-            $table->enum('size', ['small', 'medium', 'large']);
-            $table->integer('quantity');
-            $table->enum('status', ['pending', 'approved', 'completed']);
+            $table->integer('shipment_id')->unsigned();
+            $table->string('tracking_number');
+            $table->string('provider')->default('cliqnship');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +30,6 @@ class CreateItemRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_requests');
+        Schema::dropIfExists('shipment_tracking_numbers');
     }
 }

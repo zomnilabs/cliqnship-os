@@ -109,3 +109,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
         Route::get('/', 'CMSController@index');
     });
 });
+
+Route::get('print-waybill', function(){
+    return view('print.waybill');
+});

@@ -75,6 +75,7 @@
                                 <td>Address</td>
                                 <td>Size</td>
                                 <td>Quantity</td>
+                                <td>Source Type</td>
                                 <td></td>
                             </tr>
                             </tfoot>
@@ -84,6 +85,7 @@
                                 <th>Address</th>
                                 <th>Size</th>
                                 <th>Quantity</th>
+                                <th>Source Type</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -95,6 +97,7 @@
                                     <td>{{ $itemRequest->address->getFullAddress() }}</td>
                                     <td>{{ $itemRequest->size }}</td>
                                     <td>{{ $itemRequest->quantity }}</td>
+                                    <td>{{ $itemRequest->source->name or ''}}</td>
                                     <td>
                                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                         <button class="btn btn-default"><i class="fa fa-edit"></i></button>
