@@ -136,6 +136,27 @@
                             <li><a href="/admin/dispatching/item-requests">Item Requests</a></li>
                         </ul>
                     </li>
+                    <li class="{{ set_active(['admin/receiving*']) }} dropdown treeview">
+                        <a href="#"><i class="fa fa-sitemap"></i> <span>Receiving</span>
+                            <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="active dropdown treeview">
+                                <a href="#"><span>Shipments</span>
+                                    <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="/admin/receiving/shipments/all">All Shipments</a></li>
+                                    <li><a href="/admin/receiving/shipments/returned">Returned Shipments</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/admin/receiving/item-requests">Item Requests</a></li>
+                        </ul>
+                    </li>
                     <li class="{{ set_active(['admin/riders*']) }}">
                         <a href="/admin/riders"><i class="fa fa-motorcycle"></i> <span>Riders</span></a>
                     </li>
