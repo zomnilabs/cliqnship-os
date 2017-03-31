@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call(OauthClientsTableSeeder::class);
         $this->call(SourcesTableSeeder::class);
         $this->call(UserGroupsTableSeeder::class);
-        // $this->call(UsersTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }
