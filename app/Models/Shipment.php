@@ -31,4 +31,9 @@ class Shipment extends Model
     {
         return $this->hasMany(ShipmentTrackingNumbers::class);
     }
+
+    public function rider()
+    {
+        return $this->hasOne(ShipmentAssignment::class);
+    }
 }
