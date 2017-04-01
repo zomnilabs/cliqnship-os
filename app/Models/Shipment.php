@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\ShipmentEvent;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -35,5 +36,10 @@ class Shipment extends Model
     public function rider()
     {
         return $this->hasOne(ShipmentAssignment::class);
+    }
+
+    public function events()
+    {
+        return $this->hasMany(ShipmentEvent::class);
     }
 }
