@@ -143,7 +143,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/admin/receiving/shipments/all">All Shipments</a></li>
+                            <li><a href="/admin/receiving/rider">All Shipments</a></li>
                             <li><a href="/admin/receiving/item-requests">Item Requests</a></li>
                         </ul>
                     </li>

@@ -36,7 +36,7 @@
                 <div class="page-actions pull-right">
                     <button class="btn btn-primary" data-toggle="modal" data-target="#createShippingModal">
                         <i class="fa fa-plus"></i>
-                        Import Shipments Assignment</button>
+                        Import Shipments Receiving</button>
 
                 </div>
             </div>
@@ -49,12 +49,7 @@
                 <div class="box box-primary">
                     <div class="box-header">
                         <div class="box-title pull-left">
-                            <h1>Shipment</h1>
-                        </div>
-                        <div class="page-actions pull-right">
-                            <button class="btn btn-primary">
-                                <i class="fa fa-plus"></i>
-                                Add shipment Assignment</button>
+                            <h1>Rider</h1>
                         </div>
                     </div>
                     <div class="box-body">
@@ -63,32 +58,22 @@
                             <tr>
                                 <th>Id #</th>
                                 <th>Name</th>
-                                <th>Type</th>
-                                <th>Source Type</th>
-                                <th>Address Type</th>
-                                <th>Address</th>
-                                <th>Contact #</th>
-                                <th>Email Address</th>
+                                <th>Shipments Assigned</th>
+                                <th>Shipments Remitted Today</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                                @foreach($shipments as $shipment)
-                                    <tr id="shipment-{{$shipment->id}}">
-                                        <td>{{$shipment->id}}</td>
-                                        <td>{{$shipment->user->profile->first_name}} {{$shipment->user->profile->middle_name}} {{$shipment->user->profile->last_name}}</td>
-                                        <td>{{ ucwords($shipment->source->name) or '' }}</td>
-                                        <td>{{ ucwords($shipment->address->address_type or '') }}</td>
-                                        <td>{{$shipment->address->address_line_1 or ''}}</td>
-                                        <td>{{$shipment->address->contact_number or ''}}</td>
-                                        <td>{{$shipment->user->email or ''}}</td>
-                                        <td>
-                                            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                            <button class="btn btn-default"><i class="fa fa-edit"></i></button>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                <tr>
+                                    <td>1</td>
+                                    <td>Roy Mustang</td>
+                                    <td>10</td>
+                                    <td>2</td>
+                                    <td>
+                                        <a href="/admin/receiving/rider/remit" class="btn btn-default"><i class="fa fa-search"></i> Remit</a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
