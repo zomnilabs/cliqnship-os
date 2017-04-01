@@ -2,7 +2,7 @@
 
 @section('stylesheets')
     <link rel="stylesheet" href="{{ asset('css/wizard.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/selec2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
 
     <style>
         .mcontent{
@@ -10,6 +10,30 @@
         }
         .pull-right button{
             margin-right:20px;
+        }
+
+        .select2-container {
+            width: 100% !important;
+            font-size: 20px;
+        }
+
+        .select2-search__field, .select2-search {
+            width: 100% !important;
+        }
+
+        .waybill-input {
+            font-size: 20px;
+        }
+
+        .select2-selection__choice {
+            background-color: #3c8dbc !important;
+            border-color: #357CA5 !important;
+            font-size: 20px;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+            color: #224F69 !important;
+            margin-right: 10px !important;
         }
     </style>
 @endsection
@@ -25,6 +49,14 @@
             });
 
             $('.table').dataTable();
+
+            // Select 2
+            $(".waybill-input").select2({
+                tags: true,
+                tokenSeparators: [',', ' '],
+                placeholder: "Input waybill number/s",
+                allowClear: true
+            });
         }())
     </script>
 @endsection
@@ -152,8 +184,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group{{ $errors->has('waybills') ? ' has-error' : '' }}">
-                                    <label for="Identifier">Waybill Number/s</label>
-                                    <input type="text" class="form-control dataField" name="waybills" id="waybills" />
+                                    <label for="waybills">Waybill Number/s</label>
+
+                                    <select class="form-control dataField waybill-input" name="waybilld" id="waybills" multiple="multiple"></select>
 
                                     @if ($errors->has('waybills'))
                                         <span class="help-block">
