@@ -91,14 +91,15 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>Id #</th>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Source Type</th>
-                                <th>Address Type</th>
-                                <th>Address</th>
-                                <th>Contact #</th>
-                                <th>Email Address</th>
+                                <th class="hide">Shipment Id</th>
+                                <th>Tracking #</th>
+                                <th>Customer</th>
+                                <th>Delivery Address</th>
+                                <th>Service Type</th>
+                                <th>Services Add-Ons</th>
+                                <th>Remarks</th>
+                                <th>Rider</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -106,17 +107,17 @@
                             <tbody>
                                 @foreach($shipments as $shipment)
                                 <tr id="shipment-{{$shipment->id}}">
-                                <td>{{$shipment->id}}</td>
-                                <td>{{$shipment->user->profile->first_name}} {{$shipment->user->profile->middle_name}} {{$shipment->user->profile->last_name}}</td>
-                                <td>{{ ucwords($shipment->source->name) or '' }}</td>
-                                <td>{{ ucwords($shipment->address->address_type or '') }}</td>
-                                <th>{{$shipment->address->address_line_1 or ''}}</th>
-                                <th>{{$shipment->address->contact_number or ''}}</th>
-                                <th>{{$shipment->user->email or ''}}</th>
-                                <th>
-                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                <button class="btn btn-default"><i class="fa fa-edit"></i></button>
-                                </th>
+                                    <td>{{$shipment->id}}</td>
+                                    <td>{{$shipment->user->profile->first_name}} {{$shipment->user->profile->middle_name}} {{$shipment->user->profile->last_name}}</td>
+                                    <td>{{ ucwords($shipment->source->name) or '' }}</td>
+                                    <td>{{ ucwords($shipment->address->address_type or '') }}</td>
+                                    <th>{{$shipment->address->address_line_1 or ''}}</th>
+                                    <th>{{$shipment->address->contact_number or ''}}</th>
+                                    <th>{{$shipment->user->email or ''}}</th>
+                                    <th>
+                                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        <button class="btn btn-default"><i class="fa fa-edit"></i></button>
+                                    </th>
                                 </tr>
                                 @endforeach
                             </tbody>
