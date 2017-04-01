@@ -37,6 +37,8 @@ require('../lib/adminLte/js/app');
 
 require('../lib/xeditable/bootstrap3-editable/js/bootstrap-editable.min');
 
+require('../lib/select2/js/select2.full.min');
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

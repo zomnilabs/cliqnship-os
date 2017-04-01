@@ -2,6 +2,7 @@
 
 @section('stylesheets')
     <link rel="stylesheet" href="{{ asset('css/wizard.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/selec2/css/select2.min.css') }}">
 @endsection
 
 @section('scripts')
@@ -82,7 +83,7 @@
                             <h1>Shipment</h1>
                         </div>
                         <div class="page-actions pull-right">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#addRiderAssignment">
                                 <i class="fa fa-plus"></i>
                                 Add shipment Assignment</button>
                         </div>
@@ -127,5 +128,7 @@
             </div>
 
         </div>
+
+        @include('admin.dispatching.shipments.modals.dispatch-assignment')
     </div>
 @endsection
