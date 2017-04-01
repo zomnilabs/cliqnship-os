@@ -45,6 +45,14 @@
                     <button data-toggle="modal" data-target=".bs-modal-lg" class="btn btn-primary">
                         <i class="glyphicon glyphicon-plus"></i>
                         Create New Shipment</button>
+
+                    <button data-toggle="modal" data-target=".bs-modal-lg" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        Import Shipments</button>
+
+                    <button data-toggle="modal" data-target=".bs-modal-lg" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        Export Shipments Waiting for Encoding</button>
                 </div>
             </div>
         </div>
