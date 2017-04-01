@@ -167,7 +167,7 @@
 
                     <div class="modal-footer">
                         <button class="btn btn-default" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        <button type="button" class="btn btn-success" id="formSubmit" onclick="storeData.call(this)"><i class="fa fa-floppy-o"></i> Update Addressbook</button>
+                        <button type="button" class="btn btn-success" id="formSubmit" onclick="storeData.call(this)"><i class="fa fa-floppy-o"></i> Receive Shipment Remit</button>
                     </div>
                 </form>
             </div>
