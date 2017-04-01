@@ -122,6 +122,7 @@
                                 <td>Delivery Address</td>
                                 <td># of Items</td>
                                 <td>Service Type</td>
+                                <td>Status</td>
                             </tr>
                             <tr>
                                 <th class="hide">Id #</th>
@@ -129,6 +130,7 @@
                                 <th>Delivery Address</th>
                                 <th># of Items</th>
                                 <th>Service Type</th>
+                                <th>Status</th>
                             </tr>
                             </thead>
 
@@ -139,6 +141,7 @@
                                     <td>Makati City</td>
                                     <td>3</td>
                                     <td>Metro Manila</td>
+                                    <td>Pending</td>
                                 </tr>
                                 <tr>
                                     <td class="hide">1</td>
@@ -146,6 +149,7 @@
                                     <td>Guadalupe</td>
                                     <td>3</td>
                                     <td>Metro Manila</td>
+                                    <td>Pending</td>
                                 </tr>
                                 <tr>
                                     <td class="hide">1</td>
@@ -153,6 +157,7 @@
                                     <td>BGC</td>
                                     <td>3</td>
                                     <td>Metro Manila</td>
+                                    <td>Pending</td>
                                 </tr>
                                 <tr>
                                     <td class="hide">1</td>
@@ -160,6 +165,7 @@
                                     <td>Mandaluyong</td>
                                     <td>3</td>
                                     <td>Metro Manila</td>
+                                    <td>Pending</td>
                                 </tr>
                             </tbody>
                         </table>
