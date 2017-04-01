@@ -13,8 +13,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group{{ $errors->has('waybills') ? ' has-error' : '' }}">
-                                <label for="Identifier">Waybill Number/s</label>
-                                <input type="text" class="form-control dataField" name="waybills" id="waybills" />
+                                <label for="waybills">Waybill Number/s</label>
+
+                                <select class="form-control dataField waybill-input" name="waybilld" id="waybills" multiple="multiple"></select>
 
                                 @if ($errors->has('waybills'))
                                     <span class="help-block">
@@ -45,7 +46,7 @@
 
                 <div class="modal-footer">
                     <button class="btn btn-default" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                    <button type="button" class="btn btn-success" id="formSubmit" onclick="storeData.call(this)"><i class="fa fa-floppy-o"></i> Update Addressbook</button>
+                    <button type="button" class="btn btn-success" id="formSubmit" onclick="storeData.call(this)"><i class="fa fa-floppy-o"></i> Create Assignment</button>
                 </div>
             </form>
         </div>
