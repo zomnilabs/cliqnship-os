@@ -1,19 +1,29 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="container">
+<section id="auth" style="max-height: 100vh">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Register</h2>
+            </div>
+        </div>
+        <div class="row">
+
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
+
+                    <div style="margin-bottom: 20px"></div>
+
+                    <form role="form" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                            <label for="first_name" class="col-md-4 control-label">First Name</label>
+                        <div class="col-md-6">
+                            <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+                                <label for="first_name">First Name</label>
 
-                            <div class="col-md-6">
                                 <input id="first_name" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" required autofocus>
 
                                 @if ($errors->has('first_name'))
@@ -24,10 +34,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                            <label for="last_name" class="col-md-4 control-label">Last Name</label>
+                        <div class="col-md-6">
+                            <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
+                                <label for="last_name">Last Name</label>
 
-                            <div class="col-md-6">
                                 <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required>
 
                                 @if ($errors->has('last_name'))
@@ -38,10 +48,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                            <label for="gender" class="col-md-4 control-label">Gender</label>
+                        <div class="col-md-6">
+                            <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                                <label for="gender">Gender</label>
 
-                            <div class="col-md-6">
                                 <select name="gender" id="gender" class="form-control">
                                     <option value="male" {{ old('gender') === 'male' ? 'selected' : '' }}>Male</option>
                                     <option value="female" {{ old('gender') === 'female' ? 'selected' : '' }}>Female</option>
@@ -55,10 +65,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('birthdate') ? ' has-error' : '' }}">
-                            <label for="birthdate" class="col-md-4 control-label">Birthdate</label>
+                        <div class="col-md-6">
+                            <div class="form-group{{ $errors->has('birthdate') ? ' has-error' : '' }}">
+                                <label for="birthdate">Birthdate</label>
 
-                            <div class="col-md-6">
                                 <input id="birthdate" type="date" class="form-control" name="birthdate" value="{{ old('birthdate') }}" required>
 
                                 @if ($errors->has('birthdate'))
@@ -69,10 +79,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <div class="col-md-12">
+                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <label for="email">E-Mail Address</label>
 
-                            <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
@@ -83,10 +93,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                        <div class="col-md-6">
+                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                <label for="password">Password</label>
 
-                            <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
@@ -97,28 +107,30 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="password-confirm">Confirm Password</label>
 
-                            <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
-                            <div class="col-md-6 col-md-offset-4">
-                                {!! app('captcha')->display() !!}
+                        <div class="col-md-12">
+                            <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                                <div class="col-md-6 col-md-offset-4">
+                                    {!! app('captcha')->display() !!}
 
-                                @if ($errors->has('g-recaptcha-response'))
-                                    <span class="help-block">
-                                        <strong>Please validate if you are a human</strong>
-                                    </span>
-                                @endif
+                                    @if ($errors->has('g-recaptcha-response'))
+                                        <span class="help-block">
+                                            <strong>Please validate if you are a human</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div class="col-md-12 text-right">
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
@@ -129,5 +141,6 @@
             </div>
         </div>
     </div>
-</div>
+
+</section>
 @endsection

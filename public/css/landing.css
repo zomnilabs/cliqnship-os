@@ -69,15 +69,6 @@ header {
     margin-bottom: 0px !important;
 }
 
-.navbar-brand {
-    padding: 0px;
-}
-.navbar-brand>img {
-    height: auto;
-    padding: 5px;
-    width: 160px;
-}
-
 #header-ul {
     font-weight: bold;
     padding-top:10px;
