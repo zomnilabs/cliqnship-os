@@ -328,9 +328,7 @@
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline quicklinks">
-                        <li><a href="#">Privacy Policy</a>
-                        </li>
-                        <li><a href="#">Terms of Use</a>
+                        <li><a href="terms-and-conditions">Terms and Conditions</a>
                         </li>
                     </ul>
                 </div>

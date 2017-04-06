@@ -225,6 +225,21 @@ fieldset[disabled] .btn-xl.active {
     font-size: 1.5em;
   }
 }
+header#terms {
+  background-image: url('../images/terms-conditions.png') !important;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  text-align: center;
+  color: white;
+}
+.terms p, .terms li{
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
 header {
   background-image: url('../images/front-img.jpg');
   background-repeat: no-repeat;
@@ -297,6 +312,9 @@ section h3.section-subheading {
   section {
     padding: 150px 0;
   }
+}
+.terms span.text-primary {
+  font-size: 2em;
 }
 .service-heading {
   margin: 15px 0;
