@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shipments\CreateShipmentRequest;
 use App\Models\Shipment;
-use App\Models\ShipmentTrackingNumbers;
+use App\Models\ShipmentTrackingNumber;
 
 class ShipmentsController extends Controller {
     public function store(CreateShipmentRequest $request)
@@ -22,7 +22,7 @@ class ShipmentsController extends Controller {
             $data = Shipment::create($input);
 
             // Create the shipment tracking number
-            ShipmentTrackingNumbers::create([
+            ShipmentTrackingNumber::create([
                 'tracking_number'   => $this->createTrackingNumber(),
                 'shipment_id'       => $data->id
             ]);
@@ -39,7 +39,7 @@ class ShipmentsController extends Controller {
     private function createTrackingNumber()
     {
         $trackingNumber = uniqid();
-        $check = ShipmentTrackingNumbers::where('tracking_number', $trackingNumber)
+        $check = ShipmentTrackingNumber::where('tracking_number', $trackingNumber)
             ->first();
 
         if ($check) {
