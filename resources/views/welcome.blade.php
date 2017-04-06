@@ -271,13 +271,23 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Contact Us</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <form name="sentMessage" id="contactForm" novalidate>
                         <div class="row">
+                            <div class="col-md-12" style="color: #fff">
+                                <h3>CALL US </h3>
+                                <div class="col-md-6">
+                                    <h5>634.8181 (Landline)</h5>
+                                    <h5>0917.839.5561 (Globe)</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>SMS US : 0998.988.6912 (Smart)</h5>
+                                    <h5>Email: info@cliqnship.com</h5>
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name.">
@@ -290,7 +300,7 @@
                                 <div class="form-group">
                                     <input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required data-validation-required-message="Please enter your phone number.">
                                     <p class="help-block text-danger"></p>
-                                </div>
+                                    </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
