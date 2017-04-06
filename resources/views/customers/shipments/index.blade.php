@@ -149,7 +149,7 @@
                                 @foreach($shipments as $shipment)
                                     <tr id="shipment-{{$shipment->id}}">
                                         <td class="hide">{{ $shipment->id }}</td>
-                                        <td>{{ $shipment->shipment_tracking_no }}</td>
+                                        <td>{{ $shipment->trackingNumbers()->mainTrackingNumber()->tracking_number }}</td>
                                         <td>{{ $shipment->address->address_line_1 }} {{ $shipment->address->barangay }} {{ $shipment->address->city }}, {{ $shipment->address->province }}. {{ $shipment->address->zip_code }}</td>
                                         <td>{{ $shipment->number_of_items }}</td>
                                         <td>{{ $shipment->service_type }}</td>
