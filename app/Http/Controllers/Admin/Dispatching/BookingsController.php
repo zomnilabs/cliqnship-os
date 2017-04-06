@@ -72,4 +72,9 @@ class BookingsController extends Controller {
             ->with('rejectedBooking', $rejectedBooking)
             ->with('riders', $riders);
     }
+
+    public function attachToRider()
+    {
+
+    }
 }
