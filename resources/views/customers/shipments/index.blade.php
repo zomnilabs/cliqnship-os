@@ -73,7 +73,7 @@
                         <i class="fa fa-plus"></i>
                         New Shipment</button>
 
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#importShipmentsModal">
                         <i class="fa fa-upload"></i>
                         Import Shipments</button>
 
@@ -186,6 +186,7 @@
         </div>
     </div>
     <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
+    @include('customers.shipments.modals.import')
 @endsection
 
 @section('scripts')
