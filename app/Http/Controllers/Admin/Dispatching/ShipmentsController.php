@@ -9,7 +9,9 @@ use App\User;
 class ShipmentsController extends Controller {
     public function all()
     {
-        $shipments = Shipment::with('user','address','source')
+        $shipments = Shipment::with('user','address','source', 'trackingNumbers')
+            ->doesntHave('rider')
+            ->where('status', 'arrived-at-hq')
             ->get();
 
         $pendingShipment = Shipment::doesntHave('rider')
