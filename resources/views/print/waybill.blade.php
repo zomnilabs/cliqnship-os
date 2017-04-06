@@ -14,295 +14,681 @@
             color:black;
         }
         .container{
-            padding-top:10px;
-        }
-        .top-header{
-            height: 60px;
+            margin-top:20px;
         }
         .flex-container{
             display:flex;
             flex-direction: row;
-            justify-content: center;
-            align-content: center;
-            margin-top:15px;
+            justify-content: space-between;
+            width: 100%;
+            margin:0px;
         }
         .flex-content{
-            margin:auto;
+            width: 49%;
+        }
+        .flex-data{
             display:flex;
             flex-direction: row;
-            justify-content:space-between;
-            width:48%;
+            justify-content: space-around;
         }
-        .flex-item{
+        .bg-grey{
+            background-color:#e5e5e5;
+            font-size: 15px;
+            padding:5px;
+        }
+        .flex-table{
+            display:flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+        .flex-start{
+            justify-content:flex-start;
+        }
+        .center{
             text-align: center;
-            width:48%;
+        }
+        .top-header{
+            padding: 5px;
+        }
+        .data-center{
+            margin: 0 auto;
+            text-align: center;
+        }
+        .top-border{
+            border-top:0px solid;
+        }
+        .text-grey{
+            color:grey;
+        }
+        .text-left{
+            text-align: left;
         }
         img{
-            width:100%;
-            height: 60px;
-        }
-        .barcode{
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .number{
-            font-size: 15px;
-        }
-        .border{
-            border:1px solid black;
-        }
-        .divider{
-            border:1px solid black;
-        }
-        .bolder{
-            font-weight: bolder;
-        }
-        .italic{
-            font-style:italic;
-        }
-        table, tr, td{
-            vertical-align: baseline;
-        }
-        table, td{
-            font-size: 12px;
-            border: 2px solid black;
+            width: 150px;
+            height: 40px;
         }
         table{
             width: 100%;
         }
-        td{
-            padding:20px;
-            width: 50%;
+        tr{
+            width: 100%;
         }
-
+        td{
+            font-size:12px;
+            padding-left:5px;
+        }
+        table, tr, td{
+            vertical-align: baseline;
+        }
     </style>
-</head>
 <body>
     <div class="container">
         <div class="flex-container">
-            <div class="flex-content top-header">
-                <div class="flex-item">
+            <div class="flex-content">
+                <div class="flex-container top-header">
                     <img src="images/logo.png"/>
+                    <div class="center">
+                        <div>||||||||||||||||||||||||||||||||||||||||||||||||||||||</div>
+                        <div>W - 1 6 0 2 1 8 - 0 0 0 0 2</div>
+                    </div>
                 </div>
-                <div class="flex-item border">
-                    <div class="barcode">||||||||||||||||||||||||||||||||||||||</div>
-                    <div class="number">1020130322</div>
-                </div>
+                <table border>
+                    <tr>
+                        <td style="width:50%;" class="flex-content top-border">
+                            <div class="flex-data">
+                                <div>From:</div><div class="data-center">Acct #: 2016000000001</div>
+                            </div>
+                        </td>
+                        <td style="width:50%;" class="flex-content">
+                            <div class="flex-data">
+                                <div>To:</div>
+                                <div class="data-center">Test
+                                    <div>Test</div>
+                                    <div>Test</div></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <table border>
+                            <tr>
+                                <td style="width:40%;">Sevice:<div>test</div></td>
+                                <td style="width:60%;">Special Instructions:<div>test</div></td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:40%;">Shippers's Reference:<div>test</div></td>
+                                <td style="width:60%;">Description of Package:<div>test</div></td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;">Dimensions:<div>L x 10 W 11 x H 12</div></td>
+                                <td style="width:25%;">Weight (kg):</td>
+                                <td style="width:25%;">Chargable Weight:</td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;" class="flex-content top-border">
+                                    <div class="flex-data">
+                                        <div>Shipment Insurance:
+                                            <div>YES</div>
+                                        </div>
+                                        <div class="data-center">Declared Value:</div>
+                                    </div>
+                                </td>
+                                <td style="width:50%;" class="flex-content top-border">
+                                    <div class="flex-data">
+                                        <div>Mode of Payment:
+                                        </div>
+                                        <div class="data-center flex-data"><div>Bank: </div><u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                    </div>
+                                    <div class="flex-data">
+                                        <div><input type="checkbox"/></div>
+                                        <div style="padding-top:1px;">Cash&emsp;</div>
+                                        <div><input type="checkbox" checked/></div>
+                                        <div style="padding-top:1px;">Charge Check #:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;">
+                                    <div class="flex-data">
+                                        <div>Shipment Charge:</div>
+                                        <div class="data-center">Insurance Fee:</div>
+                                    </div>
+                                </td>
+                                <td style="width:25%;">Total:</td>
+                                <td style="width:25%;">O.R.#</td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;" class="flex-content data-center">
+                                    <div style="font-size:7px;margin-top:0px;">By using this waybill, I agree to the terms and conditionsstated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                                    <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                                    <div>Sender's Signature</div>
+                                </td>
+                                <td style="width:50%;">
+                                    <div>Received by CliqNShip</div>
+                                    <div>Name:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                    <div>Time & Date: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr class="data-center">
+                                <td>
+                                    <div>Received above shipment in good order and condition</div>
+                                    <div class="flex-data">
+                                        <div>
+                                            <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                                            <div>Name</div>
+                                        </div>
+                                        <div>
+                                            <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                                            <div>Relationship</div>
+                                        </div>
+                                        <div>
+                                            <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                                            <div>Signature</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr class="data-center">
+                                <td>This area is for CliqNship couriers only</td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr class="data-center">
+                                <td style="width: 40%;" class="text-left">Attemps:</td>
+                                <td style="width: 20%">1st Attempts:</td>
+                                <td style="width: 20%">2nd Attempts:</td>
+                                <td style="width: 20%">3rd Attempts:</td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr class="data-center">
+                                <td style="width: 40%;" class="text-left">Date <span class="text-grey">MM / DD / YY</span></td>
+                                <td style="width: 20%" class="text-grey">MM / DD / YY</td>
+                                <td style="width: 20%" class="text-grey">MM / DD / YY</td>
+                                <td style="width: 20%" class="text-grey">MM / DD / YY</td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width: 40%;" class="flex-content text-left">
+                                    <div class="flex-table flex-start">
+                                        <div>Time <span class="text-grey">HH:MM</span>&emsp;</div>
+                                        <div>AM<div>PM</div></div>
+                                    </div></td>
+                                <td style="width: 20%;" class="flex-content text-left">
+                                    <div class="flex-table">
+                                        <div class="text-grey">HH:MM</span>&emsp;</div>
+                                        <div>AM<div>PM</div></div>
+                                    </div>
+                                </td>
+                                <td style="width: 20%;" class="flex-content text-left">
+                                    <div class="flex-table">
+                                        <div class="flex-table">
+                                            <div class="text-grey">HH:MM</span>&emsp;</div>
+                                            <div>AM<div>PM</div></div>
+                                    </div></td>
+                                <td style="width: 20%;" class="flex-content text-left">
+                                    <div class="flex-table">
+                                        <div class="text-grey">HH:MM</span>&emsp;</div>
+                                        <div>AM<div>PM</div></div>
+                                    </div></td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width: 40%;" class="text-left">House / Office closed</td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width: 40%;">Payment not ready:
+                                    <div class="text-grey"> Cancel or Re-delivery Data</div></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width: 40%;">Unknown consignee as per:
+                                    <div class="text-grey"> Name and relationship</div></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width: 40%;">Refused to accept:
+                                    <div class="text-grey">Reason</div></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width: 40%;">Incomplete address:
+                                    <div class="text-grey"> Details</div></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width: 40%;">Other:
+                                    <div class="text-grey">Reason</div></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                                <td style="width: 20%"><input type="checkbox"/></td>
+                            </tr>
+                        </table>
+                    </tr>
+                </table>
             </div>
             <div class="flex-content">
-                <div class="flex-item">
+                <div class="flex-container top-header">
                     <img src="images/logo.png"/>
+                    <div class="center">
+                        <div>||||||||||||||||||||||||||||||||||||||||||||||||||||||</div>
+                        <div>W - 1 6 0 2 1 8 - 0 0 0 0 2</div>
+                    </div>
                 </div>
-                <div class="flex-item border">
-                    <div class="barcode">||||||||||||||||||||||||||||||||||||||</div>
-                    <div class="number">1020130322</div>
-                </div>
+                <table border>
+                    <tr>
+                        <td style="width:50%;" class="flex-content top-border">
+                            <div class="flex-data">
+                                <div>From:</div><div class="data-center">Acct #: 2016000000001</div>
+                            </div>
+                        </td>
+                        <td style="width:50%;" class="flex-content">
+                            <div class="flex-data">
+                                <div>To:</div>
+                                <div class="data-center">Test
+                                    <div>Test</div>
+                                    <div>Test</div></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <table border>
+                            <tr>
+                                <td style="width:40%;">Sevice:<div>test</div></td>
+                                <td style="width:60%;">Special Instructions:<div>test</div></td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:40%;">Shippers's Reference:<div>test</div></td>
+                                <td style="width:60%;">Description of Package:<div>test</div></td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;">Dimensions:<div>L x 10 W 11 x H 12</div></td>
+                                <td style="width:25%;">Weight (kg):</td>
+                                <td style="width:25%;">Chargable Weight:</td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;" class="flex-content top-border">
+                                    <div class="flex-data">
+                                        <div>Shipment Insurance:
+                                            <div>YES</div>
+                                        </div>
+                                        <div class="data-center">Declared Value:</div>
+                                    </div>
+                                </td>
+                                <td style="width:50%;" class="flex-content top-border">
+                                    <div class="flex-data">
+                                        <div>Mode of Payment:
+                                        </div>
+                                        <div class="data-center flex-data"><div>Bank: </div><u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                    </div>
+                                    <div class="flex-data">
+                                        <div><input type="checkbox"/></div>
+                                        <div style="padding-top:1px;">Cash&emsp;</div>
+                                        <div><input type="checkbox" checked/></div>
+                                        <div style="padding-top:1px;">Charge Check #:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;">
+                                    <div class="flex-data">
+                                        <div>Shipment Charge:</div>
+                                        <div class="data-center">Insurance Fee:</div>
+                                    </div>
+                                </td>
+                                <td style="width:25%;">Total:</td>
+                                <td style="width:25%;">O.R.#</td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;" class="flex-content data-center">
+                                    <div style="font-size:7px;margin-top:0px;">By using this waybill, I agree to the terms and conditionsstated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                                    <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                                    <div>Sender's Signature</div>
+                                </td>
+                                <td style="width:50%;">
+                                    <div>Received by CliqNShip</div>
+                                    <div>Name:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                    <div>Time & Date: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td class="data-center bg-grey">B I L L I N G C O P Y</td>
+                            </tr>
+                        </table>
+                    </tr>
+                </table>
             </div>
         </div>
-        <div class="flex-container">
-            <div class="flex-content">
-                <table>
-                    <tr>
-                        <td><div class="italic">From:</div><br/>
-                            <span class="bolder">[Sender Name Here]</span><br/>
-                            #8 Sample Street., Sample Village,<br/>
-                            Sample Barangay, Sample City.<br/>
-                            Sample Region, Philippines 1605<br/>
-                            +639166573127<br/>sender@email.com</td>
-                        <td><div class="italic">To [Domestic/International]:</div><br/>
-                            <span class="bolder">[Receiver Name Here]</span><br/>
-                            #8 Sample Street., Sample Village,<br/>
-                            Sample Barangay, Sample City.<br/>
-                            Sample Region, Philippines 1605<br/>
-                            +639166573127<br/>receiver@email.com</td>
-                    </tr>
-                    <tr>
-                        <td><div class="italic">Requested Date:</div><br/>
-                            <div>January 20, 2017</div>
-                            <div class="divider"></div>
-                            <div class="italic">Package Contents:</div><br/>
-                            <div class="bolder">[Qty] - [Package Description]</div><br/>
-                            5 x 10 x 2 3kg.<br/>
-                            <div class="divider"></div>
-                            <div>Additional Instructions:</div><br/>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aperiam debitis dolore eveniet iste obcaecati ratione sit</td>
-                        <td><div class="italic">Service:</div><br/>
-                            <div class="bolder">Document</div>
-                            <div class="divider"></div>
-                            <div class="italic">Insurance & Declared Value</div>:<br/>
-                            <div class="bolder">N/A</div><br/>
-                            <div class="divider"></div><br/>
-                            <div class="italic">Shipping Fee:</div>
-                            <div class="bolder">P900.00</div></td>
-                    <tr>
-                        <td>
-                            <div class="bolder">I AGREE TO THE ITEMS AND CONDITIONS PRINTED ON THE REVERSE SIDE OF THIS WAYBILL.</div>
-                            <div class="italic">Shipper's Signature / Data & Time:</div></td>
-                        <td>
-                            <div class="bolder">CLIQNSHIP DELIVERED SHIPMENT IN GOOD ORDER AND CONDITION</div>
-                            <div class="italic">Shipper's Signature / Relation / Data & Time:</div></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="flex-content">
-                <table>
-                    <tr>
-                        <td><div class="italic">From:</div><br/>
-                            <span class="bolder">[Sender Name Here]</span><br/>
-                            #8 Sample Street., Sample Village,<br/>
-                            Sample Barangay, Sample City.<br/>
-                            Sample Region, Philippines 1605<br/>
-                            +639166573127<br/>sender@email.com</td>
-                        <td><div class="italic">To [Domestic/International]:</div><br/>
-                            <span class="bolder">[Receiver Name Here]</span><br/>
-                            #8 Sample Street., Sample Village,<br/>
-                            Sample Barangay, Sample City.<br/>
-                            Sample Region, Philippines 1605<br/>
-                            +639166573127<br/>receiver@email.com</td>
-                    </tr>
-                    <tr>
-                        <td><div class="italic">Requested Date:</div><br/>
-                            <div>January 20, 2017</div>
-                            <div class="divider"></div>
-                            <div class="italic">Package Contents:</div><br/>
-                            <div class="bolder">[Qty] - [Package Description]</div><br/>
-                            5 x 10 x 2 3kg.<br/>
-                            <div class="divider"></div>
-                            <div>Additional Instructions:</div><br/>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aperiam debitis dolore eveniet iste obcaecati ratione sit</td>
-                        <td><div class="italic">Service:</div><br/>
-                            <div class="bolder">Document</div>
-                            <div class="divider"></div>
-                            <div class="italic">Insurance & Declared Value</div>:<br/>
-                            <div class="bolder">N/A</div><br/>
-                            <div class="divider"></div><br/>
-                            <div class="italic">Shipping Fee:</div>
-                            <div class="bolder">P900.00</div></td>
-                    <tr>
-                        <td>
-                            <div class="bolder">I AGREE TO THE ITEMS AND CONDITIONS PRINTED ON THE REVERSE SIDE OF THIS WAYBILL.</div>
-                            <div class="italic">Shipper's Signature / Data & Time:</div></td>
-                        <td>
-                            <div class="bolder">CLIQNSHIP DELIVERED SHIPMENT IN GOOD ORDER AND CONDITION</div>
-                            <div class="italic">Shipper's Signature / Relation / Data & Time:</div></td>
-                    </tr>
-                </table>
-            </div>
         </div>
     </div>
     <div class="container">
         <div class="flex-container">
-            <div class="flex-content top-header">
-                <div class="flex-item">
-                    <img src="images/logo.png"/>
-                </div>
-                <div class="flex-item border">
-                    <div class="barcode">||||||||||||||||||||||||||||||||||||||</div>
-                    <div class="number">1020130322</div>
-                </div>
-            </div>
             <div class="flex-content">
-                <div class="flex-item">
+                <div class="flex-container top-header">
                     <img src="images/logo.png"/>
+                    <div class="center">
+                        <div>||||||||||||||||||||||||||||||||||||||||||||||||||||||</div>
+                        <div>W - 1 6 0 2 1 8 - 0 0 0 0 2</div>
+                    </div>
                 </div>
-                <div class="flex-item border">
-                    <div class="barcode">||||||||||||||||||||||||||||||||||||||</div>
-                    <div class="number">1020130322</div>
-                </div>
-            </div>
-        </div>
-        <div class="flex-container">
-            <div class="flex-content">
-                <table>
+                <table border>
                     <tr>
-                        <td><div class="italic">From:</div><br/>
-                            <span class="bolder">[Sender Name Here]</span><br/>
-                            #8 Sample Street., Sample Village,<br/>
-                            Sample Barangay, Sample City.<br/>
-                            Sample Region, Philippines 1605<br/>
-                            +639166573127<br/>sender@email.com</td>
-                        <td><div class="italic">To [Domestic/International]:</div><br/>
-                            <span class="bolder">[Receiver Name Here]</span><br/>
-                            #8 Sample Street., Sample Village,<br/>
-                            Sample Barangay, Sample City.<br/>
-                            Sample Region, Philippines 1605<br/>
-                            +639166573127<br/>receiver@email.com</td>
+                        <td style="width:50%;" class="flex-content top-border">
+                            <div class="flex-data">
+                                <div>From:</div><div class="data-center">Acct #: 2016000000001</div>
+                            </div>
+                        </td>
+                        <td style="width:50%;" class="flex-content">
+                            <div class="flex-data">
+                                <div>To:</div>
+                                <div class="data-center">Test
+                                    <div>Test</div>
+                                    <div>Test</div></div>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
-                        <td><div class="italic">Requested Date:</div><br/>
-                            <div>January 20, 2017</div>
-                            <div class="divider"></div>
-                            <div class="italic">Package Contents:</div><br/>
-                            <div class="bolder">[Qty] - [Package Description]</div><br/>
-                            5 x 10 x 2 3kg.<br/>
-                            <div class="divider"></div>
-                            <div>Additional Instructions:</div><br/>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aperiam debitis dolore eveniet iste obcaecati ratione sit</td>
-                        <td><div class="italic">Service:</div><br/>
-                            <div class="bolder">Document</div>
-                            <div class="divider"></div>
-                            <div class="italic">Insurance & Declared Value</div>:<br/>
-                            <div class="bolder">N/A</div><br/>
-                            <div class="divider"></div><br/>
-                            <div class="italic">Shipping Fee:</div>
-                            <div class="bolder">P900.00</div></td>
+                        <table border>
+                            <tr>
+                                <td style="width:40%;">Sevice:<div>test</div></td>
+                                <td style="width:60%;">Special Instructions:<div>test</div></td>
+                            </tr>
+                        </table>
+                    </tr>
                     <tr>
-                        <td>
-                            <div class="bolder">I AGREE TO THE ITEMS AND CONDITIONS PRINTED ON THE REVERSE SIDE OF THIS WAYBILL.</div>
-                            <div class="italic">Shipper's Signature / Data & Time:</div></td>
-                        <td>
-                            <div class="bolder">CLIQNSHIP DELIVERED SHIPMENT IN GOOD ORDER AND CONDITION</div>
-                            <div class="italic">Shipper's Signature / Relation / Data & Time:</div></td>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:40%;">Shippers's Reference:<div>test</div></td>
+                                <td style="width:60%;">Description of Package:<div>test</div></td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;">Dimensions:<div>L x 10 W 11 x H 12</div></td>
+                                <td style="width:25%;">Weight (kg):</td>
+                                <td style="width:25%;">Chargable Weight:</td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;" class="flex-content top-border">
+                                    <div class="flex-data">
+                                        <div>Shipment Insurance:
+                                            <div>YES</div>
+                                        </div>
+                                        <div class="data-center">Declared Value:</div>
+                                    </div>
+                                </td>
+                                <td style="width:50%;" class="flex-content top-border">
+                                    <div class="flex-data">
+                                        <div>Mode of Payment:
+                                        </div>
+                                        <div class="data-center flex-data"><div>Bank: </div><u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                    </div>
+                                    <div class="flex-data">
+                                        <div><input type="checkbox"/></div>
+                                        <div style="padding-top:1px;">Cash&emsp;</div>
+                                        <div><input type="checkbox" checked/></div>
+                                        <div style="padding-top:1px;">Charge Check #:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;">
+                                    <div class="flex-data">
+                                        <div>Shipment Charge:</div>
+                                        <div class="data-center">Insurance Fee:</div>
+                                    </div>
+                                </td>
+                                <td style="width:25%;">Total:</td>
+                                <td style="width:25%;">O.R.#</td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;" class="flex-content data-center">
+                                    <div style="font-size:7px;margin-top:0px;">By using this waybill, I agree to the terms and conditionsstated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                                    <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                                    <div>Sender's Signature</div>
+                                </td>
+                                <td style="width:50%;">
+                                    <div>Received by CliqNShip</div>
+                                    <div>Name:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                    <div>Time & Date: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td class="data-center bg-grey">S H I P P E R / S E L L E R C O P Y</td>
+                            </tr>
+                        </table>
                     </tr>
                 </table>
             </div>
             <div class="flex-content">
-                <table>
+                <div class="flex-container top-header">
+                    <img src="images/logo.png"/>
+                    <div class="center">
+                        <div>||||||||||||||||||||||||||||||||||||||||||||||||||||||</div>
+                        <div>W - 1 6 0 2 1 8 - 0 0 0 0 2</div>
+                    </div>
+                </div>
+                <table border>
                     <tr>
-                        <td><div class="italic">From:</div><br/>
-                            <span class="bolder">[Sender Name Here]</span><br/>
-                            #8 Sample Street., Sample Village,<br/>
-                            Sample Barangay, Sample City.<br/>
-                            Sample Region, Philippines 1605<br/>
-                            +639166573127<br/>sender@email.com</td>
-                        <td><div class="italic">To [Domestic/International]:</div><br/>
-                            <span class="bolder">[Receiver Name Here]</span><br/>
-                            #8 Sample Street., Sample Village,<br/>
-                            Sample Barangay, Sample City.<br/>
-                            Sample Region, Philippines 1605<br/>
-                            +639166573127<br/>receiver@email.com</td>
+                        <td style="width:50%;" class="flex-content top-border">
+                            <div class="flex-data">
+                                <div>From:</div><div class="data-center">Acct #: 2016000000001</div>
+                            </div>
+                        </td>
+                        <td style="width:50%;" class="flex-content">
+                            <div class="flex-data">
+                                <div>To:</div>
+                                <div class="data-center">Test
+                                    <div>Test</div>
+                                    <div>Test</div></div>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
-                        <td><div class="italic">Requested Date:</div><br/>
-                            <div>January 20, 2017</div>
-                            <div class="divider"></div>
-                            <div class="italic">Package Contents:</div><br/>
-                            <div class="bolder">[Qty] - [Package Description]</div><br/>
-                            5 x 10 x 2 3kg.<br/>
-                            <div class="divider"></div>
-                            <div>Additional Instructions:</div><br/>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aperiam debitis dolore eveniet iste obcaecati ratione sit</td>
-                        <td><div class="italic">Service:</div><br/>
-                            <div class="bolder">Document</div>
-                            <div class="divider"></div>
-                            <div class="italic">Insurance & Declared Value</div>:<br/>
-                            <div class="bolder">N/A</div><br/>
-                            <div class="divider"></div><br/>
-                            <div class="italic">Shipping Fee:</div>
-                            <div class="bolder">P900.00</div></td>
+                        <table border>
+                            <tr>
+                                <td style="width:40%;">Sevice:<div>test</div></td>
+                                <td style="width:60%;">Special Instructions:<div>test</div></td>
+                            </tr>
+                        </table>
+                    </tr>
                     <tr>
-                        <td>
-                            <div class="bolder">I AGREE TO THE ITEMS AND CONDITIONS PRINTED ON THE REVERSE SIDE OF THIS WAYBILL.</div>
-                            <div class="italic">Shipper's Signature / Data & Time:</div></td>
-                        <td>
-                            <div class="bolder">CLIQNSHIP DELIVERED SHIPMENT IN GOOD ORDER AND CONDITION</div>
-                            <div class="italic">Shipper's Signature / Relation / Data & Time:</div></td>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:40%;">Shippers's Reference:<div>test</div></td>
+                                <td style="width:60%;">Description of Package:<div>test</div></td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;">Dimensions:<div>L x 10 W 11 x H 12</div></td>
+                                <td style="width:25%;">Weight (kg):</td>
+                                <td style="width:25%;">Chargable Weight:</td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;" class="flex-content top-border">
+                                    <div class="flex-data">
+                                        <div>Shipment Insurance:
+                                            <div>YES</div>
+                                        </div>
+                                        <div class="data-center">Declared Value:</div>
+                                    </div>
+                                </td>
+                                <td style="width:50%;" class="flex-content top-border">
+                                    <div class="flex-data">
+                                        <div>Mode of Payment:
+                                        </div>
+                                        <div class="data-center flex-data"><div>Bank: </div><u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                    </div>
+                                    <div class="flex-data">
+                                        <div><input type="checkbox"/></div>
+                                        <div style="padding-top:1px;">Cash&emsp;</div>
+                                        <div><input type="checkbox" checked/></div>
+                                        <div style="padding-top:1px;">Charge Check #:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;">
+                                    <div class="flex-data">
+                                        <div>Shipment Charge:</div>
+                                        <div class="data-center">Insurance Fee:</div>
+                                    </div>
+                                </td>
+                                <td style="width:25%;">Total:</td>
+                                <td style="width:25%;">O.R.#</td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td style="width:50%;" class="flex-content data-center">
+                                    <div style="font-size:7px;margin-top:0px;">By using this waybill, I agree to the terms and conditionsstated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                                    <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                                    <div>Sender's Signature</div>
+                                </td>
+                                <td style="width:50%;">
+                                    <div>Received by CliqNShip</div>
+                                    <div>Name:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                    <div>Time & Date: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table class="top-border" border>
+                            <tr>
+                                <td class="data-center bg-grey">C O N S I G N E E / R E C E I V E R C O P Y</td>
+                            </tr>
+                        </table>
                     </tr>
                 </table>
             </div>
-        </div>
     </div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
+

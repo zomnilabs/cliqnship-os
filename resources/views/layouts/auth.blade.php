@@ -11,9 +11,17 @@
     <title>{{ config('app.name', 'CliqNShip') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/landing.css') }}">
+    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
+
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Theme CSS -->
+    <link href="{{ asset('css/agency.css') }}" rel="stylesheet">
     @yield('stylesheets')
 
     <!-- Scripts -->
@@ -23,37 +31,25 @@
         ]) !!};
     </script>
 </head>
-<body>
-<div id="{{ !Auth::guest() ? 'app' : 'guest' }}">
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
+<body id="page-top" class="index">
 
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="images/logo.png"/>
-                </a>
+                <a class="navbar-brand page-scroll" href="/">CliqnShip</a>
             </div>
 
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    @if (! Auth::guest())
-
-                    @endif
-                </ul>
-
-                <!-- Right Side Of Navbar -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
                     @if (Auth::guest())
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
@@ -83,20 +79,28 @@
                     @endif
                 </ul>
             </div>
+            <!-- /.navbar-collapse -->
         </div>
+        <!-- /.container-fluid -->
     </nav>
 
-    <div class="content" style="margin-top: 5%">
-        @yield('content')
-    </div>
+    @yield('content')
 
-<!-- Fix for vue -->
-    @if(Auth::guest())
-        <div id="app"></div>
-    @endif
-</div>
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <!-- jQuery -->
+    <script src="{{ asset('js/jquery-2.2.3.min.js') }}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{{ asset('js/easing.min.js') }}"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="{{ asset('js/jqBootstrapValidation.js') }}"></script>
+    <script src="{{ asset('js/contact_me.js') }}"></script>
+    <!-- Theme JavaScript -->
+    <script src="{{ asset('js/agency.min.js') }}"></script>
     @yield('scripts')
 </body>
 </html>

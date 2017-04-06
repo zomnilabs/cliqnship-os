@@ -1,13 +1,20 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="container">
+<section id="auth" style="min-height: 100vh">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Register</h2>
+            </div>
+        </div>
+        <div class="row">
+
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-
                 <div class="panel-body">
+
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -72,5 +79,6 @@
             </div>
         </div>
     </div>
-</div>
+
+</section>
 @endsection

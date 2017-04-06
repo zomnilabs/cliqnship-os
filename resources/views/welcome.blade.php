@@ -2,292 +2,510 @@
 
 @section('content')
 
-    <!--- Main front -->
-    <div id="main_front">
-        <div class="overlay"></div>
-        <div class="front_txt">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-6 col-sm-6 col-xs-12">
-                    <p class="title"><strong>IS YOUR SHIPMENT READY?</strong></p>
-                    <p class="main-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse</p>
-                    {{--<div class="small-title">Wanna have something shipped for your business</div>--}}
-                    {{--<div class="front_signup">--}}
-                        {{--<span>SIGN-UP HERE! AND HAVE IT SHIPPED</span>--}}
-                    {{--</div>--}}
-                    {{--<div class="small-title"><span>Packed and shipped already? Find out  where it is?</span></div>--}}
-                    {{--<div class="front_signup">--}}
-                        {{--<span>LET'S LOCATE IT!</span>--}}
-                    {{--</div>--}}
-                    <a href="#" class="app-link">
-                        <img src="images/play_store.png" alt="Get it on play store">
-                    </a>
-                    <a href="#" class="app-link">
-                        <img src="images/app_store.png" alt="Get it on app store">
-                    </a>
-                </div>
+     <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-heading">IS YOUR SHIPMENT READY?</div>
+                <div class="intro-lead-in">GET MORE FROM YOUR FAVORITE STORES!</div>
+                <a href="#" class="page-scroll">
+                    <img src="images/play_store.png" alt="Get it on play store">
+                </a>
+                <a href="#" class="page-scroll">
+                    <img src="images/app_store.png" alt="Get it on app store">
+                </a>
             </div>
         </div>
-    </div> <!--- End of Main front -->
+    </header>
 
-    <!---Bussiness Signup -->
-    <div id="bussiness-signup" style="min-height: 75vh;">
+    <!-- Services Section -->
+    <section id="howto">
         <div class="container">
-            <div class="bs-content">
-                <div class="bs-title">
-                    <p>SIGN UP YOUR BUSSINESS</br>
-                        AND SHIP OUT THOSE ORDERS</br>
-                        IN 3 EASY STEPS</br>
-                    </p>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">How To</h2>
+                    <h3 class="section-subheading text-muted">Sign up your bussiness and ship out these orders in 3 easy steps</h3>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <div class="bs-thumbnail" id="bs-collect-deposit">
-                            <img class="img-responsive slide-left" src="images/online-tracking.png" style="height: 130px; width: auto;"/>
-                            <div class="caption">
-                                <h3>SIGN UP</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat.</p>
-                            </div>
-                        </div>
-                        <a href="#" class="bs-btn-signup">SIGN UP HERE</a>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <div class="bs-thumbnail" id="bs-free-logo">
-                            <img class="img-responsive " id="bs-img-middle" src="images/free.png" style="height: 130px; width: auto;"/>
-                            <div class="caption">
-                                <h3>PACK AND SCHEDULE</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <div class="bs-thumbnail" id="bs-track-logo">
-                            <img class="img-responsive  slide-right" src="images/pick-pack.png" style="height: 130px; width: auto;"/>
-                            <div class="caption">
-                                <h3>WE PICK IT UP!</br>
-                                    AND IT SHIPPED OUT
-                                </h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                        </div>
-                        <a href="#" class="bs-btn-signup">TRACK IT NOW</a>
-                    </div>
-                </div><!--end of row -->
             </div>
-        </div><!-- end of container -->
-    </div><!--- End of Bussiness Singup -->
-    <!--- Affilitates Program -->
-    <div id="af_program">
-        <div class="container">
-            <div class="ap-main-content">
-                <h1 class="ap-title">Why we love to help?</h1>
-                <div class="row ap-content">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div class="af-wrap" id="af-left-content">
-                            <img class="img-responsive img-worker af-wrap" src="images/worker.png"/>
-                            <img class="img-panda" src="images/panda-logo.png"/>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div class="af-wrap" id="af-right-content">
-                            <p>"Dealing with freight used to be a </br> headache and ate up a lot of my</br> time.
-                                </br>
-                                Things are completey different</br> since I started using you guys.</br> With <b><i>cliqNship</i></b> handling all our</br> shipping for us, I have more time</br> to focus on growing my business.</br> I can't thank you enough!"
-                            </p>
-                            <img class="img-charles" src="images/charles-ley.png"/>
-                            <div id="ap-name">CHARLES LEY,</div>
-                            <div id="ap-company">Manuka Health</div>
-                            <span class="btn-ap-title">LEARN ABOUT OUR AFFILITATES PROGRAM</span>
-                        </div>
-                    </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Sign Up</h4>
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                 </div>
-                <h1 class="ap-title">And it is not just Manuka Health</h1>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-dropbox fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Pack and Schedule</h4>
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-rocket fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">We pick it up and ship out!</h4>
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                </div>
             </div>
         </div>
-    </div><!-- End of Affilitates Program -->
-    <!--- Grow -->
-    <div id="grow">
-        <div class="bg-top"></div>
+    </section>
+
+    <!-- Portfolio Grid Section -->
+    <section id="otherServices" class="bg-light-gray">
         <div class="container">
-            <div class="grow-wrapper">
-                <div class="img-company-logo">
-                    <img src="images/company-logo.png"/>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Other Services</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
-                <div class="grow-title" id="grow-titleup">
-                    Here's how are we going to help you grow
-                </div>
-                <div class="grow-main-content">
-                    <div class="row">
-                        <div class="col-md-8 col-sm-6 col-xs-12">
-                            <div class="grow-content">
-                                <p class="title-content"><b>BIG</b> <span class="or">or</span> small</br></br></p>
-                                We aim to see them grow
-                                and <b><i>succeed with us</i></b>
-                                reaching one's maximum
-                                potential together
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-6">
-                            <img class="img-responsive img-tree" src="images/tree.png">
-                        </div>
+                        <img src="images/portfolio/roundicons.png" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Security and Insurance</h4>
+                        <p class="text-muted">Security and Insurance</p>
                     </div>
                 </div>
-                <div class="grow-title" id="grow-titledown">
-                    And supply you with...
-                </div>
-                <img class="img-grow slideanim" src="images/sheep.png">
-            </div><!--- End of grow wrapper -->
-        </div>
-    </div><!-- End of Grow -->
-    <!--- Supply -->
-    <div id="supply">
-        <div class="content">
-            <div class="supply-wrapper">
-                <div class="supply-upper">
-                    <img class="img-robo slideanim" src="images/robo.png"/>
-                    <div class="row">
-                        <div class="col-md-4 col-sm-6 col-xs-6">
-                            <img src="images/security.jpg"/>
-                            <div class="caption">
-                                <h4>SECURITY AND INSURANCE</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.</p> <br />
-                                <a href="#" class="btn-security-rates">VIEW RATES</a>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-6 col-xs-6">
-                            <img src="images/travel.jpg"/>
-                            <div class="caption">
-                                <h4>INTERNATIONAL SHIPPING</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.</p> <br />
-                                <a href="#" class="btn-security-rates">VIEW RATES</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12 col-xs-12">
-                            <img src="images/time.jpg"/>
-                            <div class="caption">
-                                <h4>ROUND THE CLOCK ONLINE TRACKING</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.</p> <br />
-                                <a href="#" class="btn-security-rates">VIEW RATES</a>
-                            </div>
-                        </div>
+                        <img src="images/portfolio/startup-framework.png" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>International Shipping</h4>
+                        <p class="text-muted">International Shipping</p>
                     </div>
                 </div>
-                <div class="supply-lower">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="caption">
-                                <img src="images/pick-pack.jpg"/>
-                                <h4>FREE PICK AND PACK</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna.</p>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
                             </div>
-                            <a href="#" class="btn-security-rates">VIEW RATES</a>
                         </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="caption">
-                                <img src="images/storage.jpg"/>
-                                <h4>STORAGE SPACE AND WAREHOUSE</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore.</p>
-                            </div>
-                            <a href="#" class="btn-security-rates">VIEW RATES</a>
-                        </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="caption">
-                                <img src="images/truck.jpg"/>
-                                <h4>BUSINESS SERVICE</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                            <a href="#" class="btn-security-rates">VIEW RATES</a>
-                        </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="caption">
-                                <img id="img-collect-deposit" src="images/collect.png"/>
-                                <h4>COLLECT AND DEPOSITE</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                            <a href="#" class="btn-security-rates">VIEW RATES</a>
-                        </div>
+                        <img src="images/portfolio/treehouse.png" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Round the clock online tracking</h4>
+                        <p class="text-muted">Online Tracking</p>
                     </div>
                 </div>
-            </div><!-- end of supply wrapper -->
-        </div><!-- end of supply container -->
-    </div><!-- End of Supply -->
-    <!-- Goal -->
-    <div id="goal">
-        <div class="container">
-            <div class="goal-wrapper">
-                <div class="row">
-                    <div class="col-sm-6 col-sm-push-6 goal-right-content">
-                        <p>"Our goal is to enrich your passion<br/>by providing various help to you<br/>
-                            and your customers<br/> with efficient and speedy<br/> pickup and delivery"
-                        </p><br/>
-                        <span class="goal-name">-Cliq N Ship</span>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="images/portfolio/golden.png" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Storage space and Warehouse</h4>
+                        <p class="text-muted">Big warehouse</p>
                     </div>
-                    <div class="col-sm-6 col-sm-pull-6 goal-left-content">
-                        <img class="img-responsive" src="images/delivery-boy.png">
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="images/portfolio/escape.png" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Business Service</h4>
+                        <p class="text-muted">Business Service</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="images/portfolio/dreams.png" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Collect and Deposit</h4>
+                        <p class="text-muted">COD</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div><!---- End of Goal-->
-    <!--- Shipment Info -->
-    <div id="shipment-info">
-        <div class="bg-top-black"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
         <div class="container">
-            <div class="shipment-wrapper">
-                <img src="images/bg-shipment.png">
-                <div class="row" id="shipment-content">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <p>In <b>1-CLIQ</b> you can instantly compare prices between trusted
-                            local and international carriers, and choose the best price and
-                            options wherever your shipment is going. Lower your shipment
-                            costs tremedously through our negotiated high-volume discounts.
-                        </p>
-                        <p>
-                            You can also book, mange and track all your shipments.
-                            Plus, you can submit paperwork in one consolidated place using
-                            your cliqNship account... and even earn points as you continue
-                            shipping with us!
-                        </p>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12"></div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Why we love to help?</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="images/charles-ley.png" alt="" style="height: 156px;width: 170px;">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>CHARLES LEY</h4>
+                                    <h4 class="subheading">Manuka Healt</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Dealing with freight used to be a headache and ate up a lot of my time. 
+                                        Things are completey different since I started using you guys. With <b><i>cliqNship</i></b> 
+                                        handling all our shipping for us, I have more time to focus on growing my business. I can't thank you enough!"</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="images/about/1.jpg" alt="" style="height: 156px;width: 170px;">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>John Doe</h4>
+                                    <h4 class="subheading">John Doe Enterprise</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="images/about/3.jpg" alt="" style="height: 156px;width: 170px;">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>Allen Walker</h4>
+                                    <h4 class="subheading">Cross Academy</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="images/girl.png" alt="" style="height: 156px;width: 170px;">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>Lenalee Lee</h4>
+                                    <h4 class="subheading">Test Company</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <h4>Be Part
+                                    <br>Of Our
+                                    <br>Story!</h4>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </div><!-- End of Shipment Info -->
+    </section>
+
+    <!-- Clients Aside -->
+    <aside class="clients">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">
+                        <img src="images/logos/envato.jpg" class="img-responsive img-centered" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">
+                        <img src="images/logos/designmodo.jpg" class="img-responsive img-centered" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">
+                        <img src="images/logos/themeforest.jpg" class="img-responsive img-centered" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">
+                        <img src="images/logos/creative-market.jpg" class="img-responsive img-centered" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Contact Us</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form name="sentMessage" id="contactForm" novalidate>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 text-center">
+                                <div id="success"></div>
+                                <button type="submit" class="btn btn-xl">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
-        <div class="footer-content">
-            <div class="footer-logo"><img src="images/logo-footer.png"></div>
-            <div class="footer-txt">SIGN-IN/SIGN UP</br><div class="divider"></div>
-                RATES</br><div class="divider"></div>
-                AFFILIATES PROGRAM </br><div class="divider"></div>
-                TRACK ORDERS</br><div class="divider"></div>
-                CONTACT US NEWS AND UPDATES</br><div class="divider"></div>
-            </div>
-            <div>
-                <div class="img-footer"><img src="images/gmail.png"/></div>
-                <div class="img-footer"><img src="images/facebook-logo.png"/></div>
-                <div class="img-footer"><img src="images/instagram-logo.png"/></div>
-            </div>
-            <div class="pull-right rights">
-                <div>Clinship All rights reserved</div>
-                <div>Powered by:Cloudlogiclimited</div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="copyright">Clinship All rights reserved</span>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline quicklinks">
+                        <li><a href="#">Privacy Policy</a>
+                        </li>
+                        <li><a href="#">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </footer>
+
+    <!-- Portfolio Modals -->
+    <!-- Use the modals below to showcase details about your portfolio projects! -->
+
+    <!-- Portfolio Modal 1 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here -->
+                                <h2>Security and Insurance</h2>
+                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                                <img class="img-responsive img-centered" src="images/portfolio/roundicons-free.png" alt="">
+                                <p>Use this area to describe your service. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 2 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <h2>International Shipping</h2>
+                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                                <img class="img-responsive img-centered" src="images/portfolio/startup-framework-preview.png" alt="">
+                                <p>Use this area to describe your service. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 3 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here -->
+                                <h2>Round the clock online tracking</h2>
+                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                                <img class="img-responsive img-centered" src="images/portfolio/treehouse-preview.png" alt="">
+                                <p>Use this area to describe your service. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 4 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here -->
+                                <h2>Storage space and Warehouse</h2>
+                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                                <img class="img-responsive img-centered" src="images/portfolio/golden-preview.png" alt="">
+                                <p>Use this area to describe your service. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere netmo!</p>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 5 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here -->
+                                <h2>Business Service</h2>
+                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                                <img class="img-responsive img-centered" src="images/portfolio/escape-preview.png" alt="">
+                                <p>Use this area to describe your service. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 6 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here -->
+                                <h2>Collect and Deposit</h2>
+                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                                <img class="img-responsive img-centered" src="images/portfolio/dreams-preview.png" alt="">
+                                <p>Use this area to describe your service. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
