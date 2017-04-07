@@ -56,6 +56,22 @@
                 tokenSeparators: [',', ' '],
                 placeholder: "Input waybill number/s",
                 allowClear: true
+            }).on('change', function(value) {
+                let waybills = $(this).val();
+                let newValue = waybills[waybills.length - 1];
+                console.log('new value', newValue);
+
+                fetch(`/api/v1/shipments/check/${newValue}`).then((res) => {
+                    if (! res.ok) {
+                        let html = `<p><span class="text-danger">${newValue}</span> is not a valid waybill</p>`;
+                        $('.error-container').append(html);
+
+                        return;
+                    }
+                }).catch((error) => {
+                    let html = `<p><span class="text-danger">${newValue}</span> is not a valid waybill</p>`;
+                    $('.error-container').append(html);
+                });
             });
         }())
     </script>
@@ -162,7 +178,7 @@
                 <div class="modal-header text-center">
                     <h4 class="modal-title" id="modalTitle">Shipment Remit</h4>
                 </div>
-                <form id="viewForm">
+                <form id="viewForm" method="post">
                     <div class="modal-body">
                         {{csrf_field()}}
                         <div class="row">
@@ -170,7 +186,7 @@
                                 <div class="form-group{{ $errors->has('waybills') ? ' has-error' : '' }}">
                                     <label for="waybills">Waybill Number/s</label>
 
-                                    <select class="form-control dataField waybill-input" name="waybilld" id="waybills" multiple="multiple"></select>
+                                    <select class="form-control dataField waybill-input" name="waybills[]" id="waybills" multiple="multiple"></select>
 
                                     @if ($errors->has('waybills'))
                                         <span class="help-block">
@@ -184,7 +200,7 @@
 
                                     <select class="form-control dataField" name="status" id="status">
                                         <option value="received-at-warehouse">Received At Warehouse</option>
-                                        <option value="completed">Completed</option>
+                                        <option value="successfully-delivered">Successfully Delivered</option>
                                         <option value="returned">Returned</option>
                                     </select>
 
@@ -196,11 +212,17 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-12 error-container">
+
+                            </div>
+                        </div>
                     </div>
 
                     <div class="modal-footer">
                         <button class="btn btn-default" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        <button type="button" class="btn btn-success" id="formSubmit" onclick="storeData.call(this)"><i class="fa fa-floppy-o"></i> Receive Shipment Remit</button>
+                        <button type="submit" class="btn btn-success" id="formSubmit"><i class="fa fa-floppy-o"></i> Receive Shipment Remit</button>
                     </div>
                 </form>
             </div>

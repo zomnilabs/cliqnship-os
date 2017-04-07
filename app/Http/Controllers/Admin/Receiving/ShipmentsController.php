@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin\Receiving;
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
 use App\Models\ShipmentAssignment;
+use App\Models\ShipmentTrackingNumber;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class ShipmentsController extends Controller {
     public function all()
@@ -23,6 +25,7 @@ class ShipmentsController extends Controller {
 
             $completedShipmentToday = ShipmentAssignment::where('status', 'completed')
                 ->whereDate('created_at', '=', $today)
+                ->where('user_id', $rider->id)
                 ->count();
 
             $rider['pending'] = $pendingAssignmentCount;
@@ -43,5 +46,30 @@ class ShipmentsController extends Controller {
 
         return view('admin.receiving.shipment.index')
             ->with('assignments', $assignments);
+    }
+
+    public function doRemit(Request $request, $riderId)
+    {
+        foreach ($request->get('waybills') as $waybill) {
+            // Check waybill
+            $waybill = ShipmentTrackingNumber::where('tracking_number', $waybill)
+                ->where('provider', 'cliqnship')
+                ->first();
+
+            // waybill not existing
+            if (! $waybill) {
+                continue;
+            }
+
+            // Update Assignment
+            ShipmentAssignment::where('shipment_id', $waybill->shipment_id)
+                ->where('user_id', $riderId)
+                ->update(['status' => 'completed']);
+
+            Shipment::where('id', $waybill->shipment_id)
+                ->update(['status' => $request->get('status')]);
+        }
+
+        return redirect()->back();
     }
 }
