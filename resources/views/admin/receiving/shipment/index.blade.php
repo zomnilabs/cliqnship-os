@@ -199,7 +199,7 @@
                                     <label for="status">Waybill Number/s</label>
 
                                     <select class="form-control dataField" name="status" id="status">
-                                        <option value="received-at-warehouse">Received At Warehouse</option>
+                                        <option value="arrived-at-hq">Received At Warehouse</option>
                                         <option value="successfully-delivered">Successfully Delivered</option>
                                         <option value="returned">Returned</option>
                                     </select>

@@ -16,8 +16,9 @@ class ShipmentTrackingNumber extends Model
         return $this->belongsTo(Shipment::class);
     }
 
-    public function scopeMainTrackingNumber()
+    public function scopeMainTrackingNumber($query)
     {
-        return $this->where('provider', 'cliqnship')->first();
+        return $query->where('provider', 'cliqnship')
+            ->first();
     }
 }

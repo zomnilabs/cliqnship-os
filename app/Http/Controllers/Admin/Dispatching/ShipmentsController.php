@@ -28,6 +28,8 @@ class ShipmentsController extends Controller {
             ->where('user_group_id', 4)
             ->get();
 
+//        print_r($shipments);exit;
+
         return view('admin.dispatching.shipments.all')
             ->with('pendingShipment', $pendingShipment)
             ->with('assignedShipment', $assignedShipment)
