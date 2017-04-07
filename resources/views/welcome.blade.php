@@ -1,22 +1,69 @@
 @extends('layouts.front')
 
+@section('scripts')
+    <script type="text/javascript">
+        $('.carousel').carousel({
+          interval: 4000
+        })
+    </script>
+@endsection
+
 @section('content')
 
-     <!-- Header -->
-    <header>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <header class="header1">
         <div class="container">
             <div class="intro-text">
-                <div class="intro-heading">IS YOUR SHIPMENT READY?</div>
-                <div class="intro-lead-in">GET MORE FROM YOUR FAVORITE STORES!</div>
-                <a href="#" class="page-scroll">
-                    <img src="images/play_store.png" alt="Get it on play store">
+                <div class="intro-heading">Is your shipment ready?</div>
+                <div class="intro-lead-in">Snap. Enter pickup details. Schedule pickup. </div>
+                <h4>Download the CliqnShip Mobile App Now</h4>
+                <a href="#" class="btn btn-default btn-download">
+                    <span class="text1">Get it for</span>
+                    <span class="text2">Android</span>
+                    <i class="fa fa-android fa-3x icon"></i>
                 </a>
-                <a href="#" class="page-scroll">
-                    <img src="images/app_store.png" alt="Get it on app store">
+                <a href="#" class="btn btn-default btn-download">
+                    <span class="text1">Get it for </span>
+                    <span class="text2">iOs</span>
+                    <i class="fa fa-apple fa-3x icon"></i>
                 </a>
             </div>
         </div>
     </header>
+    </div>
+    <div class="item">
+        <header class="header2">
+            <div class="container">
+                <div class="intro-text">
+                    <div class="intro-heading text-primary" style="font-size: 60px">Need your payments collected?</div>
+                <div class="intro-lead-in" style="font-size: 35px"> We can take care of it for you. Increase your sales by offering COD!</div>
+                    <h4>Download the CliqnShip Mobile App Now</h4>
+                    <a href="#" class="btn btn-default btn-download">
+                        <span class="text1">Get it for</span>
+                        <span class="text2">Android</span>
+                        <i class="fa fa-android fa-3x icon"></i>
+                    </a>
+                    <a href="#" class="btn btn-default btn-download">
+                        <span class="text1">Get it for </span>
+                        <span class="text2">iOs</span>
+                        <i class="fa fa-apple fa-3x icon"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+    </div>
+  </div>
+</div>
+<!-- Header -->
 
     <!-- Services Section -->
     <section id="howto">

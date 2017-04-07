@@ -13,6 +13,46 @@ body {
 .text-primary {
   color: #b1d047;
 }
+.btn-download {
+  color: white;
+  background-color: rgba(177, 208, 71, 0.62);
+  border-color: #b1d047;
+  font-weight: 700;
+  padding: 20px;
+  width: 250px;
+  height: 65px;
+  position: relative;
+  text-transform: uppercase;  
+  border-radius: 50px;
+}
+.btn-download-r:hover {
+  color: white;
+  background-color: rgba(177, 208, 71, 0.62);
+  border-color: #b1d047;
+  font-weight: 700;
+  padding: 20px;
+  width: 250px;
+  height: 65px;
+  position: relative;
+  text-transform: uppercase;  
+  border-radius: 50px;
+}
+.btn-download span.text1 {
+  position: absolute;
+  left: 25px;
+  top: 10px;
+}
+.btn-download span.text2 {
+  position: absolute;
+  left: 30px;
+  top: 20px;
+  font-size: 25px;
+}
+.btn-download .icon {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
 p {
   font-size: 14px;
   line-height: 1.75;
@@ -240,7 +280,19 @@ header#terms {
 .terms p, .terms li{
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
-header {
+header.header1 {
+  background-image: url('../images/carousel1.png');
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  text-align: center;
+  color: white;
+}
+header.header2 {
   background-image: url('../images/front-img.jpg');
   background-repeat: no-repeat;
   background-attachment: scroll;
