@@ -130,7 +130,7 @@
                             <tr>
                                 <td style="width:50%;">Dimensions:<div>L x 10 W 11 x H 12</div></td>
                                 <td style="width:25%;">Weight (kg):</td>
-                                <td style="width:25%;">Chargable Weight:</td>
+                                <td style="width:25%;">Chargeable Weight:</td>
                             </tr>
                         </table>
                     </tr>
@@ -381,7 +381,7 @@
                             <tr>
                                 <td style="width:50%;">Dimensions:<div>L x 10 W 11 x H 12</div></td>
                                 <td style="width:25%;">Weight (kg):</td>
-                                <td style="width:25%;">Chargable Weight:</td>
+                                <td style="width:25%;">Chargeable Weight:</td>
                             </tr>
                         </table>
                     </tr>
@@ -501,7 +501,7 @@
                             <tr>
                                 <td style="width:50%;">Dimensions:<div>L x 10 W 11 x H 12</div></td>
                                 <td style="width:25%;">Weight (kg):</td>
-                                <td style="width:25%;">Chargable Weight:</td>
+                                <td style="width:25%;">Chargeable Weight:</td>
                             </tr>
                         </table>
                     </tr>
@@ -616,7 +616,7 @@
                             <tr>
                                 <td style="width:50%;">Dimensions:<div>L x 10 W 11 x H 12</div></td>
                                 <td style="width:25%;">Weight (kg):</td>
-                                <td style="width:25%;">Chargable Weight:</td>
+                                <td style="width:25%;">Chargeable Weight:</td>
                             </tr>
                         </table>
                     </tr>
