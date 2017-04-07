@@ -48,4 +48,18 @@ class ShipmentsController extends Controller {
 
         return $trackingNumber;
     }
+
+    // Check waybill number
+    public function checkWaybill($waybillNumber)
+    {
+        $shipment = ShipmentTrackingNumber::where('tracking_number', $waybillNumber)
+            ->where('provider', 'cliqnship')
+            ->first();
+
+        if (! $shipment) {
+            return response()->json('waybill not found', 400);
+        }
+
+        return response()->json($shipment, 200);
+    }
 }

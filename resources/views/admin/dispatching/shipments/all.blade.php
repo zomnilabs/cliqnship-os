@@ -50,6 +50,22 @@
                 tokenSeparators: [',', ' '],
                 placeholder: "Input waybill number/s",
                 allowClear: true
+            }).on('change', function(value) {
+                let waybills = $(this).val();
+                let newValue = waybills[waybills.length - 1];
+                console.log('new value', newValue);
+
+                fetch(`/api/v1/shipments/check/${newValue}`).then((res) => {
+                    if (! res.ok) {
+                        let html = `<p><span class="text-danger">${newValue}</span> is not a valid waybill</p>`;
+                        $('.error-container').append(html);
+
+                        return;
+                    }
+                }).catch((error) => {
+                    let html = `<p><span class="text-danger">${newValue}</span> is not a valid waybill</p>`;
+                    $('.error-container').append(html);
+                });
             });
         }())
     </script>
@@ -67,13 +83,6 @@
                 </div>
                 <div class="header-title pull-left">
                     <h1>Dispatching</h1>
-                </div>
-
-                <div class="page-actions pull-right">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#createShippingModal">
-                        <i class="fa fa-plus"></i>
-                        Import Shipments Assignment</button>
-
                 </div>
             </div>
         </div>

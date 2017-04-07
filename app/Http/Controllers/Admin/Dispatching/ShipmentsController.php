@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin\Dispatching;
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
 use App\Models\ShipmentAssignment;
+use App\Models\ShipmentTrackingNumber;
 use App\User;
+use Illuminate\Http\Request;
 
 class ShipmentsController extends Controller {
     public function all()
@@ -36,5 +38,32 @@ class ShipmentsController extends Controller {
     public function returned()
     {
         return view('admin.dispatching.shipments.returned');
+    }
+
+    public function dispatchShipments(Request $request)
+    {
+        foreach ($request->get('waybills') as $waybill) {
+            // Check waybill
+            $waybill = ShipmentTrackingNumber::where('tracking_number', $waybill)
+                ->where('provider', 'cliqnship')
+                ->first();
+
+            // waybill not existing
+            if (! $waybill) {
+                continue;
+            }
+
+            // Create Assignment
+            ShipmentAssignment::create([
+                'user_id'   => $request->get('rider_id'),
+                'shipment_id'   => $waybill->shipment_id
+            ]);
+
+            // Update shipment
+            Shipment::where('id', $waybill->shipment_id)
+                ->update(['status' => 'enroute']);
+        }
+
+        return redirect()->back();
     }
 }
