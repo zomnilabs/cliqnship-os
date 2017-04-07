@@ -197,7 +197,23 @@
                                     @if ($errors->has('waybills'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('waybills') }}</strong>
-                                    </span>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                                    <label for="status">Waybill Number/s</label>
+
+                                    <select class="form-control dataField" name="status" id="status">
+                                        <option value="received-at-warehouse">Received At Warehouse</option>
+                                        <option value="completed">Completed</option>
+                                        <option value="returned">Returned</option>
+                                    </select>
+
+                                    @if ($errors->has('status'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('status') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                             </div>
