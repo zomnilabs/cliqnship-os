@@ -30,7 +30,7 @@ class Shipment extends Model
 
     public function trackingNumbers()
     {
-        return $this->hasMany(ShipmentTrackingNumbers::class);
+        return $this->hasMany(ShipmentTrackingNumber::class);
     }
 
     public function rider()

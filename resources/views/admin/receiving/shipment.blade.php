@@ -52,7 +52,7 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>Id #</th>
+                                <th class="hide">Id #</th>
                                 <th>Name</th>
                                 <th>Shipments Assigned</th>
                                 <th>Shipments Remitted Today</th>
@@ -61,15 +61,17 @@
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Roy Mustang</td>
-                                    <td>10</td>
-                                    <td>2</td>
-                                    <td>
-                                        <a href="/admin/receiving/rider/remit" class="btn btn-default"><i class="fa fa-search"></i> Remit</a>
-                                    </td>
-                                </tr>
+                                @foreach($riders as $rider)
+                                    <tr>
+                                        <td class="hide">{{ $rider->id }}</td>
+                                        <td>{{ $rider->profile->full_name }}</td>
+                                        <td>{{ $rider->pending }}</td>
+                                        <td>{{ $rider->completed_today }}</td>
+                                        <td>
+                                            <a href="/admin/receiving/rider/remit/{{ $rider->id }}" class="btn btn-default"><i class="fa fa-search"></i> Remit</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

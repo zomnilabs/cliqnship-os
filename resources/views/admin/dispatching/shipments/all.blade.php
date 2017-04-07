@@ -50,6 +50,22 @@
                 tokenSeparators: [',', ' '],
                 placeholder: "Input waybill number/s",
                 allowClear: true
+            }).on('change', function(value) {
+                let waybills = $(this).val();
+                let newValue = waybills[waybills.length - 1];
+                console.log('new value', newValue);
+
+                fetch(`/api/v1/shipments/check/${newValue}`).then((res) => {
+                    if (! res.ok) {
+                        let html = `<p><span class="text-danger">${newValue}</span> is not a valid waybill</p>`;
+                        $('.error-container').append(html);
+
+                        return;
+                    }
+                }).catch((error) => {
+                    let html = `<p><span class="text-danger">${newValue}</span> is not a valid waybill</p>`;
+                    $('.error-container').append(html);
+                });
             });
         }())
     </script>
@@ -67,13 +83,6 @@
                 </div>
                 <div class="header-title pull-left">
                     <h1>Dispatching</h1>
-                </div>
-
-                <div class="page-actions pull-right">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#createShippingModal">
-                        <i class="fa fa-plus"></i>
-                        Import Shipments Assignment</button>
-
                 </div>
             </div>
         </div>
@@ -129,11 +138,12 @@
                             <tr>
                                 <th class="hide">Shipment Id</th>
                                 <th>Tracking #</th>
-                                <th>Customer</th>
+                                <th>From</th>
                                 <th>Delivery Address</th>
                                 <th>Service Type</th>
                                 <th>Services Add-Ons</th>
                                 <th>Remarks</th>
+                                <th>Source</th>
                                 <th>Rider</th>
                                 <th>Status</th>
                                 <th>Actions</th>
@@ -143,13 +153,24 @@
                             <tbody>
                                 @foreach($shipments as $shipment)
                                 <tr id="shipment-{{$shipment->id}}">
-                                    <td>{{$shipment->id}}</td>
+                                    <td class="hide">{{$shipment->id}}</td>
+                                    <td>{{$shipment->trackingNumbers()->mainTrackingNumber()->tracking_number}}</td>
                                     <td>{{$shipment->user->profile->first_name}} {{$shipment->user->profile->middle_name}} {{$shipment->user->profile->last_name}}</td>
+                                    <td>{{ $shipment->address->address_line_1 }} {{ $shipment->address->barangay }} {{ $shipment->address->city }}, {{ $shipment->address->province }}. {{ $shipment->address->zip_code }}</td>
+                                    <td>{{ $shipment->service_type }}</td>
+                                    <td>
+                                        @if ($shipment->collect_and_deposit)
+                                            <p>Collect And Deposit</p>
+                                        @endif
+
+                                        @if ($shipment->insurance_declared_value)
+                                            <p>Insurance declared value</p>
+                                        @endif
+                                    </td>
+                                    <td>{{ $shipment->remarks }}</td>
                                     <td>{{ ucwords($shipment->source->name) or '' }}</td>
-                                    <td>{{ ucwords($shipment->address->address_type or '') }}</td>
-                                    <th>{{$shipment->address->address_line_1 or ''}}</th>
                                     <th>{{$shipment->address->contact_number or ''}}</th>
-                                    <th>{{$shipment->user->email or ''}}</th>
+                                    <td>{{ $shipment->status }}</td>
                                     <th>
                                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                         <button class="btn btn-default"><i class="fa fa-edit"></i></button>

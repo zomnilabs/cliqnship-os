@@ -10,7 +10,8 @@ class ShipmentsController extends Controller {
     {
         $user = $request->user()->toArray();
 
-        $shipments = Shipment::where('user_id', $user['id'])
+        $shipments = Shipment::with('trackingNumbers')
+            ->where('user_id', $user['id'])
             ->get();
 
         return view('customers.shipments.index')

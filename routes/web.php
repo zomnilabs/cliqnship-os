@@ -63,13 +63,15 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
     Route::group(['prefix' => 'dispatching', 'namespace' => 'Dispatching'], function() {
         Route::get('bookings', 'BookingsController@index');
         Route::get('shipments/all', 'ShipmentsController@all');
+        Route::post('shipments/all', 'ShipmentsController@dispatchShipments');
         Route::get('shipments/returned', 'ShipmentsController@returned');
         Route::get('item-requests', 'ItemRequestsController@index');
     });
 
     Route::group(['prefix' => 'receiving', 'namespace' => 'Receiving'], function() {
         Route::get('rider', 'ShipmentsController@all');
-        Route::get('rider/remit', 'ShipmentsController@remit');
+        Route::get('rider/remit/{riderId}', 'ShipmentsController@remit');
+        Route::post('rider/remit/{riderId}', 'ShipmentsController@doRemit');
         Route::get('item-requests', 'ItemRequestsController@index');
     });
 

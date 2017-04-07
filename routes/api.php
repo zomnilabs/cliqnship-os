@@ -27,7 +27,13 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function() {
 
         Route::group(['prefix' => 'shipments'], function () {
             Route::post('/', 'ShipmentsController@store');
+            Route::get('/check/{waybillNumber}', 'ShipmentsController@checkWaybill');
         });
+    });
+
+    // Shipments
+    Route::group(['prefix' => 'shipments'], function () {
+        Route::get('/check/{waybillNumber}', 'ShipmentsController@checkWaybill');
     });
 
     // Address book
