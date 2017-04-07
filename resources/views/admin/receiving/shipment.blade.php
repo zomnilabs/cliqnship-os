@@ -68,7 +68,7 @@
                                         <td>{{ $rider->pending }}</td>
                                         <td>{{ $rider->completed_today }}</td>
                                         <td>
-                                            <a href="/admin/receiving/rider/remit" class="btn btn-default"><i class="fa fa-search"></i> Remit</a>
+                                            <a href="/admin/receiving/rider/remit/{{ $rider->id }}" class="btn btn-default"><i class="fa fa-search"></i> Remit</a>
                                         </td>
                                     </tr>
                                 @endforeach

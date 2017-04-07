@@ -35,8 +35,13 @@ class ShipmentsController extends Controller {
             ->with('riders', $result);
     }
 
-    public function remit()
+    public function remit($riderId)
     {
-        return view('admin.receiving.shipment.index');
+        $assignments = ShipmentAssignment::with('shipment')->where('user_id', $riderId)
+            ->where('status', 'pending')
+            ->get();
+
+        return view('admin.receiving.shipment.index')
+            ->with('assignments', $assignments);
     }
 }

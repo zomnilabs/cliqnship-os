@@ -135,38 +135,16 @@
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td class="hide">1</td>
-                                    <td>58CCBB2ED51A1</td>
-                                    <td>Makati City</td>
-                                    <td>3</td>
-                                    <td>Metro Manila</td>
-                                    <td>Pending</td>
-                                </tr>
-                                <tr>
-                                    <td class="hide">1</td>
-                                    <td>58CCBB2ED599I</td>
-                                    <td>Guadalupe</td>
-                                    <td>3</td>
-                                    <td>Metro Manila</td>
-                                    <td>Pending</td>
-                                </tr>
-                                <tr>
-                                    <td class="hide">1</td>
-                                    <td>58CCBB2L6HD1A1</td>
-                                    <td>BGC</td>
-                                    <td>3</td>
-                                    <td>Metro Manila</td>
-                                    <td>Pending</td>
-                                </tr>
-                                <tr>
-                                    <td class="hide">1</td>
-                                    <td>58CCBB2ED87YB</td>
-                                    <td>Mandaluyong</td>
-                                    <td>3</td>
-                                    <td>Metro Manila</td>
-                                    <td>Pending</td>
-                                </tr>
+                                @foreach($assignments as $assignment)
+                                    <tr>
+                                        <td class="hide">{{ $assignment->id }}</td>
+                                        <td>{{ $assignment->shipment->trackingNumbers()->mainTrackingNumber()->tracking_number }}</td>
+                                        <td>{{ $assignment->shipment->address->address_line_1 }} {{ $assignment->shipment->address->barangay }} {{ $assignment->shipment->address->city }}, {{ $assignment->shipment->address->province }}. {{ $assignment->shipment->address->zip_code }}</td>
+                                        <td>{{ $assignment->shipment->number_of_items }}</td>
+                                        <td>{{ $assignment->shipment->service_type }}</td>
+                                        <td>{{ $assignment->status }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
