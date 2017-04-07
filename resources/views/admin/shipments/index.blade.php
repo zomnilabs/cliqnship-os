@@ -117,21 +117,32 @@
                             </thead>
 
                             <tbody>
-                            {{--@foreach($addressbooks as $addressbook)--}}
-                            {{--<tr id="addressbook-{{$addressbook->id}}">--}}
-                            {{--<td>{{$addressbook->id}}</td>--}}
-                            {{--<td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>--}}
-                            {{--<td>{{ ucwords($addressbook->type) }}</td>--}}
-                            {{--<td>{{ ucwords($addressbook->address_type) }}</td>--}}
-                            {{--<th>{{$addressbook->address_line_1}}</th>--}}
-                            {{--<th>{{$addressbook->contact_number}}</th>--}}
-                            {{--<th>{{$addressbook->email}}</th>--}}
-                            {{--<th>--}}
-                            {{--<button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>--}}
-                            {{--<button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>--}}
-                            {{--</th>--}}
-                            {{--</tr>--}}
-                            {{--@endforeach--}}
+                            @foreach($shipments as $shipment)
+                                <tr id="shipment-{{$shipment->id}}">
+                                    <td class="hide">{{ $shipment->id }}</td>
+                                    <td>{{ $shipment->trackingNumbers()->mainTrackingNumber()->tracking_number }}</td>
+                                    <td>{{ $shipment->address->address_line_1 }} {{ $shipment->address->barangay }} {{ $shipment->address->city }}, {{ $shipment->address->province }}. {{ $shipment->address->zip_code }}</td>
+                                    <td>{{ $shipment->number_of_items }}</td>
+                                    <td>{{ $shipment->service_type }}</td>
+                                    <td>
+                                        @if ($shipment->collect_and_deposit)
+                                            <p>Collect And Deposit</p>
+                                        @endif
+
+                                        @if ($shipment->insurance_declared_value)
+                                            <p>Insurance declared value</p>
+                                        @endif
+                                    </td>
+                                    <td>{{ $shipment->charge_to }}</td>
+                                    <td>{{ $shipment->remarks }}</td>
+                                    <td>{{ $shipment->status }}</td>
+                                    <th>
+                                        <button class="btn btn-danger delBooking" value="{{ $shipment->id }}"><i class="fa fa-trash"></i></button>
+                                        <button class="btn btn-default"><i class="fa fa-edit"></i></button>
+                                        <button class="btn btn-default" onclick="frames['frame'].print()"><i class="fa fa-print"></i></button>
+                                    </th>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -287,4 +298,5 @@
             </div>
         </div>
     </div>
+    <iframe src="/customers/shipments/preview" name="frame" style="width: 0; height: 0"></iframe>
 @endsection

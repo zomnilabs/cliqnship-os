@@ -168,6 +168,7 @@
                                         <th>
                                             <button class="btn btn-danger delBooking" value="{{ $shipment->id }}"><i class="fa fa-trash"></i></button>
                                             <button class="btn btn-default"><i class="fa fa-edit"></i></button>
+                                            <button class="btn btn-default" onclick="frames['frame'].print()"><i class="fa fa-print"></i></button>
                                         </th>
                                     </tr>
                                 @endforeach
@@ -187,6 +188,7 @@
     </div>
     <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
     @include('customers.shipments.modals.import')
+    <iframe src="/customers/shipments/preview" name="frame" style="width: 0; height: 0"></iframe>
 @endsection
 
 @section('scripts')

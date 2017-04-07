@@ -17,4 +17,9 @@ class ShipmentsController extends Controller {
         return view('customers.shipments.index')
             ->with('shipments', $shipments);
     }
+
+    public function preview()
+    {
+        return view('print.waybill');
+    }
 }
