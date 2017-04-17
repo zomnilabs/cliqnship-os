@@ -9,6 +9,12 @@ use App\User;
 class CustomerRegistrationController extends Controller {
     use ApiResponse;
 
+    /**
+     * Register a new customer
+     *
+     * @param CustomerRegistrationRequests $requests
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function register(CustomerRegistrationRequests $requests)
     {
         $result = null;
