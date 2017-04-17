@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api\Customers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\CustomerRegistrationRequests;
 use App\Traits\ApiResponse;
+use App\Transformers\Customers\UserTransformer;
 use App\User;
+use League\Fractal\Resource\Item;
 
 class CustomerRegistrationController extends Controller {
     use ApiResponse;
@@ -55,6 +57,9 @@ class CustomerRegistrationController extends Controller {
         if ($result) {
             return $this->responseBadRequest(['something went wrong when creating a new customer']);
         }
+
+        // Transform Result
+        $result = new Item($result, new UserTransformer);
 
         return $this->responseCreated($result);
     }
