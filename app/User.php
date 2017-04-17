@@ -28,7 +28,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'can_use_api',
+        'account_type', 'login_type'
     ];
 
     public function profile()
@@ -54,5 +55,14 @@ class User extends Authenticatable
     public function shipmentAssignments()
     {
         return $this->hasMany(ShipmentAssignment::class);
+    }
+
+    // Mutator
+    public function setUserGroupAttribute($value)
+    {
+        // Get value of usergroup
+        $userGroup = UserGroup::where('slug', $value)->first();
+
+        $this->attributes['user_group_id'] = $userGroup;
     }
 }
