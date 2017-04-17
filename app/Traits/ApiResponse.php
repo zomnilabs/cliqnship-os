@@ -38,4 +38,14 @@ trait ApiResponse {
 
         return response()->json($response, 400);
     }
+
+    public function responseUnauthorized()
+    {
+        $response = [
+            'errors'    => ['unauthorized'],
+            'status'    => 401
+        ];
+
+        return response()->json($response, 401);
+    }
 }

@@ -6,18 +6,19 @@ use App\Http\Requests\API\CustomerRegistrationRequests;
 use App\Traits\ApiResponse;
 use App\Transformers\Customers\UserTransformer;
 use App\User;
+use Illuminate\Http\Request;
 use League\Fractal\Resource\Item;
 
-class CustomerRegistrationController extends Controller {
+class CustomersController extends Controller {
     use ApiResponse;
 
     /**
-     * Register a new customer
+     * Create a new customer
      *
      * @param CustomerRegistrationRequests $requests
      * @return \Illuminate\Http\JsonResponse
      */
-    public function register(CustomerRegistrationRequests $requests)
+    public function store(CustomerRegistrationRequests $requests)
     {
         $result = null;
         \DB::transaction(function() use ($requests, &$result) {
@@ -62,5 +63,26 @@ class CustomerRegistrationController extends Controller {
         $result = new Item($result, new UserTransformer);
 
         return $this->responseCreated($result);
+    }
+
+    /**
+     * Get a user profile
+     *
+     * @param Request $request
+     * @param $userId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show(Request $request, $userId)
+    {
+        $user = $request->user();
+
+        if ($user->id !== $userId) {
+            return $this->responseUnauthorized();
+        }
+
+        $result = User::find($userId);
+        $result = new Item($result, new UserTransformer);
+
+        return $this->responseOk($result);
     }
 }

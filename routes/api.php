@@ -17,10 +17,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function() {
+Route::group(['namespace' => 'Api'], function() {
 
-    // users
-    Route::group(['prefix' => 'customers'], function () {
+    // customers api
+    Route::group(['prefix' => 'v1/customers'], function () {
+        Route::post('/', 'Customers\CustomersController@store');
+        Route::get('/{userId}', 'Customers\CustomersController@show');
+    });
+
+    // Frontend specific customer api
+    Route::group(['prefix' => 'v1/customers'], function () {
+
         Route::group(['prefix' => 'bookings'], function () {
             Route::post('/', 'BookingController@store');
         });
@@ -32,12 +39,12 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function() {
     });
 
     // Shipments
-    Route::group(['prefix' => 'shipments'], function () {
+    Route::group(['prefix' => 'v1/shipments'], function () {
         Route::get('/check/{waybillNumber}', 'ShipmentsController@checkWaybill');
     });
 
     // Address book
-    Route::group(['prefix' => 'address-books'], function() {
+    Route::group(['prefix' => 'v1/address-books'], function() {
         Route::get('/{userId}', 'AddressBookController@index');
     });
 });
