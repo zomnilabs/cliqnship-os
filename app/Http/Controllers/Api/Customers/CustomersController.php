@@ -62,8 +62,9 @@ class CustomersController extends AbstractAPIController {
 
         // Transform Result
         $result = new Item($result, new UserTransformer);
+        $result = $this->fractal->createData($result);
 
-        return $this->responseCreated($result);
+        return $this->responseCreated($result->toArray());
     }
 
     /**
@@ -86,6 +87,11 @@ class CustomersController extends AbstractAPIController {
         }
 
         $result = User::find($userId);
+
+        if (! $result) {
+            return $this->responseNotFound();
+        }
+
         $result = new Item($result, new UserTransformer);
         $result = $this->fractal->createData($result);
 
