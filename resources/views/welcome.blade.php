@@ -81,7 +81,7 @@
                         <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="service-heading">Sign Up</h4>
-                    <p class="text-muted">Click on the Sign Up Button. It takes just seconds to sign up.</p>
+                    <p class="text-muted">Click on <a href="/register">Register</a>. It takes just seconds to sign up.</p>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
