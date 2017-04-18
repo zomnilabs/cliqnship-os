@@ -62,8 +62,6 @@ class CustomersController extends Controller {
         // Transform Result
         $result = new Item($result, new UserTransformer);
 
-        \Log::info($result);
-
         return $this->responseCreated($result);
     }
 
