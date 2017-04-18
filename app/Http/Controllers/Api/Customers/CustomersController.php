@@ -55,7 +55,7 @@ class CustomersController extends Controller {
         });
 
         // Check if new customer was created
-        if ($result) {
+        if (! $result) {
             return $this->responseBadRequest(['something went wrong when creating a new customer']);
         }
 
