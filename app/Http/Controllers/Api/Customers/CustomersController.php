@@ -76,6 +76,10 @@ class CustomersController extends Controller {
     {
         $user = $request->user();
 
+        if (! $user) {
+            return $this->responseUnauthorized();
+        }
+
         if ($user->id !== $userId) {
             return $this->responseUnauthorized();
         }
