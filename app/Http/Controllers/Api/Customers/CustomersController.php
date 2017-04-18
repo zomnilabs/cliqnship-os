@@ -29,7 +29,7 @@ class CustomersController extends Controller {
                 'account_id'    => uniqid(), // TODO: Create correctly formatted account id
                 'user_group'    => 'customer',
                 'email'         => $input['email'],
-                'password'      => $input['password'],
+                'password'      => bcrypt($input['password']),
                 'account_type'  => 'individual',
                 'login_type'    => 'email',
                 'can_use_api'   => 0
