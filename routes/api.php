@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['namespace' => 'Api'], function() {
 
     // customers api
-    Route::group(['prefix' => 'v1/customers'], function () {
+    Route::group(['prefix' => 'v1/customers', 'middleware' => 'auth:api'], function () {
         Route::post('/', 'Customers\CustomersController@store');
         Route::get('/{userId}', 'Customers\CustomersController@show');
 
