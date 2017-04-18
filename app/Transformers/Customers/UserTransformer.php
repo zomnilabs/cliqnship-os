@@ -6,12 +6,18 @@ use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends TransformerAbstract
 {
+    /**
+     * Transform user object
+     *
+     * @param User $user
+     * @return array
+     */
     public function transform(User $user)
     {
         return [
             'id'            => $user->id,
             'email'         => $user->email,
-            'user_group'    => $user->group->name,
+            'user_group'    => $user->userGroup->name,
             'profile'   => [
                 'first_name'    => $user->profile->first_name,
                 'last_name'     => $user->profile->last_name,

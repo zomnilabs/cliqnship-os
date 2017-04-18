@@ -17,6 +17,9 @@ class AbstractAPIRequest extends FormRequest
 
     public function response(array $errors)
     {
-        return response()->json($errors, 422);
+        return response()->json([
+            'errors'    => $errors,
+            'status'    => 422
+        ], 422);
     }
 }

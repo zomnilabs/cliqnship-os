@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Api\Customers;
 
+use App\Http\Controllers\Api\AbstractAPIController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\CustomerRegistrationRequests;
 use App\Traits\ApiResponse;
@@ -9,7 +10,7 @@ use App\User;
 use Illuminate\Http\Request;
 use League\Fractal\Resource\Item;
 
-class CustomersController extends Controller {
+class CustomersController extends AbstractAPIController {
     use ApiResponse;
 
     /**
@@ -29,7 +30,7 @@ class CustomersController extends Controller {
                 'account_id'    => uniqid(), // TODO: Create correctly formatted account id
                 'user_group'    => 'customer',
                 'email'         => $input['email'],
-                'password'      => $input['password'],
+                'password'      => bcrypt($input['password']),
                 'account_type'  => 'individual',
                 'login_type'    => 'email',
                 'can_use_api'   => 0
@@ -55,7 +56,7 @@ class CustomersController extends Controller {
         });
 
         // Check if new customer was created
-        if ($result) {
+        if (! $result) {
             return $this->responseBadRequest(['something went wrong when creating a new customer']);
         }
 
@@ -76,13 +77,18 @@ class CustomersController extends Controller {
     {
         $user = $request->user();
 
-        if ($user->id !== $userId) {
+        if (! $user) {
+            return $this->responseUnauthorized();
+        }
+
+        if ($user->id !== (int) $userId) {
             return $this->responseUnauthorized();
         }
 
         $result = User::find($userId);
         $result = new Item($result, new UserTransformer);
+        $result = $this->fractal->createData($result);
 
-        return $this->responseOk($result);
+        return $this->responseOk($result->toArray());
     }
 }
