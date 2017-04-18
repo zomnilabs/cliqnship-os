@@ -23,6 +23,25 @@ Route::group(['namespace' => 'Api'], function() {
     Route::group(['prefix' => 'v1/customers'], function () {
         Route::post('/', 'Customers\CustomersController@store');
         Route::get('/{userId}', 'Customers\CustomersController@show');
+
+        // Customer Addressbooks
+        Route::get('/{userId}/addressbooks', 'Customers\AddressbooksController@all');
+        Route::post('/{userId}/addressbooks', 'Customers\AddressbooksController@store');
+        Route::get('/{userId}/addressbooks/{addressbookId}', 'Customers\AddressbooksController@show');
+        Route::put('/{userId}/addressbooks/{addressbookId}', 'Customers\AddressbooksController@update');
+
+        // Customer Bookings
+        Route::get('/{userId}/bookings', 'Customers\BookingsController@all');
+        Route::post('/{userId}/bookings', 'Customers\BookingsController@store');
+        Route::get('/{userId}/bookings/{bookingId}', 'Customers\BookingsController@show');
+        Route::put('/{userId}/bookings/{bookingId}', 'Customers\BookingsController@update');
+
+        // Customer Shipments
+        Route::get('/{userId}/shipments', 'Customers\ShipmentsController@all');
+        Route::post('/{userId}/shipments', 'Customers\ShipmentsController@store');
+        Route::get('/{userId}/shipments/{shipmentId}', 'Customers\ShipmentsController@show');
+        Route::put('/{userId}/shipments/{shipmentId}', 'Customers\ShipmentsController@update');
+
     });
 
     // Frontend specific customer api
