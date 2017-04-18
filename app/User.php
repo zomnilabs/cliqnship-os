@@ -63,6 +63,6 @@ class User extends Authenticatable
         // Get value of usergroup
         $userGroup = UserGroup::where('slug', $value)->first();
 
-        $this->attributes['user_group_id'] = $userGroup;
+        $this->attributes['user_group_id'] = $userGroup->id;
     }
 }
