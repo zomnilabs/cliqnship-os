@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Api\Customers;
 
+use App\Http\Controllers\Api\AbstractAPIController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\CustomerRegistrationRequests;
 use App\Traits\ApiResponse;
@@ -9,7 +10,7 @@ use App\User;
 use Illuminate\Http\Request;
 use League\Fractal\Resource\Item;
 
-class CustomersController extends Controller {
+class CustomersController extends AbstractAPIController {
     use ApiResponse;
 
     /**
@@ -80,13 +81,14 @@ class CustomersController extends Controller {
             return $this->responseUnauthorized();
         }
 
-        if ($user->id !== $userId) {
+        if ($user->id !== (int) $userId) {
             return $this->responseUnauthorized();
         }
 
         $result = User::find($userId);
         $result = new Item($result, new UserTransformer);
+        $result = $this->fractal->createData($result);
 
-        return $this->responseOk($result);
+        return $this->responseOk($result->toArray());
     }
 }

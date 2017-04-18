@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use League\Fractal\Manager;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,5 +29,10 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
             $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
         }
+
+        // Register Fractal
+        $this->app->singleton(Manager::class, function() {
+            return new Manager();
+        });
     }
 }
