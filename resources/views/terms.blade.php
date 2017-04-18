@@ -276,9 +276,12 @@
                 <ul class="list-inline quicklinks">
                     <li><a href="terms-and-conditions">Terms and Conditions</a>
                     </li>
+                    <li><a href="faqs">FAQS</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
+
 @endsection

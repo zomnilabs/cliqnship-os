@@ -54,13 +54,16 @@
                         <a class="page-scroll" href="#howto">How To</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#otherServices">Other Services</a>
-                    </li>
-                    <li>
                         <a class="page-scroll" href="#about">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
+                        <a class="page-scroll" href="#whyus">Why Us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact Us</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/pricing">Pricing</a>
                     </li>
                     @if (Auth::guest())
                         <li><a href="{{ route('login') }}">Login</a></li>

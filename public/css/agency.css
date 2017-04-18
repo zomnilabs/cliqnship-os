@@ -266,10 +266,10 @@ fieldset[disabled] .btn-xl.active {
   }
 }
 header#terms {
-  background-image: url('../images/terms-conditions.png') !important;
+  background-image: url('../images/terms.jpg') !important;
   background-repeat: no-repeat;
   background-attachment: scroll;
-  background-position: center center;
+  background-position: center -150px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -280,8 +280,54 @@ header#terms {
 .terms p, .terms li{
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+header#faqs {
+  background-image: url('../images/faqs.jpg') !important;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  text-align: center;
+  color: white;
+}
+.faqs p, .faqs li{
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+header#pricing {
+  background-image: url('../images/about.png') !important;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  text-align: center;
+  color: white;
+}
+.pricing table tr td, .pricing table tr th{
+  text-align: center;
+  vertical-align: middle;
+}
+.pricing a.btn {
+  margin: 10px 30px;
+  width: 250px;
+}
+
+#about {
+  background-image: url(../images/about1.jpg);
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+}
+
 header.header1 {
-  background-image: url('../images/carousel1.png');
+  background-image: url('../images/carousel1.jpg');
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -372,17 +418,17 @@ section h3.section-subheading {
   margin: 15px 0;
   text-transform: none;
 }
-#otherServices .portfolio-item {
+.portfolio-item {
   margin: 0 0 15px;
   right: 0;
 }
-#otherServices .portfolio-item .portfolio-link {
+.portfolio-item .portfolio-link {
   display: block;
   position: relative;
   max-width: 400px;
   margin: 0 auto;
 }
-#otherServices .portfolio-item .portfolio-link .portfolio-hover {
+.portfolio-item .portfolio-link .portfolio-hover {
   background: #b1d047;
   position: absolute;
   width: 100%;
@@ -392,10 +438,10 @@ section h3.section-subheading {
   -webkit-transition: all ease 0.5s;
   -moz-transition: all ease 0.5s;
 }
-#otherServices .portfolio-item .portfolio-link .portfolio-hover:hover {
+.portfolio-item .portfolio-link .portfolio-hover:hover {
   opacity: 1;
 }
-#otherServices .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content {
+.portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content {
   position: absolute;
   width: 100%;
   height: 20px;
@@ -405,25 +451,25 @@ section h3.section-subheading {
   margin-top: -12px;
   color: white;
 }
-#otherServices .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content i {
+.portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content i {
   margin-top: -12px;
 }
-#otherServices .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h3,
-#otherServices .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h4 {
+.portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h3,
+.portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h4 {
   margin: 0;
 }
-#otherServices .portfolio-item .portfolio-caption {
+.portfolio-item .portfolio-caption {
   max-width: 400px;
   margin: 0 auto;
   background-color: white;
   text-align: center;
   padding: 25px;
 }
-#otherServices .portfolio-item .portfolio-caption h4 {
+.portfolio-item .portfolio-caption h4 {
   text-transform: none;
   margin: 0;
 }
-#otherServices .portfolio-item .portfolio-caption p {
+.portfolio-item .portfolio-caption p {
   font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: italic;
   font-size: 16px;
@@ -432,9 +478,19 @@ section h3.section-subheading {
 #otherServices * {
   z-index: 2;
 }
+
+.well.well-primary {
+  background: #faffe4;
+}
 @media (min-width: 767px) {
-  #otherServices .portfolio-item {
+  .portfolio-item {
     margin: 0 0 30px;
+  }
+}
+@media (max-width: 767px) {
+  .pricing a.btn {
+    margin: 10px 10px;
+    width: 200px;
   }
 }
 .timeline {

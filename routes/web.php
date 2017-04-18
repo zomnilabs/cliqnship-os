@@ -17,6 +17,12 @@ Route::get('/', function () {
 Route::get('/terms-and-conditions', function () {
     return view('terms');
 });
+Route::get('/pricing', function () {
+    return view('pricing');
+});
+Route::get('/faqs', function () {
+    return view('faqs');
+});
 
 Auth::routes();
 
