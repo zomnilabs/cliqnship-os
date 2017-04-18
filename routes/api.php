@@ -20,8 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['namespace' => 'Api'], function() {
 
     // customers api
+    // Register
+    Route::post('/v1/customers', 'Customers\CustomersController@store');
     Route::group(['prefix' => 'v1/customers', 'middleware' => 'auth:api'], function () {
-        Route::post('/', 'Customers\CustomersController@store');
         Route::get('/{userId}', 'Customers\CustomersController@show');
 
         // Customer Addressbooks
