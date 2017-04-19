@@ -921,3 +921,9 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #b1d047;
 }
+.clients img {
+  filter: grayscale(100%);
+}
+.clients img:hover {
+  filter: grayscale(0%);
+}
