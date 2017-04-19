@@ -319,6 +319,7 @@ header#pricing {
 #about {
   background-image: url(../images/about1.jpg);
   height: 100vh;
+  filter: grayscale(50%);
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
