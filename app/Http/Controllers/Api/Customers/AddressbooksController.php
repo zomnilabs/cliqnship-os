@@ -8,6 +8,7 @@ use App\Transformers\Customers\AddressbookTransformer;
 use Illuminate\Http\Request;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
 
 class AddressbooksController extends AbstractAPIController {
     use ApiResponse;
@@ -40,6 +41,29 @@ class AddressbooksController extends AbstractAPIController {
         $result = $this->fractal->createData($resource);
 
         // Return response
+        return $this->responseOk($result->toArray());
+    }
+
+    public function show(Request $request, $userId, $addressbookId)
+    {
+        // Check user
+        if ($request->user()->id !== (int) $userId) {
+            return $this->responseUnauthorized();
+        }
+
+        // Create query
+        $address = UserAddressbook::where('user_id', $userId)
+            ->where('id', $addressbookId)
+            ->first();
+
+        if (! $address) {
+            return $this->responseNotFound();
+        }
+
+        // Transform Result
+        $resource = new Item($address, new AddressbookTransformer);
+        $result = $this->fractal->createData($resource);
+
         return $this->responseOk($result->toArray());
     }
 }

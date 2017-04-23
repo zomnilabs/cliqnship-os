@@ -5,6 +5,7 @@ trait ApiResponse {
     public function responseOk($data)
     {
         $response = $data;
+        $response['status'] = 200;
 
         return response()->json($response, 200);
     }
