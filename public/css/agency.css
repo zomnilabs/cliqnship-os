@@ -319,6 +319,7 @@ header#pricing {
 #about {
   background-image: url(../images/about1.jpg);
   height: 100vh;
+  filter: grayscale(50%);
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -919,4 +920,10 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: #b1d047;
+}
+.clients img {
+  filter: grayscale(100%);
+}
+.clients img:hover {
+  filter: grayscale(0%);
 }

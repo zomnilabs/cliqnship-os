@@ -19,252 +19,82 @@
         <div class="pricing text-center">
             
             <div style="display: inline-flex; padding-bottom: 40px;">
-                <a class="btn btn-primary" href="#provincial" class="provincial active" aria-controls="provincial" role="tab" data-toggle="tab">
-                  <i style="font-size: 6em" class="fa fa-truck"></i> <h4>Provincial</h4>
-                </a>
-                 <a class="btn btn-primary" href="#metromanila" class="metromanila" aria-controls="metromanila" role="tab" data-toggle="tab">
-                  <i style="font-size: 6em" class="fa fa-motorcycle"></i> <h4> Metro Manila</h4>
+                 <a class="btn btn-primary" href="#domestic" class="domestic active" aria-controls="domestic" role="tab" data-toggle="tab">
+                  <i style="font-size: 6em" class="fa fa-motorcycle"></i> <h4> Domestic</h4>
                 </a>
                 <a class="btn btn-primary" href="#international" class="international" aria-controls="international" role="tab" data-toggle="tab">
                   <i style="font-size: 6em" class="fa fa-plane"></i> <h4>International</h4>
                 </a>
             </div>
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="provincial">
+
+                <div role="tabpanel" class="tab-pane active" id="domestic">
                     <div class="panel panel-primary">
-                        <div class="panel-heading"><h3 class="text-center">Provincial Rates</h3></div>
+                        <div class="panel-heading"><h3 class="text-center">Domestic Rates</h3></div>
 
                         <div class="panel-body">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th style="background: #f1e0ad">Weight</th>
-                                        <th style="background: #c7de77">Regular Shipment</th>
-                                        <th style="background: #c7de77">Food Items</th>
-                                        <th style="background: #cb90ce" colspan="3">FAST N VAST</th>
-                                        <th style="background: #4393b9" colspan="3">STEADY N BREEZY</th>
+                                        <th style="background: #9BBB59"></th>
+                                        <th style="background: #9BBB59">METRO MANILA</th>
+                                        <th style="background: #9BBB59" colspan="4">STEADY N BREEZY</th>
                                     </tr>
                                     <tr>
-                                        <td style="background: #f1e0ad"></td>
-                                        <td style="background: #c7de77"></td>
-                                        <td style="background: #c7de77"></td>
-                                        <th style="background: #cb90ce" colspan="3">More Servicable Areas, Shorter Transit Time</th>
-                                        <th style="background: #4393b9" colspan="3">Major Cities, Longer Transit Time, Cheaper Rates, COD Possible</th>
+                                        <th style="background: #9BBB59">Weight</th>
+                                        <th style="background: #9BBB59">Regular Shipment</th>
+                                        <th style="background: #9BBB59" colspan="2">FAST N VAST <br> (More serviceable areas, shorter transit time)</th>
+                                        <th style="background: #9BBB59" colspan="2">STEADY N BREEZY <br> (major cities, longer transit time, cheaper rates, COD possible)</th>
                                     </tr>
                                     <tr>
-                                        <td style="background: #f1e0ad"></td>
-                                        <th style="background: #c7de77" colspan="2">METRO MANILA</th>
-                                        <th style="background: #cb90ce">LUZ</th>
-                                        <th style="background: #cb90ce">VIZ</th>
-                                        <th style="background: #cb90ce">MIN</th>
-                                        <th style="background: #4393b9">LUZ</th>
-                                        <th style="background: #4393b9">VIZ</th>
-                                        <th style="background: #4393b9">MIN</th>
-                                    </tr>
-                                    <tr>
-                                        <th style="background: #b1d047" colspan="9">UNLIPOUCH</th>
+                                        <th style="background: #FFFF00" colspan="9">POUCH</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td style="background: #f1e0ad">7 x 11 (S)</td>
-                                        <td style="background: #c7de77">38</td>
-                                        <td style="background: #c7de77"></td>
-                                        <td style="background: #cb90ce"></td>
-                                        <td style="background: #cb90ce"></td>
-                                        <td style="background: #cb90ce"></td>
-                                        <td style="background: #4393b9">90</td>
-                                        <td style="background: #4393b9">95</td>
-                                        <td style="background: #4393b9">100</td>
+                                        <td>9 x 14 (M)</td>
+                                        <td>55</td>
+                                        <td>1kg max</td>
+                                        <td>148</td>
+                                        <td>1kg max</td>
+                                        <td>100</td>
                                     </tr>
                                     <tr>
-                                        <td style="background: #f1e0ad">9 x 14 (M)</td>
-                                        <td style="background: #c7de77">48</td>
-                                        <td style="background: #c7de77"></td>
-                                        <td style="background: #cb90ce">138</td>
-                                        <td style="background: #cb90ce">148</td>
-                                        <td style="background: #cb90ce">150</td>
-                                        <td style="background: #4393b9">95</td>
-                                        <td style="background: #4393b9">100</td>
-                                        <td style="background: #4393b9">120</td>
+                                        <td>11 x 17 (L)</td>
+                                        <td>70</td>
+                                        <td>3kg max</td>
+                                        <td>220</td>
+                                        <td>2kg max</td>
+                                        <td>150</td>
                                     </tr>
                                     <tr>
-                                        <td style="background: #f1e0ad">11 x 17 (L)</td>
-                                        <td style="background: #c7de77">68</td>
-                                        <td style="background: #c7de77"></td>
-                                        <td style="background: #cb90ce">200</td>
-                                        <td style="background: #cb90ce">220</td>
-                                        <td style="background: #cb90ce">225</td>
-                                        <td style="background: #4393b9">100</td>
-                                        <td style="background: #4393b9">110</td>
-                                        <td style="background: #4393b9">130</td>
+                                        <th style="background: #FFFF00" colspan="9">OWN PACKAGING</th>
                                     </tr>
                                     <tr>
-                                        <th style="background: #b1d047" colspan="9">OWN PACKAGING</th>
+                                        <td style="background: #C4D79B">1.0</td>
+                                        <td></td>
+                                        <td rowspan="3">1st 3kg</td>
+                                        <td rowspan="3">225</td>
+                                        <td rowspan="3">1st 3kg</td>
+                                        <td>100</td>
                                     </tr>
                                     <tr>
-                                        <td style="background: #f1e0ad">1.0</td>
-                                        <td style="background: #c7de77"></td>
-                                        <td style="background: #c7de77"></td>
-                                        <td style="background: #cb90ce" rowspan="3">200</td>
-                                        <td style="background: #cb90ce" rowspan="3">220</td>
-                                        <td style="background: #cb90ce" rowspan="3">225</td>
-                                        <td style="background: #4393b9">100</td>
-                                        <td style="background: #4393b9">110</td>
-                                        <td style="background: #4393b9">130</td>
+                                        <td style="background: #C4D79B">2.0</td>
+                                        <td>48</td>
+                                        <td>160</td>
                                     </tr>
                                     <tr>
-                                        <td style="background: #f1e0ad">2.0</td>
-                                        <td style="background: #c7de77">48</td>
-                                        <td style="background: #c7de77"></td>
-                                        <td style="background: #4393b9">160</td>
-                                        <td style="background: #4393b9">175</td>
-                                        <td style="background: #4393b9">195</td>
+                                        <td style="background: #C4D79B">3.0</td>
+                                        <td>80</td>
+                                        <td>205</td>
                                     </tr>
                                     <tr>
-                                        <td style="background: #f1e0ad">3.0</td>
-                                        <td style="background: #c7de77">68</td>
-                                        <td style="background: #c7de77">88</td>
-                                        <td style="background: #4393b9">205</td>
-                                        <td style="background: #4393b9">210</td>
-                                        <td style="background: #4393b9">260</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="background: #f1e0ad">Add on per kg</td>
-                                        <td style="background: #c7de77">25</td>
-                                        <td style="background: #c7de77">30</td>
-                                        <td style="background: #cb90ce">80</td>
-                                        <td style="background: #cb90ce">80</td>
-                                        <td style="background: #cb90ce">80</td>
-                                        <td style="background: #4393b9">75</td>
-                                        <td style="background: #4393b9">75</td>
-                                        <td style="background: #4393b9">75</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <div class="well text-left">
-                                <h4>NOTE</h4>
-                                <ul>
-                                    <li>All rates are VAT inclusive</li>
-                                    <li>Valuation/Insurance charge - P 15 for 1st P500, P 5 for the succeeding fraction</li>
-                                    <li>Chargeable Weight - actual or volumetric weight whichever is higher (L x W x H cm / 3500)</li>
-                                    <li>Extra charges apply for Out of Delivery Zone (ODZ)</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div role="tabpanel" class="tab-pane" id="metromanila">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading"><h3 class="text-center">Metro Manila Rates</h3></div>
-
-                        <div class="panel-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th style="background: #f1e0ad">Weight</th>
-                                        <th style="background: #c7de77">Regular Shipment</th>
-                                        <th style="background: #c7de77">Food Items</th>
-                                        <th style="background: #cb90ce" colspan="3">FAST N VAST</th>
-                                        <th style="background: #4393b9" colspan="3">STEADY N BREEZY</th>
-                                    </tr>
-                                    <tr>
-                                        <td style="background: #f1e0ad"></td>
-                                        <td style="background: #c7de77"></td>
-                                        <td style="background: #c7de77"></td>
-                                        <th style="background: #cb90ce" colspan="3">More Servicable Areas, Shorter Transit Time</th>
-                                        <th style="background: #4393b9" colspan="3">Major Cities, Longer Transit Time, Cheaper Rates, COD Possible</th>
-                                    </tr>
-                                    <tr>
-                                        <td style="background: #f1e0ad"></td>
-                                        <th style="background: #c7de77" colspan="2">METRO MANILA</th>
-                                        <th style="background: #cb90ce">LUZ</th>
-                                        <th style="background: #cb90ce">VIZ</th>
-                                        <th style="background: #cb90ce">MIN</th>
-                                        <th style="background: #4393b9">LUZ</th>
-                                        <th style="background: #4393b9">VIZ</th>
-                                        <th style="background: #4393b9">MIN</th>
-                                    </tr>
-                                    <tr>
-                                        <th style="background: #b1d047" colspan="9">UNLIPOUCH</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td style="background: #f1e0ad">7 x 11 (S)</td>
-                                        <td style="background: #c7de77">38</td>
-                                        <td style="background: #c7de77"></td>
-                                        <td style="background: #cb90ce"></td>
-                                        <td style="background: #cb90ce"></td>
-                                        <td style="background: #cb90ce"></td>
-                                        <td style="background: #4393b9">90</td>
-                                        <td style="background: #4393b9">95</td>
-                                        <td style="background: #4393b9">100</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="background: #f1e0ad">9 x 14 (M)</td>
-                                        <td style="background: #c7de77">48</td>
-                                        <td style="background: #c7de77"></td>
-                                        <td style="background: #cb90ce">138</td>
-                                        <td style="background: #cb90ce">148</td>
-                                        <td style="background: #cb90ce">150</td>
-                                        <td style="background: #4393b9">95</td>
-                                        <td style="background: #4393b9">100</td>
-                                        <td style="background: #4393b9">120</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="background: #f1e0ad">11 x 17 (L)</td>
-                                        <td style="background: #c7de77">68</td>
-                                        <td style="background: #c7de77"></td>
-                                        <td style="background: #cb90ce">200</td>
-                                        <td style="background: #cb90ce">220</td>
-                                        <td style="background: #cb90ce">225</td>
-                                        <td style="background: #4393b9">100</td>
-                                        <td style="background: #4393b9">110</td>
-                                        <td style="background: #4393b9">130</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="background: #b1d047" colspan="9">OWN PACKAGING</th>
-                                    </tr>
-                                    <tr>
-                                        <td style="background: #f1e0ad">1.0</td>
-                                        <td style="background: #c7de77"></td>
-                                        <td style="background: #c7de77"></td>
-                                        <td style="background: #cb90ce" rowspan="3">200</td>
-                                        <td style="background: #cb90ce" rowspan="3">220</td>
-                                        <td style="background: #cb90ce" rowspan="3">225</td>
-                                        <td style="background: #4393b9">100</td>
-                                        <td style="background: #4393b9">110</td>
-                                        <td style="background: #4393b9">130</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="background: #f1e0ad">2.0</td>
-                                        <td style="background: #c7de77">48</td>
-                                        <td style="background: #c7de77"></td>
-                                        <td style="background: #4393b9">160</td>
-                                        <td style="background: #4393b9">175</td>
-                                        <td style="background: #4393b9">195</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="background: #f1e0ad">3.0</td>
-                                        <td style="background: #c7de77">68</td>
-                                        <td style="background: #c7de77">88</td>
-                                        <td style="background: #4393b9">205</td>
-                                        <td style="background: #4393b9">210</td>
-                                        <td style="background: #4393b9">260</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="background: #f1e0ad">Add on per kg</td>
-                                        <td style="background: #c7de77">25</td>
-                                        <td style="background: #c7de77">30</td>
-                                        <td style="background: #cb90ce">80</td>
-                                        <td style="background: #cb90ce">80</td>
-                                        <td style="background: #cb90ce">80</td>
-                                        <td style="background: #4393b9">75</td>
-                                        <td style="background: #4393b9">75</td>
-                                        <td style="background: #4393b9">75</td>
+                                        <td style="background: #C4D79B">Add on per kg</td>
+                                        <td>25</td>
+                                        <td></td>
+                                        <td>80</td>
+                                        <td></td>
+                                        <td>75</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -272,23 +102,23 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th style="background: #e27451" colspan="2">Service Add Ons</th>
+                                        <th style="background: #C5BE97" colspan="2">Service Add Ons</th>
                                     </tr>
                                     <tr>
-                                        <th style="background: #b1d047" colspan="2">Collect & Deposit (Metro Manila)</th>
+                                        <th style="background: #C2D69A" colspan="2">Collect & Deposit (Metro Manila)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th style="background: #f1e0ad">1st P 5000 of Declared Value</th>
+                                        <th>1st P 5000 of Declared Value</th>
                                         <td>50</td>
                                     </tr>
                                     <tr>
-                                        <th style="background: #f1e0ad"> > P 5000 Declared Value</th>
+                                        <th> > P 5000 Declared Value</th>
                                         <td>1.5% of total DV</td>
                                     </tr>
                                     <tr>
-                                        <th style="background: #f1e0ad">INSURANCE</th>
+                                        <th style="background: #C2D69A">INSURANCE</th>
                                         <td>P 15 for 1st P500, P 5 for the succeeding fraction of P 500</td>
                                     </tr>
                                 </tbody>
@@ -296,10 +126,11 @@
                             <div class="well text-left">
                                 <h4>NOTE</h4>
                                 <ul>
-                                    <li>All rates are VAT inclusive</li>
-                                    <li>Valuation/Insurance charge - P 15 for 1st P500, P 5 for the succeeding fraction</li>
                                     <li>Chargeable Weight - actual or volumetric weight whichever is higher (L x W x H cm / 3500)</li>
-                                    <li>Extra charges apply for Out of Delivery Zone (ODZ)</li>
+                                    <li>Dry ice/Ice gel, Styrofoam, plastic handles, and other supplies if needed should be used to provided protection for the goods.</li>
+                                    <li>Rates above do not include the supplies needed and will be charged accordingly.</li>
+                                    <li>Documentation (waybill with correct and complete information such as consignee details, destination), and items should be packaged properly and ready during the time of pickup to prevent delays.</li>
+                                    <li>Out of town deliveries will have corresponding surcharges accordingly.</li>
                                 </ul>
                             </div>
                         </div>
