@@ -2,7 +2,6 @@
 namespace App\Transformers\Customers;
 
 use App\Models\UserAddressbook;
-use App\User;
 use League\Fractal\TransformerAbstract;
 
 class AddressbookTransformer extends TransformerAbstract
@@ -13,11 +12,11 @@ class AddressbookTransformer extends TransformerAbstract
      * @param UserAddressbook $addressbook
      * @return array
      */
-    public function transform(UserAddressbook $addressbook)
+    public function transform($addressbook)
     {
         return [
-            'id'        => (int) $addressbook->id,
-            'user_id'   => (int) $addressbook->user_id,
+            'id'        => $addressbook->id,
+            'user_id'   => $addressbook->user_id,
             'identifier'    => $addressbook->identifier,
             'type'          => $addressbook->type,
             'first_name'    => $addressbook->first_name,
@@ -34,7 +33,7 @@ class AddressbookTransformer extends TransformerAbstract
             'country'           => $addressbook->country,
             'address_type'      => $addressbook->address_type,
             'landmarks'         => $addressbook->landmarks,
-            'primary'           => (boolean) $addressbook->primary,
+            'primary'           => $addressbook->primary,
             'links'   => [
                 [
                     'rel' => 'owner',

@@ -22,7 +22,7 @@ class AddressbooksController extends AbstractAPIController {
     public function all(Request $request, $userId)
     {
         // Check user
-        if (! $request->user()->id === $userId) {
+        if ($request->user()->id !== (int)$userId) {
             return $this->responseUnauthorized();
         }
 
@@ -30,7 +30,7 @@ class AddressbooksController extends AbstractAPIController {
         $filters = $this->getFilters($request, UserAddressbook::$filterables);
 
         // Create query
-        $model = UserAddressbook::query();
+        $model = UserAddressbook::where('user_id', $userId)->getQuery();
         $paginator = $this->filter($model, $filters);
 
         // Transform Result
@@ -40,6 +40,6 @@ class AddressbooksController extends AbstractAPIController {
         $result = $this->fractal->createData($resource);
 
         // Return response
-        return $this->responseOk($result);
+        return $this->responseOk($result->toArray());
     }
 }

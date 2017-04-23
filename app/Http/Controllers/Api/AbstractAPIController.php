@@ -31,11 +31,13 @@ abstract class AbstractAPIController extends BaseController
     protected function filter($query, $filters)
     {
         if (! count($filters)) {
-            return $query->paginate();
+            return $query->paginate(10);
         }
 
-        foreach ($filters as $filter) {
-
+        foreach ($filters as $key => $filter) {
+            $query->where($key, $filter);
         }
+
+        return $query->paginate(10);
     }
 }
