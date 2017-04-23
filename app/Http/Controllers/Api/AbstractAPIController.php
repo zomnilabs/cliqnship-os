@@ -18,4 +18,24 @@ abstract class AbstractAPIController extends BaseController
     {
         $this->fractal = $fractal;
     }
+
+    protected function getFilters($request, $filterables)
+    {
+        $filters = $request->all();
+        $filters = array_keys($filters);
+        $filters = array_intersect($filterables, $filters);
+
+        return $request->only($filters);
+    }
+
+    protected function filter($query, $filters)
+    {
+        if (! count($filters)) {
+            return $query->paginate();
+        }
+
+        foreach ($filters as $filter) {
+
+        }
+    }
 }
