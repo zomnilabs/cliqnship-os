@@ -12,6 +12,24 @@ class UserAddressbook extends Model
 
     protected $guarded = ['id'];
 
+    public static $filterables = [
+        'identifier',
+        'type',
+        'first_name',
+        'last_name',
+        'contact_number',
+        'email',
+        'address_line_1',
+        'barangay',
+        'city',
+        'province',
+        'zip_code',
+        'country',
+        'address_type',
+        'landmarks',
+        'primary'
+    ];
+
     public function bookings()
     {
         return $this->hasMany(Booking::class);

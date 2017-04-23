@@ -2,7 +2,6 @@
 namespace App\Http\Controllers\Api\Customers;
 
 use App\Http\Controllers\Api\AbstractAPIController;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\API\CustomerRegistrationRequests;
 use App\Traits\ApiResponse;
 use App\Transformers\Customers\UserTransformer;
