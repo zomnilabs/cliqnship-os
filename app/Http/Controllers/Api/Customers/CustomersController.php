@@ -7,7 +7,6 @@ use App\Traits\ApiResponse;
 use App\Transformers\Customers\UserTransformer;
 use App\User;
 use Illuminate\Http\Request;
-use League\Fractal\Resource\Item;
 
 class CustomersController extends AbstractAPIController {
     use ApiResponse;

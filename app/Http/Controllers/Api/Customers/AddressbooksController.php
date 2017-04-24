@@ -7,9 +7,6 @@ use App\Models\UserAddressbook;
 use App\Traits\ApiResponse;
 use App\Transformers\Customers\AddressbookTransformer;
 use Illuminate\Http\Request;
-use League\Fractal\Pagination\IlluminatePaginatorAdapter;
-use League\Fractal\Resource\Collection;
-use League\Fractal\Resource\Item;
 
 class AddressbooksController extends AbstractAPIController {
     use ApiResponse;
@@ -42,6 +39,14 @@ class AddressbooksController extends AbstractAPIController {
         return $this->responseOk($result->toArray());
     }
 
+    /**
+     * Get a specific addressbook
+     *
+     * @param Request $request
+     * @param $userId
+     * @param $addressbookId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show(Request $request, $userId, $addressbookId)
     {
         // Check user
@@ -65,6 +70,13 @@ class AddressbooksController extends AbstractAPIController {
         return $this->responseOk($result->toArray());
     }
 
+    /**
+     * Create a new addressbook
+     *
+     * @param CreateAddressbookRequest $request
+     * @param $userId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(CreateAddressbookRequest $request, $userId)
     {
         // Check user
@@ -74,15 +86,68 @@ class AddressbooksController extends AbstractAPIController {
 
         $input = $request->all();
 
+        $input['user_id'] = $userId;
         $address = UserAddressbook::create($input);
+
         if (! $address) {
             return $this->responseBadRequest(['something went wrong when creating a new addressbook']);
+        }
+
+        // Check if newly added address is a primary address
+        if ($address->primary && $address->type === 'shipment') {
+            // Update other primary
+            UserAddressbook::where('user_id', $userId)
+                ->where('primary', 1)
+                ->where('id', '!=', $address->id)
+                ->update(['primary', 0]);
         }
 
         // Transform Result
         $result = $this->transformItem($address, new AddressbookTransformer);
 
         // Return response
-        return $this->responseCreated($result);
+        return $this->responseCreated($result->toArray());
+    }
+
+    /**
+     * Update addressbook
+     *
+     * @param Request $request
+     * @param $userId
+     * @param $addressbookId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(Request $request, $userId, $addressbookId)
+    {
+        // Check user
+        if ($request->user()->id !== (int) $userId) {
+            return $this->responseUnauthorized();
+        }
+
+        $input = $request->all();
+
+        $address = UserAddressbook::where('user_id', $userId)
+            ->where('id', $addressbookId)
+            ->update($input);
+
+        if (! $address) {
+            return $this->responseBadRequest(['something went wrong when updating an addressbook']);
+        }
+
+        $address = UserAddressbook::find($addressbookId);
+        // Check if newly updated address is a primary address
+        if ($address->primary && $address->type === 'shipment') {
+            // Update other primary
+            UserAddressbook::where('user_id', $userId)
+                ->where('primary', 1)
+                ->where('id', '!=', $address->id)
+                ->update(['primary', 0]);
+        }
+
+        // Transform Result
+        $result = $this->transformItem($address, new AddressbookTransformer);
+
+        // Return response
+        return $this->responseCreated($result->toArray());
     }
 }
