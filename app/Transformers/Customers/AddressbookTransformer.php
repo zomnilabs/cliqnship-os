@@ -2,9 +2,10 @@
 namespace App\Transformers\Customers;
 
 use App\Models\UserAddressbook;
+use App\Transformers\Transformerable;
 use League\Fractal\TransformerAbstract;
 
-class AddressbookTransformer extends TransformerAbstract
+class AddressbookTransformer extends TransformerAbstract implements Transformerable
 {
     /**
      * Transform user object
@@ -35,6 +36,10 @@ class AddressbookTransformer extends TransformerAbstract
             'landmarks'         => $addressbook->landmarks,
             'primary'           => $addressbook->primary,
             'links'   => [
+                [
+                    'rel'   => 'self',
+                    'uri'   => url('/api/v1/customers/'.$addressbook->user_id.'/addressbooks/'.$addressbook->id)
+                ],
                 [
                     'rel' => 'owner',
                     'uri' => url('/api/v1/customers/'.$addressbook->user_id),
