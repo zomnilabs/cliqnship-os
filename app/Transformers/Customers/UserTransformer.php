@@ -1,10 +1,11 @@
 <?php
 namespace App\Transformers\Customers;
 
+use App\Transformers\Transformerable;
 use App\User;
 use League\Fractal\TransformerAbstract;
 
-class UserTransformer extends TransformerAbstract
+class UserTransformer extends TransformerAbstract implements Transformerable
 {
     /**
      * Transform user object
