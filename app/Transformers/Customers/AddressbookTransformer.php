@@ -37,7 +37,7 @@ class AddressbookTransformer extends TransformerAbstract
             'links'   => [
                 [
                     'rel' => 'owner',
-                    'uri' => '/api/v1/customers/'.$addressbook->user_id,
+                    'uri' => url('/api/v1/customers/'.$addressbook->user_id),
                 ]
             ]
         ];

@@ -66,4 +66,9 @@ class AddressbooksController extends AbstractAPIController {
 
         return $this->responseOk($result->toArray());
     }
+
+    public function store($userId)
+    {
+
+    }
 }

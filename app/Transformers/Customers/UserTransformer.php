@@ -27,19 +27,19 @@ class UserTransformer extends TransformerAbstract
             'links'   => [
                 [
                     'rel' => 'self',
-                    'uri' => '/api/v1/customers/'.$user->id,
+                    'uri' => url('/api/v1/customers/'.$user->id),
                 ],
                 [
                     'rel' => 'addressbooks',
-                    'uri' => '/api/v1/customers/'.$user->id.'/addressbooks',
+                    'uri' => url('/api/v1/customers/'.$user->id.'/addressbooks'),
                 ],
                 [
                     'rel' => 'bookings',
-                    'uri' => '/api/v1/customers/'.$user->id.'/bookings',
+                    'uri' => url('/api/v1/customers/'.$user->id.'/bookings'),
                 ],
                 [
                     'rel' => 'shipments',
-                    'uri' => '/api/v1/customers/'.$user->id.'/shipments',
+                    'uri' => url('/api/v1/customers/'.$user->id.'/shipments'),
                 ]
             ]
         ];
