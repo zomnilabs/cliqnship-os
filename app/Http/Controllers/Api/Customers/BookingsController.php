@@ -1,32 +1,35 @@
 <?php
 namespace App\Http\Controllers\Api\Customers;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\AbstractAPIController;
+use App\Models\Booking;
+use App\Traits\ApiResponse;
+use App\Transformers\Customers\BookingsTransformer;
 use Illuminate\Http\Request;
 
-class BookingsController extends Controller {
-    public function all(Request $request)
+class BookingsController extends AbstractAPIController {
+    use ApiResponse;
+
+    public function all(Request $request, $userId)
     {
-        $user = $request->user();
+        // Check user
+        if ($request->user()->id !== (int)$userId) {
+            return $this->responseUnauthorized();
+        }
+
+        // Get filters
+        $filters = $this->getFilters($request, Booking::$filterables);
+
+        // Create query
+        $model = Booking::where('id', $userId)->getQuery();
+        $paginator = $this->filter($model, $filters);
+
+        // Transform Result
+        $result = $this->transformCollection($paginator, new BookingsTransformer);
+
+        // Return response
+        return $this->responseOk($result->toArray());
     }
 
-    public function findById($bookingId)
-    {
 
-    }
-
-    public function createBooking()
-    {
-
-    }
-
-    public function updateBooking($bookingId)
-    {
-
-    }
-
-    public function updateStatus($bookingId)
-    {
-
-    }
 }

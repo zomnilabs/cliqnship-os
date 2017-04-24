@@ -12,6 +12,15 @@ class Booking extends Model
 
     protected $guarded = ['id'];
 
+    public static $filterables = [
+        'source_id',
+        'user_addressbook_id',
+        'status',
+        'pickup_date',
+        'number_of_items',
+        'type_of_items'
+    ];
+
     public function address()
     {
         return $this->belongsTo(UserAddressbook::class, 'user_addressbook_id');
