@@ -60,8 +60,7 @@ class CustomersController extends AbstractAPIController {
         }
 
         // Transform Result
-        $result = new Item($result, new UserTransformer);
-        $result = $this->fractal->createData($result);
+        $result = $this->transformItem($result, new UserTransformer);
 
         return $this->responseCreated($result->toArray());
     }
@@ -91,8 +90,8 @@ class CustomersController extends AbstractAPIController {
             return $this->responseNotFound();
         }
 
-        $result = new Item($result, new UserTransformer);
-        $result = $this->fractal->createData($result);
+        // Transform result
+        $result = $this->transformItem($result, new UserTransformer);
 
         return $this->responseOk($result->toArray());
     }
