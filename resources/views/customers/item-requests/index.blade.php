@@ -13,6 +13,7 @@
 
 @section('scripts')
     <script>
+
         // Prepare reset.
         function resetModalFormErrors() {
             $('.form-group').removeClass('has-error');
@@ -30,26 +31,41 @@
             resetModalFormErrors();
             clearformData('dataField');
         });
-        //deleting data
-        $('.delRequest').click(function () {
-            var id = $(this).val();
-            var parent = $('#itemRequests-'+id);
-            $.ajax({
-                type: "delete",
-                url: '/customers/item-requests/'+ $(this).val(),
-                beforeSend: function() {
-                    parent.css('backgroundColor','#fb6c6c');
-                },
-                success: function(){
-                    parent.fadeOut(400,function() {
-                        parent.remove();
-                    });
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                }
+
+        $(function() {
+            
+            var deleteId;
+
+            var table = $('#requestsTable').DataTable();
+
+            var $that;
+
+            $(document).on('click', '.delRequest', function(e){
+                deleteId = $(this).attr('data-item');
+                $that = $(this);
+            });
+
+            $('.deleteBtn').click(function () {
+                var rowSelected = $that.parent().parent();
+                
+                $.ajax({
+                    type: "delete",
+                    url: '/customers/item-requests/'+ deleteId,
+                    beforeSend: function() {
+                        rowSelected.css('backgroundColor','#fb6c6c');
+                    },
+                    success: function(){
+                        rowSelected.fadeOut(400,function() {
+                            that.remove();
+                        });
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
             });
         });
+
         //checking if what modal will use
         function viewModalForm(data = false){
             (data) ? viewData(data) : viewNewForm();
@@ -198,12 +214,12 @@
                     <div class="panel-body">
                         @include('components.errors')
 
-                        <table class="table table-bordered" style="width: 100%">
+                        <table class="table table-bordered" style="width: 100%" id="requestsTable">
                             <tfoot class="filter-footer">
                                 <tr class="searchable">
                                     <td>Id #</td>
                                     <td>Address</td>
-                                    <td>Size</td>
+                                    <td>Item</td>
                                     <td>Quantity</td>
                                     <td>Status</td>
                                     <td></td>
@@ -214,7 +230,7 @@
                                 <tr>
                                     <th>Id #</th>
                                     <th>Address</th>
-                                    <th>Size</th>
+                                    <th>Item</th>
                                     <th>Quantity</th>
                                     <th>Status</th>
                                     <th>Actions</th>
@@ -226,11 +242,12 @@
                                     <tr id="itemRequests-{{$itemRequest->id}}">
                                         <td>{{$itemRequest->id}}</td>
                                         <td>{{ $itemRequest->address->getFullAddress() }}</td>
-                                        <td>{{ ucwords($itemRequest->size) }}</td>
+                                        <td>{{ ucwords($itemRequest->item->name) }}</td>
                                         <td>{{$itemRequest->quantity}}</td>
                                         <td>{{$itemRequest->status}}</td>
                                         <td>
-                                            <button class="btn btn-danger delRequest" value="{{$itemRequest->id}}"><i class="fa fa-trash"></i></button>
+                                            <button class="btn btn-danger delRequest" data-item="{{$itemRequest->id}}"
+                                                data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></button>
                                             <button class="btn btn-default"
                                                     data-toggle="modal"
                                                     data-target="#viewItemRequest"
@@ -247,4 +264,5 @@
     </div>
 
     @include('customers.item-requests.modals.view')
+    @include('customers.item-requests.modals.delete')
 @endsection

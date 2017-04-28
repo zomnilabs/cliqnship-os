@@ -8,19 +8,29 @@
     <script>
         (function() {
 
-            //deleting data
-            $('.delBooking').click(function () {
-                var id = $(this).val();
-                var parent = $('#booking-'+id);
+            var deleteId;
+
+            var table = $('#bookingTable').DataTable();
+
+            var $that;
+
+            $(document).on('click', '.delBooking', function(e){
+                deleteId = $(this).attr('data-item');
+                $that = $(this);
+            });
+
+            $('.deleteBtn').click(function () {
+                var rowSelected = $that.parent().parent();
+                
                 $.ajax({
                     type: "delete",
-                    url: '/customers/bookings/'+ $(this).val(),
+                    url: '/customers/bookings/'+ deleteId,
                     beforeSend: function() {
-                        parent.css('backgroundColor','#fb6c6c');
+                        rowSelected.css('backgroundColor','#fb6c6c');
                     },
                     success: function(){
-                        parent.fadeOut(400,function() {
-                            parent.remove();
+                        rowSelected.fadeOut(400,function() {
+                            that.remove();
                         });
                     },
                     error: function (data) {
@@ -54,8 +64,6 @@
 
                 }
             });
-
-            let table = $('#bookingTable').DataTable();
 
             // Apply the search
             table.columns().every( function () {
@@ -168,7 +176,8 @@
                                     <td>{{ $booking->remarks }}</td>
                                     <td>{{ $booking->status }}</td>
                                     <th>
-                                        <button class="btn btn-danger delBooking" value="{{ $booking->id }}"><i class="fa fa-trash"></i></button>
+                                        <button class="btn btn-danger delBooking" data-item="{{ $booking->id }}" 
+                                            data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></button>
                                         <button class="btn btn-default"><i class="fa fa-edit"></i></button>
                                     </th>
                                 </tr>
@@ -191,6 +200,7 @@
 
     <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
     @include('customers.bookings.modals.import')
+    @include('customers.bookings.modals.delete')
 @endsection
 
 @section('scripts')

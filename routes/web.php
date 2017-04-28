@@ -109,6 +109,13 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
         Route::delete('/{userId}', 'UsersController@destroy');
     });
 
+    Route::group(['prefix' => 'items', 'namespace' => 'Items'], function() {
+        Route::get('/', 'ItemsController@index');
+        Route::post('/', 'ItemsController@store');
+        Route::put('/{itemId}', 'ItemsController@update');
+        Route::delete('/{itemId}', 'ItemsController@destroy');
+    });
+
     Route::group(['prefix' => 'bookings', 'namespace' => 'Bookings'], function() {
         Route::get('/', 'BookingsController@index');
     });

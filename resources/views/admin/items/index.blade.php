@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('stylesheets')
     <style>
@@ -35,11 +35,11 @@
             
             var deleteId;
 
-            var table = $('#requestsTable').DataTable();
+            var table = $('#itemTable').DataTable();
 
             var $that;
 
-            $(document).on('click', '.delAddressbook', function(e){
+            $(document).on('click', '.delItem', function(e){
                 deleteId = $(this).attr('data-item');
                 $that = $(this);
             });
@@ -49,7 +49,7 @@
                 
                 $.ajax({
                     type: "delete",
-                    url: '/customers/addressbooks/'+ deleteId,
+                    url: '/admin/items/'+ deleteId,
                     beforeSend: function() {
                         rowSelected.css('backgroundColor','#fb6c6c');
                     },
@@ -75,8 +75,8 @@
             var formButton = document.getElementById("formSubmit");
             formButton.removeAttribute('name');
             formButton.removeAttribute('value');
-            document.getElementById('modalTitle').innerHTML = 'Create Addressbook';
-            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"></i> '+'Save Addressbook';
+            document.getElementById('modalTitle').innerHTML = 'Create Item';
+            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"></i> '+'Save Item';
         }
 
         //Transfer all data to modal or edit
@@ -92,14 +92,11 @@
                 }
             }
             var formButton = document.getElementById('formSubmit');
-            var checkbox = document.getElementById('primary');
-            //checking for checkbox
-            (data.primary == 1) ? checkbox.setAttribute('checked', true) : checkbox.removeAttribute('checked', false);
             //Change HTML display for Update
             formButton.value = data.id;
             formButton.setAttribute('name','edit');
-            document.getElementById('modalTitle').innerHTML = 'Update Addressbook';
-            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"></i> '+ 'Update Addressbook';
+            document.getElementById('modalTitle').innerHTML = 'Update Item';
+            document.getElementById('formSubmit').innerHTML = '<i class="fa fa-floppy-o"></i> '+ 'Update Item';
 
         }
         //Save or update data
@@ -109,19 +106,16 @@
             for(var i = 0; i< formData.length;i++){
                 list[formData[i].name]= formData[i].value;
             }
-            // if checkbox is check
-            var checkbox = document.getElementById('primary');
-            (checkbox.checked) ? list.primary = 1 : list.primary = 0;
-
             //used to determine the http verb to use [add=POST], [update=PUT]
             var state = this.name;
             var type = 'POST'; //for creating new resource
-            var url = '/customers/addressbooks/';
+            var url = '/admin/items/';
 
             if (state == "edit"){
                 type = 'PUT';
                 url += this.value;
             }
+
             console.log(list);
             $.ajax({
                 type: type,
@@ -131,7 +125,7 @@
                     location.reload();
                 },
                 error: function(data) {
-                    console.log('Error:', data);
+                    console.log('Error: ', data);
                 }
             }).always(function(err){
                 resetModalFormErrors();
@@ -154,25 +148,6 @@
                 let title = $(this).text();
                 if (title) {
                     switch (title) {
-                        case 'Type':
-                            let selectHTML = '<select class="form-control filter" style="width: 100%">';
-                            selectHTML += '<option>Filter Type</option>';
-                            selectHTML += '<option value="booking">Booking</option>';
-                            selectHTML += '<option value="shipment">Shipment</option>';
-                            selectHTML += '</select>';
-
-                            $(this).html(selectHTML);
-
-                            break;
-                        case 'Address Type':
-                            let selectHTML2 = '<select class="form-control filter" style="width: 100%">';
-                            selectHTML2 += '<option>Filter Address Type</option>';
-                            selectHTML2 += '<option value="office">Office</option>';
-                            selectHTML2 += '<option value="residential">Residential</option>';
-                            selectHTML2 += '</select>';
-
-                            $(this).html(selectHTML2);
-                            break;
                         default:
                             $(this).html( '<input class="form-control filter" type="text" style="width: 100%" placeholder="Search '+title+'" />' );
                     }
@@ -196,25 +171,24 @@
         }())
     </script>
 @endsection
-
 @section('content')
     <div class="header-info container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcrumbs">
                     <ol class="breadcrumb">
-                        <li><a href="/customers">Dashboard</a></li>
-                        <li class="active">Addressbooks</li>
+                        <li><a href="/admin">Dashboard</a></li>
+                        <li class="active">Items</li>
                     </ol>
                 </div>
                 <div class="header-title pull-left">
-                    <h1>Addressbooks</h1>
+                    <h1>Items</h1>
                 </div>
 
                 <div class="page-actions pull-right">
-                    <button data-toggle="modal" data-target="#viewAddressbookModal" class="btn btn-primary" onclick="viewModalForm()">
+                    <button data-toggle="modal" data-target="#viewItemModal" class="btn btn-primary" onclick="viewModalForm()">
                         <i class="glyphicon glyphicon-plus"></i>
-                        New Addressbooks</button>
+                        New Item</button>
                 </div>
             </div>
         </div>
@@ -226,54 +200,40 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         @include('components.errors')
-
-                        <table class="table table-bordered" style="width: 100%">
+                        <table class="table table-bordered" id="itemTable">
                             <tfoot class="filter-footer">
                                 <tr class="searchable">
                                     <td>Id #</td>
                                     <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Address Type</td>
-                                    <td>Address</td>
-                                    <td>Contact #</td>
-                                    <td>Email Address</td>
-                                    <td></td>
+                                    <td>Actions</td>
                                 </tr>
                             </tfoot>
 
                             <thead>
                                 <tr>
                                     <th>Id #</th>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Address Type</th>
-                                    <th>Address</th>
-                                    <th>Contact #</th>
-                                    <th>Email Address</th>
+                                    <td>Name</td>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                @foreach($addressbooks as $addressbook)
-                                    <tr id="addressbook-{{$addressbook->id}}">
-                                        <td>{{$addressbook->id}}</td>
-                                        <td>{{$addressbook->first_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>
-                                        <td>{{ ucwords($addressbook->type) }}</td>
-                                        <td>{{ ucwords($addressbook->address_type) }}</td>
-                                        <td>{{$addressbook->address_line_1}}</td>
-                                        <td>{{$addressbook->contact_number}}</td>
-                                        <td>{{$addressbook->email}}</td>
+                            @if($items)
+                                @foreach($items as $item)
+                                    <tr id="item-{{$item->id}}">
+                                        <td>{{$item->id}}</td>
+                                        <td>{{$item->name}}</td>
                                         <td>
-                                            <button class="btn btn-danger delAddressbook" data-item="{{$addressbook->id}}"
+                                            <button class="btn btn-danger delItem" data-item="{{$item->id}}"
                                                 data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></button>
                                             <button class="btn btn-default"
                                                     data-toggle="modal"
-                                                    data-target="#viewAddressbookModal"
-                                                    onClick="viewModalForm({{$addressbook}})"><i class="fa fa-edit"></i></button>
+                                                    data-target="#viewItemModal"
+                                                    onClick="viewModalForm({{$item}})"><i class="fa fa-edit"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
+                            @endif
                             </tbody>
                         </table>
                     </div>
@@ -281,6 +241,6 @@
             </div>
         </div>
     </div>
-    @include('customers.addressbooks.modals.view')
-    @include('customers.addressbooks.modals.delete')
+    @include('admin.items.modals.view')
+    @include('admin.items.modals.delete')
 @endsection

@@ -30,26 +30,41 @@
             resetModalFormErrors();
             clearformData('dataField');
         });
-        //deleting data
-        $('.delRider').click(function () {
-            var id = $(this).val();
-            var parent = $('#rider-'+id);
-            $.ajax({
-                type: "delete",
-                url: '/admin/riders/'+ $(this).val(),
-                beforeSend: function() {
-                    parent.css('backgroundColor','#fb6c6c');
-                },
-                success: function(){
-                    parent.fadeOut(400,function() {
-                        parent.remove();
-                    });
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                }
+
+        $(function() {
+            
+            var deleteId;
+
+            var table = $('#ridersTable').DataTable();
+
+            var $that;
+
+            $(document).on('click', '.delRider', function(e){
+                deleteId = $(this).attr('data-item');
+                $that = $(this);
+            });
+
+            $('.deleteBtn').click(function () {
+                var rowSelected = $that.parent().parent();
+                
+                $.ajax({
+                    type: "delete",
+                    url: '/admin/riders/'+ deleteId,
+                    beforeSend: function() {
+                        rowSelected.css('backgroundColor','#fb6c6c');
+                    },
+                    success: function(){
+                        rowSelected.fadeOut(400,function() {
+                            that.remove();
+                        });
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
             });
         });
+
         //checking if what modal will use
         function viewModalForm(data = false){
             (data) ? viewData(data) : viewNewForm();
@@ -217,7 +232,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         @include('components.errors')
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" id="ridersTable">
                             <tfoot class="filter-footer">
                                 <tr class="searchable">
                                     <td>Id #</td>
@@ -247,7 +262,8 @@
                                         <td>{{$rider->profile->full_name}}</td>
                                         <td>{{$rider->email or ''}}</td>
                                         <td>
-                                            <button class="btn btn-danger delRider" value="{{$rider->id}}"><i class="fa fa-trash"></i></button>
+                                            <button class="btn btn-danger delRider" data-item="{{$rider->id}}"
+                                                data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></button>
                                             <button class="btn btn-default"
                                                     data-toggle="modal"
                                                     data-target="#viewRiderModal"
@@ -264,4 +280,5 @@
         </div>
     </div>
     @include('admin.riders.modals.view')
+    @include('admin.riders.modals.delete')
 @endsection
