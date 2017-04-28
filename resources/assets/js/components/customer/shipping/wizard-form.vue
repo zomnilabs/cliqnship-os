@@ -61,7 +61,14 @@
                         <div class="tab-content">
                             <div class="tab-pane active" role="tabpanel" id="step1">
                                 <h3>Step 1</h3>
-                                <p>Which address would you like to set for this shipment?</p>
+
+                                <p>From: </p>
+
+                                <div class="form-group">
+                                    <v-select :on-change="bookingSelected" :options="fromOptions"></v-select>
+                                </div>
+
+                                <p>To: </p>
 
                                 <div class="form-group">
                                     <v-select :on-change="addressSelected" :options="addressbookOptions"></v-select>
@@ -274,11 +281,11 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="pickup_address">FROM</label>
-                                        <p>{{ addressPreview }}</p>
+                                        <p>{{ addressFromPreview }}</p>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="pickup_address">TO</label>
-                                        <p>{{ addressPreview }}</p>
+                                        <p>{{ addressToPreview }}</p>
                                     </div>
                                     <div class="col-md-12">
                                         <h4>Package Details</h4>
@@ -365,10 +372,13 @@
                 showError: false,
                 errorMessage: '',
                 tabPage: 1,
-                user_addressbook_id: '',
+                to: '',
                 addressbooks: [],
+                from: [],
+                fromOptions: [],
                 addressbookOptions: [],
-                addressPreview: '',
+                addressFromPreview: '',
+                addressToPreview: '',
                 shippingImage: '',
                 number_of_items: '',
                 type_of_items: '',
@@ -396,6 +406,7 @@
             this.user_id = $('#user_id').val();
 
             this.getAddress()
+            this.getBookingAddress()
         },
         methods: {
             refreshPage() {
@@ -445,17 +456,28 @@
             },
             addressSelected(val) {
                 if (! val) {
-                    this.user_addressbook_id = 0
-                    this.addressPreview = ''
+                    this.to = 0
+                    this.addressToPreview = ''
 
                     return false
                 };
 
-                this.user_addressbook_id = val.value
-                this.addressPreview = val.label
+                this.to = val.value
+                this.addressToPreview = val.label
+            },
+            bookingSelected(val) {
+                if (! val) {
+                    this.from = 0
+                    this.addressFromPreview = ''
+
+                    return false
+                };
+
+                this.from = val.value
+                this.addressFromPreview = val.label
             },
             nextTab() {
-                if (! this.user_addressbook_id) {
+                if (! this.to && ! this.from) {
                     this.showError = true;
                     this.errorMessage = 'Please select a pickup address';
 
@@ -475,6 +497,17 @@
                 $($active).prev().find('a[data-toggle="tab"]').click();
 
                 this.tabPage--;
+            },
+            getBookingAddress() {
+                axios.get(`/api/v1/address-books/${this.user_id}?type=booking`).then(response => {
+                    let from = response.data;
+
+                    for (let address of from) {
+                        this.fromOptions.push({label: `${address.identifier} : ${address.address_line_1}, ${address.barangay}, ${address.city}`, value: address.id});
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
             },
             getAddress() {
                 axios.get(`/api/v1/address-books/${this.user_id}?type=shipment`).then(response => {
@@ -504,9 +537,11 @@
             saveProject(e) {
 
                 let data = {
-                    user_addressbook: {
-                        id: this.user_addressbook_id
-                    },
+                    // user_addressbook: {
+                        // id: this.user_addressbook_id
+                    // },
+                    to: this.to,
+                    from: this.from,
 //                    shippingImage: this.shippingImage,
                     number_of_items: this.number_of_items,
                     item_description: this.type_of_items,
