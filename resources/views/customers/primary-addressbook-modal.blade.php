@@ -63,7 +63,7 @@
                         <div class="col-md-4">
                             <div class="form-group{{ $errors->has('middle_name') ? ' has-error' : '' }}">
                                 <label for="middle_name">Middle Name</label>
-                                <input type="text" class="form-control" name="middle_name" id="middle_name" required/>
+                                <input type="text" class="form-control" name="middle_name" id="middle_name"/>
                                 @if ($errors->has('middle_name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('middle_name') }}</strong>
@@ -183,7 +183,7 @@
                         <div class="col-md-3">
                             <div class="form-group{{ $errors->has('landmarks') ? ' has-error' : '' }}">
                                 <label for="landmarks">Landmarks</label>
-                                <input type="text" class="form-control" name="landmarks" id="landmarks" required/>
+                                <input type="text" class="form-control" name="landmarks" id="landmarks"/>
                                 @if ($errors->has('landmarks'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('landmarks') }}</strong>
