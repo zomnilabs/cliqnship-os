@@ -8,9 +8,9 @@
             <form encType="multipart/form-data" action="/customers/bookings/import" method="POST">
                 <div class="modal-body">
                     <h4>Templates</h4>
-                    If you want to import bookings using a new address, download this template -> <a href="#">Booking With New Address XLSX Template</a>
+                    If you want to import bookings using a new address, download this template -> <a target="_blank" href="/templates/customers/booking-with-new-pickup-address.xlsx">Booking With New Address XLSX Template</a>
                     <br>
-                    If you want to import bookings using your primary address, download this template -> <a href="#">Booking Using Primary Address XLSX Template</a>
+                    If you want to import bookings using your primary address, download this template -> <a target="_blank" href="/templates/customers/booking-using-primary-address.xlsx">Booking Using Primary Address XLSX Template</a>
                     <br>
                     <br>
 
