@@ -30,26 +30,41 @@
             resetModalFormErrors();
             clearformData('dataField');
         });
-        //deleting data
-        $('.delCustomer').click(function () {
-            var id = $(this).val();
-            var parent = $('#customer-'+id);
-            $.ajax({
-                type: "delete",
-                url: '/admin/customers/'+ $(this).val(),
-                beforeSend: function() {
-                    parent.css('backgroundColor','#fb6c6c');
-                },
-                success: function(){
-                    parent.fadeOut(400,function() {
-                        parent.remove();
-                    });
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                }
+
+        $(function() {
+            
+            var deleteId;
+
+            var table = $('#customerTable').DataTable();
+
+            var $that;
+
+            $(document).on('click', '.delCustomer', function(e){
+                deleteId = $(this).attr('data-item');
+                $that = $(this);
+            });
+
+            $('.deleteBtn').click(function () {
+                var rowSelected = $that.parent().parent();
+                
+                $.ajax({
+                    type: "delete",
+                    url: '/admin/customers/'+ deleteId,
+                    beforeSend: function() {
+                        rowSelected.css('backgroundColor','#fb6c6c');
+                    },
+                    success: function(){
+                        rowSelected.fadeOut(400,function() {
+                            that.remove();
+                        });
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
             });
         });
+        
         //checking if what modal will use
         function viewModalForm(data = false){
             (data) ? viewData(data) : viewNewForm();
@@ -254,7 +269,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         @include('components.errors')
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" id="customerTable">
                             <tfoot class="filter-footer">
                                 <tr class="searchable">
                                     <td>Id #</td>
@@ -284,7 +299,8 @@
                                         <td>{{$customer->profile->last_name}} {{$customer->profile->middle_name}} {{$customer->profile->first_name}}</td>
                                         <td>{{$customer->email or ''}}</td>
                                         <td>
-                                            <button class="btn btn-danger delCustomer" value="{{$customer->id}}"><i class="fa fa-trash"></i></button>
+                                            <button class="btn btn-danger delCustomer" data-item="{{$customer->id}}"
+                                                data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></button>
                                             <button class="btn btn-info"
                                                     data-toggle="modal"
                                                     data-target="#historyModal"
@@ -307,5 +323,6 @@
         </div>
     </div>
     @include('admin.customers.modals.view')
+    @include('admin.customers.modals.delete')
     @include('admin.customers.modals.history')
 @endsection

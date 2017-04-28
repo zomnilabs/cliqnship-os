@@ -177,6 +177,9 @@
                     <li class="{{ set_active(['admin/shipments*']) }}">
                         <a href="/admin/shipments"><i class="fa fa-truck"></i> <span>Shipments</span></a>
                     </li>
+                    <li class="{{ set_active(['admin/items*']) }}">
+                        <a href="/admin/items"><i class="fa fa-archive"></i> <span>Items</span></a>
+                    </li>
                     <li class="{{ set_active(['admin/reports*']) }}">
                         <a href="/admin/reports"><i class="fa fa-bar-chart-o"></i> <span>Reports</span></a>
                     </li>

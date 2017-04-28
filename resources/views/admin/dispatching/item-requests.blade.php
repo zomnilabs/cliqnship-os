@@ -73,7 +73,7 @@
                             <tr class="searchable">
                                 <td>Id #</td>
                                 <td>Address</td>
-                                <td>Size</td>
+                                <td>Item</td>
                                 <td>Quantity</td>
                                 <td>Source Type</td>
                                 <td></td>
@@ -83,7 +83,7 @@
                             <tr>
                                 <th>Id #</th>
                                 <th>Address</th>
-                                <th>Size</th>
+                                <th>Item</th>
                                 <th>Quantity</th>
                                 <th>Source Type</th>
                                 <th>Actions</th>
@@ -95,7 +95,7 @@
                                 <tr>
                                     <td>{{ $itemRequest->id }}</td>
                                     <td>{{ $itemRequest->address->getFullAddress() }}</td>
-                                    <td>{{ $itemRequest->size }}</td>
+                                    <td>{{ $itemRequest->item->name }}</td>
                                     <td>{{ $itemRequest->quantity }}</td>
                                     <td>{{ $itemRequest->source->name or ''}}</td>
                                     <td>
