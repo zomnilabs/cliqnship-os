@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customers\ItemRequests;
 use App\Http\Controllers\Controller;
 use App\Models\ItemRequest;
 use App\Models\UserAddressbook;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class ItemRequestsController extends Controller
@@ -12,10 +13,11 @@ class ItemRequestsController extends Controller
     public function index(Request $request)
     {
         $user = $request->user()->toArray();
+        $items = Item::all();
         $itemRequests = ItemRequest::where('user_id', $user['id'])->get();
         $address = UserAddressbook::where('user_id', $user['id'])->get();
 
-        return view('customers.item-requests.index', compact('itemRequests', 'address'));
+        return view('customers.item-requests.index', compact('itemRequests', 'address', 'items'));
     }
 
     public function store(Request $request)
