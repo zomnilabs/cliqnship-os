@@ -30,16 +30,16 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group{{ $errors->has('size') ? ' has-error' : '' }}">
-                                <label for="size">Size <span class="text-danger">*</span></label>
-                                <select name="size" class="form-control dataField" id="size">
-                                    <option value="small">Small</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="large">Large</option>
+                            <div class="form-group{{ $errors->has('item_id') ? ' has-error' : '' }}">
+                                <label for="item_id">Item Type <span class="text-danger">*</span></label>
+                                <select name="item_id" class="form-control dataField" id="item_id">
+                                    @foreach($items as $i)
+                                        <option value="{{ $i->id }}">{{ $i->name }}</option>
+                                    @endforeach
                                 </select>
-                                @if ($errors->has('size'))
+                                @if ($errors->has('item_id'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('size') }}</strong>
+                                        <strong>{{ $errors->first('item_id') }}</strong>
                                     </span>
                                 @endif
                             </div>

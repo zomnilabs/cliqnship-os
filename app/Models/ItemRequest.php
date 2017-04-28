@@ -20,4 +20,9 @@ class ItemRequest extends Model
     {
         return $this->belongsTo(Source::class);
     }
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
 }

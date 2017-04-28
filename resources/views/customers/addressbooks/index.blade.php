@@ -30,26 +30,41 @@
             resetModalFormErrors();
             clearformData('dataField');
         });
-        //deleting data
-        $('.delAddressbook').click(function () {
-            var id = $(this).val();
-            var parent = $('#addressbook-'+id);
-            $.ajax({
-                type: "delete",
-                url: '/customers/addressbooks/'+ $(this).val(),
-                beforeSend: function() {
-                    parent.css('backgroundColor','#fb6c6c');
-                },
-                success: function(){
-                    parent.fadeOut(400,function() {
-                        parent.remove();
-                    });
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                }
+
+        $(function() {
+            
+            var deleteId;
+
+            var table = $('#requestsTable').DataTable();
+
+            var $that;
+
+            $(document).on('click', '.delAddressbook', function(e){
+                deleteId = $(this).attr('data-item');
+                $that = $(this);
+            });
+
+            $('.deleteBtn').click(function () {
+                var rowSelected = $that.parent().parent();
+                
+                $.ajax({
+                    type: "delete",
+                    url: '/customers/addressbooks/'+ deleteId,
+                    beforeSend: function() {
+                        rowSelected.css('backgroundColor','#fb6c6c');
+                    },
+                    success: function(){
+                        rowSelected.fadeOut(400,function() {
+                            that.remove();
+                        });
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
             });
         });
+
         //checking if what modal will use
         function viewModalForm(data = false){
             (data) ? viewData(data) : viewNewForm();
@@ -250,7 +265,8 @@
                                         <td>{{$addressbook->contact_number}}</td>
                                         <td>{{$addressbook->email}}</td>
                                         <td>
-                                            <button class="btn btn-danger delAddressbook" value="{{$addressbook->id}}"><i class="fa fa-trash"></i></button>
+                                            <button class="btn btn-danger delAddressbook" data-item="{{$addressbook->id}}"
+                                                data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></button>
                                             <button class="btn btn-default"
                                                     data-toggle="modal"
                                                     data-target="#viewAddressbookModal"
@@ -266,4 +282,5 @@
         </div>
     </div>
     @include('customers.addressbooks.modals.view')
+    @include('customers.addressbooks.modals.delete')
 @endsection
