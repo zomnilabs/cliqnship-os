@@ -231,6 +231,7 @@
                             <tfoot class="filter-footer">
                                 <tr class="searchable">
                                     <td>Id #</td>
+                                    <td>Identifier</td>
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Address Type</td>
@@ -244,6 +245,7 @@
                             <thead>
                                 <tr>
                                     <th>Id #</th>
+                                    <td>Identifier</td>
                                     <th>Name</th>
                                     <th>Type</th>
                                     <th>Address Type</th>
@@ -258,6 +260,7 @@
                                 @foreach($addressbooks as $addressbook)
                                     <tr id="addressbook-{{$addressbook->id}}">
                                         <td>{{$addressbook->id}}</td>
+                                        <td>{{ $addressbook->identifier }}</td>
                                         <td>{{$addressbook->first_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>
                                         <td>{{ ucwords($addressbook->type) }}</td>
                                         <td>{{ ucwords($addressbook->address_type) }}</td>
