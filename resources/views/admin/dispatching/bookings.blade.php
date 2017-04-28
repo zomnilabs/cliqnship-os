@@ -45,7 +45,25 @@
                 }
             });
 
-            let table = $('#bookingTable').DataTable();
+            let riders = [];
+            @foreach ($riders as $rider)
+                riders.push({
+                value: {{ $rider->id }},
+                text: '{{ $rider->profile->full_name }}'
+            });
+            @endforeach
+                
+            $.fn.editable.defaults.mode = 'inline';
+            let table = $('#bookingTable').DataTable({
+                drawCallback: function() {
+                    $('.change_rider').editable({
+                        type: 'select',
+                        name: 'rider',
+                        title: 'Change Rider',
+                        source: riders
+                    });
+                }
+            });
 
             // Apply the search
             table.columns().every( function () {
@@ -58,22 +76,6 @@
                     }
                 } );
             } );
-
-            let riders = [];
-            @foreach ($riders as $rider)
-                riders.push({
-                    value: {{ $rider->id }},
-                    text: '{{ $rider->profile->full_name }}'
-            });
-            @endforeach
-
-            $.fn.editable.defaults.mode = 'inline';
-            $('.change_rider').editable({
-                type: 'select',
-                name: 'rider',
-                title: 'Change Rider',
-                source: riders
-            });
         }())
     </script>
 @endsection

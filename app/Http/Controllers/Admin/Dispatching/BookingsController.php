@@ -43,7 +43,7 @@ class BookingsController extends Controller {
         }
 
         $pendingBooking = Booking::where('status', 'pending')
-            ->whereDate('pickup_date', '=', $today->toDateString())
+            ->whereDate('pickup_date', '<=', $today->toDateString())
             ->count();
 
         $completedBooking = Booking::where('status', 'completed')
