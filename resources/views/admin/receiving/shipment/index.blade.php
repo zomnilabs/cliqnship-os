@@ -73,6 +73,14 @@
                     $('.error-container').append(html);
                 });
             });
+
+            $('#status').on('change', function() {
+                if ($(this).val() === 'returned') {
+                    $('.reasonInput').removeClass('hide');
+                } else {
+                    $('.reasonInput').addClass('hide');
+                }
+            })
         }())
     </script>
 @endsection
@@ -207,6 +215,18 @@
                                     @if ($errors->has('status'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('status') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="reasonInput hide form-group{{ $errors->has('reason') ? ' has-error' : '' }}">
+                                    <label for="reason">Reason</label>
+
+                                    <input type="text" name="reason" id="reason" class="form-control" />
+
+                                    @if ($errors->has('reason'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('reason') }}</strong>
                                         </span>
                                     @endif
                                 </div>

@@ -60,8 +60,9 @@
                     <thead>
                     <tr>
                         <th>Shipment #</th>
-                        <th>Actions</th>
-                        <th>Date</th>
+                        <th>Tracking #</th>
+                        <th>Customer</th>
+                        <th>Delivery Address</th>
                         <th>Rider</th>
                         <th>Reason</th>
                         <th>Returned Times</th>
@@ -72,21 +73,25 @@
                     </thead>
 
                     <tbody>
-                    {{--@foreach($addressbooks as $addressbook)--}}
-                    {{--<tr id="addressbook-{{$addressbook->id}}">--}}
-                    {{--<td>{{$addressbook->id}}</td>--}}
-                    {{--<td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>--}}
-                    {{--<td>{{ ucwords($addressbook->type) }}</td>--}}
-                    {{--<td>{{ ucwords($addressbook->address_type) }}</td>--}}
-                    {{--<th>{{$addressbook->address_line_1}}</th>--}}
-                    {{--<th>{{$addressbook->contact_number}}</th>--}}
-                    {{--<th>{{$addressbook->email}}</th>--}}
-                    {{--<th>--}}
-                    {{--<button class="btn btn-danger"><i class="fa fa-trash"></i></button>--}}
-                    {{--<button class="btn btn-default"><i class="fa fa-edit"></i></button>--}}
-                    {{--</th>--}}
-                    {{--</tr>--}}
-                    {{--@endforeach--}}
+                    @foreach($shipments as $shipment)
+                        <tr id="shipment-{{$shipment->id}}">
+                            <td class="hide">{{$shipment->id}}</td>
+                            <td>{{$shipment->trackingNumbers()->mainTrackingNumber($shipment->id)->tracking_number}}</td>
+                            <td>{{$shipment->user->profile->first_name}} {{$shipment->user->profile->middle_name}} {{$shipment->user->profile->last_name}}</td>
+                            <td>{{ $shipment->address->address_line_1 }} {{ $shipment->address->barangay }} {{ $shipment->address->city }}, {{ $shipment->address->province }}. {{ $shipment->address->zip_code }}</td>
+                            <td>{{ $shipment->service_type }}</td>
+                            <td>{{$shipment->rider->user->profile->full_name}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{{ $shipment->status }}</td>
+                            <td>
+                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-default"><i class="fa fa-edit"></i></button>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

@@ -47,7 +47,12 @@ class ShipmentsController extends Controller {
 
     public function returned()
     {
-        return view('admin.dispatching.shipments.returned');
+        $shipments = Shipment::with('user','address','source', 'trackingNumbers')
+            ->where('status', 'returned')
+            ->get();
+
+        return view('admin.dispatching.shipments.returned')
+            ->with('shipments', $shipments);
     }
 
     public function dispatchShipments(Request $request)
