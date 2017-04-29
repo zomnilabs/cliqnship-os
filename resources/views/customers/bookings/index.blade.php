@@ -176,9 +176,11 @@
                                     <td>{{ $booking->remarks }}</td>
                                     <td>{{ $booking->status }}</td>
                                     <th>
+                                        @if ($booking->status === 'pending')
                                         <button class="btn btn-danger delBooking" data-item="{{ $booking->id }}" 
                                             data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></button>
                                         <button class="btn btn-default"><i class="fa fa-edit"></i></button>
+                                        @endif
                                     </th>
                                 </tr>
                             @endforeach
