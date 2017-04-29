@@ -40,7 +40,7 @@ class Shipment extends Model
 
     public function rider()
     {
-        return $this->hasOne(ShipmentAssignment::class);
+        return $this->hasOne(ShipmentAssignment::class, 'shipment_id');
     }
 
     public function events()

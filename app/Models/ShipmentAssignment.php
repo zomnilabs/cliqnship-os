@@ -15,11 +15,11 @@ class ShipmentAssignment extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function shipment()
     {
-        return $this->belongsTo(Shipment::class);
+        return $this->belongsTo(Shipment::class, 'shipment_id');
     }
 }

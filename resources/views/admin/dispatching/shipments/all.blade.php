@@ -93,7 +93,7 @@
             <div class="col-md-12">
                 <div class="row text-center cards">
                     <div class="col-md-3">
-                        <a href="#">
+                        <a href="?status=unassigned">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <h4>Unassigned Shipments</h4>
@@ -104,7 +104,7 @@
                     </div>
 
                     <div class="col-md-3">
-                        <a href="#">
+                        <a href="?status=assigned">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <h4>Assigned Shipments</h4>
@@ -169,7 +169,7 @@
                                     </td>
                                     <td>{{ $shipment->remarks }}</td>
                                     <td>{{ ucwords($shipment->source->name) or '' }}</td>
-                                    <th>{{$shipment->address->contact_number or ''}}</th>
+                                    <th>{{$shipment->rider->user->profile->full_name or 'Not Assigned'}}</th>
                                     <td>{{ $shipment->status }}</td>
                                     <th>
                                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>

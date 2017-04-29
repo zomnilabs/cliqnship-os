@@ -9,12 +9,20 @@ use App\User;
 use Illuminate\Http\Request;
 
 class ShipmentsController extends Controller {
-    public function all()
+    public function all(Request $request)
     {
-        $shipments = Shipment::with('user','address','source', 'trackingNumbers')
-            ->doesntHave('rider')
-            ->where('status', 'arrived-at-hq')
-            ->get();
+
+        if ($request->get('status') === 'assigned') {
+            $shipments = Shipment::with('user','address','source', 'trackingNumbers')
+                ->has('rider')
+                ->where('status', 'enroute')
+                ->get();
+        } else {
+            $shipments = Shipment::with('user','address','source', 'trackingNumbers')
+                ->doesntHave('rider')
+                ->where('status', 'arrived-at-hq')
+                ->get();
+        }
 
         $pendingShipment = Shipment::doesntHave('rider')
             ->where('status', 'arrived-at-hq')

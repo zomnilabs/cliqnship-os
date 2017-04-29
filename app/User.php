@@ -61,7 +61,7 @@ class User extends Authenticatable
 
     public function shipmentAssignments()
     {
-        return $this->hasMany(ShipmentAssignment::class);
+        return $this->hasMany(ShipmentAssignment::class, 'user_id');
     }
 
     // Mutator
