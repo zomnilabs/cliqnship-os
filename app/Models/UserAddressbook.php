@@ -41,7 +41,12 @@ class UserAddressbook extends Model
 
     public function shipments()
     {
-        return $this->hasMany(Shipment::class);
+        return $this->hasMany(Shipment::class, 'from');
+    }
+
+    public function senders()
+    {
+        return $this->hasMany(Shipment::class, 'to');
     }
 
     public function user()

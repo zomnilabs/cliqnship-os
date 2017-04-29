@@ -16,8 +16,6 @@ class ShipmentsController extends Controller {
         \DB::transaction(function() use ($input, &$shipment) {
             $input['source_id'] = "2";
             $input['status'] = "pending";
-            $input['user_addressbook_id'] = $input['user_addressbook']['id'];
-            unset($input['user_addressbook']);
 
             $data = Shipment::create($input);
 

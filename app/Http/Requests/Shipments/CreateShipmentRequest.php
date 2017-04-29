@@ -24,7 +24,8 @@ class CreateShipmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_addressbook'  => 'required'
+            'from'  => 'required',
+            'to'    => 'required'
         ];
     }
 }
