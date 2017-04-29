@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Customers\Shipments;
 
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
+use App\Models\UserAddressbook;
 use Illuminate\Http\Request;
 
 class ShipmentsController extends Controller {
@@ -14,7 +15,10 @@ class ShipmentsController extends Controller {
             ->where('user_id', $user['id'])
             ->get();
 
+        $addresses = UserAddressbook::where('user_id', $user['id'])->get();
+
         return view('customers.shipments.index')
+            ->with('addresses', $addresses)
             ->with('shipments', $shipments);
     }
 

@@ -5,17 +5,36 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Import Shipments</h4>
             </div>
-            <form encType="multipart/form-data" action="/customers/bookings/import" method="POST">
+            <form encType="multipart/form-data" action="/customers/shipments/import" method="POST">
                 <div class="modal-body">
                     <h4>Templates</h4>
-                    If you want to import bookings using a new address, download this template -> <a href="#">Booking With New Address XLSX Template</a>
-                    <br>
-                    If you want to import bookings using your primary address, download this template -> <a href="#">Booking Using Primary Address XLSX Template</a>
-                    <br>
+                    You can download an excel template from here -> <a target="_blank" href="/templates/customers/shipments-template.xlsx">Shipment Template XLSX</a>
                     <br>
 
                     <div class="row">
                         {{ csrf_field() }}
+
+                        <div class="col-md-12 form-group">
+                            <label for="from" class="control-label">Select Sender Address</label>
+                            <select name="from" id="from" class="form-control">
+                                @foreach ($addresses as $address)
+                                    @if ($address->type === 'booking')
+                                        <option value="{{ $address->id }}">{{ $address->identifier }} : {{ $address->address_line_1 }} {{ $address->barangay }}, {{ $address->city }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <label for="to" class="control-label">Select Delivery Address</label>
+                            <select name="to" id="to" class="form-control">
+                                @foreach ($addresses as $address)
+                                    @if ($address->type === 'shipment')
+                                        <option value="{{ $address->id }}">{{ $address->identifier }} : {{ $address->address_line_1 }} {{ $address->barangay }}, {{ $address->city }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
 
                         <div class="col-md-12 form-group{{ $errors->has('file') ? ' has-error' : '' }}">
                             <label for="file" class="control-label">Import your file here</label>
