@@ -61,6 +61,7 @@ Route::group(['prefix' => 'customers', 'namespace' => 'Customers', 'middleware' 
         Route::get('/returned', 'ReturnShipmentsController@index');
         Route::get('/preview', 'ShipmentsController@preview');
         Route::get('/cash-on-delivery', 'CodShipmentsController@index');
+        Route::post('/import', 'ShipmentsController@importShipments');
     });
 });
 
