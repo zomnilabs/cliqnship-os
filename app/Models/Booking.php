@@ -33,7 +33,7 @@ class Booking extends Model
 
     public function assignment()
     {
-        return $this->hasOne(BookingAssignment::class);
+        return $this->hasOne(BookingAssignment::class, 'booking_id');
     }
 
     public function source()

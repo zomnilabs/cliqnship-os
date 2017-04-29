@@ -63,6 +63,11 @@ Route::group(['namespace' => 'Api'], function() {
         Route::get('/check/{waybillNumber}', 'ShipmentsController@checkWaybill');
     });
 
+    // Bookings
+    Route::group(['prefix' => 'v1/bookings'], function () {
+        Route::post('/{bookingId}/update-rider', 'BookingController@updateRider');
+    });
+
     // Address book
     Route::group(['prefix' => 'v1/address-books'], function() {
         Route::get('/{userId}', 'AddressBookController@index');

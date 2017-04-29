@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Booking;
+use App\Models\BookingAssignment;
 use App\Models\ShipmentAssignment;
 use App\Models\UserAddressbook;
 use App\Models\UserGroup;
@@ -51,6 +52,11 @@ class User extends Authenticatable
     public function booking()
     {
         return $this->hasMany(Booking::class);
+    }
+
+    public function bookingAssignments()
+    {
+        return $this->hasMany(BookingAssignment::class, 'user_id');
     }
 
     public function shipmentAssignments()

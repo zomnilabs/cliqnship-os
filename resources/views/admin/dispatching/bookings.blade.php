@@ -52,7 +52,7 @@
                 text: '{{ $rider->profile->full_name }}'
             });
             @endforeach
-                
+
             $.fn.editable.defaults.mode = 'inline';
             let table = $('#bookingTable').DataTable({
                 drawCallback: function() {
@@ -61,6 +61,22 @@
                         name: 'rider',
                         title: 'Change Rider',
                         source: riders
+                    }).on('save', function(e, params) {
+                        let bookingId = $(this).data('booking');
+
+                        fetch(`/api/v1/bookings/${bookingId}/update-rider`, {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json, text/plain, */*',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ rider_id: params.newValue })
+                        }).then((res) => {
+                            console.log(res);
+                        });
+
+                        console.log(e);
+                        console.log(params);
                     });
                 }
             });
@@ -109,7 +125,7 @@
             <div class="col-md-12">
                 <div class="row text-center cards">
                     <div class="col-md-3">
-                        <a href="#">
+                        <a href="?status=pending">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <h4>Pending Bookings</h4>
@@ -120,7 +136,7 @@
                     </div>
 
                     <div class="col-md-3">
-                        <a href="#">
+                        <a href="?status=accepted">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <h4>Assigned Bookings</h4>
@@ -130,7 +146,7 @@
                         </a>
                     </div>
                     <div class="col-md-3">
-                        <a href="#">
+                        <a href="?status=completed">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <h4>Completed Bookings</h4>
@@ -141,7 +157,7 @@
                     </div>
 
                     <div class="col-md-3">
-                        <a href="#">
+                        <a href="?status=rejected">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <h4>Rejected Bookings</h4>
@@ -204,7 +220,7 @@
                                     <td>{{ $booking->address->address_line_1 }} {{ $booking->address->barangay }} {{ $booking->address->city }}, {{ $booking->address->province }}. {{ $booking->address->zip_code }}</td>
                                     <td>{{$booking->source->name}}</td>
                                     <td>{{ $booking->remarks }}</td>
-                                    <td class="change_rider">{{ $booking->assignment ? $booking->assignment->rider->profile->full_name : 'Not Assigned' }}</td>
+                                    <td class="change_rider" data-booking="{{$booking->id}}">{{ $booking->assignment ? $booking->assignment->rider->profile->full_name : 'Not Assigned' }}</td>
                                     <td>{{ $booking->status }}</td>
                                     <th>
                                         <button class="btn btn-danger delBooking" value="{{ $booking->id }}"><i class="fa fa-trash"></i></button>
