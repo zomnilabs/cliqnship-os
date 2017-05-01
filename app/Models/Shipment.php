@@ -47,4 +47,14 @@ class Shipment extends Model
     {
         return $this->hasMany(ShipmentEvent::class);
     }
+
+    public function returnLogs()
+    {
+        return $this->hasMany(ShipmentReturnLogs::class);
+    }
+
+    public function remarks()
+    {
+        return $this->hasMany(ShipmentRemarks::class);
+    }
 }
