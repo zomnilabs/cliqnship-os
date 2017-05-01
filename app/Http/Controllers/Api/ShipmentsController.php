@@ -69,9 +69,24 @@ class ShipmentsController extends Controller {
             return response()->json('Invalid shipment', 400);
         }
 
-        if ($request->has('status') && $shipment->status !== $request->get('status')) {
-            return response()->json('Shipment not ' . $request->get('status') . ' yet', 400);
+        if ($request->has('status')) {
+            if ($shipment->shipment->status === 'returned') {
+                return response()->json('Returned shipments must be reviewed first', 400);
+            }
+
+            if ($shipment->shipment->status !== 'arrived-at-hq'
+                && $shipment->shipment->status !== 'enroute') {
+
+                return response()->json('Shipment not in hq yet', 400);
+            }
         }
+
+//        if ($request->has('status') && $request->has('user_id')
+//            &&  $request->get('status') === 'enroute'
+//            && $request->user()->id == $request->get('user_id') ) {
+//
+//
+//        }
 
         return response()->json($shipment, 200);
     }

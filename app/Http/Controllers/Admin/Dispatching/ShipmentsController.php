@@ -68,17 +68,29 @@ class ShipmentsController extends Controller {
                 continue;
             }
 
+            $shipment = Shipment::where('id', $waybill->shipment_id)
+                ->where(function($q) {
+                    return $q->where('status', 'arrived-at-hq')
+                        ->orWhere('status', 'enroute');
+                })->first();
+
+            // shipment invalid status
+            if (! $shipment) {
+                continue;
+            }
+
             \DB::transaction(function() use ($request, $waybill) {
                 // Get current assigned
                 $currentAssigned = ShipmentAssignment::where('shipment_id', $waybill->shipment_id)
-                    ->where('user_id', $request->get('rider_id'))
                     ->first();
 
                 // Check if there is an assigned rider already
                 if ($currentAssigned) {
                     // Cancel the first assignment
                     ShipmentAssignment::where('id', $currentAssigned->id)
-                        ->update(['status', 'cancelled']);
+                        ->update(['status' => 'cancelled']);
+
+                    ShipmentAssignment::where('id', $currentAssigned->id)->delete();
                 }
 
                 // Create Assignment
