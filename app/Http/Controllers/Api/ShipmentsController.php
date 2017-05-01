@@ -13,11 +13,21 @@ class ShipmentsController extends Controller {
 
         $shipment = null;
         // Create the booking
-        \DB::transaction(function() use ($input, &$shipment) {
+        \DB::transaction(function() use ($input, $request, &$shipment) {
             $input['source_id'] = "2";
             $input['status'] = "pending";
 
             $data = Shipment::create($input);
+
+            if ($request->has('remarks')) {
+                $remarks = $input['remarks'];
+                unset($input['remarks']);
+
+                $data->remarks()->create([
+                    'user_id'   => $input['user_id'],
+                    'remarks'   => $remarks
+                ]);
+            }
 
             // Create the shipment tracking number
             ShipmentTrackingNumber::create([

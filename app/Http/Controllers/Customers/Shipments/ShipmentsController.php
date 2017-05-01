@@ -54,17 +54,33 @@ class ShipmentsController extends Controller {
                 'user_id'           => $user['id'],
                 'from'              => $input['from'],
                 'to'                => $input['to'],
+                'item_description'  => $input['item_description'],
                 'number_of_items'   => $shipment['number_of_items'],
                 'type_of_items'     => $shipment['type_of_items'],
+                'service_type'      => $shipment['service_type'],
+                'is_international'              => $shipment['is_international'],
+                'collect_and_deposit'           => $shipment['is_cod'],
+                'collect_and_deposit_amount'    => $shipment['cod_amount'],
+                'account_name'                  => $shipment['account_name'],
+                'account_number'                => $shipment['account_number'],
+                'bank'                          => $shipment['bank'],
+                'charge_to'                     => $shipment['charge_to'],
+                'package_type'                  => $shipment['package_type'],
+                'insurance_declared_value'      => $shipment['avail_insurance'],
+                'insurance_amount'              => $shipment['insurance_amount'],
                 'length'            => $shipment['length'],
                 'width'             => $shipment['width'],
                 'height'            => $shipment['height'],
                 'weight'            => $shipment['weight'],
-                'remarks'           => $shipment['remarks'],
                 'status'            => 'pending'
             ];
 
-            Shipment::create($bookingData);
+            $shipment = Shipment::create($bookingData);
+            $shipment->remarks()->create([
+                'user_id'   => $user['id'],
+                'remarks'   => $shipment['remarks']
+            ]);
+
         });
     }
 }
