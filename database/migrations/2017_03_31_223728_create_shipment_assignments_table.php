@@ -17,7 +17,7 @@ class CreateShipmentAssignmentsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('shipment_id')->unsigned();
-            $table->enum('status', ['pending', 'completed']);
+            $table->enum('status', ['pending', 'completed', 'cancelled']);
             $table->timestamps();
             $table->softDeletes();
         });

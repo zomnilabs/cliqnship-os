@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Shipments\CreateShipmentRequest;
 use App\Models\Shipment;
 use App\Models\ShipmentTrackingNumber;
+use Illuminate\Http\Request;
 
 class ShipmentsController extends Controller {
     public function store(CreateShipmentRequest $request)
@@ -58,14 +59,18 @@ class ShipmentsController extends Controller {
     }
 
     // Check waybill number
-    public function checkWaybill($waybillNumber)
+    public function checkWaybill(Request $request, $waybillNumber)
     {
         $shipment = ShipmentTrackingNumber::where('tracking_number', $waybillNumber)
             ->where('provider', 'cliqnship')
             ->first();
 
         if (! $shipment) {
-            return response()->json('waybill not found', 400);
+            return response()->json('Invalid shipment', 400);
+        }
+
+        if ($request->has('status') && $shipment->status !== $request->get('status')) {
+            return response()->json('Shipment not ' . $request->get('status') . ' yet', 400);
         }
 
         return response()->json($shipment, 200);

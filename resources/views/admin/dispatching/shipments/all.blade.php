@@ -53,12 +53,18 @@
             }).on('change', function(value) {
                 let waybills = $(this).val();
                 let newValue = waybills[waybills.length - 1];
-                console.log('new value', newValue);
 
-                fetch(`/api/v1/shipments/check/${newValue}`).then((res) => {
+                if (! newValue) {
+                    return;
+                }
+
+                fetch(`/api/v1/shipments/check/${newValue}?status=arrived-at-hq`).then((res) => {
                     if (! res.ok) {
-                        let html = `<p><span class="text-danger">${newValue}</span> is not a valid waybill</p>`;
-                        $('.error-container').append(html);
+                        res.json().then((json) => {
+
+                            let html = `<p><span class="text-danger">${newValue}</span> : ${json}</p>`;
+                            $('.error-container').append(html);
+                        });
 
                         return;
                     }
@@ -66,6 +72,12 @@
                     let html = `<p><span class="text-danger">${newValue}</span> is not a valid waybill</p>`;
                     $('.error-container').append(html);
                 });
+            });
+
+            // modal
+            $('#addRiderAssignment').on('hidden.bs.modal', function() {
+                $('.error-container').html('');
+                $('.waybill-input').val(null).trigger('change');
             });
         }())
     </script>

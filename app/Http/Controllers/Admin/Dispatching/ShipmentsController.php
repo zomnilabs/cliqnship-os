@@ -68,15 +68,29 @@ class ShipmentsController extends Controller {
                 continue;
             }
 
-            // Create Assignment
-            ShipmentAssignment::create([
-                'user_id'   => $request->get('rider_id'),
-                'shipment_id'   => $waybill->shipment_id
-            ]);
+            \DB::transaction(function() use ($request, $waybill) {
+                // Get current assigned
+                $currentAssigned = ShipmentAssignment::where('shipment_id', $waybill->shipment_id)
+                    ->where('user_id', $request->get('rider_id'))
+                    ->first();
 
-            // Update shipment
-            Shipment::where('id', $waybill->shipment_id)
-                ->update(['status' => 'enroute']);
+                // Check if there is an assigned rider already
+                if ($currentAssigned) {
+                    // Cancel the first assignment
+                    ShipmentAssignment::where('id', $currentAssigned->id)
+                        ->update(['status', 'cancelled']);
+                }
+
+                // Create Assignment
+                ShipmentAssignment::create([
+                    'user_id'   => $request->get('rider_id'),
+                    'shipment_id'   => $waybill->shipment_id
+                ]);
+
+                // Update shipment
+                Shipment::where('id', $waybill->shipment_id)
+                    ->update(['status' => 'enroute']);
+            });
         }
 
         return redirect()->back();
