@@ -19,7 +19,6 @@ class CreateShipmentsTable extends Migration
             $table->integer('user_id');
             $table->integer('source_id');
             $table->integer('user_addressbook_id');
-            $table->text('remarks')->nullable();
             $table->text('item_description')->nullable();
             $table->integer('number_of_items')->nullable();
             $table->enum('service_type', ['metro_manila', 'provincial', 'international', 'others']);
