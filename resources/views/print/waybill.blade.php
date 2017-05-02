@@ -101,17 +101,23 @@
                 </div>
                 <table border>
                     <tr>
-                        <td colspan="2" class="flex-content top-border">
+                        <td colspan="2">
                             <div class="flex-data">
                                 <div>From: <br>
-                                {{ $shipment->senderAddress->getFullAddress() }}
+                                {{ $shipment->senderAddress->getFullNameAttribute() }} <br>
+                                {{ $shipment->senderAddress->getFullAddress() }} <br>
+                                {{ $shipment->senderAddress->country }} {{ $shipment->senderAddress->zip_code }} <br>
+                                Landmark: {{ $shipment->senderAddress->landmarks }}
                                 </div><div class="data-center">Acct #: {{ $shipment->user->account_id }}</div>
                             </div>
                         </td>
                         <td colspan="2">
                             <div>
                                 To: <br>
-                                {{ $shipment->address->getFullAddress() }}
+                                {{ $shipment->address->getFullNameAttribute() }} <br>
+                                {{ $shipment->address->getFullAddress() }} <br>
+                                {{ $shipment->address->country }} {{ $shipment->address->zip_code }} <br>
+                                Landmark: {{ $shipment->address->landmarks }}
                             </div>
                         </td>
                     </tr>
@@ -282,17 +288,23 @@
                 </div>
                 <table border>
                     <tr>
-                        <td colspan="2" class="flex-content top-border">
+                        <td colspan="2">
                             <div class="flex-data">
                                 <div>From: <br>
-                                {{ $shipment->senderAddress->getFullAddress() }}
+                                {{ $shipment->senderAddress->getFullNameAttribute() }} <br>
+                                {{ $shipment->senderAddress->getFullAddress() }} <br>
+                                {{ $shipment->senderAddress->country }} {{ $shipment->senderAddress->zip_code }} <br>
+                                Landmark: {{ $shipment->senderAddress->landmarks }}
                                 </div><div class="data-center">Acct #: {{ $shipment->user->account_id }}</div>
                             </div>
                         </td>
                         <td colspan="2">
                             <div>
                                 To: <br>
-                                {{ $shipment->address->getFullAddress() }}
+                                {{ $shipment->address->getFullNameAttribute() }} <br>
+                                {{ $shipment->address->getFullAddress() }} <br>
+                                {{ $shipment->address->country }} {{ $shipment->address->zip_code }} <br>
+                                Landmark: {{ $shipment->address->landmarks }}
                             </div>
                         </td>
                     </tr>
@@ -365,17 +377,23 @@
                 </div>
                 <table border>
                     <tr>
-                        <td colspan="2" class="flex-content top-border">
+                        <td colspan="2">
                             <div class="flex-data">
                                 <div>From: <br>
-                                {{ $shipment->senderAddress->getFullAddress() }}
+                                {{ $shipment->senderAddress->getFullNameAttribute() }} <br>
+                                {{ $shipment->senderAddress->getFullAddress() }} <br>
+                                {{ $shipment->senderAddress->country }} {{ $shipment->senderAddress->zip_code }} <br>
+                                Landmark: {{ $shipment->senderAddress->landmarks }}
                                 </div><div class="data-center">Acct #: {{ $shipment->user->account_id }}</div>
                             </div>
                         </td>
                         <td colspan="2">
                             <div>
                                 To: <br>
-                                {{ $shipment->address->getFullAddress() }}
+                                {{ $shipment->address->getFullNameAttribute() }} <br>
+                                {{ $shipment->address->getFullAddress() }} <br>
+                                {{ $shipment->address->country }} {{ $shipment->address->zip_code }} <br>
+                                Landmark: {{ $shipment->address->landmarks }}
                             </div>
                         </td>
                     </tr>
@@ -444,17 +462,23 @@
                 </div>
                 <table border>
                     <tr>
-                        <td colspan="2" class="flex-content top-border">
+                        <td colspan="2">
                             <div class="flex-data">
                                 <div>From: <br>
-                                {{ $shipment->senderAddress->getFullAddress() }}
+                                {{ $shipment->senderAddress->getFullNameAttribute() }} <br>
+                                {{ $shipment->senderAddress->getFullAddress() }} <br>
+                                {{ $shipment->senderAddress->country }} {{ $shipment->senderAddress->zip_code }} <br>
+                                Landmark: {{ $shipment->senderAddress->landmarks }}
                                 </div><div class="data-center">Acct #: {{ $shipment->user->account_id }}</div>
                             </div>
                         </td>
                         <td colspan="2">
                             <div>
                                 To: <br>
-                                {{ $shipment->address->getFullAddress() }}
+                                {{ $shipment->address->getFullNameAttribute() }} <br>
+                                {{ $shipment->address->getFullAddress() }} <br>
+                                {{ $shipment->address->country }} {{ $shipment->address->zip_code }} <br>
+                                Landmark: {{ $shipment->address->landmarks }}
                             </div>
                         </td>
                     </tr>

@@ -58,5 +58,10 @@ class UserAddressbook extends Model
     {
         return ucwords($this->attributes['identifier'] . ': ' . $this->attributes['address_line_1'] . ', ' . $this->attributes['barangay'] . ', ' . $this->attributes['city']);
     }
+    
+    public function getFullNameAttribute()
+    {
+        return ucwords($this->attributes['first_name'] . ' ' . $this->attributes['last_name']);
+    }
 
 }
