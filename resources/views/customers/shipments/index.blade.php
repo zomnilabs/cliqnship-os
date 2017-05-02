@@ -165,9 +165,11 @@
                                         <td>{{ $shipment->charge_to }}</td>
                                         <td>
                                             <ul>
-                                                @foreach($shipment->remarks as $r)
-                                                    <li>{{ $r->remarks }}</li>
-                                                @endforeach
+                                                @if ($shipment->remarks)
+                                                    @foreach($shipment->remarks as $r)
+                                                        <li>{{ $r->remarks }}</li>
+                                                    @endforeach
+                                                @endif
                                             </ul>
                                         </td>
                                         <td>{{ $shipment->status }}</td>
