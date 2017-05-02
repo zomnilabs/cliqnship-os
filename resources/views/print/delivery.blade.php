@@ -12,12 +12,13 @@
     <style>
         body{
             color:black;
+            text-transform: uppercase;
             font-size: 9px;
+            margin: 20px;
         }
         thead tr th, tbody tr td, tfoot tr td, tfoot tr th {
             text-align: center;
             vertical-align: middle !important;
-            text-transform: uppercase;
         }
 
         tbody tr.cod { background-color: #F3E81D !important; }
@@ -31,6 +32,8 @@
     </style>
 <body>
     <div class="container">
+        <h4 class="pull-left">Rider: {{ $rider->profile->getFullNameAttribute() }}</h4>
+        <h4 class="pull-right">{{ Carbon\Carbon::today('Asia/Manila')->toFormattedDateString() }}</h4>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -79,7 +82,7 @@
                     <th colspan="2"> Prepared by:</th>
                     <td colspan="2"></td>
                     <th>REGULAR</th>
-                    <td colspan="4"></td>
+                    <th colspan="4">{{ $regular }}</th>
                     <th>RETURNS</th>
                     <td colspan="2"></td>
                 </tr>
@@ -87,14 +90,14 @@
                     <th colspan="2" rowspan="2"> Checked by:</th>
                     <td colspan="2"></td>
                     <th>W/ COD</th>
-                    <td colspan="4"></td>
+                    <th colspan="4">{{ $withCod }}</th>
                     <th>COD</th>
                     <td colspan="2"></td>
                 </tr>
                 <tr>
                     <td colspan="2"></td>
                     <th>TOTAL</th>
-                    <td colspan="4"></td>
+                    <th colspan="4">{{ $regular + $withCod }}</th>
                     <th>RTS - PROB</th>
                     <td colspan="2"></td>
                 </tr>

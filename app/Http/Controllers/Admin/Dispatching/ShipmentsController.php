@@ -124,7 +124,18 @@ class ShipmentsController extends Controller {
             ->where('status', 'pending')
             ->get();
 
-        return view('print.delivery', compact('assignments'));
+        $withCod = ShipmentAssignment::where('user_id', $riderId)
+            ->where('status', 'pending')
+            ->whereHas('shipment', function($q) {
+                $q->where('collect_and_deposit', 1);
+            })
+            ->count();
+
+        $rider = User::where('id', $riderId)->first();
+
+        $regular = $assignments->count() - $withCod;
+
+        return view('print.delivery', compact('assignments', 'withCod', 'regular', 'rider'));
 
     }
 }
