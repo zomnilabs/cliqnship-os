@@ -42,6 +42,7 @@ class ShipmentsController extends Controller {
             ->with('pendingShipment', $pendingShipment)
             ->with('assignedShipment', $assignedShipment)
             ->with('riders', $riders)
+            ->with('status', $request->has('status') ? ucwords($request->get('status')) : 'Unassigned')
             ->with('shipments',$shipments);
     }
 

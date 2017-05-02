@@ -136,7 +136,7 @@
                 <div class="box box-primary">
                     <div class="box-header">
                         <div class="box-title pull-left">
-                            <h1>Shipment</h1>
+                            <h1>{{ $status }} Shipments</h1>
                         </div>
                         <div class="page-actions pull-right">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#addRiderAssignment">
@@ -179,7 +179,13 @@
                                             <p>Insurance declared value</p>
                                         @endif
                                     </td>
-                                    <td>{{ $shipment->remarks }}</td>
+                                    <td>
+                                        @if ($shipment->remarks)
+                                            @foreach ($shipment->remarks as $remark)
+                                                <li>{{ $remark->reason }}</li>
+                                            @endforeach
+                                        @endif
+                                    </td>
                                     <td>{{ ucwords($shipment->source->name) or '' }}</td>
                                     <th>{{$shipment->rider->user->profile->full_name or 'Not Assigned'}}</th>
                                     <td>{{ $shipment->status }}</td>

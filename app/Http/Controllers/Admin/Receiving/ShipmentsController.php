@@ -20,11 +20,13 @@ class ShipmentsController extends Controller {
         $today = Carbon::today('Asia/Manila')->toDateString();
         $result = [];
         foreach ($riders as $rider) {
-            $pendingAssignmentCount = ShipmentAssignment::where('user_id', $rider->id)
+            $pendingAssignmentCount = ShipmentAssignment::withTrashed()
+                ->where('user_id', $rider->id)
                 ->where('status', 'pending')
                 ->count();
 
-            $completedShipmentToday = ShipmentAssignment::where('status', 'completed')
+            $completedShipmentToday = ShipmentAssignment::withTrashed()
+                ->where('status', 'completed')
                 ->whereDate('created_at', '=', $today)
                 ->where('user_id', $rider->id)
                 ->count();
@@ -47,7 +49,8 @@ class ShipmentsController extends Controller {
             $today = Carbon::createFromTimestamp(strtotime($request->get('date')))->toDateString();
         }
 
-        $assignments = ShipmentAssignment::with('shipment')->where('user_id', $riderId)
+        $assignments = ShipmentAssignment::with('shipment')
+            ->where('user_id', $riderId)
             ->where('status', 'pending')
             ->whereDate('created_at', $today)
             ->get();
@@ -63,7 +66,9 @@ class ShipmentsController extends Controller {
         ];
 
         $assignmentsToday = ShipmentAssignment::with('shipment')
+            ->withTrashed()
             ->where('user_id', $riderId)
+            ->where('status', '!=', 'cancelled')
             ->whereDate('created_at', $today)
             ->get();
 
@@ -132,6 +137,18 @@ class ShipmentsController extends Controller {
                 }
             }
 
+            if ($request->get('status') === 'arrived-at-hq') {
+                Shipment::where('id', $waybill->shipment_id)
+                    ->update(['status' => $request->get('status')]);
+
+                $shipment = ShipmentAssignment::create([
+                    'shipment_id' => $waybill->shipment_id,
+                    'user_id'     => $riderId,
+                    'status'      => 'completed'
+                ]);
+
+                $shipment->delete();
+            }
 
         }
 
