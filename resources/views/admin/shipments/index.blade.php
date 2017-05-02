@@ -50,9 +50,9 @@
                         <i class="glyphicon glyphicon-plus"></i>
                         Import Shipments</button>
 
-                    <button data-toggle="modal" data-target=".bs-modal-lg" class="btn btn-primary">
+                    <a href="/admin/shipments/export" target="_blank" class="btn btn-primary">
                         <i class="glyphicon glyphicon-plus"></i>
-                        Export Shipments Waiting for Encoding</button>
+                        Export Shipments Waiting for Encoding</a>
                 </div>
             </div>
         </div>

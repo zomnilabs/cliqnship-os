@@ -127,6 +127,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
 
     Route::group(['prefix' => 'shipments', 'namespace' => 'Shipments'], function() {
         Route::get('/', 'ShipmentsController@index');
+        Route::get('/export', 'ShipmentsController@exportNewShipments');
         Route::get('/preview', 'ShipmentsController@preview');
     });
 

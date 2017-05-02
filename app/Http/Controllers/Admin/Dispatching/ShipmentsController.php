@@ -50,7 +50,7 @@ class ShipmentsController extends Controller {
         $shipments = Shipment::with('user','address','source', 'trackingNumbers', 'returnLogs')
             ->where('status', 'returned')
             ->get();
-//print_r($shipments->toArray());exit;
+
         return view('admin.dispatching.shipments.returned')
             ->with('shipments', $shipments);
     }
@@ -116,5 +116,14 @@ class ShipmentsController extends Controller {
         }
 
         return redirect()->back();
+    }
+
+    public function printDispatch($riderId)
+    {
+        $assignments = ShipmentAssignment::with('shipment')->where('user_id', $riderId)
+            ->where('status', 'pending')
+            ->get();
+
+
     }
 }
