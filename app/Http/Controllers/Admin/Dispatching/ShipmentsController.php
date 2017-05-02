@@ -47,12 +47,22 @@ class ShipmentsController extends Controller {
 
     public function returned()
     {
-        $shipments = Shipment::with('user','address','source', 'trackingNumbers')
+        $shipments = Shipment::with('user','address','source', 'trackingNumbers', 'returnLogs')
             ->where('status', 'returned')
             ->get();
-
+//print_r($shipments->toArray());exit;
         return view('admin.dispatching.shipments.returned')
             ->with('shipments', $shipments);
+    }
+
+    public function redispatch($shipmentId)
+    {
+        $shipment = Shipment::where('id', $shipmentId)
+            ->update(['status' => 'arrived-at-hq']);
+
+        ShipmentAssignment::where('shipment_id', $shipmentId)->delete();
+
+        return redirect()->back();
     }
 
     public function dispatchShipments(Request $request)

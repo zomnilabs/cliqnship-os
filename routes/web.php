@@ -73,6 +73,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
         Route::get('shipments/all', 'ShipmentsController@all');
         Route::post('shipments/all', 'ShipmentsController@dispatchShipments');
         Route::get('shipments/returned', 'ShipmentsController@returned');
+        Route::post('shipments/returned/{shipmentId}/redispatch', 'ShipmentsController@redispatch');
         Route::get('item-requests', 'ItemRequestsController@index');
     });
 
