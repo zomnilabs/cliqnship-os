@@ -124,6 +124,7 @@ class ShipmentsController extends Controller {
             ->where('status', 'pending')
             ->get();
 
+        return view('print.delivery', compact('assignments'));
 
     }
 }

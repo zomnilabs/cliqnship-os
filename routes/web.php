@@ -23,9 +23,6 @@ Route::get('/pricing', function () {
 Route::get('/faqs', function () {
     return view('faqs');
 });
-Route::get('/dispatch', function () {
-    return view('print.delivery');
-});
 
 Auth::routes();
 
@@ -78,6 +75,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
         Route::get('shipments/returned', 'ShipmentsController@returned');
         Route::post('shipments/returned/{shipmentId}/redispatch', 'ShipmentsController@redispatch');
         Route::get('item-requests', 'ItemRequestsController@index');
+        Route::get('shipments/{id}/preview', 'ShipmentsController@printDispatch');
     });
 
     Route::group(['prefix' => 'receiving', 'namespace' => 'Receiving'], function() {

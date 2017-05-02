@@ -12,11 +12,12 @@
     <style>
         body{
             color:black;
-            font-size: 7px;
+            font-size: 9px;
         }
         thead tr th, tbody tr td, tfoot tr td, tfoot tr th {
             text-align: center;
             vertical-align: middle !important;
+            text-transform: uppercase;
         }
 
         tbody tr.cod { background-color: #F3E81D !important; }
@@ -36,8 +37,8 @@
                     <th>DATE</th>
                     <th>WAYBILL</th>
                     <th>CONSIGNEE NAME</th>
-                    <th>CONSIGNEE ADDRESS</th>
-                    <th>CITY</th>
+                    <th style="width: 200px">CONSIGNEE ADDRESS</th>
+                    <th style="width: 80px">CITY</th>
                     <th>RIDER</th>
                     <th>ITEM DESCRIPTION</th>
                     <th>POUCH / OWN PACKAGING</th>
@@ -48,20 +49,25 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="cod">
-                    <td>3/16/17</td>
-                    <td>1000906786</td>
-                    <td>LOVE HOPE FAITH</td>
-                    <td>4F Legal, Security Bank, 6776 Ayala Avenue Makati Makati</td>
-                    <td>Makati</td>
-                    <td></td>
-                    <td>COLLECT - 1169.4</td>
-                    <td>OWN PACKAGING</td>
-                    <td>1169.4</td>
-                    <td>CASHCASH PINOY</td>
-                    <td></td>
-                    <td>1</td>
-                </tr>
+                @foreach($assignments as $assignment)
+                    <tr class="{{ ($assignment->shipment->collect_and_deposit ? 'cod' : '') }}">
+                        <td>{{ $assignment->created_at->format('d/m/y') }}</td>
+                        <td>{{ $assignment->shipment->trackingNumbers[0]->tracking_number }}</td>
+                        <td>{{ $assignment->shipment->address->getFullNameAttribute() }}</td>
+                        <td>{{ $assignment->shipment->address->getFullAddress() }}, {{ $assignment->shipment->address->country }} 
+                            {{ $assignment->shipment->address->zip_code }} <br>
+                            Landmark: {{ $assignment->shipment->address->landmarks }}
+                        </td>
+                        <td>{{ $assignment->shipment->address->city }}</td>
+                        <td>{{ $assignment->user->profile->getFullNameAttribute() }}</td>
+                        <td>{{ $assignment->shipment->item_description }}</td>
+                        <td>{{ $assignment->shipment->package_type }}</td>
+                        <td>{{ ($assignment->shipment->collect_and_deposit_amount ? $assignment->shipment->collect_and_deposit_amount : '') }}</td>
+                        <td>{{ $assignment->shipment->senderAddress->getFullNameAttribute() }}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endforeach
             </tbody>
             <tfoot>
                 <tr>
@@ -71,7 +77,7 @@
                 </tr>
                 <tr>
                     <th colspan="2"> Prepared by:</th>
-                    <td colspan="2">Alih Benzar</td>
+                    <td colspan="2"></td>
                     <th>REGULAR</th>
                     <td colspan="4"></td>
                     <th>RETURNS</th>
@@ -79,14 +85,14 @@
                 </tr>
                 <tr>
                     <th colspan="2" rowspan="2"> Checked by:</th>
-                    <td colspan="2">Robert Famenia</td>
+                    <td colspan="2"></td>
                     <th>W/ COD</th>
                     <td colspan="4"></td>
                     <th>COD</th>
                     <td colspan="2"></td>
                 </tr>
                 <tr>
-                    <td colspan="2">2nd Shift Dispatcher</td>
+                    <td colspan="2"></td>
                     <th>TOTAL</th>
                     <td colspan="4"></td>
                     <th>RTS - PROB</th>
@@ -94,7 +100,7 @@
                 </tr>
                 <tr>
                     <th colspan="2" rowspan="2">Released & Checked by:</th>
-                    <td colspan="2">Marvin Moises</td>
+                    <td colspan="2"></td>
                     <th colspan="5" rowspan="2" style="vertical-align: bottom !important">
                         <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -105,11 +111,11 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br>
                         SIGNATURE OF RELEASING OFFICER
                     </th>
-                    <th style="width: 70px">RTS - RE-SHIP</th>
+                    <th style="width: 90px">RTS - RE-SHIP</th>
                     <td colspan="2"></td>
                 </tr>
                 <tr>
-                    <td colspan="2">1ST SHIFT DISPATCHER</td>
+                    <td colspan="2"></td>
                     <th>TOTAL</th>
                     <td colspan="2"></td>
                 </tr>
