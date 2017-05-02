@@ -136,7 +136,7 @@
                 <div class="box box-primary">
                     <div class="box-header">
                         <div class="box-title pull-left">
-                            <h1>Shipment</h1>
+                            <h1>{{ $status }} Shipments</h1>
                         </div>
                         <div class="page-actions pull-right">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#addRiderAssignment">

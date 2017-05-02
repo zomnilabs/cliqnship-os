@@ -29,12 +29,12 @@
                     <h1>Receiving</h1>
                 </div>
 
-                <div class="page-actions pull-right">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#createShippingModal">
-                        <i class="fa fa-plus"></i>
-                        Import Shipments Receiving</button>
+                {{--<div class="page-actions pull-right">--}}
+                    {{--<button class="btn btn-primary" data-toggle="modal" data-target="#createShippingModal">--}}
+                        {{--<i class="fa fa-plus"></i>--}}
+                        {{--Import Shipments Receiving</button>--}}
 
-                </div>
+                {{--</div>--}}
             </div>
         </div>
     </div>
