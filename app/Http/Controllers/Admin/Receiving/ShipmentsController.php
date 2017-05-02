@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Receiving;
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
 use App\Models\ShipmentAssignment;
+use App\Models\ShipmentReturnLogs;
 use App\Models\ShipmentTrackingNumber;
 use App\User;
 use Carbon\Carbon;
@@ -61,13 +62,29 @@ class ShipmentsController extends Controller {
                 continue;
             }
 
-            // Update Assignment
-            ShipmentAssignment::where('shipment_id', $waybill->shipment_id)
-                ->where('user_id', $riderId)
-                ->update(['status' => 'completed']);
+            if ($request->get('status') === 'successfully-delivered'
+                || $request->get('status') === 'returned') {
 
-            Shipment::where('id', $waybill->shipment_id)
-                ->update(['status' => $request->get('status')]);
+                // Update Assignment
+                ShipmentAssignment::where('shipment_id', $waybill->shipment_id)
+                    ->where('user_id', $riderId)
+                    ->update(['status' => 'completed']);
+
+                Shipment::where('id', $waybill->shipment_id)
+                    ->update(['status' => $request->get('status')]);
+
+                // Check if returned item
+                if ($request->get('status') === 'returned') {
+                    // Save return log
+                    ShipmentReturnLogs::create([
+                        'shipment_id'   => $waybill->shipment_id,
+                        'user_id'       => $riderId,
+                        'reason'        => $request->has('reason') ? $request->get('reason') : ''
+                    ]);
+                }
+            }
+
+
         }
 
         return redirect()->back();

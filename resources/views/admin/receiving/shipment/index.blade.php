@@ -222,7 +222,7 @@
                                 <div class="reasonInput hide form-group{{ $errors->has('reason') ? ' has-error' : '' }}">
                                     <label for="reason">Reason</label>
 
-                                    <input type="text" id="reason" class="form-control" />
+                                    <input type="text" id="reason" name="reason" class="form-control" />
 
                                     @if ($errors->has('reason'))
                                         <span class="help-block">
