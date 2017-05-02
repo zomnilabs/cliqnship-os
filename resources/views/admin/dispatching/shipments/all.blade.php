@@ -179,7 +179,13 @@
                                             <p>Insurance declared value</p>
                                         @endif
                                     </td>
-                                    <td>{{ $shipment->remarks }}</td>
+                                    <td>
+                                        @if ($shipment->remarks)
+                                            @foreach ($shipment->remarks as $remark)
+                                                <li>{{ $remark->reason }}</li>
+                                            @endforeach
+                                        @endif
+                                    </td>
                                     <td>{{ ucwords($shipment->source->name) or '' }}</td>
                                     <th>{{$shipment->rider->user->profile->full_name or 'Not Assigned'}}</th>
                                     <td>{{ $shipment->status }}</td>
