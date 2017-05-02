@@ -23,6 +23,9 @@ Route::get('/pricing', function () {
 Route::get('/faqs', function () {
     return view('faqs');
 });
+Route::get('/dispatch', function () {
+    return view('print.delivery');
+});
 
 Auth::routes();
 
