@@ -97,13 +97,52 @@
                     </ol>
                 </div>
                 <div class="header-title pull-left">
-                    <h1>Shipments</h1>
+                    <h1>Receiving Shipments</h1>
                 </div>
 
                 <div class="page-actions pull-right">
                     <button  data-toggle="modal" data-target="#addWaybill" class="btn btn-primary">
                         <i class="glyphicon glyphicon-plus"></i>
                         Add New Shipment Remit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row text-center cards">
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4>Shipments Remitted / Total Shipments</h4>
+                                    <h1>{{ $statistics['remitted'] }} / {{ $statistics['total_shipments'] }}</h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4>Remitted COD / Total COD Shipments</h4>
+                                    <h1>{{ $statistics['remitted_cod'] }} / {{ $statistics['with_cod'] }}</h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4>COD Remitted / Total Amount</h4>
+                                    <h1>{{ $statistics['total_cod_amount_remitted'] }} / {{ $statistics['total_cod_amount'] }}</h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

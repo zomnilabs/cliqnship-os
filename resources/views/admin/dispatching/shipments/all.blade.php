@@ -94,7 +94,7 @@
                     </ol>
                 </div>
                 <div class="header-title pull-left">
-                    <h1>Dispatching</h1>
+                    <h1>Dispatching Shipments</h1>
                 </div>
             </div>
         </div>
@@ -158,7 +158,7 @@
                                 <th>Source</th>
                                 <th>Rider</th>
                                 <th>Status</th>
-                                <th>Actions</th>
+                                {{--<th>Actions</th>--}}
                             </tr>
                             </thead>
 
@@ -183,10 +183,10 @@
                                     <td>{{ ucwords($shipment->source->name) or '' }}</td>
                                     <th>{{$shipment->rider->user->profile->full_name or 'Not Assigned'}}</th>
                                     <td>{{ $shipment->status }}</td>
-                                    <th>
-                                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                        <button class="btn btn-default"><i class="fa fa-edit"></i></button>
-                                    </th>
+                                    {{--<th>--}}
+                                        {{--<button class="btn btn-danger"><i class="fa fa-trash"></i></button>--}}
+                                        {{--<button class="btn btn-default"><i class="fa fa-edit"></i></button>--}}
+                                    {{--</th>--}}
                                 </tr>
                                 @endforeach
                             </tbody>
