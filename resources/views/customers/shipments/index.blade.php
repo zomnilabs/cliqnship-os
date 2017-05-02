@@ -163,12 +163,19 @@
                                             @endif
                                         </td>
                                         <td>{{ $shipment->charge_to }}</td>
-                                        <td>{{ $shipment->remarks }}</td>
+                                        <td>
+                                            <ul>
+                                                @foreach($shipment->remarks as $r)
+                                                    <li>{{ $r->remarks }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </td>
                                         <td>{{ $shipment->status }}</td>
                                         <th>
                                             <button class="btn btn-danger delBooking" value="{{ $shipment->id }}"><i class="fa fa-trash"></i></button>
                                             <button class="btn btn-default"><i class="fa fa-edit"></i></button>
-                                            <button class="btn btn-default" onclick="frames['frame'].print()"><i class="fa fa-print"></i></button>
+                                            <button class="btn btn-default" onclick="$('iframe').attr('src','/customers/shipments/{{ $shipment->id }}/preview');
+                                                frames['frame'].print();"><i class="fa fa-print"></i></button>
                                         </th>
                                     </tr>
                                 @endforeach
@@ -188,7 +195,7 @@
     </div>
     <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
     @include('customers.shipments.modals.import')
-    <iframe src="/customers/shipments/preview" name="frame" style="width: 0; height: 0"></iframe>
+    <iframe name="frame" style="width: 0; height: 0"></iframe>
 @endsection
 
 @section('scripts')

@@ -23,9 +23,10 @@ class ShipmentsController extends Controller {
             ->with('shipments', $shipments);
     }
 
-    public function preview()
+    public function preview($shipmentId)
     {
-        return view('print.waybill');
+        $shipment = Shipment::where('id', $shipmentId)->first();
+        return view('print.waybill', compact('shipment'));
     }
 
     public function importShipments(Request $request)

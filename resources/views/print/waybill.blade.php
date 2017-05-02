@@ -103,37 +103,37 @@
                     <tr>
                         <td colspan="2" class="flex-content top-border">
                             <div class="flex-data">
-                                <div>From:</div><div class="data-center">Acct #: 2016000000001</div>
+                                <div>From: <br>
+                                {{ $shipment->senderAddress->getFullAddress() }}
+                                </div><div class="data-center">Acct #: {{ $shipment->user->account_id }}</div>
                             </div>
                         </td>
-                        <td colspan="2" class="flex-content">
-                            <div class="flex-data">
-                                <div>To:</div>
-                                <div class="data-center">Test
-                                    <div>Test</div>
-                                    <div>Test</div></div>
+                        <td colspan="2">
+                            <div>
+                                To: <br>
+                                {{ $shipment->address->getFullAddress() }}
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="1">Sevice:<div>test</div></td>
+                        <td colspan="1">Sevice:<div>{{ $shipment->service_type }}</div></td>
                         <td colspan="3">Special Instructions:<div>test</div></td>
                     </tr>
                     <tr>
-                        <td colspan="1">Shippers's Reference:<div>test</div></td>
-                        <td colspan="3">Description of Package:<div>test</div></td>
+                        <td colspan="1">Shippers's Reference:<div></div></td>
+                        <td colspan="3">Description of Package:<div>{{ $shipment->item_description }}</div></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Dimensions:<div>L x 10 W 11 x H 12</div></td>
-                        <td colspan="1">Weight (kg):</td>
+                        <td colspan="2">Dimensions:<div>L x {{ $shipment->length }} W {{ $shipment->width }} x H {{ $shipment->height }}</div></td>
+                        <td colspan="1">Weight (kg): <br> {{ $shipment->weight }}</td>
                         <td colspan="1">Chargeable Weight:</td>
                     </tr>
                     <tr>
                         <td colspan="2" class="flex-content top-border">
                             <div class="flex-data">
-                                <div>Shipment Insurance: <br> YES
+                                <div>Shipment Insurance: <br> {{ ($shipment->insurance_declared_value ? "YES" : "") }}
                                 </div>
-                                <div class="data-center">Declared Value:</div>
+                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? insurance_amount : "") }}</div>
                             </div>
                         </td>
                         <td colspan="2" class="flex-content top-border">
@@ -284,38 +284,37 @@
                     <tr>
                         <td colspan="2" class="flex-content top-border">
                             <div class="flex-data">
-                                <div>From:</div><div class="data-center">Acct #: 2016000000001</div>
+                                <div>From: <br>
+                                {{ $shipment->senderAddress->getFullAddress() }}
+                                </div><div class="data-center">Acct #: {{ $shipment->user->account_id }}</div>
                             </div>
                         </td>
-                        <td colspan="2" class="flex-content">
-                            <div class="flex-data">
-                                <div>To:</div>
-                                <div class="data-center">Test
-                                    <div>Test</div>
-                                    <div>Test</div></div>
+                        <td colspan="2">
+                            <div>
+                                To: <br>
+                                {{ $shipment->address->getFullAddress() }}
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Sevice:<div>test</div></td>
+                        <td colspan="2">Sevice:<div>{{ $shipment->service_type }}</div></td>
                         <td colspan="2">Special Instructions:<div>test</div></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Shippers's Reference:<div>test</div></td>
-                        <td colspan="2">Description of Package:<div>test</div></td>
+                        <td colspan="2">Shippers's Reference:<div></div></td>
+                        <td colspan="2">Description of Package:<div>{{ $shipment->item_description }}</div></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Dimensions:<div>L x 10 W 11 x H 12</div></td>
-                        <td colspan="1">Weight (kg):</td>
+                        <td colspan="2">Dimensions:<div>L x {{ $shipment->length }} W {{ $shipment->width }} x H {{ $shipment->height }}</div></td>
+                        <td colspan="1">Weight (kg): <br> {{ $shipment->weight }}</td>
                         <td colspan="1">Chargeable Weight:</td>
                     </tr>
                     <tr>
                         <td colspan="2" class="flex-content top-border">
                             <div class="flex-data">
-                                <div>Shipment Insurance:
-                                    <div>YES</div>
+                                <div>Shipment Insurance: <br> {{ ($shipment->insurance_declared_value ? "YES" : "") }}
                                 </div>
-                                <div class="data-center">Declared Value:</div>
+                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? insurance_amount : "") }}</div>
                             </div>
                         </td>
                         <td colspan="2" class="flex-content top-border">
@@ -368,38 +367,37 @@
                     <tr>
                         <td colspan="2" class="flex-content top-border">
                             <div class="flex-data">
-                                <div>From:</div><div class="data-center">Acct #: 2016000000001</div>
+                                <div>From: <br>
+                                {{ $shipment->senderAddress->getFullAddress() }}
+                                </div><div class="data-center">Acct #: {{ $shipment->user->account_id }}</div>
                             </div>
                         </td>
-                        <td colspan="2" class="flex-content">
-                            <div class="flex-data">
-                                <div>To:</div>
-                                <div class="data-center">Test
-                                    <div>Test</div>
-                                    <div>Test</div></div>
+                        <td colspan="2">
+                            <div>
+                                To: <br>
+                                {{ $shipment->address->getFullAddress() }}
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Sevice:<div>test</div></td>
+                        <td colspan="2">Sevice:<div>{{ $shipment->service_type }}</div></td>
                         <td colspan="2">Special Instructions:<div>test</div></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Shippers's Reference:<div>test</div></td>
-                        <td colspan="2">Description of Package:<div>test</div></td>
+                        <td colspan="2">Shippers's Reference:<div></div></td>
+                        <td colspan="2">Description of Package:<div>{{ $shipment->item_description }}</div></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Dimensions:<div>L x 10 W 11 x H 12</div></td>
-                        <td colspan="1">Weight (kg):</td>
+                        <td colspan="2">Dimensions:<div>L x {{ $shipment->length }} W {{ $shipment->width }} x H {{ $shipment->height }}</div></td>
+                        <td colspan="1">Weight (kg): <br> {{ $shipment->weight }}</td>
                         <td colspan="1">Chargeable Weight:</td>
                     </tr>
                     <tr>
                         <td colspan="2" class="flex-content top-border">
                             <div class="flex-data">
-                                <div>Shipment Insurance:
-                                    <div>YES</div>
+                                <div>Shipment Insurance: <br> {{ ($shipment->insurance_declared_value ? "YES" : "") }}
                                 </div>
-                                <div class="data-center">Declared Value:</div>
+                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? insurance_amount : "") }}</div>
                             </div>
                         </td>
                         <td colspan="2" class="flex-content top-border">
@@ -448,38 +446,37 @@
                     <tr>
                         <td colspan="2" class="flex-content top-border">
                             <div class="flex-data">
-                                <div>From:</div><div class="data-center">Acct #: 2016000000001</div>
+                                <div>From: <br>
+                                {{ $shipment->senderAddress->getFullAddress() }}
+                                </div><div class="data-center">Acct #: {{ $shipment->user->account_id }}</div>
                             </div>
                         </td>
-                        <td colspan="2" class="flex-content">
-                            <div class="flex-data">
-                                <div>To:</div>
-                                <div class="data-center">Test
-                                    <div>Test</div>
-                                    <div>Test</div></div>
+                        <td colspan="2">
+                            <div>
+                                To: <br>
+                                {{ $shipment->address->getFullAddress() }}
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Sevice:<div>test</div></td>
+                        <td colspan="2">Sevice:<div>{{ $shipment->service_type }}</div></td>
                         <td colspan="2">Special Instructions:<div>test</div></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Shippers's Reference:<div>test</div></td>
-                        <td colspan="2">Description of Package:<div>test</div></td>
+                        <td colspan="2">Shippers's Reference:<div></div></td>
+                        <td colspan="2">Description of Package:<div>{{ $shipment->item_description }}</div></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Dimensions:<div>L x 10 W 11 x H 12</div></td>
-                        <td colspan="1">Weight (kg):</td>
+                        <td colspan="2">Dimensions:<div>L x {{ $shipment->length }} W {{ $shipment->width }} x H {{ $shipment->height }}</div></td>
+                        <td colspan="1">Weight (kg): <br> {{ $shipment->weight }}</td>
                         <td colspan="1">Chargeable Weight:</td>
                     </tr>
                     <tr>
                         <td colspan="2" class="flex-content top-border">
                             <div class="flex-data">
-                                <div>Shipment Insurance:
-                                    <div>YES</div>
+                                <div>Shipment Insurance: <br> {{ ($shipment->insurance_declared_value ? "YES" : "") }}
                                 </div>
-                                <div class="data-center">Declared Value:</div>
+                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? insurance_amount : "") }}</div>
                             </div>
                         </td>
                         <td colspan="2" class="flex-content top-border">
