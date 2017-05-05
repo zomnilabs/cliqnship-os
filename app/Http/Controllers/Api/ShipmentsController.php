@@ -79,6 +79,8 @@ class ShipmentsController extends Controller {
 
                 return response()->json('Shipment not in hq yet', 400);
             }
+
+//            if ($shipment->shipment->status === '')
         }
 
 //        if ($request->has('status') && $request->has('user_id')
