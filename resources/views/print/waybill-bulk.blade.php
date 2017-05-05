@@ -112,7 +112,7 @@
                     <div class="flex-container top-header">
                         <img src="/images/logo.png"/>
                         <div class="center">
-                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39+",3,33) . '" alt="barcode"   />';?>
+                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode"   />';?>
                             <div>{{ $shipment['tracking_number'] }}</div>
                         </div>
                     </div>
@@ -296,7 +296,7 @@
                     <div class="flex-container top-header">
                         <img src="/images/logo.png"/>
                         <div class="center">
-                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39+",3,33) . '" alt="barcode"   />';?>
+                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode"   />';?>
                             <div>{{ $shipment['tracking_number'] }}</div>
                         </div>
                     </div>
@@ -381,7 +381,7 @@
                     <div class="flex-container top-header">
                         <img src="/images/logo.png"/>
                         <div class="center">
-                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39+",3,33) . '" alt="barcode"   />';?>
+                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode"   />';?>
                             <div>{{ $shipment['tracking_number'] }}</div>
                         </div>
                     </div>
@@ -462,7 +462,7 @@
                     <div class="flex-container top-header">
                         <img src="/images/logo.png"/>
                         <div class="center">
-                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39+",3,33) . '" alt="barcode"   />';?>
+                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode"   />';?>
                             <div>{{ $shipment['tracking_number'] }}</div>
                         </div>
                     </div>
