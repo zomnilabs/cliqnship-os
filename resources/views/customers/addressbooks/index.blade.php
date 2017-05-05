@@ -116,7 +116,7 @@
             //used to determine the http verb to use [add=POST], [update=PUT]
             var state = this.name;
             var type = 'POST'; //for creating new resource
-            var url = '/customers/addressbooks/';
+            var url = location.origin + '/customers/addressbooks/';
 
             if (state == "edit"){
                 type = 'PUT';
