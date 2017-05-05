@@ -84,11 +84,27 @@
             vertical-align: baseline;
         }
 
+        .hide-on-print {
+            text-align: center;
+        }
+
         @media print {
             footer {page-break-after: always;}
+            .hide-on-print {
+                display: none;
+            }
         }
     </style>
 <body>
+    <div class="hide-on-print">
+        <h1>Total of {{ count($shipments) }} Waybills</h1>
+        <button class="btn btn-primary" id="btnPrint"
+            onclick="window.print()">
+            Print Waybills
+        </button>
+        <hr>
+    </div>
+
     @foreach ($shipments as $shipment)
         <div class="container">
             <div class="flex-container">
