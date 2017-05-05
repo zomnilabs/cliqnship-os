@@ -138,6 +138,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
     });
 });
 
+Route::get('bulk-import','Extra\BulkShipmentUploadController@index');
+Route::post('bulk-import','Extra\BulkShipmentUploadController@generate');
+
 Route::get('print-waybill', function(){
     return view('print.waybill');
 });
