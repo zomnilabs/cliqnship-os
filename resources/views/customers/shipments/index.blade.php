@@ -120,7 +120,6 @@
                                     <td class="hide">Id #</td>
                                     <td>Tracking #</td>
                                     <td>Delivery Address</td>
-                                    <td># of Items</td>
                                     <td>Service Type</td>
                                     <td>Services Add-Ons</td>
                                     <td>Charge To</td>
@@ -135,7 +134,6 @@
                                     <th class="hide">Id #</th>
                                     <th>Tracking #</th>
                                     <th>Delivery Address</th>
-                                    <th># of Items</th>
                                     <th>Service Type</th>
                                     <th>Services Add-Ons</th>
                                     <th>Charge To</th>
@@ -151,7 +149,6 @@
                                         <td class="hide">{{ $shipment->id }}</td>
                                         <td>{{ $shipment->trackingNumbers()->mainTrackingNumber()->tracking_number }}</td>
                                         <td>{{ $shipment->address->address_line_1 }} {{ $shipment->address->barangay }} {{ $shipment->address->city }}, {{ $shipment->address->province }}. {{ $shipment->address->zip_code }}</td>
-                                        <td>{{ $shipment->number_of_items }}</td>
                                         <td>{{ $shipment->service_type }}</td>
                                         <td>
                                             @if ($shipment->collect_and_deposit)

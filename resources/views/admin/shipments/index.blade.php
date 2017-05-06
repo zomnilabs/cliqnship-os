@@ -14,14 +14,49 @@
 @section('scripts')
     <script>
         (function() {
-            $('.table thead tr.searchable th').each( function () {
-                var title = $(this).text();
+            $('#shippingTable tfoot tr.searchable td').each( function () {
+                let title = $(this).text();
                 if (title) {
-                    $(this).html( '<input type="text" style="width: 100%" placeholder="Search '+title+'" />' );
+                    switch (title) {
+                        case 'Pickup Date':
+                            $(this).html( '<input type="date" class="form-control filter" style="width: 100%" placeholder="Search '+title+'" />' );
+
+                            break;
+                        case 'Status':
+                            let selectHTML = '<select class="form-control filter" style="width: 100%">';
+                            selectHTML += '<option value="">Filter Status</option>';
+                            selectHTML += '<option value="pending">Pending</option>';
+                            selectHTML += '<option value="for-pickup">For Pickup</option>';
+                            selectHTML += '<option value="courier-picked-up">Courier Picked Up</option>';
+                            selectHTML += '<option value="arrived-at-hq">Arrived at HQ</option>';
+                            selectHTML += '<option value="enroute">En Route</option>';
+                            selectHTML += '<option value="successfully-delivered">Successfully Delivered</option>';
+                            selectHTML += '<option value="returned">Returned</option>';
+                            selectHTML += '</select>';
+
+                            $(this).html(selectHTML);
+                            break;
+                        default:
+                            $(this).html( '<input class="form-control filter" type="text" style="width: 100%" placeholder="Search '+title+'" />' );
+                    }
+
                 }
             });
 
-            $('.table').dataTable();
+            let table = $('#shippingTable').DataTable();
+
+            // Apply the search
+            table.columns().every( function () {
+                let that = this;
+                $( '.filter', this.footer() ).on( 'keyup change', function () {
+                    if ( that.search() !== this.value ) {
+                        console.log(that.data());
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+            } );
         }())
     </script>
 @endsection
@@ -87,26 +122,26 @@
                             </div>
                         </div>
 
-                        <table class="table table-bordered">
-                            <thead>
+                        <table class="table table-bordered" id="shippingTable">
+                            <tfoot class="filter-footer">
                             <tr class="searchable">
-                                <th class="hide">Id #</th>
-                                <th>Tracking #</th>
-                                <th>Delivery Address</th>
-                                <th># of Items</th>
-                                <th>Service Type</th>
-                                <th>Services Add-Ons</th>
-                                <th>Charge To</th>
-                                <th>Remarks</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                                <th></th>
+                                <td class="hide">Id #</td>
+                                <td>Tracking #</td>
+                                <td>Delivery Address</td>
+                                <td>Service Type</td>
+                                <td>Services Add-Ons</td>
+                                <td>Charge To</td>
+                                <td>Remarks</td>
+                                <td>Status</td>
+                                <td></td>
                             </tr>
+                            </tfoot>
+
+                            <thead>
                             <tr>
                                 <th class="hide">Id #</th>
                                 <th>Tracking #</th>
                                 <th>Delivery Address</th>
-                                <th># of Items</th>
                                 <th>Service Type</th>
                                 <th>Services Add-Ons</th>
                                 <th>Charge To</th>
@@ -122,7 +157,6 @@
                                     <td class="hide">{{ $shipment->id }}</td>
                                     <td>{{ $shipment->trackingNumbers()->mainTrackingNumber()->tracking_number }}</td>
                                     <td>{{ $shipment->address->address_line_1 }} {{ $shipment->address->barangay }} {{ $shipment->address->city }}, {{ $shipment->address->province }}. {{ $shipment->address->zip_code }}</td>
-                                    <td>{{ $shipment->number_of_items }}</td>
                                     <td>{{ $shipment->service_type }}</td>
                                     <td>
                                         @if ($shipment->collect_and_deposit)
@@ -134,12 +168,21 @@
                                         @endif
                                     </td>
                                     <td>{{ $shipment->charge_to }}</td>
-                                    <td>{{ $shipment->remarks }}</td>
+                                    <td>
+                                        <ul>
+                                            @if ($shipment->remarks)
+                                                @foreach($shipment->remarks as $r)
+                                                    <li>{{ $r->remarks }}</li>
+                                                @endforeach
+                                            @endif
+                                        </ul>
+                                    </td>
                                     <td>{{ $shipment->status }}</td>
                                     <th>
                                         <button class="btn btn-danger delBooking" value="{{ $shipment->id }}"><i class="fa fa-trash"></i></button>
                                         <button class="btn btn-default"><i class="fa fa-edit"></i></button>
-                                        <button class="btn btn-default" onclick="frames['frame'].print()"><i class="fa fa-print"></i></button>
+                                        <button class="btn btn-default" onclick="$('iframe').attr('src','/customers/shipments/{{ $shipment->id }}/preview');
+                                                frames['frame'].print();"><i class="fa fa-print"></i></button>
                                     </th>
                                 </tr>
                             @endforeach
