@@ -57,6 +57,23 @@
                     }
                 } );
             } );
+
+            $('#btnExport').on('click', function(e) {
+                e.preventDefault();
+
+                let data = table
+                    .rows({search:'applied'})
+                    .data().toArray();
+
+                let ids = '';
+                for (let id of data) {
+                    console.log(id[0]);
+                    ids += id[0] + ',';
+                }
+
+                ids = ids.replace(/,\s*$/, '');
+                window.open(`/admin/shipments/export?ids=${ids}`);
+            });
         }())
     </script>
 @endsection
@@ -85,7 +102,7 @@
                         <i class="glyphicon glyphicon-plus"></i>
                         Import Shipments</button>
 
-                    <a href="/admin/shipments/export" target="_blank" class="btn btn-primary">
+                    <a href="#" id="btnExport" class="btn btn-primary">
                         <i class="glyphicon glyphicon-plus"></i>
                         Export Shipments Waiting for Encoding</a>
                 </div>
