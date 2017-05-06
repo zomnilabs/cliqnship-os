@@ -53,11 +53,29 @@ class ShipmentsController extends Controller {
     private function createNewShipment($shipment, $user, $input)
     {
         \DB::transaction(function() use ($shipment, $user, $input) {
+            $address = [
+                'user_id'           => $user['id'],
+                'first_name'        => $shipment['contact_person'],
+                'last_name'         => '',
+                'type'              => 'shipment',
+                'address_type'      => 'residential',
+                'contact_number'    => $shipment['contact_number'],
+                'email'             => $shipment['email_address'],
+                'address_line_1'    => $shipment['street'],
+                'barangay'          => $shipment['barangay'],
+                'city'              => $shipment['municipality'],
+                'province'          => $shipment['province'],
+                'zip_code'          => $shipment['zip_code']
+            ];
+
+            // Address
+            $to = $this->findOrCreateAddress($address);
+
             $bookingData = [
                 'source_id'                     => 2,
                 'user_id'                       => $user['id'],
                 'from'                          => $input['from'],
-                'to'                            => $input['to'],
+                'to'                            => $to,
                 'item_description'              => $shipment['item_description'],
                 'number_of_items'               => $shipment['number_of_items'],
                 'service_type'                  => $shipment['service_type'] ? $shipment['service_type'] : 'metro_manila',
@@ -90,6 +108,25 @@ class ShipmentsController extends Controller {
                 'shipment_id'       =>$shipment->id
             ]);
         });
+    }
+
+    private function findOrCreateAddress($address)
+    {
+        $model = UserAddressbook::query();
+        $filters = array_keys($address);
+
+        foreach ($filters as $filter) {
+            $model->where($filter, $address[$filter]);
+        }
+
+        $result = $model->first();
+
+        if (! $result) {
+            $address['identifier']  = $address['first_name'];
+            $result = UserAddressbook::create($address);
+        }
+
+        return $result->id;
     }
 
     // Create unique tracking number

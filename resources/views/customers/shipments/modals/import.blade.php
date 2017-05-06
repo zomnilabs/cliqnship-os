@@ -25,17 +25,6 @@
                             </select>
                         </div>
 
-                        <div class="col-md-12 form-group">
-                            <label for="to" class="control-label">Select Delivery Address</label>
-                            <select name="to" id="to" class="form-control">
-                                @foreach ($addresses as $address)
-                                    @if ($address->type === 'shipment')
-                                        <option value="{{ $address->id }}">{{ $address->identifier }} : {{ $address->address_line_1 }} {{ $address->barangay }}, {{ $address->city }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-
                         <div class="col-md-12 form-group{{ $errors->has('file') ? ' has-error' : '' }}">
                             <label for="file" class="control-label">Import your file here</label>
                             <input type="file" name="file" id="file"
