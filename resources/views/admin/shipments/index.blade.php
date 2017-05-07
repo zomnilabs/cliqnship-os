@@ -98,7 +98,7 @@
                         <i class="glyphicon glyphicon-plus"></i>
                         Create New Shipment</button>
 
-                    <button data-toggle="modal" data-target=".bs-modal-lg" class="btn btn-primary">
+                    <button data-toggle="modal" data-target="#importShipmentsModal" class="btn btn-primary">
                         <i class="glyphicon glyphicon-plus"></i>
                         Import Shipments</button>
 
@@ -359,4 +359,6 @@
         </div>
     </div>
     <iframe src="/customers/shipments/preview" name="frame" style="width: 0; height: 0"></iframe>
+
+    @include('admin.shipments.import');
 @endsection
