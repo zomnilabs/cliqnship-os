@@ -146,8 +146,9 @@ class ShipmentsController extends Controller
         ];
 
         $otherWaybill = [
-            'other_waybill_number'      => $shipment['other_waybill_number'],
-            'other_waybill_provider'    => $shipment['other_waybill_provider']
+            'shipment_id'          => $tracking->shipment_id,
+            'tracking_number'      => $shipment['other_waybill_number'],
+            'provider'             => $shipment['other_waybill_provider']
         ];
 
         $address = [
@@ -182,6 +183,18 @@ class ShipmentsController extends Controller
                     ]);
                 }
             }
+
+            if (! empty($otherWaybill['tracking_number'])) {
+                $otherTracking = ShipmentTrackingNumber::where('shipment_id', $otherWaybill['shipment_id'])
+                    ->where('tracking_number', $otherWaybill['tracking_number'])
+                    ->where('provider', $otherWaybill['provider'])
+                    ->first();
+
+                if (! $otherTracking) {
+                    ShipmentTrackingNumber::create($otherWaybill);
+                }
+            }
+
         });
 
         return $result;
