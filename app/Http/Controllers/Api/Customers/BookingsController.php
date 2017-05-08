@@ -108,4 +108,87 @@ class BookingsController extends AbstractAPIController {
         return $this->responseCreated($result->toArray());
     }
 
+    public function update(CreateBookingRequest $request, $userId, $bookingId)
+    {
+        // Check user
+        if ($request->user()->id !== (int) $userId) {
+            return $this->responseUnauthorized();
+        }
+
+        // Check the status of the booking
+        $booking = Booking::where('user_id', $userId)
+            ->where('id', $bookingId)->first();
+
+        if (! $booking) {
+            return $this->responseNotFound(['booking is non existing']);
+        }
+
+        if ($booking->status !== 'pending') {
+            return $this->responseBadRequest(['unable to update the booking, because it is not in pending status anymore']);
+        }
+
+        $input = $request->all();
+
+        $result = null;
+
+        // check address
+        if (isset($input['address']) && is_array($input['address'])) {
+            if (isset($input['address']['id'])) {
+                $address = UserAddressbook::find($input['address']['id']);
+
+                if (! $address) {
+                    return $this->responseBadRequest(['invalid selected address']);
+                }
+
+                $input['address'] = $address->id;
+            } else {
+                $addressData = $input['address'];
+                $addressData['user_id'] = $userId;
+
+                if ($addressData['primary'] && $addressData['type'] === 'booking') {
+                    $addressData['primary'] = 0;
+                }
+
+                $address = UserAddressbook::create($addressData);
+
+                // Check if newly added address is a primary address
+                if ($address->primary && $address->type === 'shipment') {
+                    // Update other primary
+                    UserAddressbook::where('user_id', $userId)
+                        ->where('primary', 1)
+                        ->where('id', '!=', $address->id)
+                        ->update(['primary' => 0]);
+                }
+
+                $input['address'] = $address->id;
+            }
+        }
+
+        \DB::transaction(function() use ($input, $userId, $bookingId, &$result) {
+            $bookingData = [
+                'user_addressbook_id'   => $input['address'],
+                'remarks'           => isset($input['remarks']) ? $input['remarks'] : '',
+                'pickup_date'       => Carbon::createFromTimestamp(strtotime($input['pickup_date'])),
+                'number_of_items'   => isset($input['number_of_items']) ? $input['number_of_items'] : 0,
+                'type_of_items'     => isset($input['type_of_items']) ? $input['type_of_items'] : '',
+                'length'            => isset($input['length']) ? $input['length'] : 0,
+                'width'             => isset($input['width']) ? $input['width'] : 0,
+                'height'            => isset($input['height']) ? $input['height'] : 0,
+                'weight'            => isset($input['weight']) ? $input['weight'] : 0,
+            ];
+
+            $booking = Booking::where('user_id', $userId)
+                ->where('id', $bookingId)
+                ->update($bookingData);
+
+            $result = Booking::find($booking->id);
+        });
+
+        // Transform Result
+        $result = $this->transformItem($result, new BookingsTransformer);
+
+        // Return response
+        return $this->responseCreated($result->toArray());
+    }
+
 }
