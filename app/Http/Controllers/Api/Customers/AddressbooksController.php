@@ -131,6 +131,21 @@ class AddressbooksController extends AbstractAPIController {
 
         $input = $request->all();
 
+        // check address first
+        $address = UserAddressbook::where('user_id', $userId)
+            ->where('id', $addressbookId)->first();
+
+        if (! $address) {
+            return $this->responseNotFound(['addressbook not found']);
+        }
+
+        if ($input['primary']
+            && $input['type'] === 'booking'
+            && $address->type === 'booking') {
+
+            $input['primary'] = 0;
+        }
+
         $address = UserAddressbook::where('user_id', $userId)
             ->where('id', $addressbookId)
             ->update($input);
