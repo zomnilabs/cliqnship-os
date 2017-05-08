@@ -87,6 +87,11 @@ class AddressbooksController extends AbstractAPIController {
         $input = $request->all();
 
         $input['user_id'] = $userId;
+
+        if ($input['primary'] && $input['type'] === 'booking') {
+            $input['primary'] = 0;
+        }
+
         $address = UserAddressbook::create($input);
 
         if (! $address) {
@@ -99,7 +104,7 @@ class AddressbooksController extends AbstractAPIController {
             UserAddressbook::where('user_id', $userId)
                 ->where('primary', 1)
                 ->where('id', '!=', $address->id)
-                ->update(['primary', 0]);
+                ->update(['primary' => 0]);
         }
 
         // Transform Result
