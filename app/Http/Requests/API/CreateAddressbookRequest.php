@@ -12,10 +12,10 @@ class CreateAddressbookRequest extends AbstractAPIRequest
     public function rules()
     {
         return [
-            'identifier'    => 'required',
-            'type'          => 'in:booking,shipment',
-            'first_name'    => 'required',
-            'last_name'     => 'required',
+            'identifier'        => 'required',
+            'type'              => 'required|in:booking,shipment',
+            'first_name'        => 'required',
+            'last_name'         => 'required',
             'contact_number'    => 'required',
             'email'             => 'email',
             'address_line_1'    => 'required',

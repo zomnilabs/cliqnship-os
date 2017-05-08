@@ -32,4 +32,6 @@ class BookingsController extends AbstractAPIController {
     }
 
 
+
+
 }

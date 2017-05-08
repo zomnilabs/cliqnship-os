@@ -16,8 +16,8 @@ class AddressbookTransformer extends TransformerAbstract implements Transformera
     public function transform($addressbook)
     {
         return [
-            'id'        => $addressbook->id,
-            'user_id'   => $addressbook->user_id,
+            'id'        => (int) $addressbook->id,
+            'user_id'   => (int) $addressbook->user_id,
             'identifier'    => $addressbook->identifier,
             'type'          => $addressbook->type,
             'first_name'    => $addressbook->first_name,

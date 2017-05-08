@@ -12,10 +12,8 @@ trait ApiResponse {
 
     public function responseCreated($data)
     {
-        $response = [
-            'data'      => $data,
-            'status'    => 201
-        ];
+        $response = $data;
+        $response['status'] = 200;
 
         return response()->json($response, 201);
     }
