@@ -122,7 +122,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="1">Sevice:<div>{{ $shipment->service_type }}</div></td>
+                        <td colspan="1">Service:<div>{{ $shipment->service_type }}</div></td>
                         <td colspan="3">Special Instructions:<div>test</div></td>
                     </tr>
                     <tr>
@@ -135,18 +135,26 @@
                         <td colspan="1">Chargeable Weight:</td>
                     </tr>
                     <tr>
-                        <td colspan="2" class="flex-content top-border">
-                            <div class="flex-data">
-                                <div>Shipment Insurance: <br> {{ ($shipment->insurance_declared_value ? "YES" : "") }}
-                                </div>
-                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? $shipment->insurance_amount : "") }}</div>
+                        <td colspan="1">
+                            <div>
+                                <div>Shipment Insurance: {{ ($shipment['insurance_declared_value'] ? "YES" : "") }}</div>
+                                <div>Declared Value: {{ ($shipment['insurance_amount'] ? $shipment['insurance_amount'] : "") }}</div>
                             </div>
                         </td>
-                        <td colspan="2" class="flex-content top-border">
-                            Mode of Payment:&emsp;   
-                            Bank: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u> <br>
-                            <input type="checkbox"/> Cash
-                            <input type="checkbox"/> Charge Check #:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                        <td colspan="2">
+                            <div>
+                                <div>
+                                    Collect and Deposit: {{ ($shipment['collect_and_deposit'] ? "YES" : "") }} <br>
+                                    Amount: {{ ($shipment['collect_and_deposit_amount'] ? $shipment['collect_and_deposit_amount'] : "") }}
+                                </div>
+                                <div>Account Name: {{ ($shipment['account_name'] ? $shipment['account_name'] : "") }} <br>
+                                Account Number: {{ ($shipment['account_number'] ? $shipment['account_number'] : "") }} <br>
+                                Account Bank: {{ ($shipment['bank'] ? $shipment['bank'] : "") }}</div>
+                            </div>
+
+                        </td>
+                        <td colspan="1">
+                            Charge To: {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
                         </td>
                     </tr>
                     <tr>
@@ -309,7 +317,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Sevice:<div>{{ $shipment->service_type }}</div></td>
+                        <td colspan="2">Service:<div>{{ $shipment->service_type }}</div></td>
                         <td colspan="2">Special Instructions:<div>test</div></td>
                     </tr>
                     <tr>
@@ -322,18 +330,26 @@
                         <td colspan="1">Chargeable Weight:</td>
                     </tr>
                     <tr>
-                        <td colspan="2" class="flex-content top-border">
-                            <div class="flex-data">
-                                <div>Shipment Insurance: <br> {{ ($shipment->insurance_declared_value ? "YES" : "") }}
-                                </div>
-                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? $shipment->insurance_amount : "") }}</div>
+                        <td colspan="2">
+                            <div>
+                                <div>Shipment Insurance: {{ ($shipment['insurance_declared_value'] ? "YES" : "") }}</div>
+                                <div>Declared Value: {{ ($shipment['insurance_amount'] ? $shipment['insurance_amount'] : "") }}</div>
                             </div>
                         </td>
-                        <td colspan="2" class="flex-content top-border">
-                            Mode of Payment:&emsp;&emsp;
-                            Bank: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u> <br>
-                            <input type="checkbox"/>Cash
-                            <input type="checkbox"/>Charge &emsp;&emsp;Check #:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                        <td colspan="1">
+                            <div>
+                                <div>
+                                    Collect and Deposit: {{ ($shipment['collect_and_deposit'] ? "YES" : "") }} <br>
+                                    Amount: {{ ($shipment['collect_and_deposit_amount'] ? $shipment['collect_and_deposit_amount'] : "") }}
+                                </div>
+                                <div>Account Name: {{ ($shipment['account_name'] ? $shipment['account_name'] : "") }} <br>
+                                Account Number: {{ ($shipment['account_number'] ? $shipment['account_number'] : "") }} <br>
+                                Account Bank: {{ ($shipment['bank'] ? $shipment['bank'] : "") }}</div>
+                            </div>
+
+                        </td>
+                        <td colspan="1">
+                            Charge To: {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
                         </td>
                     </tr>
                     <tr>
@@ -398,7 +414,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Sevice:<div>{{ $shipment->service_type }}</div></td>
+                        <td colspan="2">Service:<div>{{ $shipment->service_type }}</div></td>
                         <td colspan="2">Special Instructions:<div>test</div></td>
                     </tr>
                     <tr>
@@ -411,18 +427,26 @@
                         <td colspan="1">Chargeable Weight:</td>
                     </tr>
                     <tr>
-                        <td colspan="2" class="flex-content top-border">
-                            <div class="flex-data">
-                                <div>Shipment Insurance: <br> {{ ($shipment->insurance_declared_value ? "YES" : "") }}
-                                </div>
-                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? $shipment->insurance_amount : "") }}</div>
+                        <td colspan="2">
+                            <div>
+                                <div>Shipment Insurance: {{ ($shipment['insurance_declared_value'] ? "YES" : "") }}</div>
+                                <div>Declared Value: {{ ($shipment['insurance_amount'] ? $shipment['insurance_amount'] : "") }}</div>
                             </div>
                         </td>
-                        <td colspan="2" class="flex-content top-border">
-                            Mode of Payment:&emsp;&emsp;
-                            Bank: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u> <br>
-                            <input type="checkbox"/>Cash
-                            <input type="checkbox"/>Charge &emsp;&emsp;Check #:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                        <td colspan="1">
+                            <div>
+                                <div>
+                                    Collect and Deposit: {{ ($shipment['collect_and_deposit'] ? "YES" : "") }} <br>
+                                    Amount: {{ ($shipment['collect_and_deposit_amount'] ? $shipment['collect_and_deposit_amount'] : "") }}
+                                </div>
+                                <div>Account Name: {{ ($shipment['account_name'] ? $shipment['account_name'] : "") }} <br>
+                                Account Number: {{ ($shipment['account_number'] ? $shipment['account_number'] : "") }} <br>
+                                Account Bank: {{ ($shipment['bank'] ? $shipment['bank'] : "") }}</div>
+                            </div>
+
+                        </td>
+                        <td colspan="1">
+                            Charge To: {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
                         </td>
                     </tr>
                     <tr>
@@ -483,7 +507,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Sevice:<div>{{ $shipment->service_type }}</div></td>
+                        <td colspan="2">Service:<div>{{ $shipment->service_type }}</div></td>
                         <td colspan="2">Special Instructions:<div>test</div></td>
                     </tr>
                     <tr>
@@ -496,18 +520,26 @@
                         <td colspan="1">Chargeable Weight:</td>
                     </tr>
                     <tr>
-                        <td colspan="2" class="flex-content top-border">
-                            <div class="flex-data">
-                                <div>Shipment Insurance: <br> {{ ($shipment->insurance_declared_value ? "YES" : "") }}
-                                </div>
-                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? $shipment->insurance_amount : "") }}</div>
+                        <td colspan="2">
+                            <div>
+                                <div>Shipment Insurance: {{ ($shipment['insurance_declared_value'] ? "YES" : "") }}</div>
+                                <div>Declared Value: {{ ($shipment['insurance_amount'] ? $shipment['insurance_amount'] : "") }}</div>
                             </div>
                         </td>
-                        <td colspan="2" class="flex-content top-border">
-                            Mode of Payment:&emsp;&emsp;
-                            Bank: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u> <br>
-                            <input type="checkbox"/>Cash
-                            <input type="checkbox"/>Charge &emsp;&emsp;Check #:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                        <td colspan="1">
+                            <div>
+                                <div>
+                                    Collect and Deposit: {{ ($shipment['collect_and_deposit'] ? "YES" : "") }} <br>
+                                    Amount: {{ ($shipment['collect_and_deposit_amount'] ? $shipment['collect_and_deposit_amount'] : "") }}
+                                </div>
+                                <div>Account Name: {{ ($shipment['account_name'] ? $shipment['account_name'] : "") }} <br>
+                                Account Number: {{ ($shipment['account_number'] ? $shipment['account_number'] : "") }} <br>
+                                Account Bank: {{ ($shipment['bank'] ? $shipment['bank'] : "") }}</div>
+                            </div>
+
+                        </td>
+                        <td colspan="1">
+                            Charge To: {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
                         </td>
                     </tr>
                     <tr>

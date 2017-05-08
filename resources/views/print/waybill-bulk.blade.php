@@ -26,7 +26,11 @@
         .flex-content{
             width: 49%;
         }
-
+        .flex-data{
+            display:flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
         .text-center {
             text-align: center;
         }
@@ -119,12 +123,10 @@
                     <table border>
                         <tr>
                             <td colspan="1">
-                                <div class="flex-data">
-                                    <div>From: <br>
-                                        {{ $shipment['shipper_name'] }} <br>
-                                        {{ $shipment['shipper_contact_number'] }} <br>
-                                        {{ $shipment['shipper_address'] }}
-                                    </div>
+                                <div>From: <br>
+                                    {{ $shipment['shipper_name'] }} <br>
+                                    {{ $shipment['shipper_contact_number'] }} <br>
+                                    {{ $shipment['shipper_address'] }}
                                 </div>
                             </td>
                             <td colspan="3">
@@ -138,7 +140,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="1">Sevice:<div>{{ $shipment['service_type'] }}</div></td>
+                            <td colspan="1">Service:<div>{{ $shipment['service_type'] }}</div></td>
                             <td colspan="3">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
                         </tr>
                         <tr>
@@ -151,29 +153,26 @@
                             <td colspan="1">Chargeable Weight:</td>
                         </tr>
                         <tr>
-                            <td colspan="1" class="flex-content top-border">
-                                <div class="flex-data">
-                                    <div>Collect and Deposit: {{ ($shipment['collect_and_deposit'] ? "YES" : "") }}</div>
-                                    <div>Amount: {{ ($shipment['collect_and_deposit_amount'] ? $shipment['collect_and_deposit_amount'] : "") }}</div>
-                                    <div>Account Name: {{ ($shipment['account_name'] ? $shipment['account_name'] : "") }}</div>
-                                    <div>Account Number: {{ ($shipment['account_number'] ? $shipment['account_number'] : "") }}</div>
-                                    <div>Account Bank: {{ ($shipment['bank'] ? $shipment['bank'] : "") }}</div>
-                                </div>
-                            </td>
-                            <td class="flex-content top-border">
-                                <div class="flex-data">
+                            <td colspan="1">
+                                <div>
                                     <div>Shipment Insurance: {{ ($shipment['insurance_declared_value'] ? "YES" : "") }}</div>
                                     <div>Declared Value: {{ ($shipment['insurance_amount'] ? $shipment['insurance_amount'] : "") }}</div>
                                 </div>
                             </td>
-                            <td colspan="2" class="flex-content top-border">
-                                Mode of Payment:&emsp;
-                                <input type="checkbox"/> Cash
-                                <input type="checkbox"/> Charge
-                                <br>
-                                Charge To:&emsp;
-                                <input type="checkbox"/> Account
-                                <input type="checkbox"/> Prepaid
+                            <td colspan="2">
+                                <div>
+                                    <div>
+                                        Collect and Deposit: {{ ($shipment['collect_and_deposit'] ? "YES" : "") }} <br>
+                                        Amount: {{ ($shipment['collect_and_deposit_amount'] ? $shipment['collect_and_deposit_amount'] : "") }}
+                                    </div>
+                                    <div>Account Name: {{ ($shipment['account_name'] ? $shipment['account_name'] : "") }} <br>
+                                    Account Number: {{ ($shipment['account_number'] ? $shipment['account_number'] : "") }} <br>
+                                    Account Bank: {{ ($shipment['bank'] ? $shipment['bank'] : "") }}</div>
+                                </div>
+
+                            </td>
+                            <td colspan="1">
+                                Charge To: {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
                             </td>
                         </tr>
                         <tr>
@@ -187,14 +186,14 @@
                         </tr>
                         <tr>
                             <td colspan="2" class="flex-content data-center">
-                                <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditionsstated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                                <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
                                 <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u><br>
                                 Sender's Signature
                             </td>
                             <td colspan="2">
                                 <div>Received by CliqNShip</div>
-                                <div>Name:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
-                                <div>Time & Date: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                <div>Name:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                                <div>Time & Date: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
                             </td>
                         </tr>
                         <tr>
@@ -220,10 +219,10 @@
                             <td colspan="4" class="text-center">This area is for CliqNship couriers only</td>
                         </tr>
                         <tr class="text-center">
-                            <td colspan="1" style="width: 70%" class="text-left">Attemps:</td>
-                            <td colspan="1" style="width: 70%">1st Attempts:</td>
-                            <td colspan="1" style="width: 100%">2nd Attempts:</td>
-                            <td colspan="1" style="width: 100%">3rd Attempts:</td>
+                            <td colspan="1" class="text-left">Attemps:</td>
+                            <td colspan="1">1st Attempts:</td>
+                            <td colspan="1">2nd Attempts:</td>
+                            <td colspan="1">3rd Attempts:</td>
                         </tr>
                         <tr class="text-center">
                             <td colspan="1" class="text-left">Date &emsp;<span class="text-grey">MM / DD / YY</span></td>
@@ -316,12 +315,10 @@
                     <table border>
                         <tr>
                             <td colspan="2">
-                                <div class="flex-data">
-                                    <div>From: <br>
-                                        {{ $shipment['shipper_name'] }} <br>
-                                        {{ $shipment['shipper_contact_number'] }} <br>
-                                        {{ $shipment['shipper_address'] }}
-                                    </div>
+                                <div>From: <br>
+                                    {{ $shipment['shipper_name'] }} <br>
+                                    {{ $shipment['shipper_contact_number'] }} <br>
+                                    {{ $shipment['shipper_address'] }}
                                 </div>
                             </td>
                             <td colspan="2">
@@ -335,7 +332,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">Sevice:<div>{{ $shipment['service_type'] }}</div></td>
+                            <td colspan="2">Service:<div>{{ $shipment['service_type'] }}</div></td>
                             <td colspan="2">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
                         </tr>
                         <tr>
@@ -348,17 +345,26 @@
                             <td colspan="1">Chargeable Weight:</td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="flex-content top-border">
-                                <div class="flex-data">
-                                    <div>Shipment Insurance: <br> {{ ($shipment['insurance_declared_value'] ? "YES" : "") }}
-                                    </div>
-                                    <div class="data-center">Declared Value: {{ ($shipment['insurance_amount'] ? $shipment['insurance_amount'] : "") }}</div>
+                            <td colspan="2">
+                                <div>
+                                    <div>Shipment Insurance: {{ ($shipment['insurance_declared_value'] ? "YES" : "") }}</div>
+                                    <div>Declared Value: {{ ($shipment['insurance_amount'] ? $shipment['insurance_amount'] : "") }}</div>
                                 </div>
                             </td>
-                            <td colspan="2" class="flex-content top-border">
-                                Mode of Payment:&emsp;
-                                <input type="checkbox"/> Cash
-                                <input type="checkbox"/> Charge
+                            <td colspan="1">
+                                <div>
+                                    <div>
+                                        Collect and Deposit: {{ ($shipment['collect_and_deposit'] ? "YES" : "") }} <br>
+                                        Amount: {{ ($shipment['collect_and_deposit_amount'] ? $shipment['collect_and_deposit_amount'] : "") }}
+                                    </div>
+                                    <div>Account Name: {{ ($shipment['account_name'] ? $shipment['account_name'] : "") }} <br>
+                                    Account Number: {{ ($shipment['account_number'] ? $shipment['account_number'] : "") }} <br>
+                                    Account Bank: {{ ($shipment['bank'] ? $shipment['bank'] : "") }}</div>
+                                </div>
+
+                            </td>
+                            <td colspan="1">
+                                Charge To: {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
                             </td>
                         </tr>
                         <tr>
@@ -373,7 +379,7 @@
                         </tr>
                         <tr>
                             <td colspan="2" class="flex-content data-center">
-                                <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditionsstated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                                <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
                                 <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
                                 <div>Sender's Signature</div>
                             </td>
@@ -403,12 +409,10 @@
                     <table border>
                         <tr>
                             <td colspan="2">
-                                <div class="flex-data">
-                                    <div>From: <br>
-                                        {{ $shipment['shipper_name'] }} <br>
-                                        {{ $shipment['shipper_contact_number'] }} <br>
-                                        {{ $shipment['shipper_address'] }}
-                                    </div>
+                                <div>From: <br>
+                                    {{ $shipment['shipper_name'] }} <br>
+                                    {{ $shipment['shipper_contact_number'] }} <br>
+                                    {{ $shipment['shipper_address'] }}
                                 </div>
                             </td>
                             <td colspan="2">
@@ -422,7 +426,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">Sevice:<div>{{ $shipment['service_type'] }}</div></td>
+                            <td colspan="2">Service:<div>{{ $shipment['service_type'] }}</div></td>
                             <td colspan="2">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
                         </tr>
                         <tr>
@@ -435,17 +439,26 @@
                             <td colspan="1">Chargeable Weight:</td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="flex-content top-border">
-                                <div class="flex-data">
-                                    <div>Shipment Insurance: <br> {{ ($shipment['insurance_declared_value'] ? "YES" : "") }}
-                                    </div>
-                                    <div class="data-center">Declared Value: {{ ($shipment['insurance_amount'] ? $shipment['insurance_amount'] : "") }}</div>
+                            <td colspan="2">
+                                <div>
+                                    <div>Shipment Insurance: {{ ($shipment['insurance_declared_value'] ? "YES" : "") }}</div>
+                                    <div>Declared Value: {{ ($shipment['insurance_amount'] ? $shipment['insurance_amount'] : "") }}</div>
                                 </div>
                             </td>
-                            <td colspan="2" class="flex-content top-border">
-                                Mode of Payment:&emsp;
-                                <input type="checkbox"/> Cash
-                                <input type="checkbox"/> Charge
+                            <td colspan="1">
+                                <div>
+                                    <div>
+                                        Collect and Deposit: {{ ($shipment['collect_and_deposit'] ? "YES" : "") }} <br>
+                                        Amount: {{ ($shipment['collect_and_deposit_amount'] ? $shipment['collect_and_deposit_amount'] : "") }}
+                                    </div>
+                                    <div>Account Name: {{ ($shipment['account_name'] ? $shipment['account_name'] : "") }} <br>
+                                    Account Number: {{ ($shipment['account_number'] ? $shipment['account_number'] : "") }} <br>
+                                    Account Bank: {{ ($shipment['bank'] ? $shipment['bank'] : "") }}</div>
+                                </div>
+
+                            </td>
+                            <td colspan="1">
+                                Charge To: {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
                             </td>
                         </tr>
                         <tr>
@@ -460,7 +473,7 @@
                         </tr>
                         <tr>
                             <td colspan="2" class="flex-content data-center">
-                                <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditionsstated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                                <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
                                 <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
                                 <div>Sender's Signature</div>
                             </td>
@@ -486,12 +499,10 @@
                     <table border>
                         <tr>
                             <td colspan="2">
-                                <div class="flex-data">
-                                    <div>From: <br>
-                                        {{ $shipment['shipper_name'] }} <br>
-                                        {{ $shipment['shipper_contact_number'] }} <br>
-                                        {{ $shipment['shipper_address'] }}
-                                    </div>
+                                <div>From: <br>
+                                    {{ $shipment['shipper_name'] }} <br>
+                                    {{ $shipment['shipper_contact_number'] }} <br>
+                                    {{ $shipment['shipper_address'] }}
                                 </div>
                             </td>
                             <td colspan="2">
@@ -505,7 +516,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">Sevice:<div>{{ $shipment['service_type'] }}</div></td>
+                            <td colspan="2">Service:<div>{{ $shipment['service_type'] }}</div></td>
                             <td colspan="2">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
                         </tr>
                         <tr>
@@ -518,17 +529,26 @@
                             <td colspan="1">Chargeable Weight:</td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="flex-content top-border">
-                                <div class="flex-data">
-                                    <div>Shipment Insurance: <br> {{ ($shipment['insurance_declared_value'] ? "YES" : "") }}
-                                    </div>
-                                    <div class="data-center">Declared Value: {{ ($shipment['insurance_amount'] ? $shipment['insurance_amount'] : "") }}</div>
+                            <td colspan="2">
+                                <div>
+                                    <div>Shipment Insurance: {{ ($shipment['insurance_declared_value'] ? "YES" : "") }}</div>
+                                    <div>Declared Value: {{ ($shipment['insurance_amount'] ? $shipment['insurance_amount'] : "") }}</div>
                                 </div>
                             </td>
-                            <td colspan="2" class="flex-content top-border">
-                                Mode of Payment:&emsp;
-                                <input type="checkbox"/> Cash
-                                <input type="checkbox"/> Charge
+                            <td colspan="1">
+                                <div>
+                                    <div>
+                                        Collect and Deposit: {{ ($shipment['collect_and_deposit'] ? "YES" : "") }} <br>
+                                        Amount: {{ ($shipment['collect_and_deposit_amount'] ? $shipment['collect_and_deposit_amount'] : "") }}
+                                    </div>
+                                    <div>Account Name: {{ ($shipment['account_name'] ? $shipment['account_name'] : "") }} <br>
+                                    Account Number: {{ ($shipment['account_number'] ? $shipment['account_number'] : "") }} <br>
+                                    Account Bank: {{ ($shipment['bank'] ? $shipment['bank'] : "") }}</div>
+                                </div>
+
+                            </td>
+                            <td colspan="1">
+                                Charge To: {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
                             </td>
                         </tr>
                         <tr>
@@ -543,7 +563,7 @@
                         </tr>
                         <tr>
                             <td colspan="2" class="flex-content data-center">
-                                <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditionsstated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                                <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
                                 <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
                                 <div>Sender's Signature</div>
                             </td>
