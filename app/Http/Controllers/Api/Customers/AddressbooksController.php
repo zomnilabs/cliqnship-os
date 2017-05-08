@@ -146,7 +146,7 @@ class AddressbooksController extends AbstractAPIController {
             UserAddressbook::where('user_id', $userId)
                 ->where('primary', 1)
                 ->where('id', '!=', $address->id)
-                ->update(['primary', 0]);
+                ->update(['primary' => 0]);
         }
 
         // Transform Result
