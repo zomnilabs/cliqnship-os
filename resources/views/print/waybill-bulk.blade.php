@@ -121,8 +121,9 @@
                             <td colspan="1">
                                 <div class="flex-data">
                                     <div>From: <br>
-
-                                        {{ $shipment['from'] }}
+                                        {{ $shipment['shipper_name'] }} <br>
+                                        {{ $shipment['shipper_contact_number'] }} <br>
+                                        {{ $shipment['shipper_address'] }}
                                     </div>
                                 </div>
                             </td>
@@ -131,7 +132,8 @@
                                     To: <br>
                                     {{ $shipment['contact_person'] }} <br>
                                     {{ $shipment['contact_number'] }} <br>
-                                    {{ $shipment['to'] }}
+                                    {{ $shipment['to'] }} <br>
+                                    {{ $shipment['address_type'] }}
                                 </div>
                             </td>
                         </tr>
@@ -158,9 +160,8 @@
                             </td>
                             <td colspan="2" class="flex-content top-border">
                                 Mode of Payment:&emsp;
-                                Bank: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u> <br>
                                 <input type="checkbox"/> Cash
-                                <input type="checkbox"/> Charge Check #:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                                <input type="checkbox"/> Charge
                             </td>
                         </tr>
                         <tr>
@@ -305,7 +306,9 @@
                             <td colspan="2">
                                 <div class="flex-data">
                                     <div>From: <br>
-                                        {{ $shipment['from'] }}
+                                        {{ $shipment['shipper_name'] }} <br>
+                                        {{ $shipment['shipper_contact_number'] }} <br>
+                                        {{ $shipment['shipper_address'] }}
                                     </div>
                                 </div>
                             </td>
@@ -314,7 +317,8 @@
                                     To: <br>
                                     {{ $shipment['contact_person'] }} <br>
                                     {{ $shipment['contact_number'] }} <br>
-                                    {{ $shipment['to'] }}
+                                    {{ $shipment['to'] }}  <br>
+                                    {{ $shipment['address_type'] }}
                                 </div>
                             </td>
                         </tr>
@@ -340,10 +344,9 @@
                                 </div>
                             </td>
                             <td colspan="2" class="flex-content top-border">
-                                Mode of Payment:&emsp;&emsp;
-                                Bank: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u> <br>
-                                <input type="checkbox"/>Cash
-                                <input type="checkbox"/>Charge &emsp;&emsp;Check #:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                                Mode of Payment:&emsp;
+                                <input type="checkbox"/> Cash
+                                <input type="checkbox"/> Charge
                             </td>
                         </tr>
                         <tr>
@@ -390,7 +393,9 @@
                             <td colspan="2">
                                 <div class="flex-data">
                                     <div>From: <br>
-                                        {{ $shipment['from'] }}
+                                        {{ $shipment['shipper_name'] }} <br>
+                                        {{ $shipment['shipper_contact_number'] }} <br>
+                                        {{ $shipment['shipper_address'] }}
                                     </div>
                                 </div>
                             </td>
@@ -399,7 +404,8 @@
                                     To: <br>
                                     {{ $shipment['contact_person'] }} <br>
                                     {{ $shipment['contact_number'] }} <br>
-                                    {{ $shipment['to'] }}
+                                    {{ $shipment['to'] }}  <br>
+                                    {{ $shipment['address_type'] }}
                                 </div>
                             </td>
                         </tr>
@@ -425,10 +431,9 @@
                                 </div>
                             </td>
                             <td colspan="2" class="flex-content top-border">
-                                Mode of Payment:&emsp;&emsp;
-                                Bank: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u> <br>
-                                <input type="checkbox"/>Cash
-                                <input type="checkbox"/>Charge &emsp;&emsp;Check #:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                                Mode of Payment:&emsp;
+                                <input type="checkbox"/> Cash
+                                <input type="checkbox"/> Charge
                             </td>
                         </tr>
                         <tr>
@@ -471,7 +476,9 @@
                             <td colspan="2">
                                 <div class="flex-data">
                                     <div>From: <br>
-                                        {{ $shipment['from'] }}
+                                        {{ $shipment['shipper_name'] }} <br>
+                                        {{ $shipment['shipper_contact_number'] }} <br>
+                                        {{ $shipment['shipper_address'] }}
                                     </div>
                                 </div>
                             </td>
@@ -480,7 +487,8 @@
                                     To: <br>
                                     {{ $shipment['contact_person'] }} <br>
                                     {{ $shipment['contact_number'] }} <br>
-                                    {{ $shipment['to'] }}
+                                    {{ $shipment['to'] }}  <br>
+                                    {{ $shipment['address_type'] }}
                                 </div>
                             </td>
                         </tr>
@@ -506,10 +514,9 @@
                                 </div>
                             </td>
                             <td colspan="2" class="flex-content top-border">
-                                Mode of Payment:&emsp;&emsp;
-                                Bank: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u> <br>
-                                <input type="checkbox"/>Cash
-                                <input type="checkbox"/>Charge &emsp;&emsp;Check #:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
+                                Mode of Payment:&emsp;
+                                <input type="checkbox"/> Cash
+                                <input type="checkbox"/> Charge
                             </td>
                         </tr>
                         <tr>

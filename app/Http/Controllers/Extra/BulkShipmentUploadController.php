@@ -36,12 +36,14 @@ class BulkShipmentUploadController extends Controller {
     private function createNewShipment($shipment)
     {
         $shipment = [
-            'from'                          => $shipment['from'] ? $shipment['from'] : '',
+            'shipper_name'                  => $shipment['shipper_name'] ? $shipment['shipper_name'] : '',
+            'shipper_contact_number'        => $shipment['shipper_contact_number'] ? $shipment['shipper_contact_number'] : '',
+            'shipper_address'               => $shipment['shipper_address'] ? $shipment['shipper_address'] : '',
             'to'                            => $shipment['delivery_address'] ? $shipment['delivery_address'] : '',
+            'address_type'                  => $shipment['address_type'] ? $shipment['address_type'] : '',
             'contact_person'                => $shipment['contact_person'] ? $shipment['contact_person'] : '',
             'contact_number'                => $shipment['contact_number'] ? $shipment['contact_number'] : '',
             'item_description'              => $shipment['item_description'] ? $shipment['item_description'] : '',
-            'number_of_items'               => $shipment['number_of_items'] ? $shipment['number_of_items'] : '',
             'service_type'                  => $shipment['service_type'] ? $shipment['service_type'] : 'metro_manila',
             'collect_and_deposit'           => $shipment['is_cod'] ? $shipment['is_cod'] : 0,
             'collect_and_deposit_amount'    => $shipment['cod_amount'] ? $shipment['cod_amount'] : '',
