@@ -151,17 +151,29 @@
                             <td colspan="1">Chargeable Weight:</td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="flex-content top-border">
+                            <td colspan="1" class="flex-content top-border">
                                 <div class="flex-data">
-                                    <div>Shipment Insurance: <br> {{ ($shipment['insurance_declared_value'] ? "YES" : "") }}
-                                    </div>
-                                    <div class="data-center">Declared Value: {{ ($shipment['insurance_amount'] ? $shipment['insurance_amount'] : "") }}</div>
+                                    <div>Collect and Deposit: {{ ($shipment['collect_and_deposit'] ? "YES" : "") }}</div>
+                                    <div>Amount: {{ ($shipment['collect_and_deposit_amount'] ? $shipment['collect_and_deposit_amount'] : "") }}</div>
+                                    <div>Account Name: {{ ($shipment['account_name'] ? $shipment['account_name'] : "") }}</div>
+                                    <div>Account Number: {{ ($shipment['account_number'] ? $shipment['account_number'] : "") }}</div>
+                                    <div>Account Bank: {{ ($shipment['bank'] ? $shipment['bank'] : "") }}</div>
+                                </div>
+                            </td>
+                            <td class="flex-content top-border">
+                                <div class="flex-data">
+                                    <div>Shipment Insurance: {{ ($shipment['insurance_declared_value'] ? "YES" : "") }}</div>
+                                    <div>Declared Value: {{ ($shipment['insurance_amount'] ? $shipment['insurance_amount'] : "") }}</div>
                                 </div>
                             </td>
                             <td colspan="2" class="flex-content top-border">
                                 Mode of Payment:&emsp;
                                 <input type="checkbox"/> Cash
                                 <input type="checkbox"/> Charge
+                                <br>
+                                Charge To:&emsp;
+                                <input type="checkbox"/> Account
+                                <input type="checkbox"/> Prepaid
                             </td>
                         </tr>
                         <tr>
