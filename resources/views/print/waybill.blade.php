@@ -154,7 +154,7 @@
 
                         </td>
                         <td colspan="1">
-                            Charge To: {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
+                            Charge To: <br> {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
                         </td>
                     </tr>
                     <tr>
@@ -349,7 +349,7 @@
 
                         </td>
                         <td colspan="1">
-                            Charge To: {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
+                            Charge To: <br> {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
                         </td>
                     </tr>
                     <tr>
@@ -446,7 +446,7 @@
 
                         </td>
                         <td colspan="1">
-                            Charge To: {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
+                            Charge To: <br> {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
                         </td>
                     </tr>
                     <tr>
@@ -539,7 +539,7 @@
 
                         </td>
                         <td colspan="1">
-                            Charge To: {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
+                            Charge To: <br> {{ ($shipment['charge_to'] ? ucwords($shipment['charge_to']) : "") }}
                         </td>
                     </tr>
                     <tr>
