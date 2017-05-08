@@ -139,7 +139,7 @@
                             <div class="flex-data">
                                 <div>Shipment Insurance: <br> {{ ($shipment->insurance_declared_value ? "YES" : "") }}
                                 </div>
-                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? insurance_amount : "") }}</div>
+                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? $shipment->insurance_amount : "") }}</div>
                             </div>
                         </td>
                         <td colspan="2" class="flex-content top-border">
@@ -326,7 +326,7 @@
                             <div class="flex-data">
                                 <div>Shipment Insurance: <br> {{ ($shipment->insurance_declared_value ? "YES" : "") }}
                                 </div>
-                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? insurance_amount : "") }}</div>
+                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? $shipment->insurance_amount : "") }}</div>
                             </div>
                         </td>
                         <td colspan="2" class="flex-content top-border">
@@ -415,7 +415,7 @@
                             <div class="flex-data">
                                 <div>Shipment Insurance: <br> {{ ($shipment->insurance_declared_value ? "YES" : "") }}
                                 </div>
-                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? insurance_amount : "") }}</div>
+                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? $shipment->insurance_amount : "") }}</div>
                             </div>
                         </td>
                         <td colspan="2" class="flex-content top-border">
@@ -500,7 +500,7 @@
                             <div class="flex-data">
                                 <div>Shipment Insurance: <br> {{ ($shipment->insurance_declared_value ? "YES" : "") }}
                                 </div>
-                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? insurance_amount : "") }}</div>
+                                <div class="data-center">Declared Value: {{ ($shipment->insurance_amount ? $shipment->insurance_amount : "") }}</div>
                             </div>
                         </td>
                         <td colspan="2" class="flex-content top-border">
