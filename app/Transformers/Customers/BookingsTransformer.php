@@ -16,6 +16,8 @@ class BookingsTransformer extends TransformerAbstract implements Transformerable
      */
     public function transform($booking)
     {
+        $booking = Booking::find($booking->id);
+
         return [
             'id'            => (int) $booking->id,
             'user_id'       => (int) $booking->user_id,

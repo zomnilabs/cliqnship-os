@@ -13,6 +13,13 @@ use Illuminate\Http\Request;
 class BookingsController extends AbstractAPIController {
     use ApiResponse;
 
+    /**
+     * Get all the bookings of a customer
+     *
+     * @param Request $request
+     * @param $userId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function all(Request $request, $userId)
     {
         // Check user
@@ -24,7 +31,7 @@ class BookingsController extends AbstractAPIController {
         $filters = $this->getFilters($request, Booking::$filterables);
 
         // Create query
-        $model = Booking::where('id', $userId)->getQuery();
+        $model = Booking::where('user_id', $userId)->getQuery();
         $paginator = $this->filter($model, $filters);
 
         // Transform Result
@@ -34,7 +41,47 @@ class BookingsController extends AbstractAPIController {
         return $this->responseOk($result->toArray());
     }
 
+    /**
+     * Get a specific booking of a customer
+     *
+     * @param Request $request
+     * @param $userId
+     * @param $bookingId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show(Request $request, $userId, $bookingId)
+    {
+        // Check user
+        if ($request->user()->id !== (int)$userId) {
+            return $this->responseUnauthorized();
+        }
 
+        // Get filters
+        $filters = $this->getFilters($request, Booking::$filterables);
+
+        // Create query
+        $booking = Booking::where('user_id', $userId)
+            ->where('id', $bookingId)
+            ->first();
+
+        if (! $booking) {
+            return $this->responseNotFound();
+        }
+
+        // Transform Result
+        $result = $this->transformItem($booking, new BookingsTransformer);
+
+        // Return response
+        return $this->responseOk($result->toArray());
+    }
+
+    /**
+     * Create a new booking for the customer
+     *
+     * @param CreateBookingRequest $request
+     * @param $userId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(CreateBookingRequest $request, $userId)
     {
         // Check user
@@ -61,6 +108,7 @@ class BookingsController extends AbstractAPIController {
             } else {
                 $addressData = $input['address'];
                 $addressData['user_id'] = $userId;
+                $addressData['type'] = 'booking';
 
                 if ($addressData['primary'] && $addressData['type'] === 'booking') {
                     $addressData['primary'] = 0;
@@ -108,6 +156,14 @@ class BookingsController extends AbstractAPIController {
         return $this->responseCreated($result->toArray());
     }
 
+    /**
+     * Update an existing booking
+     *
+     * @param CreateBookingRequest $request
+     * @param $userId
+     * @param $bookingId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(CreateBookingRequest $request, $userId, $bookingId)
     {
         // Check user

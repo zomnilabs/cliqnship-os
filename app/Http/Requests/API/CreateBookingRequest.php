@@ -21,7 +21,6 @@ class CreateBookingRequest extends AbstractAPIRequest
         } else {
             return [
                 'address.identifier'        => 'required',
-                'address.type'              => 'required|in:booking,shipment',
                 'address.first_name'        => 'required',
                 'address.last_name'         => 'required',
                 'address.contact_number'    => 'required',

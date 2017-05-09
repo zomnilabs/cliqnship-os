@@ -13,7 +13,7 @@ trait ApiResponse {
     public function responseCreated($data)
     {
         $response = $data;
-        $response['status'] = 200;
+        $response['status'] = 201;
 
         return response()->json($response, 201);
     }
