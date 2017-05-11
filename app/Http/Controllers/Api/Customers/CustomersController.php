@@ -79,8 +79,12 @@ class CustomersController extends AbstractAPIController {
             return $this->responseUnauthorized();
         }
 
-        if ($user->id !== (int) $userId) {
-            return $this->responseUnauthorized();
+        if ($userId !== 'me') {
+            if ($user->id !== (int) $userId) {
+                return $this->responseUnauthorized();
+            }
+        } else {
+            $userId = $request->user()->id;
         }
 
         $result = User::find($userId);
