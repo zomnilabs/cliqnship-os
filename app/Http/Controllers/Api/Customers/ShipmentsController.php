@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AbstractAPIController;
 use App\Http\Requests\API\CreateBookingRequest;
 use App\Http\Requests\API\CreateShipmentRequest;
 use App\Models\Shipment;
+use App\Models\ShipmentEvent;
 use App\Models\ShipmentTrackingNumber;
 use App\Models\UserAddressbook;
 use App\Traits\ApiResponse;
@@ -203,6 +204,39 @@ class ShipmentsController extends AbstractAPIController {
 
         // Return response
         return $this->responseCreated($result->toArray());
+    }
+
+    /**
+     * Tracking Shipment
+     *
+     * @param Request $request
+     * @param $trackingNumber
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function tracking(Request $request, $trackingNumber)
+    {
+        $tracking = ShipmentTrackingNumber::where('tracking_number', $trackingNumber)
+            ->where('provider', 'cliqnship')
+            ->first();
+
+        if (! $tracking) {
+            return $this->responseNotFound();
+        }
+
+        $events = ShipmentEvent::where('shipment_id', $tracking->shipment_id)
+            ->get();
+
+        $result = [];
+        foreach ($events as $event) {
+            $result['data'][] = [
+                'tracking_number'   => $trackingNumber,
+                'event'             => $event['event'],
+                'value'             => $event['value'],
+                'date'              => $event['created_at']->toDateTimeString()
+            ];
+        }
+
+        return $this->responseOk($result);
     }
 
     /**

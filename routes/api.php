@@ -45,6 +45,10 @@ Route::group(['namespace' => 'Api'], function() {
 
     });
 
+    Route::group(['prefix' => 'v1/tracking'], function () {
+        Route::get('/{trackingNumber}', 'Customers\ShipmentsController@tracking');
+    });
+
     // Frontend specific customer api
     Route::group(['prefix' => 'v1/customers'], function () {
 
