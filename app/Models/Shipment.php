@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\ShipmentEvent;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,6 +11,7 @@ class Shipment extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+    protected $hidden = ['deleted_at'];
 
     public static $filterables = [
         'source_id',

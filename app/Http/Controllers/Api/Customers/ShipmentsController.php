@@ -170,7 +170,7 @@ class ShipmentsController extends AbstractAPIController {
                 'source_id'         => 3,
                 'item_description'  => isset($input['item_description']) ? $input['item_description'] : '',
                 'number_of_items'   => isset($input['number_of_items']) ? $input['number_of_items'] : 0,
-                'service_type'      => $input['service_type'],
+                'service_type'      => isset($input['service_type']) ? $input['service_type'] : 'metro_manila',
 //                'is_international'      => isset($input['is_international']) ? $input['is_international'] : '',
                 'collect_and_deposit'   => isset($input['collect_and_deposit']) ? $input['collect_and_deposit'] : 0,
                 'insurance_declared_value'   => isset($input['insurance_declared_value']) ? $input['insurance_declared_value'] : 0,
@@ -205,7 +205,11 @@ class ShipmentsController extends AbstractAPIController {
         return $this->responseCreated($result->toArray());
     }
 
-    // Create unique tracking number
+    /**
+     * Create Shipment Tracking Number
+     *
+     * @return string
+     */
     private function createTrackingNumber()
     {
         $trackingNumber = uniqid();

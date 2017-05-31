@@ -10,6 +10,7 @@ class ShipmentEvent extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+    protected $hidden = ['deleted_at'];
 
     public function shipment()
     {

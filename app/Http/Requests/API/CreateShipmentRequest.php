@@ -14,7 +14,7 @@ class CreateShipmentRequest extends AbstractAPIRequest
         $input = $this->all();
 
         $rules = [
-            'service_type'      => 'required|in:metro_manila,provincial,international,others',
+            'service_type'      => 'in:metro_manila,provincial,international,others',
             'is_international'  => 'in:express,ems,postal',
             'charge_to'         => 'in:sender,consignee',
             'pay_thru'          => 'in:cash,account,others',

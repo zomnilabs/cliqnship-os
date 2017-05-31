@@ -85,9 +85,9 @@ class ShipmentTransformer extends TransformerAbstract implements Transformerable
             'width'             => $shipment->width,
             'height'            => $shipment->height,
             'weight'            => $shipment->weight,
-            'remarks'           => $shipment->remarks,
-            'return_history'    => $shipment->returnLogs,
-            'events'            => $shipment->events,
+            'remarks'           => $this->transformRemarks($shipment->remarks),
+            'return_history'    => $this->transformHistories($shipment->returnLogs),
+            'events'            => $this->transformEvents($shipment->events),
             'status'            => $shipment->status,
             'links'   => [
                 [
@@ -105,8 +105,71 @@ class ShipmentTransformer extends TransformerAbstract implements Transformerable
                 [
                     'rel' => 'to',
                     'uri' => url('/api/v1/customers/'.$shipment->user_id.'/addressbooks/'.$shipment->address->id),
+                ],
+                [
+                    'rel' => 'tracking',
+                    'uri' => url('/api/v1/tracking/'.$shipment->trackingNumbers()->mainTrackingNumber()->tracking_number),
                 ]
             ]
         ];
+    }
+
+    /**
+     * Transform Events
+     *
+     * @param $events
+     * @return array
+     */
+    private function transformEvents($events)
+    {
+        $result = [];
+        foreach ($events as $event) {
+            $result[] = [
+                'event_source'  => $event['event_source'],
+                'event'         => $event['event'],
+                'value'         => $event['value'],
+                'remarks'       => $event['remarks'],
+                'created_at'    => $event['created_at']->toDateTimeString()
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
+     * Transform Histories
+     * @param $histories
+     * @return array
+     */
+    private function transformHistories($histories)
+    {
+        $result = [];
+        foreach ($histories as $history) {
+            $result[] = [
+                'reason'        => $history['reason'],
+                'created_at'    => $history['created_at']->toDateTimeString()
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
+     * Transform Remarks
+     *
+     * @param $remarks
+     * @return array
+     */
+    private function transformRemarks($remarks)
+    {
+        $result = [];
+        foreach ($remarks as $remark) {
+            $result[] = [
+                'remarks'       => $remark['remarks'],
+                'created_at'    => $remark['created_at']->toDateTimeString()
+            ];
+        }
+
+        return $result;
     }
 }
