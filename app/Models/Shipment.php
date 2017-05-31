@@ -13,6 +13,22 @@ class Shipment extends Model
 
     protected $guarded = ['id'];
 
+    public static $filterables = [
+        'source_id',
+        'from',
+        'to',
+        'service_type',
+        'collect_and_deposit',
+        'insurance_declared_value',
+        'charge_to',
+        'pay_thru',
+        'package_type',
+        'status',
+        'pickup_date',
+        'number_of_items',
+        'type_of_items'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

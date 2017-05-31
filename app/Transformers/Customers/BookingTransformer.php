@@ -6,7 +6,7 @@ use App\Transformers\Transformerable;
 use Carbon\Carbon;
 use League\Fractal\TransformerAbstract;
 
-class BookingsTransformer extends TransformerAbstract implements Transformerable
+class BookingTransformer extends TransformerAbstract implements Transformerable
 {
     /**
      * Transform user object

@@ -6,7 +6,7 @@ use App\Http\Requests\API\CreateBookingRequest;
 use App\Models\Booking;
 use App\Models\UserAddressbook;
 use App\Traits\ApiResponse;
-use App\Transformers\Customers\BookingsTransformer;
+use App\Transformers\Customers\BookingTransformer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -35,7 +35,7 @@ class BookingsController extends AbstractAPIController {
         $paginator = $this->filter($model, $filters);
 
         // Transform Result
-        $result = $this->transformCollection($paginator, new BookingsTransformer);
+        $result = $this->transformCollection($paginator, new BookingTransformer);
 
         // Return response
         return $this->responseOk($result->toArray());
@@ -69,7 +69,7 @@ class BookingsController extends AbstractAPIController {
         }
 
         // Transform Result
-        $result = $this->transformItem($booking, new BookingsTransformer);
+        $result = $this->transformItem($booking, new BookingTransformer);
 
         // Return response
         return $this->responseOk($result->toArray());
@@ -150,7 +150,7 @@ class BookingsController extends AbstractAPIController {
         });
 
         // Transform Result
-        $result = $this->transformItem($result, new BookingsTransformer);
+        $result = $this->transformItem($result, new BookingTransformer);
 
         // Return response
         return $this->responseCreated($result->toArray());
@@ -241,7 +241,7 @@ class BookingsController extends AbstractAPIController {
         });
 
         // Transform Result
-        $result = $this->transformItem($result, new BookingsTransformer);
+        $result = $this->transformItem($result, new BookingTransformer);
 
         // Return response
         return $this->responseCreated($result->toArray());
