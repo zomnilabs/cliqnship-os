@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Extra;
 
 use App\Http\Controllers\Controller;
+use App\TemporaryShipments;
+use App\TemporaryWaybillNumbers;
 use Illuminate\Http\Request;
 
 class BulkShipmentUploadController extends Controller {
@@ -62,12 +64,21 @@ class BulkShipmentUploadController extends Controller {
             'tracking_number'               => $this->createTrackingNumber()
         ];
 
+        TemporaryShipments::create($shipment);
+
         return $shipment;
     }
 
     // Create unique tracking number
     private function createTrackingNumber()
     {
-        return strtoupper(uniqid());
+        $tracking = 8800000000;
+        $current = TemporaryWaybillNumbers::orderBy('id', 'DESC')->first();
+
+        if (! $current) {
+            return $tracking;
+        }
+
+        return (int)$current['current'] + 1;
     }
 }
