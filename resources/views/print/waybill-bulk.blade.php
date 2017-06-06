@@ -113,10 +113,11 @@
         </button>
 
         &nbsp;
-        <button class="btn btn-primary" id="btnExport"
-                onclick="window.print()">
+        <a class="btn btn-primary"
+           href="/bulk-import/{{ $identifier }}/download"
+           id="btnExport">
             Export Waybills as Excel
-        </button>
+        </a>
         <hr>
     </div>
 

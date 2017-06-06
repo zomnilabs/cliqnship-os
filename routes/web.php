@@ -140,6 +140,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
 });
 
 Route::get('bulk-import','Extra\BulkShipmentUploadController@index');
+Route::get('bulk-import/{identifier}/download','Extra\BulkShipmentUploadController@download');
 Route::post('bulk-import','Extra\BulkShipmentUploadController@generate');
 
 Route::get('print-waybill', function(){
