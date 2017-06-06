@@ -12,6 +12,7 @@
     <style>
         body{
             color:black;
+            font-size: 25px !important;
         }
         .container{
             margin-top:20px;
@@ -36,7 +37,7 @@
         }
         .bg-grey{
             background-color:#e5e5e5;
-            font-size: 15px;
+            font-size: 20px;
             padding:5px;
         }
         .flex-table{
@@ -70,9 +71,13 @@
         .footer-text {
             letter-spacing: 6px
         }
-        img{
+        img.logo{
             width: 150px;
             height: 40px;
+        }
+        img.barcode {
+            width: 300px;
+            height: auto;
         }
         table{
             width: 100%;
@@ -81,7 +86,7 @@
             width: 100%;
         }
         td{
-            font-size:7px;
+            font-size:12px;
             padding-left:5px;
         }
         table, tr, td{
@@ -114,9 +119,9 @@
             <div class="flex-container">
                 <div class="flex-content">
                     <div class="flex-container top-header">
-                        <img src="/images/logo.png"/>
+                        <img src="/images/logo.png" class="logo"/>
                         <div class="center">
-                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode"   />';?>
+                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode" class="barcode" />';?>
                             <div>{{ $shipment['tracking_number'] }}</div>
                         </div>
                     </div>
@@ -186,7 +191,7 @@
                         </tr>
                         <tr>
                             <td colspan="2" class="flex-content data-center">
-                                <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                                <div style="font-size:10px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
                                 <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u><br>
                                 Sender's Signature
                             </td>
@@ -262,42 +267,42 @@
                         </tr>
                         <tr>
                             <td colspan="1">Payment not ready:
-                                <div class="text-grey" style="font-size: 7px"> Cancel or Re-delivery Data</div></td>
+                                <div class="text-grey" style="font-size: 12px"> Cancel or Re-delivery Data</div></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         </tr>
                         <tr>
                             <td colspan="1">Unknown consignee as per:
-                                <div class="text-grey" style="font-size: 7px"> Name and position</div></td>
+                                <div class="text-grey" style="font-size: 12px"> Name and position</div></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         </tr>
                         <tr>
                             <td colspan="1">Consignee not around as per:
-                                <div class="text-grey" style="font-size: 7px"> Name and relationship</div></td>
+                                <div class="text-grey" style="font-size: 12px"> Name and relationship</div></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         </tr>
                         <tr>
                             <td colspan="1">Refused to accept:
-                                <div class="text-grey" style="font-size: 7px">Reason</div></td>
+                                <div class="text-grey" style="font-size: 12px">Reason</div></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         </tr>
                         <tr>
                             <td colspan="1">Incomplete address:
-                                <div class="text-grey" style="font-size: 7px"> Details</div></td>
+                                <div class="text-grey" style="font-size: 12px"> Details</div></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         </tr>
                         <tr>
                             <td colspan="1">Other:
-                                <div class="text-grey" style="font-size: 7px">Reason</div></td>
+                                <div class="text-grey" style="font-size: 12px">Reason</div></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                             <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
@@ -306,9 +311,9 @@
                 </div>
                 <div class="flex-content">
                     <div class="flex-container top-header">
-                        <img src="/images/logo.png"/>
+                        <img src="/images/logo.png" class="logo"/>
                         <div class="center">
-                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode"   />';?>
+                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode" class="barcode"   />';?>
                             <div>{{ $shipment['tracking_number'] }}</div>
                         </div>
                     </div>
@@ -379,7 +384,7 @@
                         </tr>
                         <tr>
                             <td colspan="2" class="flex-content data-center">
-                                <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                                <div style="font-size:10px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
                                 <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
                                 <div>Sender's Signature</div>
                             </td>
@@ -400,9 +405,9 @@
             <div class="flex-container">
                 <div class="flex-content">
                     <div class="flex-container top-header">
-                        <img src="/images/logo.png"/>
+                        <img src="/images/logo.png" class="logo"/>
                         <div class="center">
-                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode"   />';?>
+                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode" class="barcode"   />';?>
                             <div>{{ $shipment['tracking_number'] }}</div>
                         </div>
                     </div>
@@ -473,7 +478,7 @@
                         </tr>
                         <tr>
                             <td colspan="2" class="flex-content data-center">
-                                <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                                <div style="font-size:10px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
                                 <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
                                 <div>Sender's Signature</div>
                             </td>
@@ -490,9 +495,9 @@
                 </div>
                 <div class="flex-content">
                     <div class="flex-container top-header">
-                        <img src="/images/logo.png"/>
+                        <img src="/images/logo.png" class="logo"/>
                         <div class="center">
-                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode"   />';?>
+                            <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode" class="barcode"   />';?>
                             <div>{{ $shipment['tracking_number'] }}</div>
                         </div>
                     </div>
@@ -563,7 +568,7 @@
                         </tr>
                         <tr>
                             <td colspan="2" class="flex-content data-center">
-                                <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                                <div style="font-size:10px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
                                 <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
                                 <div>Sender's Signature</div>
                             </td>
@@ -587,4 +592,3 @@
     @endforeach
 </body>
 </html>
-
