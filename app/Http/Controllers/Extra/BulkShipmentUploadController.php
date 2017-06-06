@@ -76,7 +76,9 @@ class BulkShipmentUploadController extends Controller {
         $current = TemporaryWaybillNumbers::orderBy('id', 'DESC')->first();
 
         if (! $current) {
-            return $tracking;
+            $tracking = TemporaryWaybillNumbers::create(['current' => $tracking]);
+
+            return $tracking->current;
         }
 
         $tracking = (int) $current['current'] + 1;
