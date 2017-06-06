@@ -12,7 +12,7 @@
     <style>
         body{
             color:black;
-            font-size: 25px !important;
+            font-size: 20px !important;
         }
         .container{
             margin-top:20px;
@@ -37,7 +37,7 @@
         }
         .bg-grey{
             background-color:#e5e5e5;
-            font-size: 20px;
+            font-size: 17px;
             padding:5px;
         }
         .flex-table{
@@ -86,7 +86,7 @@
             width: 100%;
         }
         td{
-            font-size:12px;
+            font-size:11px;
             padding-left:5px;
         }
         table, tr, td{
