@@ -79,6 +79,10 @@ class BulkShipmentUploadController extends Controller {
             return $tracking;
         }
 
-        return (int)$current['current'] + 1;
+        $tracking = (int) $current['current'] + 1;
+
+        $tracking = TemporaryWaybillNumbers::create(['current' => $tracking]);
+
+        return $tracking->current;
     }
 }
