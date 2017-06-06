@@ -111,6 +111,12 @@
             onclick="window.print()">
             Print Waybills
         </button>
+
+        &nbsp;
+        <button class="btn btn-primary" id="btnExport"
+                onclick="window.print()">
+            Export Waybills as Excel
+        </button>
         <hr>
     </div>
 

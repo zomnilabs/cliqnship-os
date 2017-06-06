@@ -22,20 +22,23 @@ class BulkShipmentUploadController extends Controller {
 
         $file = $request->file('file');
 
+        $identifier = uniqid();
+
         $shipments = [];
-        \Excel::load($file, function($reader)  use (&$shipments) {
+        \Excel::load($file, function($reader)  use (&$shipments, &$identifier) {
             $results = $reader->get();
 
             foreach ($results as $shipment) {
-                $shipments[] = $this->createNewShipment($shipment);
+                $shipments[] = $this->createNewShipment($shipment, $identifier);
             }
         });
 
         return view('print.waybill-bulk')
-            ->with('shipments', $shipments);
+            ->with('shipments', $shipments)
+            ->with('identifier', $identifier);
     }
 
-    private function createNewShipment($shipment)
+    private function createNewShipment($shipment, $identifier)
     {
         $shipment = [
             'shipper_name'                  => $shipment['shipper_name'] ? $shipment['shipper_name'] : '',
@@ -61,7 +64,8 @@ class BulkShipmentUploadController extends Controller {
             'width'                         => $shipment['width'],
             'height'                        => $shipment['height'],
             'weight'                        => $shipment['weight'],
-            'tracking_number'               => $this->createTrackingNumber()
+            'tracking_number'               => $this->createTrackingNumber(),
+            'identifier'                    => $identifier
         ];
 
         TemporaryShipments::create($shipment);
