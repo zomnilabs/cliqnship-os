@@ -76,8 +76,8 @@
         height: 40px;
     }
     img.barcode {
-        width: 300px;
-        height: auto;
+        width: 320px;
+        height: 50px;
     }
     table{
         width: 100%;
