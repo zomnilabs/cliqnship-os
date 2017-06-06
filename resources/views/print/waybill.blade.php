@@ -10,128 +10,134 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
-        body{
-            color:black;
-        }
-        .container{
-            margin-top:20px;
-        }
-        .flex-container{
-            display:flex;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 100%;
-            margin:0px;
-        }
-        .flex-content{
-            width: 49%;
-        }
-        .flex-data{
-            display:flex;
-            flex-direction: row;
-            justify-content: space-around;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .bg-grey{
-            background-color:#e5e5e5;
-            font-size: 15px;
-            padding:5px;
-        }
-        .flex-table{
-            display:flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-        }
-        .flex-start{
-            justify-content:flex-start;
-        }
-        .center{
-            text-align: center;
-        }
-        .top-header{
-            padding: 5px;
-        }
-        .data-center{
-            margin: 0 auto;
-            text-align: center;
-        }
-        .top-border{
-            border-top:0px solid;
-        }
-        .text-grey{
-            color:grey;
-        }
-        .text-left{
-            text-align: left;
-        }
-        .footer-text {
-            letter-spacing: 6px
-        }
-        img{
-            width: 150px;
-            height: 40px;
-        }
-        table{
-            width: 100%;
-        }
-        tr{
-            width: 100%;
-        }
-        td{
-            font-size:7px;
-            padding-left:5px;
-        }
-        table, tr, td{
-            vertical-align: baseline;
-        }
+    body{
+        color:black;
+        font-size: 25px !important;
+    }
+    .container{
+        margin-top:20px;
+    }
+    .flex-container{
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        margin:0px;
+    }
+    .flex-content{
+        width: 49%;
+    }
+    .flex-data{
+        display:flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .text-center {
+        text-align: center;
+    }
+    .bg-grey{
+        background-color:#e5e5e5;
+        font-size: 20px;
+        padding:5px;
+    }
+    .flex-table{
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    .flex-start{
+        justify-content:flex-start;
+    }
+    .center{
+        text-align: center;
+    }
+    .top-header{
+        padding: 5px;
+    }
+    .data-center{
+        margin: 0 auto;
+        text-align: center;
+    }
+    .top-border{
+        border-top:0px solid;
+    }
+    .text-grey{
+        color:grey;
+    }
+    .text-left{
+        text-align: left;
+    }
+    .footer-text {
+        letter-spacing: 6px
+    }
+    img.logo{
+        width: 150px;
+        height: 40px;
+    }
+    img.barcode {
+        width: 300px;
+        height: auto;
+    }
+    table{
+        width: 100%;
+    }
+    tr{
+        width: 100%;
+    }
+    td{
+        font-size:12px;
+        padding-left:5px;
+    }
+    table, tr, td{
+        vertical-align: baseline;
+    }
+
+    .hide-on-print {
+        text-align: center;
+    }
     </style>
 <body>
     <div class="container">
         <div class="flex-container">
             <div class="flex-content">
                 <div class="flex-container top-header">
-                    <img src="/images/logo.png"/>
+                    <img src="/images/logo.png" class="logo"/>
                     <div class="center">
-                        <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment->trackingNumbers()->mainTrackingNumber()->tracking_number, "C39+",3,33) . '" alt="barcode"   />';?>
-                        <div>{{ $shipment->trackingNumbers()->mainTrackingNumber()->tracking_number }}</div>
+                        <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode" class="barcode" />';?>
+                        <div>{{ $shipment['tracking_number'] }}</div>
                     </div>
                 </div>
                 <table border>
                     <tr>
-                        <td colspan="2">
-                            <div class="flex-data">
-                                <div>From: <br>
-                                {{ $shipment->senderAddress->getFullNameAttribute() }} <br>
-                                {{ $shipment->senderAddress->getFullAddress() }} <br>
-                                {{ $shipment->senderAddress->country }} {{ $shipment->senderAddress->zip_code }} <br>
-                                Landmark: {{ $shipment->senderAddress->landmarks }}
-                                </div><div class="data-center">Acct #: {{ $shipment->user->account_id }}</div>
+                        <td colspan="1">
+                            <div>From: <br>
+                                {{ $shipment['shipper_name'] }} <br>
+                                {{ $shipment['shipper_contact_number'] }} <br>
+                                {{ $shipment['shipper_address'] }}
                             </div>
                         </td>
-                        <td colspan="2">
+                        <td colspan="3">
                             <div>
                                 To: <br>
-                                {{ $shipment->address->getFullNameAttribute() }} <br>
-                                {{ $shipment->address->getFullAddress() }} <br>
-                                {{ $shipment->address->country }} {{ $shipment->address->zip_code }} <br>
-                                Landmark: {{ $shipment->address->landmarks }}
+                                {{ $shipment['contact_person'] }} <br>
+                                {{ $shipment['contact_number'] }} <br>
+                                {{ $shipment['to'] }} <br>
+                                {{ $shipment['address_type'] }}
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="1">Service:<div>{{ $shipment->service_type }}</div></td>
-                        <td colspan="3">Special Instructions:<div>test</div></td>
+                        <td colspan="1">Service:<div>{{ $shipment['service_type'] }}</div></td>
+                        <td colspan="3">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
                     </tr>
                     <tr>
                         <td colspan="1">Shippers's Reference:<div></div></td>
-                        <td colspan="3">Description of Package:<div>{{ $shipment->item_description }}</div></td>
+                        <td colspan="3">Description of Package:<div>{{ $shipment['item_description'] }}</div></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Dimensions:<div>L x {{ $shipment->length }} W {{ $shipment->width }} x H {{ $shipment->height }}</div></td>
-                        <td colspan="1">Weight (kg): <br> {{ $shipment->weight }}</td>
+                        <td colspan="2">Dimensions:<div>L x {{ $shipment['length'] }} W {{ $shipment['width'] }} x H {{ $shipment['height'] }}</div></td>
+                        <td colspan="1">Weight (kg): <br> {{ $shipment['weight'] }}</td>
                         <td colspan="1">Chargeable Weight:</td>
                     </tr>
                     <tr>
@@ -159,7 +165,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Shipment Charge: 
+                            Shipment Charge:
                             &emsp;&emsp;&emsp;&emsp;
                             Insurance Fee:
                         </td>
@@ -168,14 +174,14 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="flex-content data-center">
-                            <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditionsstated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                            <div style="font-size:10px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
                             <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u><br>
                             Sender's Signature
                         </td>
                         <td colspan="2">
                             <div>Received by CliqNShip</div>
-                            <div>Name:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
-                            <div>Time & Date: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                            <div>Name:<u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
+                            <div>Time & Date: <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u></div>
                         </td>
                     </tr>
                     <tr>
@@ -201,10 +207,10 @@
                         <td colspan="4" class="text-center">This area is for CliqNship couriers only</td>
                     </tr>
                     <tr class="text-center">
-                        <td colspan="1" style="width: 70%" class="text-left">Attemps:</td>
-                        <td colspan="1" style="width: 70%">1st Attempts:</td>
-                        <td colspan="1" style="width: 100%">2nd Attempts:</td>
-                        <td colspan="1" style="width: 100%">3rd Attempts:</td>
+                        <td colspan="1" class="text-left">Attemps:</td>
+                        <td colspan="1">1st Attempts:</td>
+                        <td colspan="1">2nd Attempts:</td>
+                        <td colspan="1">3rd Attempts:</td>
                     </tr>
                     <tr class="text-center">
                         <td colspan="1" class="text-left">Date &emsp;<span class="text-grey">MM / DD / YY</span></td>
@@ -229,7 +235,7 @@
                                 <div class="flex-table">
                                     <div class="text-grey">HH:MM</span>&emsp;</div>
                                     <div>AM<div>PM</div></div>
-                            </div></td>
+                                </div></td>
                         <td colspan="1" class="flex-content text-left">
                             <div class="flex-table">
                                 <div class="text-grey">HH:MM</span>&emsp;</div>
@@ -244,42 +250,42 @@
                     </tr>
                     <tr>
                         <td colspan="1">Payment not ready:
-                            <div class="text-grey" style="font-size: 7px"> Cancel or Re-delivery Data</div></td>
+                            <div class="text-grey" style="font-size: 12px"> Cancel or Re-delivery Data</div></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                     </tr>
                     <tr>
                         <td colspan="1">Unknown consignee as per:
-                            <div class="text-grey" style="font-size: 7px"> Name and position</div></td>
+                            <div class="text-grey" style="font-size: 12px"> Name and position</div></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                     </tr>
                     <tr>
                         <td colspan="1">Consignee not around as per:
-                            <div class="text-grey" style="font-size: 7px"> Name and relationship</div></td>
+                            <div class="text-grey" style="font-size: 12px"> Name and relationship</div></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                     </tr>
                     <tr>
                         <td colspan="1">Refused to accept:
-                            <div class="text-grey" style="font-size: 7px">Reason</div></td>
+                            <div class="text-grey" style="font-size: 12px">Reason</div></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                     </tr>
                     <tr>
                         <td colspan="1">Incomplete address:
-                            <div class="text-grey" style="font-size: 7px"> Details</div></td>
+                            <div class="text-grey" style="font-size: 12px"> Details</div></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                     </tr>
                     <tr>
                         <td colspan="1">Other:
-                            <div class="text-grey" style="font-size: 7px">Reason</div></td>
+                            <div class="text-grey" style="font-size: 12px">Reason</div></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
                         <td colspan="1" style="vertical-align: middle"><input type="checkbox"/></td>
@@ -288,45 +294,42 @@
             </div>
             <div class="flex-content">
                 <div class="flex-container top-header">
-                    <img src="/images/logo.png"/>
+                    <img src="/images/logo.png" class="logo"/>
                     <div class="center">
-                    <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment->trackingNumbers()->mainTrackingNumber()->tracking_number, "C39+",3,33) . '" alt="barcode"   />';?>
-                        <div>{{ $shipment->trackingNumbers()->mainTrackingNumber()->tracking_number }}</div>
+                        <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode" class="barcode"   />';?>
+                        <div>{{ $shipment['tracking_number'] }}</div>
                     </div>
                 </div>
                 <table border>
                     <tr>
                         <td colspan="2">
-                            <div class="flex-data">
-                                <div>From: <br>
-                                {{ $shipment->senderAddress->getFullNameAttribute() }} <br>
-                                {{ $shipment->senderAddress->getFullAddress() }} <br>
-                                {{ $shipment->senderAddress->country }} {{ $shipment->senderAddress->zip_code }} <br>
-                                Landmark: {{ $shipment->senderAddress->landmarks }}
-                                </div><div class="data-center">Acct #: {{ $shipment->user->account_id }}</div>
+                            <div>From: <br>
+                                {{ $shipment['shipper_name'] }} <br>
+                                {{ $shipment['shipper_contact_number'] }} <br>
+                                {{ $shipment['shipper_address'] }}
                             </div>
                         </td>
                         <td colspan="2">
                             <div>
                                 To: <br>
-                                {{ $shipment->address->getFullNameAttribute() }} <br>
-                                {{ $shipment->address->getFullAddress() }} <br>
-                                {{ $shipment->address->country }} {{ $shipment->address->zip_code }} <br>
-                                Landmark: {{ $shipment->address->landmarks }}
+                                {{ $shipment['contact_person'] }} <br>
+                                {{ $shipment['contact_number'] }} <br>
+                                {{ $shipment['to'] }}  <br>
+                                {{ $shipment['address_type'] }}
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Service:<div>{{ $shipment->service_type }}</div></td>
-                        <td colspan="2">Special Instructions:<div>test</div></td>
+                        <td colspan="2">Service:<div>{{ $shipment['service_type'] }}</div></td>
+                        <td colspan="2">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
                     </tr>
                     <tr>
                         <td colspan="2">Shippers's Reference:<div></div></td>
-                        <td colspan="2">Description of Package:<div>{{ $shipment->item_description }}</div></td>
+                        <td colspan="2">Description of Package:<div>{{ $shipment['item_description'] }}</div></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Dimensions:<div>L x {{ $shipment->length }} W {{ $shipment->width }} x H {{ $shipment->height }}</div></td>
-                        <td colspan="1">Weight (kg): <br> {{ $shipment->weight }}</td>
+                        <td colspan="2">Dimensions:<div>L x {{ $shipment['length'] }} W {{ $shipment['width'] }} x H {{ $shipment['height'] }}</div></td>
+                        <td colspan="1">Weight (kg): <br> {{ $shipment['weight'] }}</td>
                         <td colspan="1">Chargeable Weight:</td>
                     </tr>
                     <tr>
@@ -364,7 +367,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="flex-content data-center">
-                            <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditionsstated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                            <div style="font-size:10px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
                             <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
                             <div>Sender's Signature</div>
                         </td>
@@ -385,45 +388,42 @@
         <div class="flex-container">
             <div class="flex-content">
                 <div class="flex-container top-header">
-                    <img src="/images/logo.png"/>
+                    <img src="/images/logo.png" class="logo"/>
                     <div class="center">
-                        <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment->trackingNumbers()->mainTrackingNumber()->tracking_number, "C39+",3,33) . '" alt="barcode"   />';?>
-                        <div>{{ $shipment->trackingNumbers()->mainTrackingNumber()->tracking_number }}</div>
+                        <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode" class="barcode"   />';?>
+                        <div>{{ $shipment['tracking_number'] }}</div>
                     </div>
                 </div>
                 <table border>
                     <tr>
                         <td colspan="2">
-                            <div class="flex-data">
-                                <div>From: <br>
-                                {{ $shipment->senderAddress->getFullNameAttribute() }} <br>
-                                {{ $shipment->senderAddress->getFullAddress() }} <br>
-                                {{ $shipment->senderAddress->country }} {{ $shipment->senderAddress->zip_code }} <br>
-                                Landmark: {{ $shipment->senderAddress->landmarks }}
-                                </div><div class="data-center">Acct #: {{ $shipment->user->account_id }}</div>
+                            <div>From: <br>
+                                {{ $shipment['shipper_name'] }} <br>
+                                {{ $shipment['shipper_contact_number'] }} <br>
+                                {{ $shipment['shipper_address'] }}
                             </div>
                         </td>
                         <td colspan="2">
                             <div>
                                 To: <br>
-                                {{ $shipment->address->getFullNameAttribute() }} <br>
-                                {{ $shipment->address->getFullAddress() }} <br>
-                                {{ $shipment->address->country }} {{ $shipment->address->zip_code }} <br>
-                                Landmark: {{ $shipment->address->landmarks }}
+                                {{ $shipment['contact_person'] }} <br>
+                                {{ $shipment['contact_number'] }} <br>
+                                {{ $shipment['to'] }}  <br>
+                                {{ $shipment['address_type'] }}
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Service:<div>{{ $shipment->service_type }}</div></td>
-                        <td colspan="2">Special Instructions:<div>test</div></td>
+                        <td colspan="2">Service:<div>{{ $shipment['service_type'] }}</div></td>
+                        <td colspan="2">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
                     </tr>
                     <tr>
                         <td colspan="2">Shippers's Reference:<div></div></td>
-                        <td colspan="2">Description of Package:<div>{{ $shipment->item_description }}</div></td>
+                        <td colspan="2">Description of Package:<div>{{ $shipment['item_description'] }}</div></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Dimensions:<div>L x {{ $shipment->length }} W {{ $shipment->width }} x H {{ $shipment->height }}</div></td>
-                        <td colspan="1">Weight (kg): <br> {{ $shipment->weight }}</td>
+                        <td colspan="2">Dimensions:<div>L x {{ $shipment['length'] }} W {{ $shipment['width'] }} x H {{ $shipment['height'] }}</div></td>
+                        <td colspan="1">Weight (kg): <br> {{ $shipment['weight'] }}</td>
                         <td colspan="1">Chargeable Weight:</td>
                     </tr>
                     <tr>
@@ -461,7 +461,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="flex-content data-center">
-                            <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditionsstated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                            <div style="font-size:10px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
                             <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
                             <div>Sender's Signature</div>
                         </td>
@@ -478,45 +478,42 @@
             </div>
             <div class="flex-content">
                 <div class="flex-container top-header">
-                    <img src="/images/logo.png"/>
+                    <img src="/images/logo.png" class="logo"/>
                     <div class="center">
-                        <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment->trackingNumbers()->mainTrackingNumber()->tracking_number, "C39+",3,33) . '" alt="barcode"   />';?>
-                        <div>{{ $shipment->trackingNumbers()->mainTrackingNumber()->tracking_number }}</div>
+                        <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode" class="barcode"   />';?>
+                        <div>{{ $shipment['tracking_number'] }}</div>
                     </div>
                 </div>
                 <table border>
                     <tr>
                         <td colspan="2">
-                            <div class="flex-data">
-                                <div>From: <br>
-                                {{ $shipment->senderAddress->getFullNameAttribute() }} <br>
-                                {{ $shipment->senderAddress->getFullAddress() }} <br>
-                                {{ $shipment->senderAddress->country }} {{ $shipment->senderAddress->zip_code }} <br>
-                                Landmark: {{ $shipment->senderAddress->landmarks }}
-                                </div><div class="data-center">Acct #: {{ $shipment->user->account_id }}</div>
+                            <div>From: <br>
+                                {{ $shipment['shipper_name'] }} <br>
+                                {{ $shipment['shipper_contact_number'] }} <br>
+                                {{ $shipment['shipper_address'] }}
                             </div>
                         </td>
                         <td colspan="2">
                             <div>
                                 To: <br>
-                                {{ $shipment->address->getFullNameAttribute() }} <br>
-                                {{ $shipment->address->getFullAddress() }} <br>
-                                {{ $shipment->address->country }} {{ $shipment->address->zip_code }} <br>
-                                Landmark: {{ $shipment->address->landmarks }}
+                                {{ $shipment['contact_person'] }} <br>
+                                {{ $shipment['contact_number'] }} <br>
+                                {{ $shipment['to'] }}  <br>
+                                {{ $shipment['address_type'] }}
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Service:<div>{{ $shipment->service_type }}</div></td>
-                        <td colspan="2">Special Instructions:<div>test</div></td>
+                        <td colspan="2">Service:<div>{{ $shipment['service_type'] }}</div></td>
+                        <td colspan="2">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
                     </tr>
                     <tr>
                         <td colspan="2">Shippers's Reference:<div></div></td>
-                        <td colspan="2">Description of Package:<div>{{ $shipment->item_description }}</div></td>
+                        <td colspan="2">Description of Package:<div>{{ $shipment['item_description'] }}</div></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Dimensions:<div>L x {{ $shipment->length }} W {{ $shipment->width }} x H {{ $shipment->height }}</div></td>
-                        <td colspan="1">Weight (kg): <br> {{ $shipment->weight }}</td>
+                        <td colspan="2">Dimensions:<div>L x {{ $shipment['length'] }} W {{ $shipment['width'] }} x H {{ $shipment['height'] }}</div></td>
+                        <td colspan="1">Weight (kg): <br> {{ $shipment['weight'] }}</td>
                         <td colspan="1">Chargeable Weight:</td>
                     </tr>
                     <tr>
@@ -554,7 +551,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="flex-content data-center">
-                            <div style="font-size:5px;margin-top:0px;">By using this waybill, I agree to the terms and conditionsstated at http://www.cliqnship.com/terms-and-conditions.php.</div>
+                            <div style="font-size:10px;margin-top:0px;">By using this waybill, I agree to the terms and conditions stated at http://www.cliqnship.com/terms-and-conditions.php.</div>
                             <u>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</u>
                             <div>Sender's Signature</div>
                         </td>
@@ -569,9 +566,9 @@
                     </tr>
                 </table>
             </div>
+        </div>
     </div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
-
