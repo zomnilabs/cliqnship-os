@@ -15,7 +15,7 @@ class CreateTemporaryWaybillNumbersTable extends Migration
     {
         Schema::create('temporary_waybill_numbers', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('current', 15);
+            $table->bigInteger('current');
             $table->timestamps();
         });
     }
