@@ -19,12 +19,15 @@ class ShipmentsController extends Controller {
             $input['source_id'] = "2";
             $input['status'] = "pending";
 
+            $remarks = null;
+            if ($request->has('remarks')) {
+                $remarks = $request->get('remarks');
+            }
+            unset($input['remarks']);
+
             $data = Shipment::create($input);
 
             if ($request->has('remarks')) {
-                $remarks = $input['remarks'];
-                unset($input['remarks']);
-
                 $data->remarks()->create([
                     'user_id'   => $input['user_id'],
                     'remarks'   => $remarks
@@ -32,7 +35,7 @@ class ShipmentsController extends Controller {
             }
 
             // Create the shipment tracking number
-            ShipmentTrackingNumber::create([
+            $tracking = ShipmentTrackingNumber::create([
                 'tracking_number'   => $this->createTrackingNumber(),
                 'shipment_id'       => $data->id
             ]);
@@ -40,6 +43,8 @@ class ShipmentsController extends Controller {
             $shipment = Shipment::with('address')
                 ->where('id', $data->id)
                 ->first();
+
+            $shipment['shipment_tracking_no'] = $tracking->tracking_number;
         });
 
         return response()->json($shipment, 201);

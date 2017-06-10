@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Shipment;
 use App\Models\ShipmentTrackingNumber;
 use App\Models\UserAddressbook;
+use App\Models\WaybillNumber;
 use Illuminate\Http\Request;
 
 class ShipmentsController extends Controller {
@@ -132,14 +133,19 @@ class ShipmentsController extends Controller {
     // Create unique tracking number
     private function createTrackingNumber()
     {
-        $trackingNumber = uniqid();
-        $check = ShipmentTrackingNumber::where('tracking_number', $trackingNumber)
-            ->first();
+        $tracking = 5000000000;
+        $current = WaybillNumber::orderBy('id', 'DESC')->first();
 
-        if ($check) {
-            $this->createTrackingNumber();
+        if (! $current) {
+            $tracking = WaybillNumber::create(['current' => $tracking]);
+
+            return $tracking->current;
         }
 
-        return $trackingNumber;
+        $tracking = (int) $current['current'] + 1;
+
+        $tracking = WaybillNumber::create(['current' => $tracking]);
+
+        return $tracking->current;
     }
 }

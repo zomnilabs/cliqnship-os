@@ -433,7 +433,7 @@
                 this.collect_and_deposit_amount = ''
                 this.insurance_amount = ''
                 this.tabPage = 1
-                this.shipment_tracking_no = ''
+//                this.shipment_tracking_no = ''
             },
             readURL(input) {
 
@@ -567,12 +567,12 @@
                 console.log(data);
                 axios.post(url, data).then(response => {
                     console.log(response)
+                    this.shipment_tracking_no = response.data.shipment_tracking_no;
 
 //                  this.$events.fire('reload-table')
                     this.resetForm()
                     this.nextTab()
 
-                    this.shipment_tracking_no = response.shipment_tracking_no;
                 }, error => {
                     console.log(error)
                 })
