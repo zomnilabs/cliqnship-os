@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class WaybillNumbers extends Model
+class WaybillNumber extends Model
 {
     use SoftDeletes;
 
