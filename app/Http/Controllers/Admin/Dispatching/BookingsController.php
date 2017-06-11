@@ -50,8 +50,10 @@ class BookingsController extends Controller {
             ->whereDate('pickup_date', '=', $today->toDateString())
             ->count();
 
-        $assignedBooking = Booking::whereHas('assignment')
-            ->whereDate('pickup_date', '=', $today->toDateString())
+        $assignedBooking = Booking::whereHas('assignment', function($q) {
+            $q->where('status', 'pending');
+        })
+//            ->whereDate('pickup_date', '=', $today->toDateString())
             ->where('status', 'accepted')
             ->count();
 
