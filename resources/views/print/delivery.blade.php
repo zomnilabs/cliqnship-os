@@ -68,7 +68,7 @@
                         <td>{{ ($assignment->shipment->collect_and_deposit_amount ? $assignment->shipment->collect_and_deposit_amount : '') }}</td>
                         <td>{{ $assignment->shipment->senderAddress->getFullNameAttribute() }}</td>
                         <td></td>
-                        <td></td>
+                        <td> {{ $assignment->shipment->returnLogs()->orderBy('created_at', 'DESC')->count() }} </td>
                     </tr>
                 @endforeach
             </tbody>

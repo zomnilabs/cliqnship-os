@@ -50,8 +50,9 @@ class ShipmentsController extends Controller {
         }
 
         $assignments = ShipmentAssignment::with('shipment')
+            ->withTrashed()
             ->where('user_id', $riderId)
-            ->where('status', 'pending')
+//            ->where('status', 'pending')
             ->whereDate('created_at', $today)
             ->get();
 
@@ -85,14 +86,17 @@ class ShipmentsController extends Controller {
                 $statistics['remitted'] = $statistics['remitted'] + 1;
             }
 
-            if ($shipment->collect_and_deposit) {
-                $statistics['with_cod'] = $statistics['with_cod'] + 1;
+            // Don't count cod of new shipment
+            if ($shipment->status !== 'arrived-at-hq') {
+                if ($shipment->collect_and_deposit) {
+                    $statistics['with_cod'] = $statistics['with_cod'] + 1;
 
-                $statistics['total_cod_amount'] = $statistics['total_cod_amount'] + $shipment->collect_and_deposit_amount;
+                    $statistics['total_cod_amount'] = $statistics['total_cod_amount'] + $shipment->collect_and_deposit_amount;
 
-                if ($assignment->status === 'completed') {
-                    $statistics['remitted_cod'] = $statistics['remitted_cod'] + 1;
-                    $statistics['total_cod_amount_remitted'] = $statistics['total_cod_amount_remitted'] + $shipment->collect_and_deposit_amount;
+                    if ($assignment->status === 'completed') {
+                        $statistics['remitted_cod'] = $statistics['remitted_cod'] + 1;
+                        $statistics['total_cod_amount_remitted'] = $statistics['total_cod_amount_remitted'] + $shipment->collect_and_deposit_amount;
+                    }
                 }
             }
         }

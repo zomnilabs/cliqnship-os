@@ -103,7 +103,13 @@
                 <div class="page-actions pull-right">
                     <button  data-toggle="modal" data-target="#addWaybill" class="btn btn-primary">
                         <i class="glyphicon glyphicon-plus"></i>
-                        Add New Shipment Remit</button>
+                        Receive New Shipments</button>
+                </div>
+
+                <div class="page-actions pull-right">
+                    <button  data-toggle="modal" data-target="#addWaybill" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        Receive Existing Shipments</button>
                 </div>
             </div>
         </div>
@@ -152,6 +158,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            Existing Shipments
+                        </div>
+                    </div>
+
                     <div class="panel-body">
                         <div class="hide">
                             <div class="filter-categories">
@@ -183,17 +195,21 @@
                                 <td class="hide">Id #</td>
                                 <td>Tracking #</td>
                                 <td>Delivery Address</td>
-                                <td># of Items</td>
+                                <td>COD</td>
+                                <td>COD Amount</td>
                                 <td>Service Type</td>
-                                <td>Status</td>
+                                <td>Task Status</td>
+                                <td>Shipment Status</td>
                             </tr>
                             <tr>
                                 <th class="hide">Id #</th>
                                 <th>Tracking #</th>
                                 <th>Delivery Address</th>
-                                <th># of Items</th>
+                                <th>COD</th>
+                                <th>COD Amount</th>
                                 <th>Service Type</th>
-                                <th>Status</th>
+                                <th>Task Status</th>
+                                <th>Shipment Status</th>
                             </tr>
                             </thead>
 
@@ -203,9 +219,11 @@
                                         <td class="hide">{{ $assignment->id }}</td>
                                         <td>{{ $assignment->shipment->trackingNumbers()->mainTrackingNumber()->tracking_number }}</td>
                                         <td>{{ $assignment->shipment->address->address_line_1 }} {{ $assignment->shipment->address->barangay }} {{ $assignment->shipment->address->city }}, {{ $assignment->shipment->address->province }}. {{ $assignment->shipment->address->zip_code }}</td>
-                                        <td>{{ $assignment->shipment->number_of_items }}</td>
+                                        <td>{{ $assignment->shipment->collect_and_deposit ? 'Yes' : 'No' }}</td>
+                                        <td>{{ $assignment->shipment->collect_and_deposit_amount }}</td>
                                         <td>{{ $assignment->shipment->service_type }}</td>
                                         <td>{{ $assignment->status }}</td>
+                                        <td>{{ $assignment->shipment->status }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -215,6 +233,8 @@
             </div>
         </div>
     </div>
+
+
 
     <div class="modal fade" id="addWaybill" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">

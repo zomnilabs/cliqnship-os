@@ -161,7 +161,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <h4>Package Type</h4>
-                                            <label><input type="radio" name="package_type" id="small" v-model="package_type" value="small"> Small</label>&nbsp;&nbsp;
+                                            <label><input type="radio" name="package_type" id="own-packaging" v-model="package_type" value="small"> Own Packaging</label>&nbsp;&nbsp;
                                             <label><input type="radio" name="package_type" id="medium" v-model="package_type" value="medium"> Medium</label>&nbsp;&nbsp;
                                             <label><input type="radio" name="package_type" id="large" v-model="package_type" value="large"> Large</label>
                                         </div>

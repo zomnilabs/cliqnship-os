@@ -34,7 +34,7 @@ class CreateShipmentsTable extends Migration
             $table->enum('charge_to', ['sender','consignee'])->default('sender');
             $table->enum('pay_thru', ['cash','account','others'])->default('cash');
             $table->string('if_pay_others')->nullable();
-            $table->enum('package_type', ['small','medium','large'])->default('small');
+            $table->enum('package_type', ['own-packaging','medium','large'])->default('own-packaging');
             $table->double('length')->nullable();
             $table->double('width')->nullable();
             $table->double('height')->nullable();

@@ -91,7 +91,11 @@ class ShipmentsController extends Controller
                 'height'                    => $shipment->height,
                 'weight'                    => $shipment->weight,
                 'status'                    => $shipment->status,
-                'remarks'                   => $shipment->remarks
+                'remarks'                   => $shipment->remarks()->orderBy('created_at', 'DESC')->first()->remarks,
+                'shipping_fee'              => $shipment->shipping_fee,
+                'cod_fee'                   => $shipment->cod_fee,
+                'pod_received_by'           => $shipment->pod_received_by,
+                'pod_date'                  => $shipment->pod_date
             ];
         }
 
