@@ -156,7 +156,7 @@
                             <td colspan="3">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
                         </tr>
                         <tr>
-                            <td colspan="1">Shippers's Reference:<div></div></td>
+                            <td colspan="1">Shippers's Reference:<div>{{ $shipment['shipper_reference'] }}</div></td>
                             <td colspan="3">Description of Package:<div>{{ $shipment['item_description'] }}</div></td>
                         </tr>
                         <tr>
@@ -193,8 +193,7 @@
                                 &emsp;&emsp;&emsp;&emsp;
                                 Insurance Fee:
                             </td>
-                            <td colspan="1">Total:</td>
-                            <td colspan="1">O.R.#</td>
+                            <td colspan="2">Total:</td>
                         </tr>
                         <tr>
                             <td colspan="2" class="flex-content data-center">
@@ -348,7 +347,7 @@
                             <td colspan="2">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Shippers's Reference:<div></div></td>
+                            <td colspan="2">Shippers's Reference:<div>{{ $shipment['shipper_reference'] }}</div></td>
                             <td colspan="2">Description of Package:<div>{{ $shipment['item_description'] }}</div></td>
                         </tr>
                         <tr>
@@ -386,8 +385,7 @@
                                     <div class="data-center">Insurance Fee:</div>
                                 </div>
                             </td>
-                            <td colspan="1">Total:</td>
-                            <td colspan="1">O.R.#</td>
+                            <td colspan="2">Total:</td>
                         </tr>
                         <tr>
                             <td colspan="2" class="flex-content data-center">
@@ -442,7 +440,7 @@
                             <td colspan="2">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Shippers's Reference:<div></div></td>
+                            <td colspan="2">Shippers's Reference:<div>{{ $shipment['shipper_reference'] }}</div></td>
                             <td colspan="2">Description of Package:<div>{{ $shipment['item_description'] }}</div></td>
                         </tr>
                         <tr>
@@ -480,8 +478,7 @@
                                     <div class="data-center">Insurance Fee:</div>
                                 </div>
                             </td>
-                            <td colspan="1">Total:</td>
-                            <td colspan="1">O.R.#</td>
+                            <td colspan="2">Total:</td>
                         </tr>
                         <tr>
                             <td colspan="2" class="flex-content data-center">
@@ -532,7 +529,7 @@
                             <td colspan="2">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Shippers's Reference:<div></div></td>
+                            <td colspan="2">Shippers's Reference:<div>{{ $shipment['shipper_reference'] }}</div></td>
                             <td colspan="2">Description of Package:<div>{{ $shipment['item_description'] }}</div></td>
                         </tr>
                         <tr>
@@ -570,8 +567,7 @@
                                     <div class="data-center">Insurance Fee:</div>
                                 </div>
                             </td>
-                            <td colspan="1">Total:</td>
-                            <td colspan="1">O.R.#</td>
+                            <td colspan="2">Total:</td>
                         </tr>
                         <tr>
                             <td colspan="2" class="flex-content data-center">
