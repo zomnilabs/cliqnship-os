@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Dispatching;
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
 use App\Models\ShipmentAssignment;
+use App\Models\ShipmentEvent;
 use App\Models\ShipmentTrackingNumber;
 use App\User;
 use Illuminate\Http\Request;
@@ -56,12 +57,28 @@ class ShipmentsController extends Controller {
             ->with('shipments', $shipments);
     }
 
-    public function redispatch($shipmentId)
+    /**
+     * Redispatch returned shipments
+     *
+     * @param $shipmentId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function redispatch(Request $request, $shipmentId)
     {
         $shipment = Shipment::where('id', $shipmentId)
             ->update(['status' => 'arrived-at-hq']);
 
         ShipmentAssignment::where('shipment_id', $shipmentId)->delete();
+
+        // Record Event
+        ShipmentEvent::create([
+            'shipment_id'   => $shipmentId,
+            'event_source'  => 'warehouse',
+            'event'         => 'status_change',
+            'value'         => 'arrived-at-hq',
+            'remarks'       => 're-dispatched shipment',
+            'user_id'       => $request->user()->id
+        ]);
 
         return redirect()->back();
     }
@@ -113,6 +130,16 @@ class ShipmentsController extends Controller {
                 // Update shipment
                 Shipment::where('id', $waybill->shipment_id)
                     ->update(['status' => 'enroute']);
+
+                // Record Event
+                ShipmentEvent::create([
+                    'shipment_id'   => $waybill->shipment_id,
+                    'event_source'  => 'warehouse',
+                    'event'         => 'status_change',
+                    'value'         => 'enroute',
+                    'remarks'       => 'dispatched shipment',
+                    'user_id'       => $request->user()->id
+                ]);
             });
         }
 

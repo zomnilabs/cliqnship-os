@@ -9,6 +9,14 @@ use App\Models\WaybillNumber;
 use Illuminate\Http\Request;
 
 class ShipmentsController extends Controller {
+    public function show($shipmentId)
+    {
+        $shipment = Shipment::with('returnLogs.user.profile', 'events.user.profile')
+            ->where('id', $shipmentId)->first();
+
+        return response()->json($shipment, 200);
+    }
+
     public function store(CreateShipmentRequest $request)
     {
         $input = $request->all();

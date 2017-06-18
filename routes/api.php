@@ -65,6 +65,7 @@ Route::group(['namespace' => 'Api'], function() {
     // Shipments
     Route::group(['prefix' => 'v1/shipments'], function () {
         Route::get('/check/{waybillNumber}', 'ShipmentsController@checkWaybill');
+        Route::get('/{shipmentId}', 'ShipmentsController@show');
     });
 
     // Bookings

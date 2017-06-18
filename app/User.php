@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\BookingAssignment;
 use App\Models\ShipmentAssignment;
 use App\Models\ShipmentEvent;
+use App\Models\ShipmentReturnLogs;
 use App\Models\UserAddressbook;
 use App\Models\UserGroup;
 use App\Models\UserProfile;
@@ -68,6 +69,11 @@ class User extends Authenticatable
     public function shipmentEvents()
     {
         return $this->hasMany(ShipmentEvent::class);
+    }
+
+    public function returnLogs()
+    {
+        return $this->hasMany(ShipmentReturnLogs::class, 'user_id');
     }
 
     // Mutator

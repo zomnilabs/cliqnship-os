@@ -81,6 +81,70 @@
             });
         }())
     </script>
+
+    <script>
+        (function() {
+            let shipmentDetails = $('#shipmentDetails');
+            let shipmentLoader  = $('#shipmentLoader');
+            let shipmentContent = $('#shipmentContent');
+            let shipmentReturnLogs = $('#shipmentReturnLogs').DataTable();
+            let shipmentEvents = $('#shipmentEvents').DataTable();
+
+            // events
+            shipmentDetails.on('hidden.bs.modal', function(e) {
+                shipmentLoader.removeClass('hide');
+                shipmentContent.addClass('hide');
+
+                shipmentReturnLogs.clear().draw();
+                shipmentEvents.clear().draw();
+                $('#myTabs a:first').tab('show');
+            });
+
+            $('.view-shipment-details').on('click', function() {
+                let shipmentId = $(this).data('shipment');
+
+                getShipmentDetails(shipmentId);
+            });
+
+            // functions
+            function getShipmentDetails(shipmentId) {
+                axios.get(`/api/v1/shipments/${shipmentId}`).then((response) => {
+                    console.log(response.data);
+                    let shipment = response.data;
+
+                    buildReturnLogs(shipment.return_logs);
+                    buildEvents(shipment.events);
+
+                    shipmentLoader.addClass('hide');
+                    shipmentContent.removeClass('hide');
+                }).catch(error => console.log(error));
+            }
+
+            function buildReturnLogs(items) {
+                for (let item of items) {
+                    shipmentReturnLogs.row.add([
+                        `${item.user.profile.first_name} ${item.user.profile.last_name}`,
+                        `${item.reason}`,
+                        `${item.created_at}`,
+                        `${item.status}`
+                    ]).draw( false );
+                }
+            }
+
+            function buildEvents(items) {
+                for (let item of items) {
+                    shipmentEvents.row.add([
+                        `${item.user.profile.first_name} ${item.user.profile.last_name}`,
+                        `${item.event_source}`,
+                        `${item.event}`,
+                        `${item.value}`,
+                        `${item.remarks}`,
+                        `${item.created_at}`
+                    ]).draw( false );
+                }
+            }
+        })()
+    </script>
 @endsection
 
 @section('content')
@@ -166,7 +230,11 @@
                                 @foreach($shipments as $shipment)
                                 <tr id="shipment-{{$shipment->id}}">
                                     <td class="hide">{{$shipment->id}}</td>
-                                    <td>{{$shipment->trackingNumbers()->mainTrackingNumber($shipment->id)->tracking_number}}</td>
+                                    <td>
+                                        <a href="#" class="view-shipment-details" data-shipment="{{ $shipment->id }}" data-toggle="modal" data-target="#shipmentDetails">
+                                            {{$shipment->trackingNumbers()->mainTrackingNumber($shipment->id)->tracking_number}}
+                                        </a>
+                                    </td>
                                     <td>{{$shipment->user->profile->first_name}} {{$shipment->user->profile->middle_name}} {{$shipment->user->profile->last_name}}</td>
                                     <td>{{ $shipment->address->address_line_1 }} {{ $shipment->address->barangay }} {{ $shipment->address->city }}, {{ $shipment->address->province }}. {{ $shipment->address->zip_code }}</td>
                                     <td>{{ $shipment->service_type }}</td>
@@ -203,6 +271,7 @@
 
         </div>
 
+        @include('admin.shipments.modals.info')
         @include('admin.dispatching.shipments.modals.dispatch-assignment')
     </div>
 @endsection
