@@ -87,6 +87,7 @@ class BulkShipmentUploadController extends Controller {
     {
         $shipment = [
             'shipper_name'                  => $shipment['shipper_name'] ? $shipment['shipper_name'] : '',
+            'shipper_reference'             => $shipment['shipper_reference'] ? $shipment['shipper_reference'] : '',
             'shipper_contact_number'        => $shipment['shipper_contact_number'] ? $shipment['shipper_contact_number'] : '',
             'shipper_address'               => $shipment['shipper_address'] ? $shipment['shipper_address'] : '',
             'to'                            => $shipment['delivery_address'] ? $shipment['delivery_address'] : '',

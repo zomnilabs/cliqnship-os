@@ -7,6 +7,7 @@ class BookingsController extends Controller
 {
     public function index()
     {
+        // Display bookings
         return view('admin.bookings.index');
     }
 }
