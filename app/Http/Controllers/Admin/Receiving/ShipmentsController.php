@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Receiving;
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
 use App\Models\ShipmentAssignment;
+use App\Models\ShipmentEvent;
 use App\Models\ShipmentReturnLogs;
 use App\Models\ShipmentTrackingNumber;
 use App\User;
@@ -119,6 +120,9 @@ class ShipmentsController extends Controller {
                 continue;
             }
 
+            $status = 'arrived-at-hq';
+            $remarks = 'shipment arrived at warehouse';
+
             if ($request->get('status') === 'successfully-delivered'
                 || $request->get('status') === 'returned') {
 
@@ -130,6 +134,9 @@ class ShipmentsController extends Controller {
                 Shipment::where('id', $waybill->shipment_id)
                     ->update(['status' => $request->get('status')]);
 
+                $status = 'successfully-delivered';
+                $remarks = 'shipment delivered successfully';
+
                 // Check if returned item
                 if ($request->get('status') === 'returned') {
                     // Save return log
@@ -138,6 +145,9 @@ class ShipmentsController extends Controller {
                         'user_id'       => $riderId,
                         'reason'        => $request->has('reason') ? $request->get('reason') : ''
                     ]);
+
+                    $status = 'returned';
+                    $remarks = 'failed to deliver shipment';
                 }
             }
 
@@ -152,8 +162,20 @@ class ShipmentsController extends Controller {
                 ]);
 
                 $shipment->delete();
+
+                $status = 'arrived-at-hq';
+                $remarks = 'shipment arrived at warehouse';
             }
 
+            // Record Event
+            ShipmentEvent::create([
+                'shipment_id'   => $waybill->shipment_id,
+                'event_source'  => 'warehouse',
+                'event'         => 'status_change',
+                'value'         => $status,
+                'remarks'       => $remarks,
+                'user_id'       => $request->user()->id
+            ]);
         }
 
         return redirect()->back();

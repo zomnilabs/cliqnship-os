@@ -76,7 +76,7 @@ class ShipmentsController extends Controller {
             'event_source'  => 'warehouse',
             'event'         => 'status_change',
             'value'         => 'arrived-at-hq',
-            'remarks'       => 're-dispatched shipment',
+            'remarks'       => 'resolved shipment and put it back to dispatching',
             'user_id'       => $request->user()->id
         ]);
 
