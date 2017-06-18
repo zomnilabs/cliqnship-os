@@ -54,6 +54,10 @@ class ShipmentsController extends Controller
 
         $data = [];
         foreach ($shipments as $shipment) {
+            if ($shipment->status === 'successfully-delivered' && $shipment->pod_received_by) {
+                continue;
+            }
+
             $data[] = [
                 'account_id'                => $shipment->user->account_id,
                 'waybill_number'            => $shipment->trackingNumbers()->mainTrackingNumber()->tracking_number,
@@ -143,6 +147,10 @@ class ShipmentsController extends Controller
             'height'                    => $shipment['height'],
             'weight'                    => $shipment['weight'],
             'status'                    => $shipment['status'],
+            'shipping_fee'              => $shipment['shipping_fee'],
+            'cod_fee'                   => $shipment['cod_fee'],
+            'pod_received_by'           => $shipment['pod_received_by'],
+            'pod_date'                  => $shipment['pod_date']
         ];
 
         $remarks = [

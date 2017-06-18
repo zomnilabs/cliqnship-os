@@ -221,6 +221,7 @@
                                 <th>Remarks</th>
                                 <th>Source</th>
                                 <th>Rider</th>
+                                <th>Arrival Date</th>
                                 <th>Status</th>
                                 {{--<th>Actions</th>--}}
                             </tr>
@@ -254,8 +255,9 @@
                                             @endforeach
                                         @endif
                                     </td>
-                                    <td>{{ ucwords($shipment->source->name) or '' }}</td>
-                                    <th>{{$shipment->rider->user->profile->full_name or 'Not Assigned'}}</th>
+                                    <td>{{ ucwords($shipment->source->name) }}</td>
+                                    <th>{{ $shipment->rider->user->profile->full_name or 'Not Assigned' }}</th>
+                                    <td>{{ $shipment->events()->where('value', 'arrived-at-hq')->first()->created_at->toFormattedDateString() }}</td>
                                     <td>{{ $shipment->status }}</td>
                                     {{--<th>--}}
                                         {{--<button class="btn btn-danger"><i class="fa fa-trash"></i></button>--}}

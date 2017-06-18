@@ -268,6 +268,11 @@
                                                     data-toggle="modal"
                                                     data-target="#viewRiderModal"
                                                     onClick="viewModalForm({{$rider}})"><i class="fa fa-edit"></i></button>
+
+                                            <a href="/admin/dispatching/shipments/{{ $rider->id }}/preview"
+                                                class="btn btn-default">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

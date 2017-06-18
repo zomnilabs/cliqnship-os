@@ -49,7 +49,7 @@ class ShipmentsController extends Controller {
 
     public function returned()
     {
-        $shipments = Shipment::with('user','address','source', 'trackingNumbers', 'returnLogs')
+        $shipments = Shipment::with('user', 'events', 'address','source', 'trackingNumbers', 'returnLogs')
             ->where('status', 'returned')
             ->get();
 

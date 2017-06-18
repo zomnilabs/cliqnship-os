@@ -32,6 +32,9 @@
     </style>
 <body>
     <div class="container">
+        <div style="text-align: center">
+            <img src="/images/logo.png" class="logo"/>
+        </div>
         <h4 class="pull-left">Rider: {{ $rider->profile->getFullNameAttribute() }}</h4>
         <h4 class="pull-right">{{ Carbon\Carbon::today('Asia/Manila')->toFormattedDateString() }}</h4>
         <table class="table table-bordered">
