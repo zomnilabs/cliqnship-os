@@ -48,6 +48,7 @@ class BulkShipmentUploadController extends Controller {
         foreach ($shipments as $shipment) {
             $data[] = [
                 'tracking_number'               => $shipment['tracking_number'],
+                'shipper_reference'             => $shipment['shipper_reference'] ? $shipment['shipper_reference'] : '',
                 'shipper_name'                  => $shipment['shipper_name'] ? $shipment['shipper_name'] : '',
                 'shipper_contact_number'        => $shipment['shipper_contact_number'] ? $shipment['shipper_contact_number'] : '',
                 'shipper_address'               => $shipment['shipper_address'] ? $shipment['shipper_address'] : '',
