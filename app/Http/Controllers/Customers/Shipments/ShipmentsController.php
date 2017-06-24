@@ -28,6 +28,8 @@ class ShipmentsController extends Controller {
     public function preview($shipmentId)
     {
         $shipment = Shipment::where('id', $shipmentId)->first();
+
+//        print_r($shipment->remarks[0]->remarks); exit;
         return view('print.waybill', compact('shipment'));
     }
 

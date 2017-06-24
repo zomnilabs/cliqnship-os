@@ -14,14 +14,46 @@
 @section('scripts')
     <script>
         (function() {
-            $('.table thead tr.searchable th').each( function () {
-                var title = $(this).text();
+            var table = $('#bookingTable').DataTable();
+
+            $('#bookingTable tfoot tr.searchable td').each( function () {
+                let title = $(this).text();
                 if (title) {
-                    $(this).html( '<input type="text" style="width: 100%" placeholder="Search '+title+'" />' );
+                    switch (title) {
+                        case 'Pickup Date':
+                            $(this).html( '<input type="date" class="form-control filter" style="width: 100%" placeholder="Search '+title+'" />' );
+
+                            break;
+                        case 'Status':
+                            let selectHTML = '<select class="form-control filter" style="width: 100%">';
+                            selectHTML += '<option value="">Filter Status</option>';
+                            selectHTML += '<option value="pending">Pending</option>';
+                            selectHTML += '<option value="accepted">Accepted</option>';
+                            selectHTML += '<option value="completed">Completed</option>';
+                            selectHTML += '<option value="rejected">Rejected</option>';
+                            selectHTML += '</select>';
+
+                            $(this).html(selectHTML);
+                            break;
+                        default:
+                            $(this).html( '<input class="form-control filter" type="text" style="width: 100%" placeholder="Search '+title+'" />' );
+                    }
+
                 }
             });
 
-            $('.table').dataTable();
+            // Apply the search
+            table.columns().every( function () {
+                let that = this;
+                $( '.filter', this.footer() ).on( 'keyup change', function () {
+                    if ( that.search() !== this.value ) {
+                        console.log(that.data());
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+            } );
         }())
     </script>
 @endsection
@@ -78,17 +110,20 @@
                             </div>
                         </div>
 
-                        <table class="table table-bordered">
-                            <thead>
+                        <table class="table table-bordered" id="bookingTable" style="width: 100%">
+                            <tfoot class="filter-footer">
                             <tr class="searchable">
-                                <th class="hide">Id #</th>
-                                <th>Booking #</th>
-                                <th>Pickup Date</th>
-                                <th>Pickup Address</th>
-                                <th>Remarks</th>
-                                <th>Status</th>
-                                <th></th>
+                                <td class="hide">Id #</td>
+                                <td>Booking #</td>
+                                <td>Pickup Date</td>
+                                <td>Pickup Address</td>
+                                <td>Remarks</td>
+                                <td>Status</td>
+                                <td></td>
                             </tr>
+                            </tfoot>
+
+                            <thead>
                             <tr>
                                 <th class="hide">Id #</th>
                                 <th>Booking #</th>
@@ -101,21 +136,21 @@
                             </thead>
 
                             <tbody>
-                            {{--@foreach($addressbooks as $addressbook)--}}
-                            {{--<tr id="addressbook-{{$addressbook->id}}">--}}
-                            {{--<td>{{$addressbook->id}}</td>--}}
-                            {{--<td>{{$addressbook->last_name}} {{$addressbook->middle_name}} {{$addressbook->last_name}}</td>--}}
-                            {{--<td>{{ ucwords($addressbook->type) }}</td>--}}
-                            {{--<td>{{ ucwords($addressbook->address_type) }}</td>--}}
-                            {{--<th>{{$addressbook->address_line_1}}</th>--}}
-                            {{--<th>{{$addressbook->contact_number}}</th>--}}
-                            {{--<th>{{$addressbook->email}}</th>--}}
-                            {{--<th>--}}
-                            {{--<button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>--}}
-                            {{--<button class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></button>--}}
-                            {{--</th>--}}
-                            {{--</tr>--}}
-                            {{--@endforeach--}}
+                            @foreach($bookings as $booking)
+                                <tr id="booking-{{$booking->id}}">
+                                    <td class="hide">{{ $booking->id }}</td>
+                                    <td>{{ $booking->booking_no }}</td>
+                                    <td>{{ $booking->pickup_date }}</td>
+                                    <td>{{ $booking->address->address_line_1 }} {{ $booking->address->barangay }} {{ $booking->address->city }}, {{ $booking->address->province }}. {{ $booking->address->zip_code }}</td>
+                                    <td>{{ $booking->remarks }}</td>
+                                    <td>{{ $booking->status }}</td>
+                                    <th>
+                                        @if ($booking->status === 'pending')
+                                            <button class="btn btn-default"><i class="fa fa-edit"></i></button>
+                                        @endif
+                                    </th>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
