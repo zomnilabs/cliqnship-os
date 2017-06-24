@@ -95,7 +95,7 @@ class ShipmentsController extends Controller
                 'height'                    => $shipment->height,
                 'weight'                    => $shipment->weight,
                 'status'                    => $shipment->status,
-                'remarks'                   => $shipment->remarks()->orderBy('created_at', 'DESC')->first()->remarks,
+//                'remarks'                   => $shipment->remarks()->orderBy('created_at', 'DESC')->first()->remarks,
                 'shipping_fee'              => $shipment->shipping_fee,
                 'cod_fee'                   => $shipment->cod_fee,
                 'pod_received_by'           => $shipment->pod_received_by,
@@ -153,9 +153,9 @@ class ShipmentsController extends Controller
             'pod_date'                  => $shipment['pod_date']
         ];
 
-        $remarks = [
-            'remarks'                   => $shipment['remarks']
-        ];
+//        $remarks = [
+//            'remarks'                   => $shipment['remarks']
+//        ];
 
         $otherWaybill = [
             'shipment_id'          => $tracking->shipment_id,
@@ -176,6 +176,7 @@ class ShipmentsController extends Controller
         ];
 
         $result = null;
+        $remarks = null;
 
         \DB::transaction(function() use (&$result, $data, $remarks, $otherWaybill, $address, $tracking, $user) {
             $data['to'] = $this->findOrCreateAddress($address);

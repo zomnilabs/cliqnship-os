@@ -131,8 +131,15 @@ class ShipmentsController extends Controller {
                     ->where('user_id', $riderId)
                     ->update(['status' => 'completed']);
 
+                $data = [
+                    'status' => $request->get('status')
+                ];
+                if ($request->get('status') === 'successfully-delivered') {
+                    $data['pod_date'] = Carbon::today('Asia/Manila')->toDateTimeString();
+                }
+
                 Shipment::where('id', $waybill->shipment_id)
-                    ->update(['status' => $request->get('status')]);
+                    ->update($data);
 
                 $status = 'successfully-delivered';
                 $remarks = 'shipment delivered successfully';
