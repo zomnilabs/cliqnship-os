@@ -301,7 +301,7 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body panel-body-wallet white-text stats">
-                                    <h1 class="stats-value">P 560, 000</h1>
+                                    <h1 class="stats-value">P {{ $counts['codAmount'] }}</h1>
                                     <h4 class="stats-label">Wallet</h4>
                                 </div>
                             </div>
@@ -337,7 +337,7 @@
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h2>Recently completed shipments</h2>
+                        <h2>Recently updated shipments</h2>
 
                         <table class="table table-hover">
                             <thead>
@@ -350,34 +350,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>58AD64AEDA281</td>
-                                    <td>T-shirt</td>
-                                    <td>Metro Manila</td>
-                                    <td>Testing</td>
-                                    <td>Completed</td>
-                                </tr>
-                                <tr>
-                                    <td>58AD64AEDA255</td>
-                                    <td>Food</td>
-                                    <td>Metro Manila</td>
-                                    <td>Handle with Care</td>
-                                    <td>Completed</td>
-                                </tr>
-                                <tr>
-                                    <td>58HFA4AEDA281</td>
-                                    <td>Testing</td>
-                                    <td>Metro Manila</td>
-                                    <td>Fragile</td>
-                                    <td>Completed</td>
-                                </tr>
-                                <tr>
-                                    <td>58AD64AEHNN62</td>
-                                    <td>Testttttt</td>
-                                    <td>Metro Manila</td>
-                                    <td>Handle with Care</td>
-                                    <td>Completed</td>
-                                </tr>
+                                @foreach($shipments as $shipment)
+                                    <tr>
+                                        <td>{{ $shipment->trackingNumbers[0]->tracking_number }}</td>
+                                        <td>{{ $shipment->item_description }}</td>
+                                        <td>{{ ucwords($shipment->service_type) }}</td>
+                                        <td>
+                                            @foreach($shipment->remarks as $r)
+                                                {{ $r->remarks }},
+                                            @endforeach
+                                        </td>
+                                        <td>{{ ucwords($shipment->status) }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -394,39 +379,22 @@
                                 <th>Booking Number</th>
                                 <th>Item Description</th>
                                 <th>Service Type</th>
-                                <th>Remarks</th>
+                                <th>Amount</th>
                                 <th>Status</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>58AD64AEDA281</td>
-                                <td>T-shirt</td>
-                                <td>Metro Manila</td>
-                                <td>Testing</td>
-                                <td>Completed</td>
-                            </tr>
-                            <tr>
-                                <td>58AD64AEDA255</td>
-                                <td>Food</td>
-                                <td>Metro Manila</td>
-                                <td>Handle with Care</td>
-                                <td>Completed</td>
-                            </tr>
-                            <tr>
-                                <td>58HFA4AEDA281</td>
-                                <td>Testing</td>
-                                <td>Metro Manila</td>
-                                <td>Fragile</td>
-                                <td>Completed</td>
-                            </tr>
-                            <tr>
-                                <td>58AD64AEHNN62</td>
-                                <td>Testttttt</td>
-                                <td>Metro Manila</td>
-                                <td>Handle with Care</td>
-                                <td>Completed</td>
-                            </tr>
+                            @foreach($cods as $shipment)
+                                <tr>
+                                    <td>{{ $shipment->trackingNumbers[0]->tracking_number }}</td>
+                                    <td>{{ $shipment->item_description }}</td>
+                                    <td>{{ ucwords($shipment->service_type) }}</td>
+                                    <td>
+                                        {{ $shipment->cod->collect_and_deposit_amount }}
+                                    </td>
+                                    <td>{{ ucwords($shipment->status) }}</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
 

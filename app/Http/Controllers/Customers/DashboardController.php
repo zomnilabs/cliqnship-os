@@ -37,17 +37,37 @@ class DashboardController extends Controller {
             ->where('user_id', $user['id'])
             ->count();
 
+        $codAmount = Shipment::where('collect_and_deposit', 1)
+            ->where('user_id', $user['id'])
+            ->join('shipment_cods', 'shipments.id', '=', 'shipment_cods.shipment_id')
+            ->select(\DB::raw('SUM(shipment_cods.collect_and_deposit_amount) as amount'))
+            ->first();
+
         $counts = [
             'pendingBookings'   => $pendingBookings,
             'pendingShipments'  => $pendingShipments,
             'enRouteShipments'  => $enRouteShipments,
             'completedShipments'    => $completedShipments,
-            'returnedShipments' => $returnedShipments
+            'returnedShipments' => $returnedShipments,
+            'codAmount'         => $codAmount->amount
         ];
+
+        $shipments = Shipment::where('user_id', $user['id'])
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
+
+        $cods = Shipment::where('collect_and_deposit', 1)
+            ->where('user_id', $user['id'])
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
 
         return view('customers.dashboard')
             ->with('withPrimaryAddress', $withPrimaryAddress)
-            ->with('counts', $counts);
+            ->with('counts', $counts)
+            ->with('shipments', $shipments)
+            ->with('cods', $cods);
     }
 
     private function havePrimaryAddress($userId)
