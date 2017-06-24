@@ -104,32 +104,35 @@
                 <div class="flex-container top-header">
                     <img src="/images/logo.png" class="logo"/>
                     <div class="center">
-                        <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode" class="barcode" />';?>
-                        <div>{{ $shipment['tracking_number'] }}</div>
+                        <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment->trackingNumbers[0]->tracking_number, "C39",3,33) . '" alt="barcode" class="barcode" />';?>
+                        <div>{{ $shipment->trackingNumbers[0]->tracking_number }}</div>
                     </div>
                 </div>
                 <table border>
                     <tr>
                         <td colspan="1">
                             <div>From: <br>
-                                {{ $shipment['shipper_name'] }} <br>
-                                {{ $shipment['shipper_contact_number'] }} <br>
-                                {{ $shipment['shipper_address'] }}
+                                {{ $shipment->senderAddress->getFullNameAttribute() }} <br>
+                                {{ $shipment->senderAddress->contact_number }} <br>
+                                <span style="font-size: 9px">{{ $shipment->senderAddress->getFullAddress() }}</span>
                             </div>
                         </td>
                         <td colspan="3">
                             <div>
                                 To: <br>
-                                {{ $shipment['contact_person'] }} <br>
-                                {{ $shipment['contact_number'] }} <br>
-                                {{ $shipment['to'] }} <br>
-                                {{ $shipment['address_type'] }}
+                                {{ $shipment->address->getFullNameAttribute() }} <br>
+                                {{ $shipment->address->contact_number }} <br>
+                                {{ $shipment->address->getFullAddress() }}
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="1">Service:<div>{{ $shipment['service_type'] }}</div></td>
-                        <td colspan="3">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
+                        <td colspan="1">Service:<div>{{ ucwords($shipment['service_type']) }}</div></td>
+                        <td colspan="3">Special Instructions:<div>
+                            @foreach($shipment['remarks'] as $remark)
+                                {{ $remark->remarks }},
+                            @endforeach
+                        </div></td>
                     </tr>
                     <tr>
                         <td colspan="1">Shippers's Reference:<div></div></td>
@@ -296,32 +299,35 @@
                 <div class="flex-container top-header">
                     <img src="/images/logo.png" class="logo"/>
                     <div class="center">
-                        <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode" class="barcode"   />';?>
-                        <div>{{ $shipment['tracking_number'] }}</div>
+                        <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment->trackingNumbers[0]->tracking_number, "C39",3,33) . '" alt="barcode" class="barcode"   />';?>
+                        <div>{{ $shipment->trackingNumbers[0]->tracking_number }}</div>
                     </div>
                 </div>
                 <table border>
                     <tr>
                         <td colspan="2">
                             <div>From: <br>
-                                {{ $shipment['shipper_name'] }} <br>
-                                {{ $shipment['shipper_contact_number'] }} <br>
-                                {{ $shipment['shipper_address'] }}
+                                {{ $shipment->senderAddress->getFullNameAttribute() }} <br>
+                                {{ $shipment->senderAddress->contact_number }} <br>
+                                {{ $shipment->senderAddress->getFullAddress() }}
                             </div>
                         </td>
                         <td colspan="2">
                             <div>
                                 To: <br>
-                                {{ $shipment['contact_person'] }} <br>
-                                {{ $shipment['contact_number'] }} <br>
-                                {{ $shipment['to'] }}  <br>
-                                {{ $shipment['address_type'] }}
+                                {{ $shipment->address->getFullNameAttribute() }} <br>
+                                {{ $shipment->address->contact_number }} <br>
+                                {{ $shipment->address->getFullAddress() }}
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Service:<div>{{ $shipment['service_type'] }}</div></td>
-                        <td colspan="2">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
+                        <td colspan="2">Service:<div>{{ ucwords($shipment['service_type']) }}</div></td>
+                        <td colspan="2">Special Instructions:<div>
+                                @foreach($shipment['remarks'] as $remark)
+                                    {{ $remark->remarks }},
+                                @endforeach
+                            </div></td>
                     </tr>
                     <tr>
                         <td colspan="2">Shippers's Reference:<div></div></td>
@@ -390,32 +396,35 @@
                 <div class="flex-container top-header">
                     <img src="/images/logo.png" class="logo"/>
                     <div class="center">
-                        <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode" class="barcode"   />';?>
-                        <div>{{ $shipment['tracking_number'] }}</div>
+                        <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment->trackingNumbers[0]->tracking_number, "C39",3,33) . '" alt="barcode" class="barcode"   />';?>
+                        <div>{{ $shipment->trackingNumbers[0]->tracking_number }}</div>
                     </div>
                 </div>
                 <table border>
                     <tr>
                         <td colspan="2">
                             <div>From: <br>
-                                {{ $shipment['shipper_name'] }} <br>
-                                {{ $shipment['shipper_contact_number'] }} <br>
-                                {{ $shipment['shipper_address'] }}
+                                {{ $shipment->senderAddress->getFullNameAttribute() }} <br>
+                                {{ $shipment->senderAddress->contact_number }} <br>
+                                {{ $shipment->senderAddress->getFullAddress() }}
                             </div>
                         </td>
                         <td colspan="2">
                             <div>
                                 To: <br>
-                                {{ $shipment['contact_person'] }} <br>
-                                {{ $shipment['contact_number'] }} <br>
-                                {{ $shipment['to'] }}  <br>
-                                {{ $shipment['address_type'] }}
+                                {{ $shipment->address->getFullNameAttribute() }} <br>
+                                {{ $shipment->address->contact_number }} <br>
+                                {{ $shipment->address->getFullAddress() }}
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Service:<div>{{ $shipment['service_type'] }}</div></td>
-                        <td colspan="2">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
+                        <td colspan="2">Service:<div>{{ ucwords($shipment['service_type']) }}</div></td>
+                        <td colspan="2">Special Instructions:<div>
+                            @foreach($shipment['remarks'] as $remark)
+                                {{ $remark->remarks }},
+                            @endforeach
+                            </div></td>
                     </tr>
                     <tr>
                         <td colspan="2">Shippers's Reference:<div></div></td>
@@ -480,32 +489,35 @@
                 <div class="flex-container top-header">
                     <img src="/images/logo.png" class="logo"/>
                     <div class="center">
-                        <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment['tracking_number'], "C39",3,33) . '" alt="barcode" class="barcode"   />';?>
-                        <div>{{ $shipment['tracking_number'] }}</div>
+                        <?php echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG($shipment->trackingNumbers[0]->tracking_number, "C39",3,33) . '" alt="barcode" class="barcode"   />';?>
+                        <div>{{ $shipment->trackingNumbers[0]->tracking_number }}</div>
                     </div>
                 </div>
                 <table border>
                     <tr>
                         <td colspan="2">
                             <div>From: <br>
-                                {{ $shipment['shipper_name'] }} <br>
-                                {{ $shipment['shipper_contact_number'] }} <br>
-                                {{ $shipment['shipper_address'] }}
+                                {{ $shipment->senderAddress->getFullNameAttribute() }} <br>
+                                {{ $shipment->senderAddress->contact_number }} <br>
+                                {{ $shipment->senderAddress->getFullAddress() }}
                             </div>
                         </td>
                         <td colspan="2">
                             <div>
                                 To: <br>
-                                {{ $shipment['contact_person'] }} <br>
-                                {{ $shipment['contact_number'] }} <br>
-                                {{ $shipment['to'] }}  <br>
-                                {{ $shipment['address_type'] }}
+                                {{ $shipment->address->getFullNameAttribute() }} <br>
+                                {{ $shipment->address->contact_number }} <br>
+                                {{ $shipment->address->getFullAddress() }}
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Service:<div>{{ $shipment['service_type'] }}</div></td>
-                        <td colspan="2">Special Instructions:<div>{{ $shipment['remarks'] }}</div></td>
+                        <td colspan="2">Service:<div>{{ ucwords($shipment['service_type']) }}</div></td>
+                        <td colspan="2">Special Instructions:<div>
+                                @foreach($shipment['remarks'] as $remark)
+                                    {{ $remark->remarks }},
+                                @endforeach
+                            </div></td>
                     </tr>
                     <tr>
                         <td colspan="2">Shippers's Reference:<div></div></td>
