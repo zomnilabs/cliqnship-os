@@ -73,4 +73,9 @@ class Shipment extends Model
     {
         return $this->hasMany(ShipmentRemarks::class);
     }
+
+    public function cod()
+    {
+        return $this->hasOne(ShipmentCod::class);
+    }
 }

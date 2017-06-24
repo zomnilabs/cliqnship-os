@@ -7,6 +7,8 @@ use App\Models\Shipment;
 class ShipmentsController extends Controller {
     public function all()
     {
+//        $shipments =
+
        return view('admin.cod.shipments.index');
     }
 }

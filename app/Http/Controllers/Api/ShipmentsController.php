@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shipments\CreateShipmentRequest;
 use App\Models\Shipment;
+use App\Models\ShipmentEvent;
 use App\Models\ShipmentTrackingNumber;
 use App\Models\WaybillNumber;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class ShipmentsController extends Controller {
         $input = $request->all();
 
         $shipment = null;
-        // Create the booking
+        // Create the shipment
         \DB::transaction(function() use ($input, $request, &$shipment) {
             $input['source_id'] = "2";
             $input['status'] = "pending";
@@ -31,9 +32,32 @@ class ShipmentsController extends Controller {
             if ($request->has('remarks')) {
                 $remarks = $request->get('remarks');
             }
+
             unset($input['remarks']);
 
+            $cod = [];
+            if ($input['collect_and_deposit']) {
+                $cod = [
+                    'collect_and_deposit_amount'    => $input['collect_and_deposit_amount'],
+                    'account_name'                  => $input['account_name'],
+                    'account_number'                => $input['account_number'],
+                    'bank'                          => $input['bank'],
+                    'status'                        => $input['status']
+                ];
+
+                unset($input['collect_and_deposit_amount']);
+                unset($input['account_name']);
+                unset($input['account_number']);
+                unset($input['bank']);
+                unset($input['status']);
+            }
+
             $data = Shipment::create($input);
+
+            // Create COD Record
+            if ($data->collect_and_deposit) {
+                $data->cod()->create($cod);
+            }
 
             if ($request->has('remarks')) {
                 $data->remarks()->create([
@@ -53,7 +77,21 @@ class ShipmentsController extends Controller {
                 ->first();
 
             $shipment['shipment_tracking_no'] = $tracking->tracking_number;
+
+            // Record Event
+            ShipmentEvent::create([
+                'shipment_id'   => $shipment->id,
+                'event_source'  => 'customer',
+                'event'         => 'status_change',
+                'value'         => 'pending',
+                'remarks'       => 'shipment created',
+                'user_id'       => $request->user()->id
+            ]);
         });
+
+        if (! $shipment) {
+            return response()->json(['failed to create a shipment'], 400);
+        }
 
         return response()->json($shipment, 201);
     }
