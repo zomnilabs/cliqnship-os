@@ -109,6 +109,7 @@
 
                     buildReturnLogs(shipment.return_logs);
                     buildEvents(shipment.events);
+                    populateShipmentDetails(shipment);
 
                     shipmentLoader.addClass('hide');
                     shipmentContent.removeClass('hide');
@@ -137,6 +138,17 @@
                         `${item.created_at}`
                     ]).draw( false );
                 }
+            }
+            function populateShipmentDetails(item) {
+                $('#to').val(item.sender_address.first_name + " " + item.sender_address.last_name);
+                $('#from').val(item.address.first_name + " " + item.address.last_name);
+                $('#number_of_items').val(item.number_of_items);
+                $('#type_of_items').val(item.item_description);
+                $('#length').val(item.length);
+                $('#height').val(item.height);
+                $('#width').val(item.width);
+                $('#weight').val(item.weight);
+                $('#remarks').val(item.remarks);
             }
         })()
     </script>
