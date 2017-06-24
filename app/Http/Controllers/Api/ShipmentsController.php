@@ -42,15 +42,16 @@ class ShipmentsController extends Controller {
                     'account_name'                  => $input['account_name'],
                     'account_number'                => $input['account_number'],
                     'bank'                          => $input['bank'],
-                    'status'                        => $input['status']
+                    'status'                        => 'pending',
+                    'cod_fee'                       => 0
                 ];
-
-                unset($input['collect_and_deposit_amount']);
-                unset($input['account_name']);
-                unset($input['account_number']);
-                unset($input['bank']);
-                unset($input['status']);
             }
+
+            unset($input['collect_and_deposit_amount']);
+            unset($input['account_name']);
+            unset($input['account_number']);
+            unset($input['bank']);
+            unset($input['status']);
 
             $data = Shipment::create($input);
 
@@ -85,7 +86,7 @@ class ShipmentsController extends Controller {
                 'event'         => 'status_change',
                 'value'         => 'pending',
                 'remarks'       => 'shipment created',
-                'user_id'       => $request->user()->id
+                'user_id'       => $input['user_id']
             ]);
         });
 

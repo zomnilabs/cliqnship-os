@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Customers\Shipments;
 
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
+use App\Models\ShipmentEvent;
 use App\Models\ShipmentTrackingNumber;
 use App\Models\UserAddressbook;
 use App\Models\WaybillNumber;
@@ -51,62 +52,81 @@ class ShipmentsController extends Controller {
         return redirect()->back();
     }
 
-    private function createNewShipment($shipment, $user, $input)
+    private function createNewShipment($data, $user, $input)
     {
-        \DB::transaction(function() use ($shipment, $user, $input) {
+        \DB::transaction(function() use ($data, $user, $input) {
             $address = [
                 'user_id'           => $user['id'],
-                'first_name'        => $shipment['contact_person'],
+                'first_name'        => $data['contact_person'],
                 'last_name'         => '',
                 'type'              => 'shipment',
                 'address_type'      => 'residential',
-                'contact_number'    => $shipment['contact_number'],
-                'email'             => $shipment['email_address'],
-                'address_line_1'    => $shipment['street'],
-                'barangay'          => $shipment['barangay'],
-                'city'              => $shipment['municipality'],
-                'province'          => $shipment['province'],
-                'zip_code'          => $shipment['zip_code']
+                'contact_number'    => $data['contact_number'],
+                'email'             => $data['email_address'],
+                'address_line_1'    => $data['street'],
+                'barangay'          => $data['barangay'],
+                'city'              => $data['municipality'],
+                'province'          => $data['province'],
+                'zip_code'          => $data['zip_code']
             ];
 
             // Address
             $to = $this->findOrCreateAddress($address);
 
-            $bookingData = [
+            $shipmentData = [
                 'source_id'                     => 2,
                 'user_id'                       => $user['id'],
                 'from'                          => $input['from'],
                 'to'                            => $to,
-                'item_description'              => $shipment['item_description'],
-                'number_of_items'               => $shipment['number_of_items'],
-                'service_type'                  => $shipment['service_type'] ? $shipment['service_type'] : 'metro_manila',
-                'is_international'              => $shipment['is_international'] ? $shipment['is_international'] : 'postal',
-                'collect_and_deposit'           => $shipment['is_cod'],
-                'collect_and_deposit_amount'    => $shipment['cod_amount'],
-                'account_name'                  => $shipment['account_name'],
-                'account_number'                => $shipment['account_number'],
-                'bank'                          => $shipment['bank'],
-                'charge_to'                     => $shipment['charge_to'] ? $shipment['charge_to'] : 'sender',
-                'package_type'                  => $shipment['package_type'] ? $shipment['package_type'] : 'small',
-                'insurance_declared_value'      => $shipment['avail_insurance'],
-                'insurance_amount'              => $shipment['insurance_amount'],
-                'length'                        => $shipment['length'],
-                'width'                         => $shipment['width'],
-                'height'                        => $shipment['height'],
-                'weight'                        => $shipment['weight'],
+                'item_description'              => $data['item_description'],
+                'number_of_items'               => $data['number_of_items'],
+                'service_type'                  => $data['service_type'] ? $data['service_type'] : 'metro_manila',
+                'is_international'              => $data['is_international'] ? $data['is_international'] : 'postal',
+                'collect_and_deposit'           => $data['is_cod'] ? 1 : 0,
+                'charge_to'                     => $data['charge_to'] ? $data['charge_to'] : 'sender',
+                'package_type'                  => $data['package_type'] ? $data['package_type'] : 'own-packaging',
+                'insurance_declared_value'      => $data['avail_insurance'] ? 1 : 0,
+                'insurance_amount'              => $data['insurance_amount'],
+                'length'                        => $data['length'],
+                'width'                         => $data['width'],
+                'height'                        => $data['height'],
+                'weight'                        => $data['weight'],
                 'status'                        => 'pending'
             ];
 
-            $shipment = Shipment::create($bookingData);
+            $shipment = Shipment::create($shipmentData);
             $shipment->remarks()->create([
                 'user_id'   => $user['id'],
-                'remarks'   => $shipment['remarks']
+                'remarks'   => $data['remarks']
             ]);
+
+            if ($shipment->collect_and_deposit) {
+                $cod = [
+                    'collect_and_deposit_amount'    => $data['cod_amount'],
+                    'account_name'                  => $data['account_name'],
+                    'account_number'                => $data['account_number'],
+                    'bank'                          => $data['bank'],
+                    'status'                        => 'pending',
+                    'cod_fee'                       => 0
+                ];
+
+                $shipment->cod()->create($cod);
+            }
 
             // Create Tracking Number
             ShipmentTrackingNumber::create([
                 'tracking_number'   => $this->createTrackingNumber(),
                 'shipment_id'       =>$shipment->id
+            ]);
+
+            // Record Event
+            ShipmentEvent::create([
+                'shipment_id'   => $shipment->id,
+                'event_source'  => 'customer',
+                'event'         => 'status_change',
+                'value'         => 'pending',
+                'remarks'       => 'shipment created',
+                'user_id'       => $user['id']
             ]);
         });
     }
