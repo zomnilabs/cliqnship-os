@@ -3,13 +3,16 @@ namespace App\Http\Controllers\Customers\Shipments;
 
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
+use Illuminate\Http\Request;
 
 class CodShipmentsController extends Controller {
-    public function index()
+    public function index(Request $request)
     {
+        $user = $request->user();
         $shipments = Shipment::with('cod')->has('cod')
             ->where('collect_and_deposit', 1)
             ->where('status', '<>', 'pending')
+            ->where('user_id', $user->id)
             ->get();
 
         $amounts = [

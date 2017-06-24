@@ -33,9 +33,8 @@
                             let selectHTML = '<select class="form-control filter" style="width: 100%">';
                             selectHTML += '<option value="">Filter Status</option>';
                             selectHTML += '<option value="pending">Pending</option>';
-                            selectHTML += '<option value="accepted">Accepted</option>';
-                            selectHTML += '<option value="completed">Completed</option>';
-                            selectHTML += '<option value="rejected">Rejected</option>';
+                            selectHTML += '<option value="collected">Collected</option>';
+                            selectHTML += '<option value="deposited">Deposited</option>';
                             selectHTML += '</select>';
 
                             $(this).html(selectHTML);
