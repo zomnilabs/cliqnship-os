@@ -177,10 +177,6 @@ class ShipmentsController extends AbstractAPIController {
                 'collect_and_deposit'   => isset($input['collect_and_deposit']) ? $input['collect_and_deposit'] : 0,
                 'insurance_declared_value'   => isset($input['insurance_declared_value']) ? $input['insurance_declared_value'] : 0,
                 'insurance_amount'           => isset($input['insurance_amount']) ? $input['insurance_amount'] : 0,
-                'collect_and_deposit_amount'    => isset($input['collect_and_deposit_amount']) ? $input['collect_and_deposit_amount'] : 0,
-                'account_name'      => isset($input['account_name']) ? $input['account_name'] : '',
-                'account_number'    => isset($input['account_number']) ? $input['account_number'] : '',
-                'bank'              => isset($input['bank']) ? $input['bank'] : '',
                 'status'            => 'pending',
                 'charge_to'         => isset($input['charge_to']) ? $input['charge_to'] : 'sender',
                 'pay_thru'          => isset($input['pay_thru']) ? $input['pay_thru'] : 'cash',
@@ -193,10 +189,33 @@ class ShipmentsController extends AbstractAPIController {
 
             $result = Shipment::create($shipmentData);
 
+            if ($result->collect_and_deposit) {
+                $cod = [
+                    'collect_and_deposit_amount'    => isset($input['collect_and_deposit_amount']) ? $input['collect_and_deposit_amount'] : 0,
+                    'account_name'                  => isset($input['account_name']) ? $input['account_name'] : '',
+                    'account_number'                => isset($input['account_number']) ? $input['account_number'] : '',
+                    'bank'                          => isset($input['bank']) ? $input['bank'] : '',
+                    'status'                        => 'pending',
+                    'cod_fee'                       => 0
+                ];
+
+                $result->cod()->create($cod);
+            }
+
             // Create Tracking Number
             ShipmentTrackingNumber::create([
                 'tracking_number'   => $this->createTrackingNumber(),
                 'shipment_id'       => $result->id
+            ]);
+
+            // Record Event
+            ShipmentEvent::create([
+                'shipment_id'   => $result->id,
+                'event_source'  => 'customer',
+                'event'         => 'status_change',
+                'value'         => 'pending',
+                'remarks'       => 'shipment created',
+                'user_id'       => $input['user_id']
             ]);
         });
 
