@@ -54,6 +54,16 @@
                                 <a href="/admin/reports/shipments/age">Shipment Age Report</a> <br>
                                 <small>View the pending shipments by age</small>
                             </li>
+
+                            <li>
+                                <a href="/admin/reports/shipments/dispatch">Dispatch Report</a> <br>
+                                <small>Report for all dispatched shipments</small>
+                            </li>
+
+                            <li>
+                                <a href="/admin/reports/shipments/cod">COD Report</a> <br>
+                                <small>Summary of all cod per day and per client</small>
+                            </li>
                         </ul>
                     </div>
                 </div>
