@@ -124,7 +124,8 @@ class ShipmentsController extends Controller {
                 // Create Assignment
                 ShipmentAssignment::create([
                     'user_id'   => $request->get('rider_id'),
-                    'shipment_id'   => $waybill->shipment_id
+                    'shipment_id'   => $waybill->shipment_id,
+                    'action'    => 'delivered'
                 ]);
 
                 // Update shipment

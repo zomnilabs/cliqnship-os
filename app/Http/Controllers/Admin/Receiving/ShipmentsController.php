@@ -126,10 +126,6 @@ class ShipmentsController extends Controller {
             if ($request->get('status') === 'successfully-delivered'
                 || $request->get('status') === 'returned') {
 
-                // Update Assignment
-                ShipmentAssignment::where('shipment_id', $waybill->shipment_id)
-                    ->where('user_id', $riderId)
-                    ->update(['status' => 'completed']);
 
                 $data = [
                     'status' => $request->get('status')
@@ -153,8 +149,20 @@ class ShipmentsController extends Controller {
                         'reason'        => $request->has('reason') ? $request->get('reason') : ''
                     ]);
 
+                    // Update Assignment
+                    ShipmentAssignment::where('shipment_id', $waybill->shipment_id)
+                        ->where('user_id', $riderId)
+                        ->update(['status' => 'completed', 'action' => 'returned']);
+
                     $status = 'returned';
                     $remarks = 'failed to deliver shipment';
+                }
+
+                if ($request->get('status') === 'successfully-delivered') {
+                    // Update Assignment
+                    ShipmentAssignment::where('shipment_id', $waybill->shipment_id)
+                        ->where('user_id', $riderId)
+                        ->update(['status' => 'completed']);
                 }
             }
 
