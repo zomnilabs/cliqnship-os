@@ -3,8 +3,11 @@ namespace App\Http\Controllers\Admin\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
+use App\Models\ShipmentAssignment;
 use App\Models\ShipmentEvent;
+use App\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class ReportsController extends Controller
 {
@@ -40,6 +43,53 @@ class ReportsController extends Controller
         $shipments = $results;
 
         return view('admin.reports.items.shipment-age', compact('shipments'));
+    }
+
+    public function dispatching(Request $request)
+    {
+        $user = $request->get('user_id');
+        $date = Carbon::today('Asia/Manila')->toDateString();
+
+        if ($request->has('date')) {
+            $date = Carbon::createFromTimestamp(strtotime($request->get('date')))->toDateString();
+        }
+
+        $riders = User::where('user_group_id', 4)
+            ->get();
+
+        $result = [];
+        if ($request->has('user_id') || $request->get('user_id') === 0) {
+            foreach ($riders->toArray() as $key => $value) {
+                $riders[$key]['assignments'] = ShipmentAssignment::withTrashed()
+                    ->where('user_id', $value['id'])
+                    ->whereDate('created_at', $date)
+                    ->get();
+            }
+
+            $result = $riders;
+        } else if (! $request->has('user_id')) {
+            foreach ($riders->toArray() as $key => $value) {
+                $riders[$key]['assignments'] = ShipmentAssignment::withTrashed()
+                    ->where('user_id', $value['id'])
+                    ->whereDate('created_at', $date)
+                    ->get();
+            }
+
+            $result = $riders;
+        } else {
+            $rider = User::where('user_group_id', 4)
+                ->where('id', $user)
+                ->first();
+
+            $rider['assignments'] = ShipmentAssignment::withTrashed()
+                ->where('user_id', $rider->id)
+                ->whereDate('created_at', $date)
+                ->get();
+
+            $result[] = $rider;
+        }
+
+        return view('admin.reports.items.dispatch', compact('assignment', 'riders', 'result'));
     }
 
     private function getFirstArrivalDate($shipmentId)

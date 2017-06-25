@@ -33,9 +33,8 @@
                             let selectHTML = '<select class="form-control filter" style="width: 100%">';
                             selectHTML += '<option value="">Filter Status</option>';
                             selectHTML += '<option value="pending">Pending</option>';
-                            selectHTML += '<option value="accepted">Accepted</option>';
-                            selectHTML += '<option value="completed">Completed</option>';
-                            selectHTML += '<option value="rejected">Rejected</option>';
+                            selectHTML += '<option value="collected">Collected</option>';
+                            selectHTML += '<option value="deposited">Deposited</option>';
                             selectHTML += '</select>';
 
                             $(this).html(selectHTML);
@@ -96,8 +95,8 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Pending Deliveries</h4>
-                                    <h1>21</h1>
+                                    <h4>Pending Amount</h4>
+                                    <h1>{{ number_format($amounts['pending'], 2) }}</h1>
                                 </div>
                             </div>
                         </a>
@@ -106,8 +105,8 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Successful Deliveries</h4>
-                                    <h1>4</h1>
+                                    <h4>Collected Amount</h4>
+                                    <h1>{{ number_format($amounts['collected'], 2) }}</h1>
                                 </div>
                             </div>
                         </a>
@@ -116,18 +115,8 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Failed Deliveries</h4>
-                                    <h1>5</h1>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4>Pending Remittance</h4>
-                                    <h1>P 560, 000</h1>
+                                    <h4>Deposited Amount</h4>
+                                    <h1>{{ number_format($amounts['deposited'], 2) }}</h1>
                                 </div>
                             </div>
                         </a>
@@ -142,59 +131,44 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="hide">
-                            <div class="filter-categories">
-                                <div class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-sm btn-default active">
-                                        <input type="radio" name="filter" id="option1" value="all" autocomplete="off" checked> [{{ number_of_bookings(Auth::user()->id, 'all') }}] All
-                                    </label>
-                                    <label class="btn btn-sm btn-warning">
-                                        <input type="radio" name="filter" id="option2" value="pending" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'pending') }}] Pending
-                                    </label>
-                                    <label class="btn btn-sm btn-primary">
-                                        <input type="radio" name="filter" id="option3" value="accepted" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'accepted') }}] Accepted
-                                    </label>
-
-                                    <label class="btn btn-sm btn-success">
-                                        <input type="radio" name="filter" id="option3" value="completed" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'completed') }}] Completed
-                                    </label>
-
-                                    <label class="btn btn-sm btn-danger">
-                                        <input type="radio" name="filter" id="option3" value="rejected" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'rejected') }}] Rejected
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
                         <table class="table table-bordered" id="shippingTable" style="width: 100%">
                             <tfoot class="filter-footer">
                             <tr class="searchable">
                                 <td class="hide">Id #</td>
-                                <td>Booking #</td>
-                                <td>Pickup Date</td>
-                                <td>Pickup Address</td>
-                                <td># of Items</td>
-                                <td>Remarks</td>
+                                <td>Tracking #</td>
+                                <td>Delivery Address</td>
+                                <td>Account Details</td>
+                                <td>COD Amount</td>
                                 <td>Status</td>
-                                <td></td>
                             </tr>
                             </tfoot>
 
                             <thead>
                             <tr>
                                 <th class="hide">Id #</th>
-                                <th>Booking #</th>
-                                <th>Pickup Date</th>
-                                <th>Pickup Address</th>
-                                <th># of Items</th>
-                                <th>Remarks</th>
+                                <th>Tracking #</th>
+                                <th>Delivery Address</th>
+                                <th>Account Details</th>
+                                <th>COD Amount</th>
                                 <th>Status</th>
-                                <th>Actions</th>
                             </tr>
                             </thead>
 
                             <tbody>
-
+                                @foreach($shipments as $shipment)
+                                    <tr>
+                                        <td class="hide">{{ $shipment->id }}</td>
+                                        <td>{{ $shipment->trackingNumbers()->mainTrackingNumber()->tracking_number }}</td>
+                                        <td>{{ $shipment->address->address_line_1 }} {{ $shipment->address->barangay }} {{ $shipment->address->city }}, {{ $shipment->address->province }}. {{ $shipment->address->zip_code }}</td>
+                                        <td>
+                                            Account Name: {{ $shipment->cod->account_name }} <br/>
+                                            Account Number: {{ $shipment->cod->account_number }} <br/>
+                                            Bank: {{ $shipment->cod->bank }} <br/>
+                                        </td>
+                                        <td>{{ number_format($shipment->cod->collect_and_deposit_amount, 2) }}</td>
+                                        <td>{{ $shipment->cod->status }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

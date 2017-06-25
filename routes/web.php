@@ -133,6 +133,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
     Route::group(['prefix' => 'reports', 'namespace' => 'Reports'], function() {
         Route::get('/', 'ReportsController@index');
         Route::get('/shipments/age', 'ReportsController@shipmentAge');
+        Route::get('/shipments/dispatch', 'ReportsController@dispatching');
     });
 
     Route::group(['prefix' => 'cms', 'namespace' => 'CMS'], function() {

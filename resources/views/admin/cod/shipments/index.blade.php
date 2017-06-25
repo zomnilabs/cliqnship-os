@@ -33,9 +33,8 @@
                             let selectHTML = '<select class="form-control filter" style="width: 100%">';
                             selectHTML += '<option value="">Filter Status</option>';
                             selectHTML += '<option value="pending">Pending</option>';
-                            selectHTML += '<option value="accepted">Accepted</option>';
-                            selectHTML += '<option value="completed">Completed</option>';
-                            selectHTML += '<option value="rejected">Rejected</option>';
+                            selectHTML += '<option value="collected">Collected</option>';
+                            selectHTML += '<option value="deposited">Deposited</option>';
                             selectHTML += '</select>';
 
                             $(this).html(selectHTML);
@@ -95,8 +94,8 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Pending Deliveries</h4>
-                                    <h1>21</h1>
+                                    <h4>Pending Amount</h4>
+                                    <h1>{{ number_format($amounts['pending'], 2) }}</h1>
                                 </div>
                             </div>
                         </a>
@@ -105,8 +104,8 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Successful Deliveries</h4>
-                                    <h1>4</h1>
+                                    <h4>Collected Amount</h4>
+                                    <h1>{{ number_format($amounts['collected'], 2) }}</h1>
                                 </div>
                             </div>
                         </a>
@@ -115,18 +114,8 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Failed Deliveries</h4>
-                                    <h1>5</h1>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4>Pending Remittance</h4>
-                                    <h1>P 560, 000</h1>
+                                    <h4>Deposited Amount</h4>
+                                    <h1>{{ number_format($amounts['deposited'], 2) }}</h1>
                                 </div>
                             </div>
                         </a>
@@ -145,11 +134,10 @@
                             <tfoot class="filter-footer">
                             <tr class="searchable">
                                 <td class="hide">Id #</td>
-                                <td>Booking #</td>
-                                <td>Pickup Date</td>
-                                <td>Pickup Address</td>
-                                <td># of Items</td>
-                                <td>Remarks</td>
+                                <td>Tracking #</td>
+                                <td>Delivery Address</td>
+                                <td>Account Details</td>
+                                <td>COD Amount</td>
                                 <td>Status</td>
                                 <td></td>
                             </tr>
@@ -158,18 +146,33 @@
                             <thead>
                             <tr>
                                 <th class="hide">Id #</th>
-                                <th>Booking #</th>
-                                <th>Pickup Date</th>
-                                <th>Pickup Address</th>
-                                <th># of Items</th>
-                                <th>Remarks</th>
+                                <th>Tracking #</th>
+                                <th>Delivery Address</th>
+                                <th>Account Details</th>
+                                <th>COD Amount</th>
                                 <th>Status</th>
-                                <th>Actions</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
 
                             <tbody>
-
+                            @foreach($shipments as $shipment)
+                                <tr>
+                                    <td class="hide">{{ $shipment->id }}</td>
+                                    <td>{{ $shipment->trackingNumbers()->mainTrackingNumber()->tracking_number }}</td>
+                                    <td>{{ $shipment->address->address_line_1 }} {{ $shipment->address->barangay }} {{ $shipment->address->city }}, {{ $shipment->address->province }}. {{ $shipment->address->zip_code }}</td>
+                                    <td>
+                                        Account Name: {{ $shipment->cod->account_name }} <br/>
+                                        Account Number: {{ $shipment->cod->account_number }} <br/>
+                                        Bank: {{ $shipment->cod->bank }} <br/>
+                                    </td>
+                                    <td>{{ number_format($shipment->cod->collect_and_deposit_amount, 2) }}</td>
+                                    <td>{{ $shipment->cod->status }}</td>
+                                    <td>
+                                        <button class="btn btn-primary">Update Status</button>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
