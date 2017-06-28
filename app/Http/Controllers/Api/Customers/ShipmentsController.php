@@ -107,11 +107,11 @@ class ShipmentsController extends AbstractAPIController {
 
                 $input['from'] = $address->id;
             } else {
-                $addressData = $input['address'];
+                $addressData = $input['from'];
                 $addressData['user_id'] = $userId;
                 $addressData['type'] = 'booking';
 
-                if ($addressData['primary'] && $addressData['type'] === 'booking') {
+                if (isset($addressData['primary']) && $addressData['primary'] && $addressData['type'] === 'booking') {
                     $addressData['primary'] = 0;
                 }
 
@@ -141,11 +141,11 @@ class ShipmentsController extends AbstractAPIController {
 
                 $input['to'] = $address->id;
             } else {
-                $addressData = $input['address'];
+                $addressData = $input['to'];
                 $addressData['user_id'] = $userId;
                 $addressData['type'] = 'booking';
 
-                if ($addressData['primary'] && $addressData['type'] === 'booking') {
+                if (isset($addressData['primary']) && $addressData['primary'] && $addressData['type'] === 'booking') {
                     $addressData['primary'] = 0;
                 }
 
@@ -180,7 +180,7 @@ class ShipmentsController extends AbstractAPIController {
                 'status'            => 'pending',
                 'charge_to'         => isset($input['charge_to']) ? $input['charge_to'] : 'sender',
                 'pay_thru'          => isset($input['pay_thru']) ? $input['pay_thru'] : 'cash',
-                'package_type'      => isset($input['package_type']) ? $input['package_type'] : 'small',
+                'package_type'      => isset($input['package_type']) ? $input['package_type'] : 'own-packaging',
                 'length'      => isset($input['length']) ? $input['length'] : 0,
                 'width'      => isset($input['width']) ? $input['width'] : 0,
                 'height'      => isset($input['height']) ? $input['height'] : 0,

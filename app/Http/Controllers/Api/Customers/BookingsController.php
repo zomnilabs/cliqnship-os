@@ -110,7 +110,7 @@ class BookingsController extends AbstractAPIController {
                 $addressData['user_id'] = $userId;
                 $addressData['type'] = 'booking';
 
-                if ($addressData['primary'] && $addressData['type'] === 'booking') {
+                if (isset($addressData['primary']) && $addressData['primary'] && $addressData['type'] === 'booking') {
                     $addressData['primary'] = 0;
                 }
 
@@ -201,7 +201,7 @@ class BookingsController extends AbstractAPIController {
                 $addressData = $input['address'];
                 $addressData['user_id'] = $userId;
 
-                if ($addressData['primary'] && $addressData['type'] === 'booking') {
+                if (isset($addressData['primary']) && $addressData['primary'] && $addressData['type'] === 'booking') {
                     $addressData['primary'] = 0;
                 }
 

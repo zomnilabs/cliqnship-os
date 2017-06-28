@@ -76,6 +76,6 @@ class Shipment extends Model
 
     public function cod()
     {
-        return $this->hasOne(ShipmentCod::class);
+        return $this->hasOne(ShipmentCod::class, 'shipment_id');
     }
 }
