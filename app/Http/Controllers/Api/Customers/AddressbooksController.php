@@ -88,7 +88,7 @@ class AddressbooksController extends AbstractAPIController {
 
         $input['user_id'] = $userId;
 
-        if ($input['primary'] && $input['type'] === 'booking') {
+        if (isset($input['primary']) && $input['primary'] && $input['type'] === 'booking') {
             $input['primary'] = 0;
         }
 

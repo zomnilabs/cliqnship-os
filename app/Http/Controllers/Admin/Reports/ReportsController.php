@@ -58,16 +58,7 @@ class ReportsController extends Controller
             ->get();
 
         $result = [];
-        if ($request->has('user_id') || $request->get('user_id') === 0) {
-            foreach ($riders->toArray() as $key => $value) {
-                $riders[$key]['assignments'] = ShipmentAssignment::withTrashed()
-                    ->where('user_id', $value['id'])
-                    ->whereDate('created_at', $date)
-                    ->get();
-            }
-
-            $result = $riders;
-        } else if (! $request->has('user_id')) {
+        if (! $request->has('user_id') || $request->get('user_id') === 0) {
             foreach ($riders->toArray() as $key => $value) {
                 $riders[$key]['assignments'] = ShipmentAssignment::withTrashed()
                     ->where('user_id', $value['id'])
