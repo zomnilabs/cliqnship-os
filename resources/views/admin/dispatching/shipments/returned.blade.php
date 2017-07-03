@@ -15,6 +15,12 @@
             });
 
             $('.table').dataTable();
+
+            $('#returnShipmentBtn').click(function(){
+                id = $(this).attr('data-shipment');
+                action = '/admin/dispatching/shipments/returned/'+ id +'/redispatch';
+                $('#redispatch-form').attr('action', action);
+            });
         }())
     </script>
 @endsection
@@ -77,7 +83,7 @@
                             <td>{{ $shipment->returnLogs()->orderBy('created_at', 'DESC')->count() }}</td>
                             <td>{{ $shipment->status }}</td>
                             <td>
-                                <button class="btn btn-default"
+                                <button class="btn btn-default" id="returnShipmentBtn"
                                         data-shipment="{{ $shipment->id }}" data-toggle="modal" data-target="#returnShipment" >
                                     <i class="fa fa-refresh"></i></button>
                             </td>

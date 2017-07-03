@@ -7,7 +7,7 @@
             <div class="modal-header text-center">
                 <h4 class="modal-title" id="modalTitle">Refresh Shipment</h4>
             </div>
-            <form id="redispatch-form" action="/admin/dispatching/shipments/returned/{{ $shipment->id }}/redispatch" method="POST">
+            <form id="redispatch-form" action="" method="POST">
                 <div class="modal-body">
                     {{csrf_field()}}
                     <div class="row">
