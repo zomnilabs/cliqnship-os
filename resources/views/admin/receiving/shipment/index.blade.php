@@ -35,20 +35,53 @@
             color: #224F69 !important;
             margin-right: 10px !important;
         }
+
+        .stat-item {
+            border: solid #efefef 1px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            height: 80px;
+        }
+
+        .stat-item h2 {
+            margin: 0;
+            padding: 0;
+        }
+
+        .stat-input {
+            margin: 0;
+            padding: 0;
+        }
+
+        .stat-input input {
+            font-size: 20px;
+            padding: 10px;
+            height: 50px;
+            border-color: #6e6e6e;
+        }
+
+        .stat-button {
+            margin: 0;
+            padding: 0;
+        }
+
+        .stat-button button {
+            height: 50px;
+        }
     </style>
 @endsection
 
 @section('scripts')
     <script>
         (function() {
-            $('.table thead tr.searchable td').each( function () {
+            $('#receivedTable thead tr.searchable td').each( function () {
                 var title = $(this).text();
                 if (title) {
                     $(this).html( '<input type="text" style="width: 100%" placeholder="Search '+title+'" />' );
                 }
             });
 
-            $('.table').dataTable();
+            $('#receivedTable').dataTable();
 
             // Select 2
             $(".waybill-input").select2({
@@ -189,7 +222,7 @@
                             </div>
                         </div>
 
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" id="receivedTable">
                             <thead>
                             <tr class="searchable">
                                 <td class="hide">Id #</td>
@@ -237,7 +270,7 @@
 
 
     <div class="modal fade" id="addWaybill" role="dialog" aria-labelledby="myLargeModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg" style="width: 100%" role="document">
             <div class="modal-content mcontent">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -245,65 +278,128 @@
                 <div class="modal-header text-center">
                     <h4 class="modal-title" id="modalTitle">Shipment Remit</h4>
                 </div>
-                <form id="viewForm" method="post">
-                    <div class="modal-body">
-                        {{csrf_field()}}
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group{{ $errors->has('waybills') ? ' has-error' : '' }}">
-                                    <label for="waybills">Waybill Number/s</label>
 
-                                    <select class="form-control dataField waybill-input" name="waybills[]" id="waybills" multiple="multiple"></select>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row text-center cards">
 
-                                    @if ($errors->has('waybills'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('waybills') }}</strong>
-                                        </span>
-                                    @endif
+                                <div class="col-md-3">
+                                    <a href="#">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <h4>Shipments Remitted / Total Shipments</h4>
+                                                <h1>{{ $statistics['remitted'] }} / {{ $statistics['total_shipments'] }}</h1>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
 
-                                <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                                    <label for="status">Waybill Number/s</label>
-
-                                    <select class="form-control dataField" name="status" id="status">
-                                        <option value="arrived-at-hq">Received At Warehouse</option>
-                                        <option value="successfully-delivered">Successfully Delivered</option>
-                                        <option value="returned">Returned</option>
-                                    </select>
-
-                                    @if ($errors->has('status'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('status') }}</strong>
-                                        </span>
-                                    @endif
+                                <div class="col-md-3">
+                                    <a href="#">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <h4>New Shipments</h4>
+                                                <h1>{{ $statistics['total_cod_amount'] }}</h1>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
 
-                                <div class="reasonInput hide form-group{{ $errors->has('reason') ? ' has-error' : '' }}">
-                                    <label for="reason">Reason</label>
-
-                                    <input type="text" id="reason" name="reason" class="form-control" />
-
-                                    @if ($errors->has('reason'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('reason') }}</strong>
-                                        </span>
-                                    @endif
+                                <div class="col-md-3">
+                                    <a href="#">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <h4>Remitted COD / Total COD Shipments</h4>
+                                                <h1>{{ $statistics['remitted_cod'] }} / {{ $statistics['with_cod'] }}</h1>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12 error-container">
-
+                                <div class="col-md-3">
+                                    <a href="#">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <h4>COD Remitted / Total Amount</h4>
+                                                <h1>{{ $statistics['total_cod_amount_remitted'] }} / {{ $statistics['total_cod_amount'] }}</h1>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="modal-footer">
-                        <button class="btn btn-default" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        <button type="submit" class="btn btn-success" id="formSubmit"><i class="fa fa-floppy-o"></i> Receive Shipment Remit</button>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Waybill</th>
+                                    <th>COD Amount</th>
+                                    <th>Shipment Amount</th>
+                                    <th>Remitted COD Amount</th>
+                                    <th>Remitted Shipment Fee</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td colspan="6">
+                                        <p style="text-align: center">No Content Yet</p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-6 stat-item">
+                                    Total COD
+                                    <h2>1000.00</h2>
+                                </div>
+                                <div class="col-md-6 stat-item">
+                                    Total Shipment
+                                    <h2>0.00</h2>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-12 stat-item">
+                                    <h4>Remitted COD: </h4>
+                                    <span id="remittedCOD">900.00</span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 stat-item">
+                                    <h4>Remitted Shipment Fee: </h4>
+                                    <span id="remittedShipmentFee">0.00</span>
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12 stat-input">
+                                    <input type="text" placeholder="500000XXXX" class="form-control">
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12 stat-button">
+                                    <button class="btn btn-default btn-block">
+                                        Save Transaction
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
