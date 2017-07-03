@@ -146,7 +146,7 @@
                                 <td>COD Amount</td>
                                 <td>Deposit Date</td>
                                 <td>Status</td>
-                                <td></td>
+                                <td class="hide"></td>
                             </tr>
                             </tfoot>
 
@@ -159,7 +159,7 @@
                                 <th>COD Amount</th>
                                 <th>Deposit Date</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th class="hide">Action</th>
                             </tr>
                             </thead>
 
@@ -177,7 +177,7 @@
                                     <td>{{ number_format($shipment->cod->collect_and_deposit_amount, 2) }}</td>
                                     <td>{{ $shipment->cod->deposit_date ? \Carbon\Carbon::createFromTimestamp(strtotime($shipment->cod->deposit_date))->toFormattedDateString() : '' }}</td>
                                     <td>{{ $shipment->cod->status }}</td>
-                                    <td>
+                                    <td class="hide">
                                         <button class="btn btn-primary">Update Status</button>
                                     </td>
                                 </tr>
