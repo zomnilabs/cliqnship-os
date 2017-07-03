@@ -72,7 +72,6 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
         Route::get('bookings', 'BookingsController@index');
         Route::get('shipments/all', 'ShipmentsController@all');
         Route::post('shipments/all', 'ShipmentsController@dispatchShipments');
-        Route::get('shipments/returned', 'ShipmentsController@returned');
         Route::post('shipments/returned/{shipmentId}/redispatch', 'ShipmentsController@redispatch');
         Route::get('item-requests', 'ItemRequestsController@index');
         Route::get('shipments/{id}/preview', 'ShipmentsController@printDispatch');
@@ -83,6 +82,10 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
         Route::get('rider/remit/{riderId}', 'ShipmentsController@remit');
         Route::post('rider/remit/{riderId}', 'ShipmentsController@doRemit');
         Route::get('item-requests', 'ItemRequestsController@index');
+    });
+
+    Route::group(['prefix' => 'resolutions', 'namespace' => 'Dispatching'], function() {
+        Route::get('shipments/returned', 'ShipmentsController@returned');
     });
 
     Route::group(['prefix' => 'cash-on-delivery', 'namespace' => 'COD'], function() {
