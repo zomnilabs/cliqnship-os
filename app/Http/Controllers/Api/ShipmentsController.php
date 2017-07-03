@@ -119,7 +119,7 @@ class ShipmentsController extends Controller {
     // Check waybill number
     public function checkWaybill(Request $request, $waybillNumber)
     {
-        $shipment = ShipmentTrackingNumber::where('tracking_number', $waybillNumber)
+        $shipment = ShipmentTrackingNumber::with('shipment.cod')->where('tracking_number', $waybillNumber)
             ->where('provider', 'cliqnship')
             ->first();
 

@@ -74,6 +74,8 @@
 @section('scripts')
     <script>
         (function() {
+            let shipments = [];
+
             $('#receivedTable thead tr.searchable td').each( function () {
                 var title = $(this).text();
                 if (title) {
@@ -107,13 +109,142 @@
                 });
             });
 
-            $('#status').on('change', function() {
-                if ($(this).val() === 'returned') {
-                    $('.reasonInput').removeClass('hide');
-                } else {
-                    $('.reasonInput').addClass('hide');
+            $(".waybill-input-new").select2({
+                tags: true,
+                tokenSeparators: [',', ' '],
+                placeholder: "Input waybill number/s",
+                allowClear: true
+            });
+
+            // waybillNumbersInput
+            $('#waybillNumbersInput').on('click', function(e) {
+                $(this).select();
+                $(this).focus();
+            });
+
+            $('#waybillNumbersInput').on('keyup', function(e) {
+                if (e.keyCode == 13) {
+                    let value = $(this).val();
+
+                    $(this).prop('disabled', true);
+                    $(this).select();
+                    $(this).focus();
+
+                    let self = $(this);
+
+                    let index = shipments.findIndex((item) => item.tracking_number === value);
+
+                    if (index >= 0) {
+                        let html = `<p><span class="text-danger">${value}</span> already in the table</p>`;
+                        $('#errorContainer').html(html);
+
+                        $(this).prop('disabled', false);
+                        $(this).select();
+                        $(this).focus();
+
+                        return;
+                    }
+
+                    fetch(`/api/v1/shipments/check/${value}`).then((res) => {
+                        if (! res.ok) {
+                            let html = `<p><span class="text-danger">${value}</span> is not a valid waybill</p>`;
+                            $('#errorContainer').html(html);
+                            self.prop('disabled', false);
+
+                            self.select();
+                            self.focus();
+                            return;
+                        }
+
+                        res.json().then((json) => {
+                            shipments.push(json);
+                            calculateTotals();
+
+                            addToTable(json);
+                        });
+
+                        $('#errorContainer').html('');
+                        self.prop('disabled', false);
+                        self.select();
+                        self.focus();
+                    }).catch((error) => {
+                        let html = `<p><span class="text-danger">${value}</span> is not a valid waybill</p>`;
+                        $('#errorContainer').html(html);
+
+                        self.prop('disabled', false);
+                        self.select();
+                        self.focus();
+                    });
                 }
-            })
+            });
+
+            // calculate
+            function calculateTotals() {
+                let total = 0;
+
+                for (let shipment of shipments) {
+                    total += shipment.shipment.cod ? shipment.shipment.cod.collect_and_deposit_amount : 0;
+                }
+
+                $('#totalCOD').html(total);
+            }
+
+            function addToTable(data) {
+                $('#noContent').hide();
+
+                let table = $('#shipmentReceiveTable tbody');
+                let html = '<tr>';
+                html += `<td>${data.tracking_number}</td>`;
+                html += `<td>${data.shipment.cod ? data.shipment.cod.collect_and_deposit_amount : 0}</td>`;
+                html += `<td>0</td>`;
+                html += `<td class="editable-cod-amount">0</td>`;
+                html += `<td class="editable-shipment-fee">0</td>`;
+                html += `<td class="editable-status">${data.shipment.status}</td>`;
+                html += '</tr>';
+
+                table.append(html);
+                setupEditable();
+            }
+
+            // Editables
+            function setupEditable() {
+                $.fn.editable.defaults.mode = 'inline';
+
+                $('.editable-status').editable({
+                    type: 'select',
+                    name: 'status',
+                    title: 'Change Status',
+                    inline: true,
+                    source: [
+                        {
+                            value: 'arrived-at-hq',
+                            text: 'Arrived At HQ',
+                            selected: true
+                        },
+                        {
+                            value: 'successfully-delivered',
+                            text: 'Successfully Delivered'
+                        }
+                    ]
+                }).on('save', function(e, params) {
+                    let bookingId = $(this).data('booking');
+
+                    console.log(e);
+                    console.log(params);
+                });
+
+                $('.editable-cod-amount').editable({
+                    type: 'number',
+                    title: 'Enter COD Amount Remitted'
+                });
+
+                $('.editable-shipment-fee').editable({
+                    type: 'number',
+                    title: 'Enter COD Amount Remitted'
+                });
+            }
+
+            setupEditable();
         }())
     </script>
 @endsection
@@ -134,7 +265,13 @@
                 </div>
 
                 <div class="page-actions pull-right">
-                    <button  data-toggle="modal" data-target="#addWaybill" class="btn btn-primary">
+                    <button  data-toggle="modal" data-target="#addReturnedWaybill" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        Receive Returned Shipments</button>
+                </div>
+
+                <div class="page-actions pull-right">
+                    <button  data-toggle="modal" data-target="#addNewWaybill" class="btn btn-primary">
                         <i class="glyphicon glyphicon-plus"></i>
                         Receive New Shipments</button>
                 </div>
@@ -142,7 +279,7 @@
                 <div class="page-actions pull-right">
                     <button  data-toggle="modal" data-target="#addWaybill" class="btn btn-primary">
                         <i class="glyphicon glyphicon-plus"></i>
-                        Receive Existing Shipments</button>
+                        Receive Shipments</button>
                 </div>
             </div>
         </div>
@@ -332,7 +469,7 @@
 
                     <div class="row">
                         <div class="col-md-8">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered" id="shipmentReceiveTable">
                                 <thead>
                                 <tr>
                                     <th>Waybill</th>
@@ -345,7 +482,7 @@
                                 </thead>
 
                                 <tbody>
-                                <tr>
+                                <tr id="noContent">
                                     <td colspan="6">
                                         <p style="text-align: center">No Content Yet</p>
                                     </td>
@@ -358,11 +495,11 @@
                             <div class="row">
                                 <div class="col-md-6 stat-item">
                                     Total COD
-                                    <h2>1000.00</h2>
+                                    <h2 id="totalCOD">0.00</h2>
                                 </div>
                                 <div class="col-md-6 stat-item">
                                     Total Shipment
-                                    <h2>0.00</h2>
+                                    <h2 id="totalShipment">0.00</h2>
                                 </div>
                             </div>
 
@@ -371,7 +508,7 @@
                             <div class="row">
                                 <div class="col-md-12 stat-item">
                                     <h4>Remitted COD: </h4>
-                                    <span id="remittedCOD">900.00</span>
+                                    <span id="remittedCOD">0.00</span>
                                 </div>
                             </div>
 
@@ -385,7 +522,8 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-12 stat-input">
-                                    <input type="text" placeholder="500000XXXX" class="form-control">
+                                    <input type="text" placeholder="500000XXXX" id="waybillNumbersInput" class="form-control">
+                                    <div id="errorContainer"></div>
                                 </div>
                             </div>
 
@@ -400,6 +538,132 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addReturnedWaybill" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content mcontent">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title" id="modalTitle">Returned Shipment Remit</h4>
+                </div>
+                <form id="viewForm" method="post">
+                    <div class="modal-body">
+                        {{csrf_field()}}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group{{ $errors->has('waybills') ? ' has-error' : '' }}">
+                                    <label for="waybills">Returned Waybill Number/s</label>
+
+                                    <select class="form-control dataField waybill-input" name="waybills[]" id="waybills" multiple="multiple"></select>
+
+                                    @if ($errors->has('waybills'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('waybills') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                                    <label for="status">Waybill Number/s</label>
+
+                                    <select class="form-control dataField" name="status" id="status">
+                                        <option value="returned" selected>Returned</option>
+                                    </select>
+
+                                    @if ($errors->has('status'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('status') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="reasonInput form-group{{ $errors->has('reason') ? ' has-error' : '' }}">
+                                    <label for="reason">Reason</label>
+
+                                    <input type="text" id="reason" name="reason" class="form-control" />
+
+                                    @if ($errors->has('reason'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('reason') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 error-container">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        <button type="submit" class="btn btn-success" id="formSubmit"><i class="fa fa-floppy-o"></i> Receive Shipment Remit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addNewWaybill" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content mcontent">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title" id="modalTitle">New Shipment Remit</h4>
+                </div>
+                <form id="viewForm" method="post" action="/admin/receiving/rider/remit/{{ $riderId }}/new">
+                    <div class="modal-body">
+                        {{csrf_field()}}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group{{ $errors->has('waybills') ? ' has-error' : '' }}">
+                                    <label for="waybills">New Waybill Number/s</label>
+
+                                    <select class="form-control dataField waybill-input-new" name="waybills[]" id="waybills" multiple="multiple"></select>
+
+                                    @if ($errors->has('waybills'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('waybills') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                                    <label for="status">Waybill Number/s</label>
+
+                                    <select class="form-control dataField" name="status" id="status">
+                                        <option value="arrived-at-hq" selected>Arrived at HQ</option>
+                                    </select>
+
+                                    @if ($errors->has('status'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('status') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 error-container">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        <button type="submit" class="btn btn-success" id="formSubmit"><i class="fa fa-floppy-o"></i> Receive Shipment Remit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

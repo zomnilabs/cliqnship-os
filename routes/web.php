@@ -81,6 +81,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
         Route::get('rider', 'ShipmentsController@all');
         Route::get('rider/remit/{riderId}', 'ShipmentsController@remit');
         Route::post('rider/remit/{riderId}', 'ShipmentsController@doRemit');
+        Route::post('rider/remit/{riderId}/new', 'ShipmentsController@doNewRemit');
         Route::get('item-requests', 'ItemRequestsController@index');
     });
 

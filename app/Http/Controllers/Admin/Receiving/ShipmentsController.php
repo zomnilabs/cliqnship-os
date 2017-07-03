@@ -104,6 +104,7 @@ class ShipmentsController extends Controller {
 
         return view('admin.receiving.shipment.index')
             ->with('statistics', $statistics)
+            ->with('riderId', $riderId)
             ->with('assignments', $assignments);
     }
 
@@ -189,6 +190,56 @@ class ShipmentsController extends Controller {
                 'event'         => 'status_change',
                 'value'         => $status,
                 'remarks'       => $remarks,
+                'user_id'       => $request->user()->id
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
+    public function doNewRemit(Request $request, $riderId)
+    {
+        foreach ($request->get('waybills') as $waybill) {
+            $data = [
+                'user_id'       => 0,
+                'source_id'     => 2,
+                'service_type'  => 'metro_manila',
+                'is_international'  => 'postal',
+                'status'        => 'arrived-at-hq',
+                'charge_to'     => 'sender',
+                'pay_thru'      => 'cash',
+                'package_type'  => 'own-packaging',
+                'from'          => 0,
+                'to'            => 0
+            ];
+
+            $shipment = Shipment::create($data);
+            $shipment->trackingNumbers()->create([
+                'tracking_number'   => $waybill,
+                'provider'          => 'cliqnship'
+            ]);
+
+            if ($request->get('status') === 'arrived-at-hq') {
+
+                $shipment = ShipmentAssignment::create([
+                    'shipment_id' => $shipment->id,
+                    'user_id'     => $riderId,
+                    'status'      => 'completed'
+                ]);
+
+                $shipment->delete();
+
+                $status = 'arrived-at-hq';
+                $remarks = 'shipment arrived at warehouse';
+            }
+
+            // Record Event
+            ShipmentEvent::create([
+                'shipment_id'   => $shipment->id,
+                'event_source'  => 'warehouse',
+                'event'         => 'status_change',
+                'value'         => 'arrived-at-hq',
+                'remarks'       => 'Created a new blank shipment',
                 'user_id'       => $request->user()->id
             ]);
         }
