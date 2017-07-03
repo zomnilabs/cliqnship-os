@@ -127,15 +127,7 @@
                         <ul class="treeview-menu">
                             <li><a href="/admin/dispatching/bookings">Bookings</a></li>
                             <li class="active dropdown treeview">
-                                <a href="#"><span>Shipments</span>
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="/admin/dispatching/shipments/all">All Shipments</a></li>
-                                    <li><a href="/admin/dispatching/shipments/returned">Returned Shipments</a></li>
-                                </ul>
+                                <a href="/admin/dispatching/shipments/all"><span>Shipments</span></a>
                             </li>
                             <li><a href="/admin/dispatching/item-requests">Item Requests</a></li>
                         </ul>
@@ -149,6 +141,18 @@
                         <ul class="treeview-menu">
                             <li><a href="/admin/receiving/rider">Shipments</a></li>
                             <li><a href="/admin/receiving/item-requests">Item Requests</a></li>
+                        </ul>
+                    </li>
+                    <li class="{{ set_active(['admin/receiving*']) }} dropdown treeview">
+                        <a href="#"><i class="fa fa-warning"></i> <span>Resolution</span>
+                            <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="{{ set_active(['admin/resolutions*']) }} dropdown treeview">
+                                <a href="/admin/resolutions/shipments/returned">Returned Shipments</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="{{ set_active(['admin/cash-on-delivery*']) }} dropdown treeview">

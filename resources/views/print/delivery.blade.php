@@ -138,6 +138,8 @@
                 </tr>
             </tfoot>
         </table>
+
+        <div id="map"></div>
     </div>
 <!-- Scripts -->
 <script src="{{ asset('js/print/js/bootstrap.min.js') }}"></script>
