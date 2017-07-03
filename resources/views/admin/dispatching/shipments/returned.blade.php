@@ -78,13 +78,8 @@
                             <td>{{ $shipment->status }}</td>
                             <td>
                                 <button class="btn btn-default"
-                                        onclick="event.preventDefault();
-                                                 document.getElementById('redispatch-form').submit();">
+                                        data-shipment="{{ $shipment->id }}" data-toggle="modal" data-target="#returnShipment" >
                                     <i class="fa fa-refresh"></i></button>
-
-                                <form id="redispatch-form" action="/admin/dispatching/shipments/returned/{{ $shipment->id }}/redispatch" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -93,4 +88,5 @@
             </div>
         </div>
     </div>
+    @include('admin.dispatching.shipments.modals.refresh-shipment')
 @endsection
