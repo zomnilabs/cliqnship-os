@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Shipment;
 use App\Models\ShipmentAssignment;
 use App\Models\ShipmentEvent;
+use App\Models\ShipmentReturnLogs;
 use App\Models\ShipmentTrackingNumber;
 use App\User;
 use Illuminate\Http\Request;
@@ -65,19 +66,15 @@ class ShipmentsController extends Controller {
      */
     public function redispatch(Request $request, $shipmentId)
     {
-        $shipment = Shipment::where('id', $shipmentId)
-            ->update(['status' => 'arrived-at-hq']);
-
-        ShipmentAssignment::where('shipment_id', $shipmentId)->delete();
+        $input = $request->all();
 
         // Record Event
-        ShipmentEvent::create([
-            'shipment_id'   => $shipmentId,
-            'event_source'  => 'warehouse',
-            'event'         => 'status_change',
-            'value'         => 'arrived-at-hq',
-            'remarks'       => 'resolved shipment and put it back to dispatching',
-            'user_id'       => $request->user()->id
+        ShipmentReturnLogs::create([
+            'shipment_id'               => $shipmentId,
+            'reason'                    => 'return logs',
+            'resolution_team_remarks'   => $input['resolution_remarks'],
+            'status'                    => $input['status'],
+            'user_id'                   => $request->user()->id
         ]);
 
         return redirect()->back();
