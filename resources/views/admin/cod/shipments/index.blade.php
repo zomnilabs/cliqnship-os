@@ -78,9 +78,15 @@
                     <h1>Cash-on-Delivery Shipments</h1>
                 </div>
                 <div class="page-actions pull-right">
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary"
+                        data-toggle="modal" data-target="#exportShipmentCod">
                         <i class="fa fa-download"></i>
                         Export Shipments</button>
+
+                    <button class="btn btn-primary"
+                            data-toggle="modal" data-target="#importShipmentCod">
+                        <i class="fa fa-upload"></i>
+                        Import Shipments</button>
                 </div>
             </div>
         </div>
@@ -183,4 +189,70 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="exportShipmentCod" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content mcontent">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title" id="modalTitle">Shipment Assignment</h4>
+                </div>
+                <form id="viewForm" action="/admin/cash-on-delivery/all/export" method="GET">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select name="status" id="status" class="form-control">
+                                        <option value="" disabled selected>Select a status to export</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="collected">Collected</option>
+                                        <option value="deposited">Deposited</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        <button type="submit" class="btn btn-success" id="formSubmit"><i class="fa fa-floppy-o"></i> Export</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="importShipmentCod" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content mcontent">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title" id="modalTitle">Shipment Assignment</h4>
+                </div>
+                <form id="viewForm" action="/admin/cash-on-delivery/all/import" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="file">Shipment CODs File</label>
+                                    <input type="file" class="form-control" name="file" id="file" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        <button type="submit" class="btn btn-success" id="formSubmit"><i class="fa fa-floppy-o"></i> Export</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection

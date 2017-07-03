@@ -87,6 +87,8 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
 
     Route::group(['prefix' => 'cash-on-delivery', 'namespace' => 'COD'], function() {
         Route::get('all', 'ShipmentsController@all');
+        Route::get('all/export', 'ShipmentsController@export');
+        Route::post('all/import', 'ShipmentsController@import');
         Route::get('customer', 'CustomerController@index');
     });
 
