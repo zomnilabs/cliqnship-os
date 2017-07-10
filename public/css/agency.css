@@ -595,6 +595,19 @@ section h3.section-subheading {
 .timeline .timeline-body > ul {
   margin-bottom: 0;
 }
+@media (max-width: 500px) {
+    #about p, #about em {
+        font-size: 12px;
+    }
+    section#about {
+        padding: 20px 0;
+    }
+}
+@media (max-width: 690px) {
+    #about {
+        height: 120vh;
+    }
+}
 @media (min-width: 768px) {
   .timeline:before {
     left: 50%;

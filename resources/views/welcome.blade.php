@@ -161,7 +161,7 @@
                     </div>
                     <div class="portfolio-caption">
                         <h4>Get your food items out there! We deliver them, too!</h4>
-                        <p class="text-muted">This is for all our food-loving cliqers! We deliver pastries, cookies, non-perishables and the like. (Unfortunately, this excludes cooked items, cakes with soft icing, frozen goods, highly sensitive, easily spoiled food items and the like.) </p>
+                        <p class="text-muted">This is for all our food-loving cliqers! We deliver pastries, cookies, non-perishables and the like. (Unfortunately, this excludes cooked items, frozen goods, easily spoiled food items and the like.) </p>
                     </div>
                 </div>
 
@@ -171,7 +171,7 @@
                     </div>
                     <div class="portfolio-caption">
                         <h4>Flexible international shipping services!</h4>
-                        <p class="text-muted">Become a global brand and deliver your products anywhere in the world! You may choose from our range of international delivery options like Express, EMS and Postal services based on your budget and transit time requirements.</p>
+                        <p class="text-muted">Become a global brand and deliver your products anywhere in the world! You may choose from our range of international delivery options based on your budget and transit time requirements.</p>
                     </div>
                 </div>
 
