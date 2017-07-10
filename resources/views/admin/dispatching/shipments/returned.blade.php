@@ -48,6 +48,36 @@
     </div>
 
     <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row text-center cards">
+                    <div class="col-md-3">
+                        <a href="?status=unassigned">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4>Resolved Issues</h4>
+                                    <h1>0</h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3">
+                        <a href="?status=assigned">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4>Unresolved Issues</h4>
+                                    <h1>0</h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
         <div class="box box-primary">
             <div class="box-header">
                 <div class="box-title pull-left">
