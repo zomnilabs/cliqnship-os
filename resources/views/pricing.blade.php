@@ -29,30 +29,30 @@
             <div class="tab-content">
 
                 <div role="tabpanel" class="tab-pane active" id="domestic">
-                    <div class="panel panel-primary">
+                    <div class="panel panel-default">
                         <div class="panel-heading"><h3 class="text-center">Domestic Rates</h3></div>
 
                         <div class="panel-body">
-                            <table class="table table-bordered">
+                            <table class="table table-responsive">
                                 <thead>
                                     <tr>
-                                        <th style="background: #9BBB59"></th>
-                                        <th style="background: #9BBB59">METRO MANILA</th>
-                                        <th style="background: #9BBB59" colspan="4">STEADY N BREEZY</th>
+                                        <th style="background-color: #757575; color: #fff"></th>
+                                        <th style="background-color: #757575; color: #fff">METRO MANILA</th>
+                                        <th style="background-color: #757575; color: #fff" colspan="4">STEADY N BREEZY</th>
                                     </tr>
                                     <tr>
-                                        <th style="background: #9BBB59">Weight</th>
-                                        <th style="background: #9BBB59">Regular Shipment</th>
-                                        <th style="background: #9BBB59" colspan="2">FAST N VAST <br> (More serviceable areas, shorter transit time)</th>
-                                        <th style="background: #9BBB59" colspan="2">STEADY N BREEZY <br> (major cities, longer transit time, cheaper rates, COD possible)</th>
+                                        <th style="background-color: #757575; color: #fff">Weight</th>
+                                        <th style="background-color: #757575; color: #fff">Regular Shipment</th>
+                                        <th style="background-color: #757575; color: #fff" colspan="2">FAST N VAST <br> (More serviceable areas, shorter transit time)</th>
+                                        <th style="background-color: #757575; color: #fff" colspan="2">STEADY N BREEZY <br> (major cities, longer transit time, cheaper rates, COD possible)</th>
                                     </tr>
                                     <tr>
-                                        <th style="background: #FFFF00" colspan="9">POUCH</th>
+                                        <th colspan="9">POUCH</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>9 x 14 (M)</td>
+                                        <th>9 x 14 (M)</th>
                                         <td>55</td>
                                         <td>1kg max</td>
                                         <td>148</td>
@@ -60,7 +60,7 @@
                                         <td>100</td>
                                     </tr>
                                     <tr>
-                                        <td>11 x 17 (L)</td>
+                                        <th>11 x 17 (L)</th>
                                         <td>70</td>
                                         <td>3kg max</td>
                                         <td>220</td>
@@ -68,10 +68,10 @@
                                         <td>150</td>
                                     </tr>
                                     <tr>
-                                        <th style="background: #FFFF00" colspan="9">OWN PACKAGING</th>
+                                        <th colspan="9">OWN PACKAGING</th>
                                     </tr>
                                     <tr>
-                                        <td style="background: #C4D79B">1.0</td>
+                                        <th>1.0</th>
                                         <td></td>
                                         <td rowspan="3">1st 3kg</td>
                                         <td rowspan="3">225</td>
@@ -79,17 +79,17 @@
                                         <td>100</td>
                                     </tr>
                                     <tr>
-                                        <td style="background: #C4D79B">2.0</td>
+                                        <th>2.0</th>
                                         <td>48</td>
                                         <td>160</td>
                                     </tr>
                                     <tr>
-                                        <td style="background: #C4D79B">3.0</td>
+                                        <th>3.0</th>
                                         <td>80</td>
                                         <td>205</td>
                                     </tr>
                                     <tr>
-                                        <td style="background: #C4D79B">Add on per kg</td>
+                                        <th>Add on per kg</th>
                                         <td>25</td>
                                         <td></td>
                                         <td>80</td>
@@ -99,13 +99,13 @@
                                 </tbody>
                             </table>
 
-                            <table class="table table-bordered">
+                            <table class="table table-responsive">
                                 <thead>
                                     <tr>
-                                        <th style="background: #C5BE97" colspan="2">Service Add Ons</th>
+                                        <th style="background-color: #757575; color: #fff" colspan="2">Service Add Ons</th>
                                     </tr>
                                     <tr>
-                                        <th style="background: #C2D69A" colspan="2">Collect & Deposit (Metro Manila)</th>
+                                        <th colspan="2">Collect & Deposit (Metro Manila)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -118,13 +118,13 @@
                                         <td>1.5% of total DV</td>
                                     </tr>
                                     <tr>
-                                        <th style="background: #C2D69A">INSURANCE</th>
+                                        <th>INSURANCE</th>
                                         <td>P 15 for 1st P500, P 5 for the succeeding fraction of P 500</td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="well text-left">
-                                <h4>NOTE</h4>
+                                <h4>NOTE:</h4>
                                 <ul>
                                     <li>Chargeable Weight - actual or volumetric weight whichever is higher (L x W x H cm / 3500)</li>
                                     <li>Dry ice/Ice gel, Styrofoam, plastic handles, and other supplies if needed should be used to provided protection for the goods.</li>
@@ -138,7 +138,7 @@
                 </div>
 
                 <div role="tabpanel" class="tab-pane" id="international">
-                    <div class="panel panel-primary">
+                    <div class="panel panel-default">
                         <div class="panel-heading"><h3 class="text-center">International Rates</h3></div>
 
                         <div class="panel-body">
