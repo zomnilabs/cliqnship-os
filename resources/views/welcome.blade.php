@@ -21,7 +21,7 @@
   <div class="carousel-inner" role="listbox">
     <div class="item active">
       <header class="header1">
-        <div class="container">
+        <div class="container" style="height: 100vh">
             <div class="intro-text">
                 <div class="intro-heading">Is your shipment ready?</div>
                 <div class="intro-lead-in">Snap. Enter pickup details. Schedule pickup. </div>
@@ -42,7 +42,7 @@
     </div>
     <div class="item">
         <header class="header2">
-            <div class="container">
+            <div class="container" style="height: 100vh">
                 <div class="intro-text">
                     <div class="intro-heading text-primary" style="font-size: 60px">Need your payments collected?</div>
                 <div class="intro-lead-in" style="font-size: 35px"> We can take care of it for you. Increase your sales by offering COD!</div>
@@ -144,6 +144,36 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <div class="portfolio-link" data-toggle="modal">
+                        <img src="images/delivery-boy.png" class="img-responsive" alt="">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h4>Receive your items right away!</h4>
+                        <p class="text-muted">Schedule a pick-up date and one of our couriers will arrive at your door on the date specified.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <div class="portfolio-link" data-toggle="modal">
+                        <img src="images/worker.png" class="img-responsive" alt="">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h4>Connect with our responsive customer service team!</h4>
+                        <p class="text-muted">May it be on the phone, SMS or across our online accounts, our team makes sure you are attended to, 100% satisfied and happy at all costs. <em>Happy cliqers = awesomeness!</em> </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <div class="portfolio-link" data-toggle="modal">
+                        <img src="images/food.jpg" class="img-responsive" alt="">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h4>Get your food items out there! We deliver them, too!</h4>
+                        <p class="text-muted">This is for all our food-loving cliqers! We deliver pastries, cookies, non-perishables and the like. (Unfortunately, this excludes cooked items, cakes with soft icing, frozen goods, highly sensitive, easily spoiled food items and the like.) </p>
+                    </div>
+                </div>
+
                 <div class="col-md-12">
                     <ol>
                         <li>
