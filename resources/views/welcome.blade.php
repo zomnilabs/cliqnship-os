@@ -143,16 +143,7 @@
                     <h4 class="section-heading" style="text-decoration: underline;">Why #choosecliqnship? Here are the reasons we make sure #everybodygetsit!</h4>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <div class="portfolio-link" data-toggle="modal">
-                        <img src="images/delivery-boy.png" class="img-responsive" alt="">
-                    </div>
-                    <div class="portfolio-caption">
-                        <h4>Receive your items right away!</h4>
-                        <p class="text-muted">Schedule a pick-up date and one of our couriers will arrive at your door on the date specified.</p>
-                    </div>
-                </div>
+            <div class="row" style="margin-top: 50px">
 
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <div class="portfolio-link" data-toggle="modal">
@@ -174,61 +165,44 @@
                     </div>
                 </div>
 
-                <div class="col-md-12">
-                    <ol>
-                        <li>
-                            <h5>Receive your items right away!</h5>
-                            <p class="text-muted"> - Our fast, priority shipping gets your items where you want them at the soonest time possible. </p>
-                        </li>
-                        <li>
-                            <h5>Connect with our responsive customer service team!</h5>
-                            <p class="text-muted"> - May it be on the phone, SMS or across our online accounts, our team makes sure you are attended to, 100% satisfied and happy at all costs. <em>Happy cliqers = awesomeness!</em> </p>
-                        </li>
-                        <li>
-                            <h5>Meet our friendly neighborhood riders!</h5>
-                            <p class="text-muted"> - Always with a smile, our cool and reliable team of riders ensures that your items are picked up and delivered on time and in good condition. </p>
-                        </li>
-                        <li>
-                            <h5>Get up-to-date delivery statuses on your package!</h5>
-                            <p class="text-muted"> - Check your package’s delivery status on our user-friendly tracking page. It even comes with an SMS feature which updates both shipper and consignee! Yay! </p>
-                        </li>
-                        <li>
-                            <h5>Make payments hassle-free with our Collect N Deposit/COD service!</h5>
-                            <p class="text-muted"> - We can collect payments from your customers and deposit them to your specified bank account--it’s that easy! </p>
-                        </li>
-                        <li>
-                            <h5>Protect your packages with our budget-friendly insurance add-on!</h5>
-                            <p class="text-muted"> - Safekeep your fragile items at a lower cost by having them insured. Get added security for your items! </p>
-                        </li>
-                        <li>
-                            <h5>Get your food items out there! We deliver them, too!</h5>
-                            <p class="text-muted"> - This is for all our food-loving cliqers! We deliver pastries, cookies, non-perishables and the like. (Unfortunately, this excludes cooked items, cakes with soft icing, frozen goods, highly sensitive, easily spoiled food items and the like.) </p>
-                        </li>
-                        <li>
-                            <h5>Expand your market with our flexible international shipping services!</h5>
-                            <p class="text-muted"> - Become a global brand and deliver your products anywhere in the world! You may choose from our range of international delivery options like Express, EMS and Postal services based on your budget and transit time requirements. </p>
-                        </li>
-                        <li>
-                            <h5>Store your items with us! (and we can help you prepare orders, too!)</h5>
-                            <p class="text-muted"> - With our pickNstore and pickNpack warehousing services, you may store your items...and we can help you prepare the orders for delivery as well! Email us at <strong>info@cliqnship.com</strong> for more details. </p>
-                        </li>
-                        <li>
-                            <h5>Manage your orders and deliveries with your personalized cliqNship team member!</h5>
-                            <p class="text-muted"> - Need a helping hand with increasing orders? We can help you handle all the dirty work of processing and packing all your orders with your personal cliqNship team member! Such fun! </p>
-                        </li>
-                        <li>
-                            <h5>Get maximum exposure across multiple channels!</h5>
-                            <p class="text-muted"> - Expand your network with marketing and promotional collaborations with cliqNship! </p>
-                        </li>
-                        <li>
-                            <h5>Create your online store with our help!</h5>
-                            <p class="text-muted"> - Want to setup your own online store but don’t know how? We are glad to help out! Build, customize and manage effectively your own website for your online store through our awesome partners. Find out more by calling us at 6348181 or emailing us at <strong>be-a-cliqer@cliqnship.com</strong>. </p>
-                        </li>
-                        <li>
-                            <h5>Ship more to earn more points!</h5>
-                            <p class="text-muted"> - Receive exclusive cliqer perks when you garner more points simply by shipping with us! Plus you get to level up your cliqer status as your points grow! </p>
-                        </li>
-                    </ol>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <div class="portfolio-link" data-toggle="modal">
+                        <img src="images/international.jpg" class="img-responsive" alt="">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h4>Flexible international shipping services!</h4>
+                        <p class="text-muted">Become a global brand and deliver your products anywhere in the world! You may choose from our range of international delivery options like Express, EMS and Postal services based on your budget and transit time requirements.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <div class="portfolio-link" data-toggle="modal">
+                        <img src="images/schedule.jpg" class="img-responsive" alt="">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h4>Get up-to-date delivery statuses on your package!</h4>
+                        <p class="text-muted">Check your package’s delivery status on our user-friendly tracking page. It even comes with an SMS feature which updates both shipper and consignee! Yay!</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <div class="portfolio-link" data-toggle="modal">
+                        <img src="images/delivery-boy.png" class="img-responsive" alt="">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h4>Receive your items right away!</h4>
+                        <p class="text-muted">Schedule a pick-up date and one of our couriers will arrive at your door on the date specified.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <div class="portfolio-link" data-toggle="modal">
+                        <img src="images/warehouse.jpg" class="img-responsive" alt="">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h4>Store your items with us!</h4>
+                        <p class="text-muted">With our pickNstore and pickNpack warehousing services, you may store your items...and we can help you prepare the orders for delivery as well!</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -239,7 +213,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12">
-                    <h4>Featured Cliqers</h5>
+                    <h4>Featured Cliqers</h4>
                     <hr>
                 </div>
                 <div class="col-md-2 col-sm-6">
