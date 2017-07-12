@@ -132,7 +132,7 @@ class AddressbooksController extends AbstractAPIController {
         $input = $request->all();
 
         $input = array_filter($input);
-return $input;
+
         // check address first
         $address = UserAddressbook::where('user_id', $userId)
             ->where('id', $addressbookId)->first();
@@ -161,13 +161,13 @@ return $input;
         $address = UserAddressbook::where('user_id', $userId)
             ->where('id', $addressbookId)->first();
         // Check if newly updated address is a primary address
-//        if ($address->primary && $address->type === 'booking') {
-//            // Update other primary
-//            UserAddressbook::where('user_id', $userId)
-//                ->where('primary', 1)
-//                ->where('id', '!=', $address->id)
-//                ->update(['primary' => 0]);
-//        }
+        if ($address->primary && $address->type === 'booking') {
+            // Update other primary
+            UserAddressbook::where('user_id', $userId)
+                ->where('primary', 1)
+                ->where('id', '!=', $address->id)
+                ->update(['primary' => 0]);
+        }
 
         // Transform Result
         $result = $this->transformItem($address, new AddressbookTransformer);
