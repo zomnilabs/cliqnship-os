@@ -158,15 +158,16 @@ class AddressbooksController extends AbstractAPIController {
             return $this->responseBadRequest(['something went wrong when updating an addressbook']);
         }
 
-        $address = UserAddressbook::find($addressbookId);
+        $address = UserAddressbook::where('user_id', $userId)
+            ->where('id', $addressbookId)->first();
         // Check if newly updated address is a primary address
-        if ($address->primary && $address->type === 'booking') {
-            // Update other primary
-            UserAddressbook::where('user_id', $userId)
-                ->where('primary', 1)
-                ->where('id', '!=', $address->id)
-                ->update(['primary' => 0]);
-        }
+//        if ($address->primary && $address->type === 'booking') {
+//            // Update other primary
+//            UserAddressbook::where('user_id', $userId)
+//                ->where('primary', 1)
+//                ->where('id', '!=', $address->id)
+//                ->update(['primary' => 0]);
+//        }
 
         // Transform Result
         $result = $this->transformItem($address, new AddressbookTransformer);
