@@ -132,7 +132,7 @@ class AddressbooksController extends AbstractAPIController {
         $input = $request->all();
 
         $input = array_filter($input);
-
+return $input;
         // check address first
         $address = UserAddressbook::where('user_id', $userId)
             ->where('id', $addressbookId)->first();
