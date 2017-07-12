@@ -141,10 +141,11 @@ class AddressbooksController extends AbstractAPIController {
             return $this->responseNotFound(['addressbook not found']);
         }
 
+        $type = isset($input['type']) ? $input['type'] : $address->type;
+
         if (isset($input['primary'])
             && $input['primary']
-            && $input['type'] === 'shipment'
-            && $address->type === 'shipment') {
+            && $type === 'shipment') {
 
             $input['primary'] = 0;
         }
