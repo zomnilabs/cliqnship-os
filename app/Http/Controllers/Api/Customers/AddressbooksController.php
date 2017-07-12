@@ -88,7 +88,7 @@ class AddressbooksController extends AbstractAPIController {
 
         $input['user_id'] = $userId;
 
-        if (isset($input['primary']) && $input['primary'] && $input['type'] === 'booking') {
+        if (isset($input['primary']) && $input['primary'] && $input['type'] === 'shipment') {
             $input['primary'] = 0;
         }
 
@@ -99,7 +99,7 @@ class AddressbooksController extends AbstractAPIController {
         }
 
         // Check if newly added address is a primary address
-        if ($address->primary && $address->type === 'shipment') {
+        if ($address->primary && $address->type === 'booking') {
             // Update other primary
             UserAddressbook::where('user_id', $userId)
                 ->where('primary', 1)
@@ -143,8 +143,8 @@ class AddressbooksController extends AbstractAPIController {
 
         if (isset($input['primary'])
             && $input['primary']
-            && $input['type'] === 'booking'
-            && $address->type === 'booking') {
+            && $input['type'] === 'shipment'
+            && $address->type === 'shipment') {
 
             $input['primary'] = 0;
         }
@@ -159,7 +159,7 @@ class AddressbooksController extends AbstractAPIController {
 
         $address = UserAddressbook::find($addressbookId);
         // Check if newly updated address is a primary address
-        if ($address->primary && $address->type === 'shipment') {
+        if ($address->primary && $address->type === 'booking') {
             // Update other primary
             UserAddressbook::where('user_id', $userId)
                 ->where('primary', 1)
