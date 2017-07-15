@@ -35,9 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
     'google' => [
-        'client_id' => 'your-github-app-id',
-        'client_secret' => 'your-github-app-secret',
-        'redirect' => 'http://your-callback-url',
+        'client_id' => '568902247085-2nrenitp760gl3qhaprf52mqrpng20ni.apps.googleusercontent.com',
+        'client_secret' => 'lQENJXiBNDZJfmYR1pMknSEw',
+        'redirect' => 'http://localhost:8000/auth/google/callback',
     ],
     'facebook' => [
         'client_id' => '208105299538183',

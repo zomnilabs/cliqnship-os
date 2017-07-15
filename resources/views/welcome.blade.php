@@ -31,11 +31,11 @@
                     <span class="text2">Android</span>
                     <i class="fa fa-android fa-3x icon"></i>
                 </a>
-                <a href="#" class="btn btn-default btn-download">
+                <!-- <a href="#" class="btn btn-default btn-download">
                     <span class="text1">Get it for </span>
                     <span class="text2">iOs</span>
                     <i class="fa fa-apple fa-3x icon"></i>
-                </a>
+                </a> -->
             </div>
         </div>
     </header>
@@ -52,11 +52,11 @@
                         <span class="text2">Android</span>
                         <i class="fa fa-android fa-3x icon"></i>
                     </a>
-                    <a href="#" class="btn btn-default btn-download">
+                    <!-- <a href="#" class="btn btn-default btn-download">
                         <span class="text1">Get it for </span>
                         <span class="text2">iOs</span>
                         <i class="fa fa-apple fa-3x icon"></i>
-                    </a>
+                    </a> -->
                 </div>
             </div>
         </header>

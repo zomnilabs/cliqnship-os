@@ -72,7 +72,7 @@
             let ctx = document.getElementById('shipmentsChart');
 
             let data = {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                 datasets: [
                     {
                         label: "Returned Shipments",
@@ -301,8 +301,8 @@
                         <a href="#">
                             <div class="panel panel-default">
                                 <div class="panel-body panel-body-wallet white-text stats">
-                                    <h1 class="stats-value">P {{ $counts['codAmount'] }}</h1>
-                                    <h4 class="stats-label">Wallet</h4>
+                                    <h1 class="stats-value">P {{ $counts['codAmount'] or '0' }}</h1>
+                                    <h4 class="stats-label">Collected COD</h4>
                                 </div>
                             </div>
                         </a>
@@ -313,7 +313,7 @@
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h5>Shipments Monthly Overview</h5>
+                        <h5>Shipments Monthly Overview - {{ Carbon\Carbon::today()->year }}</h5>
                     </div>
                     <div class="panel-body">
                         <canvas id="shipmentsChart" width="200" height="300"></canvas>
@@ -342,9 +342,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Booking Number</th>
-                                    <th>Item Description</th>
-                                    <th>Service Type</th>
+                                    <th>Waybill #</th>
                                     <th>Remarks</th>
                                     <th>Status</th>
                                 </tr>
@@ -353,8 +351,6 @@
                                 @foreach($shipments as $shipment)
                                     <tr>
                                         <td>{{ $shipment->trackingNumbers[0]->tracking_number }}</td>
-                                        <td>{{ $shipment->item_description }}</td>
-                                        <td>{{ ucwords($shipment->service_type) }}</td>
                                         <td>
                                             @foreach($shipment->remarks as $r)
                                                 {{ $r->remarks }},

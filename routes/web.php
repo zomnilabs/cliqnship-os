@@ -31,6 +31,9 @@ Auth::routes();
 Route::group(['prefix' => 'auth'], function() {
     Route::get('facebook', 'Auth\FacebookAuthController@redirectToProvider');
     Route::get('facebook/callback', 'Auth\FacebookAuthController@handleProviderCallback');
+
+    Route::get('google', 'Auth\FacebookAuthController@redirectToProvider');
+    Route::get('google/callback', 'Auth\FacebookAuthController@handleProviderCallback');
 });
 
 Route::group(['prefix' => 'customers', 'namespace' => 'Customers', 'middleware' => 'auth'], function() {

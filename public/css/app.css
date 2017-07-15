@@ -9012,3 +9012,9 @@ button.close {
     display: none !important;
   }
 }
+
+button.close {
+  margin-right: 10px;
+  margin-top: 10px;
+  font-size: 35px;
+}

@@ -41,7 +41,9 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="/">CliqnShip</a>
+                <a class="navbar-brand page-scroll" href="/" style="width: 200px; margin-top: -10px;">
+                    <img src="/images/logo.png" alt="logo cliqnship" style="width: 100%">
+                </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
