@@ -4,7 +4,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <div class="modal-header text-center">
+            <div class="modal-header">
                 <h4 class="modal-title" id="modalTitle">Shipment Details</h4>
             </div>
                 <div class="modal-body">

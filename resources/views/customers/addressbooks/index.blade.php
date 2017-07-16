@@ -63,6 +63,16 @@
                     }
                 });
             });
+
+            $('#type').on('change', function() {
+                let currentValue = $(this).val();
+                
+                if (currentValue === 'shipment') {
+                    $('#primaryField').hide();
+                } else {
+                    $('#primaryField').show();
+                }
+            });
         });
 
         //checking if what modal will use

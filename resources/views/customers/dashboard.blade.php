@@ -69,6 +69,13 @@
 @section('scripts')
     <script>
         (function() {
+            let BASE_URL = 'http://localhost:8000/';
+
+            axios.get(`${BASE_URL}/customers/reports/shipments/per-month`)
+                .then((response) => {
+                    console.log('response', response.data);
+                });
+
             let ctx = document.getElementById('shipmentsChart');
 
             let data = {

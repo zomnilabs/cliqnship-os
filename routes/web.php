@@ -32,12 +32,16 @@ Route::group(['prefix' => 'auth'], function() {
     Route::get('facebook', 'Auth\FacebookAuthController@redirectToProvider');
     Route::get('facebook/callback', 'Auth\FacebookAuthController@handleProviderCallback');
 
-    Route::get('google', 'Auth\FacebookAuthController@redirectToProvider');
-    Route::get('google/callback', 'Auth\FacebookAuthController@handleProviderCallback');
+    Route::get('google', 'Auth\GoogleAuthController@redirectToProvider');
+    Route::get('google/callback', 'Auth\GoogleAuthController@handleProviderCallback');
 });
 
 Route::group(['prefix' => 'customers', 'namespace' => 'Customers', 'middleware' => 'auth'], function() {
     Route::get('/', 'DashboardController@index');
+
+    Route::group(['prefix' => 'reports'], function() {
+        Route::get('/shipments/per-month', 'DashboardController@getMonthlyShipments');
+    });
 
     Route::group(['prefix' => 'item-requests', 'namespace' => 'ItemRequests'], function() {
         Route::get('/', 'ItemRequestsController@index');

@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\UserAddressbook;
 use App\Models\Shipment;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class DashboardController extends Controller {
     public function index(Request $request)
@@ -68,6 +69,25 @@ class DashboardController extends Controller {
             ->with('counts', $counts)
             ->with('shipments', $shipments)
             ->with('cods', $cods);
+    }
+
+    public function getMonthlyShipments()
+    {
+        $currentYear = Carbon::today('Asia/Manila')->year;
+        $months = ['January', 'February', 'March', 'April', 
+            'May', 'June', 'July', 'August', 'September', 
+            'October', 'November', 'December'];
+
+        $shipments = Shipment::whereDate('created_at', '=', $currentYear)
+            ->get();
+
+        $result = [];
+        foreach ($shipments as $shipment) {
+            $monthInNumber = Carbon::createFromTimestamp(strtotime($shipment->created_at))->month;
+            return $monthInNumber;
+        }
+
+        return response()->json($result, 200);
     }
 
     private function havePrimaryAddress($userId)

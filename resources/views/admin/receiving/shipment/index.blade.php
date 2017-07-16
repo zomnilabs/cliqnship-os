@@ -412,7 +412,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <div class="modal-header text-center">
+                <div class="modal-header">
                     <h4 class="modal-title" id="modalTitle">Shipment Remit</h4>
                 </div>
 
@@ -547,7 +547,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <div class="modal-header text-center">
+                <div class="modal-header">
                     <h4 class="modal-title" id="modalTitle">Returned Shipment Remit</h4>
                 </div>
                 <form id="viewForm" method="post">
@@ -616,7 +616,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <div class="modal-header text-center">
+                <div class="modal-header">
                     <h4 class="modal-title" id="modalTitle">New Shipment Remit</h4>
                 </div>
                 <form id="viewForm" method="post" action="/admin/receiving/rider/remit/{{ $riderId }}/new">

@@ -4,7 +4,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <div class="modal-header text-center">
+            <div class="modal-header">
                 <h4 class="modal-title" id="modalTitle">Address Book</h4>
             </div>
             <form id="viewForm">
@@ -207,7 +207,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6" id="primaryField">
                             <div class="form-group" style="padding-top: 35px;">
                                 <label for="primary">
                                     <input type="checkbox" id="primary" name="primary" /> Is this your primary address?
