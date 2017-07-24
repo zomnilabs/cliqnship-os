@@ -154,7 +154,8 @@ class ShipmentsController extends Controller
             'collect_and_deposit_amount'    => $shipment['collect_and_deposit_amount'],
             'account_name'                  => $shipment['account_name'],
             'account_number'                => $shipment['account_number'],
-            'bank'                      => $shipment['bank']
+            'bank'                      => $shipment['bank'],
+            'cod_fee'                   => 0
         ];
 
 //        $remarks = [
