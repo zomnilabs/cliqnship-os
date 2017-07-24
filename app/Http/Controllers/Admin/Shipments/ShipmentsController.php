@@ -154,7 +154,8 @@ class ShipmentsController extends Controller
             'account_name'                  => isset($shipment['account_name']) ? $shipment['account_name'] : '',
             'account_number'                => isset($shipment['account_number']) ? $shipment['account_number'] : '',
             'bank'                          => isset($shipment['bank']) ? $shipment['bank'] : '',
-            'cod_fee'                       => 0
+            'cod_fee'                       => 0,
+            'shipment_id'                   => $tracking->shipment_id
         ];
 
 //        $remarks = [
@@ -209,14 +210,10 @@ class ShipmentsController extends Controller
                 $scod = ShipmentCod::where('shipment_id', $tracking->shipment_id)
                     ->first();
 
-                $cod['shipment_id'] = $tracking->shipment_id;
-
                 if (! $scod) {
                     ShipmentCod::create($cod);
                 } else {
-                    if ($cod['collect_and_deposit_amount']) {
-                        $scod->update($cod);
-                    }
+                    $scod->update($cod);
                 }
             }
 
