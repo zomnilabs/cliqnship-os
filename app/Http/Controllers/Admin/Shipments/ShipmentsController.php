@@ -175,11 +175,24 @@ class ShipmentsController extends Controller
             'last_name'              => $shipment['to_last_name'] ? $shipment['to_last_name'] : '',
         ];
 
+        $from_address = [
+            'user_id'                => $user->id,
+            'address_line_1'         => $shipment['from_address_line_1'],
+            'barangay'               => $shipment['from_barangay'],
+            'city'                   => $shipment['from_municipality'],
+            'province'               => $shipment['from_province'],
+            'zip_code'               => $shipment['from_zip_code'],
+            'landmarks'              => $shipment['from_landmarks'],
+            'first_name'             => $shipment['from_first_name'],
+            'last_name'              => $shipment['from_last_name'] ? $shipment['from_last_name'] : '',
+        ];
+
         $result = null;
         $remarks = null;
 
-        \DB::transaction(function() use (&$result, $data, $remarks, $otherWaybill, $address, $tracking, $user) {
+        \DB::transaction(function() use (&$result, $data, $remarks, $otherWaybill, $address, $from_address, $tracking, $user) {
             $data['to'] = $this->findOrCreateAddress($address);
+            $data['from'] = $this->findOrCreateAddress($from_address);
 
             $result = Shipment::where('id', $tracking->shipment_id)->update($data);
 
