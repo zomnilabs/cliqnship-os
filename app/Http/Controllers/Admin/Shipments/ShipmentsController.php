@@ -150,10 +150,10 @@ class ShipmentsController extends Controller
         ];
 
         $cod = [
-            'collect_and_deposit_amount'    => $shipment['collect_and_deposit_amount'],
-            'account_name'                  => $shipment['account_name'],
-            'account_number'                => $shipment['account_number'],
-            'bank'                      => $shipment['bank'],
+            'collect_and_deposit_amount'    => isset($shipment['collect_and_deposit_amount']) ? $shipment['collect_and_deposit_amount'] : 0,
+            'account_name'                  => isset($shipment['account_name']) ? $shipment['account_name'] : '',
+            'account_number'                => isset($shipment['account_number']) ? $shipment['account_number'] : '',
+            'bank'                      => isset($shipment['bank']) ? $shipment['bank'] : '',
             'cod_fee'                   => 0
         ];
 
