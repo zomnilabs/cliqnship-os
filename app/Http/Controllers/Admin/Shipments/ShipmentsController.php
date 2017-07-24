@@ -215,7 +215,7 @@ class ShipmentsController extends Controller
 
                     ShipmentCod::create($cod);
                 } else {
-                    $cod->update($cod);
+                    $scod->update($cod);
                 }
             }
 
