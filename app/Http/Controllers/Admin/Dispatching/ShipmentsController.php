@@ -18,11 +18,13 @@ class ShipmentsController extends Controller {
             $shipments = Shipment::with('user','address','source', 'trackingNumbers')
                 ->has('rider')
                 ->where('status', 'enroute')
+                ->where('to', '<>', 0)
                 ->get();
         } else {
             $shipments = Shipment::with('user','address','source', 'trackingNumbers')
                 ->doesntHave('rider')
                 ->where('status', 'arrived-at-hq')
+                ->where('to', '<>', 0)
                 ->get();
         }
 
@@ -37,8 +39,6 @@ class ShipmentsController extends Controller {
         $riders = User::with('profile')
             ->where('user_group_id', 4)
             ->get();
-
-//        print_r($shipments);exit;
 
         return view('admin.dispatching.shipments.all')
             ->with('pendingShipment', $pendingShipment)

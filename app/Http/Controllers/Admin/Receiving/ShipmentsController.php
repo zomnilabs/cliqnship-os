@@ -254,6 +254,7 @@ class ShipmentsController extends Controller {
                 ]);
 
                 $shipment->delete();
+                $status = 'arrived-at-hq';
             } else {
                 return response()->json(['invalid status'], 400);
             }
