@@ -205,14 +205,14 @@ class ShipmentsController extends Controller
             $result = Shipment::where('id', $tracking->shipment_id)->update($data);
 
             // Update Cod
-            if (! empty($cod)) {
+
+            if (! empty($cod) && $data['collect_and_deposit']) {
                 $scod = ShipmentCod::where('shipment_id', $tracking->shipment_id)
                     ->first();
 
                 $cod['shipment_id'] = $tracking->shipment_id;
 
                 if (! $scod) {
-
                     ShipmentCod::create($cod);
                 } else {
                     $scod->update($cod);
