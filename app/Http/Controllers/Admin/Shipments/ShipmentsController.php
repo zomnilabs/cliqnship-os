@@ -145,7 +145,6 @@ class ShipmentsController extends Controller
             'weight'                    => $shipment['weight'],
             'status'                    => $shipment['status'],
             'shipping_fee'              => $shipment['shipping_fee'],
-            'cod_fee'                   => $shipment['cod_fee'],
             'pod_received_by'           => $shipment['pod_received_by'],
             'pod_date'                  => $shipment['pod_date']
         ];
