@@ -139,7 +139,7 @@
                                     <th>Charge To</th>
                                     <th>Remarks</th>
                                     <th>Status</th>
-                                    <th>Actions</th>
+                                    <th class="actions">Actions</th>
                                 </tr>
                             </thead>
 

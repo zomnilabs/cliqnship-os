@@ -41,6 +41,7 @@ Route::group(['prefix' => 'customers', 'namespace' => 'Customers', 'middleware' 
 
     Route::group(['prefix' => 'reports'], function() {
         Route::get('/shipments/per-month', 'DashboardController@getMonthlyShipments');
+        Route::get('/shipments/top-five-clients', 'DashboardController@getTopFiveAddresses');
     });
 
     Route::group(['prefix' => 'item-requests', 'namespace' => 'ItemRequests'], function() {

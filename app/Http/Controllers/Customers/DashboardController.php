@@ -71,20 +71,81 @@ class DashboardController extends Controller {
             ->with('cods', $cods);
     }
 
-    public function getMonthlyShipments()
+    public function getMonthlyShipments(Request $request)
     {
+        $user = $request->user();
         $currentYear = Carbon::today('Asia/Manila')->year;
+
         $months = ['January', 'February', 'March', 'April', 
             'May', 'June', 'July', 'August', 'September', 
             'October', 'November', 'December'];
 
-        $shipments = Shipment::whereDate('created_at', '=', $currentYear)
+        $shipments = Shipment::whereRaw('year(created_at) = ?', $currentYear)
+            ->where('user_id', $user->id)
+            ->where(function($q) {
+                $q->where('status', 'successfully-delivered')
+                    ->orWhere('status', 'returned');
+            })
             ->get();
 
         $result = [];
         foreach ($shipments as $shipment) {
             $monthInNumber = Carbon::createFromTimestamp(strtotime($shipment->created_at))->month;
-            return $monthInNumber;
+            $month = $months[$monthInNumber - 1];
+
+            if (! isset($result[$month])) {
+                $result[$month] = [
+                    'success'    => 0,
+                    'returned'                  => 0
+                ];
+            }
+
+            if ($shipment->status === 'successfully-delivered') {
+                if (isset($result[$month]['success'])) {
+                    $result[$month]['success'] = $result[$month]['success'] + 1;
+                } else {
+                    $result[$month]['success'] = 0;
+                }
+            } else if ($shipment->status === 'returned') {
+                if (isset($result[$month]['returned'])) {
+                    $result[$month]['returned'] = $result[$month]['returned'] + 1;
+                } else {
+                    $result[$month]['returned'] = 0;
+                }
+            }
+        }
+
+        $finalResult = [
+            'success'   => [],
+            'returned'  => []
+        ];
+
+        foreach ($months as $month) {
+            $finalResult['success'][]  = isset($result[$month]) ? $result[$month]['success'] : 0;
+            $finalResult['returned'][]  = isset($result[$month]) ? $result[$month]['returned'] : 0;
+        }
+
+        return response()->json($finalResult, 200);
+    }
+
+    public function getTopFiveAddresses(Request $request)
+    {
+        $user = $request->user();
+
+        $shipments = Shipment::select(\DB::raw('`to` as address, COUNT(*) as shipment_count'))
+            ->where('user_id', $user->id)
+            ->groupBy('to')
+            ->orderBy('shipment_count', 'DESC')
+            ->limit(5)
+            ->get();
+
+        $result = [];
+        foreach ($shipments as $shipment) {
+            $address = UserAddressbook::where('id', $shipment->address)
+                ->first();
+
+            $result['customers'][] = $address->identifier;
+            $result['counts'][] = $shipment->shipment_count;
         }
 
         return response()->json($result, 200);

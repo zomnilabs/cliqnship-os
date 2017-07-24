@@ -76,3 +76,7 @@ input[type="radio"]:focus {
 .filter-footer {
     display: table-header-group;
 }
+
+.actions {
+    min-width: 120px;
+}

@@ -68,116 +68,121 @@
 
 @section('scripts')
     <script>
-        (function() {
-            let BASE_URL = 'http://localhost:8000/';
+        let BASE_URL = 'http://localhost:8000/';
 
+        (function() {
             axios.get(`${BASE_URL}/customers/reports/shipments/per-month`)
                 .then((response) => {
                     console.log('response', response.data);
+
+                    let ctx = document.getElementById('shipmentsChart');
+
+                    let data = {
+                        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                        datasets: [
+                            {
+                                label: "Returned Shipments",
+                                fill: false,
+                                lineTension: 0.1,
+                                backgroundColor: "#ea435e",
+                                borderColor: "#ea435e",
+                                borderCapStyle: 'butt',
+                                borderDash: [],
+                                borderDashOffset: 0.0,
+                                borderJoinStyle: 'miter',
+                                pointBorderColor: "#ea2844",
+                                pointBackgroundColor: "#fff",
+                                pointBorderWidth: 1,
+                                pointHoverRadius: 5,
+                                pointHoverBackgroundColor: "#ea435e",
+                                pointHoverBorderColor: "#ea435e",
+                                pointHoverBorderWidth: 2,
+                                pointRadius: 1,
+                                pointHitRadius: 10,
+                                data: response.data.success,
+                                spanGaps: false,
+                            },
+                            {
+                                label: "Completed Shipments",
+                                fill: false,
+                                lineTension: 0.1,
+                                backgroundColor: "#7bea88",
+                                borderColor: "#7bea88",
+                                borderCapStyle: 'butt',
+                                borderDash: [],
+                                borderDashOffset: 0.0,
+                                borderJoinStyle: 'miter',
+                                pointBorderColor: "#51ea65",
+                                pointBackgroundColor: "#fff",
+                                pointBorderWidth: 1,
+                                pointHoverRadius: 5,
+                                pointHoverBackgroundColor: "#7bea88",
+                                pointHoverBorderColor: "#7bea88",
+                                pointHoverBorderWidth: 2,
+                                pointRadius: 1,
+                                pointHitRadius: 10,
+                                data: response.data.returned,
+                                spanGaps: false,
+                            }
+                        ]
+                    };
+
+                    let shipmentsChart = new Chart(ctx, {
+                        type: 'line',
+                        data: data,
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    stacked: true
+                                }]
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    });
                 });
-
-            let ctx = document.getElementById('shipmentsChart');
-
-            let data = {
-                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-                datasets: [
-                    {
-                        label: "Returned Shipments",
-                        fill: false,
-                        lineTension: 0.1,
-                        backgroundColor: "#ea435e",
-                        borderColor: "#ea435e",
-                        borderCapStyle: 'butt',
-                        borderDash: [],
-                        borderDashOffset: 0.0,
-                        borderJoinStyle: 'miter',
-                        pointBorderColor: "#ea2844",
-                        pointBackgroundColor: "#fff",
-                        pointBorderWidth: 1,
-                        pointHoverRadius: 5,
-                        pointHoverBackgroundColor: "#ea435e",
-                        pointHoverBorderColor: "#ea435e",
-                        pointHoverBorderWidth: 2,
-                        pointRadius: 1,
-                        pointHitRadius: 10,
-                        data: [10, 5, 10, 5, 2, 10, 3],
-                        spanGaps: false,
-                    },
-                    {
-                        label: "Completed Shipments",
-                        fill: false,
-                        lineTension: 0.1,
-                        backgroundColor: "#7bea88",
-                        borderColor: "#7bea88",
-                        borderCapStyle: 'butt',
-                        borderDash: [],
-                        borderDashOffset: 0.0,
-                        borderJoinStyle: 'miter',
-                        pointBorderColor: "#51ea65",
-                        pointBackgroundColor: "#fff",
-                        pointBorderWidth: 1,
-                        pointHoverRadius: 5,
-                        pointHoverBackgroundColor: "#7bea88",
-                        pointHoverBorderColor: "#7bea88",
-                        pointHoverBorderWidth: 2,
-                        pointRadius: 1,
-                        pointHitRadius: 10,
-                        data: [65, 59, 80, 81, 56, 55, 40],
-                        spanGaps: false,
-                    }
-                ]
-            };
-
-            let shipmentsChart = new Chart(ctx, {
-                type: 'line',
-                data: data,
-                options: {
-                    scales: {
-                        yAxes: [{
-                            stacked: true
-                        }]
-                    },
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
         }());
     </script>
 
     <script>
         (function() {
-            let ctx = document.getElementById('shipmentsChartByAddress');
+            axios.get(`${BASE_URL}/customers/reports/shipments/top-five-clients`)
+                .then((response) => {
+                    console.log('response', response.data);
 
-            let data = {
-                labels: [
-                    "Customer 1",
-                    "Customer 2",
-                    "Customer 3"
-                ],
-                datasets: [
-                    {
-                        data: [300, 50, 100],
-                        backgroundColor: [
-                            "#FF6384",
-                            "#36A2EB",
-                            "#FFCE56"
-                        ],
-                        hoverBackgroundColor: [
-                            "#FF6384",
-                            "#36A2EB",
-                            "#FFCE56"
-                        ]
-                    }]
-            };
+                    let ctx = document.getElementById('shipmentsChartByAddress');
 
-            let shipmentsChart = new Chart(ctx, {
-                type: 'pie',
-                data: data,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
+                    let data = {
+                        labels: response.data.customers,
+                        datasets: [
+                            {
+                                data: response.data.counts,
+                                backgroundColor: [
+                                    "#FF6384",
+                                    "#36A2EB",
+                                    "#FFCE56",
+                                    "#78b849",
+                                    "#54cac8"
+                                ],
+                                hoverBackgroundColor: [
+                                    "#FF6384",
+                                    "#36A2EB",
+                                    "#FFCE56",
+                                    "#78b849",
+                                    "#54cac8"
+                                ]
+                            }]
+                    };
+
+                    let shipmentsChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: data,
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    });
+                });
         }());
     </script>
 
