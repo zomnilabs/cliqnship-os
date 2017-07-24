@@ -6,6 +6,7 @@ use App\Models\Shipment;
 use App\Models\ShipmentAssignment;
 use App\Models\ShipmentCod;
 use App\Models\ShipmentEvent;
+use App\Models\ShipmentResolution;
 use App\Models\ShipmentReturnLogs;
 use App\Models\ShipmentTrackingNumber;
 use App\User;
@@ -144,9 +145,15 @@ class ShipmentsController extends Controller {
 
                 // Check if returned item
                 if ($request->get('status') === 'returned') {
+
                     // Save return log
-                    ShipmentReturnLogs::create([
+                    $resolution = ShipmentResolution::create([
                         'shipment_id'   => $waybill->shipment_id,
+                        'remarks'       => $request->has('reason') ? $request->get('reason') : '',
+                        'status'        => 'unresolved'
+                    ]);
+
+                    $resolution->logs()->create([
                         'user_id'       => $riderId,
                         'reason'        => $request->has('reason') ? $request->get('reason') : ''
                     ]);

@@ -96,6 +96,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
 
     Route::group(['prefix' => 'resolutions', 'namespace' => 'Dispatching'], function() {
         Route::get('shipments/returned', 'ShipmentsController@returned');
+        Route::get('shipments/returned/{resolutionId}', 'ShipmentsController@getReturnLogs');
     });
 
     Route::group(['prefix' => 'cash-on-delivery', 'namespace' => 'COD'], function() {
