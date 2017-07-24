@@ -28,10 +28,18 @@
         @media print {
             body { -webkit-print-color-adjust: exact; }
             thead { background-color: #9BBB59 !important; }
+            .button-container { display: none; }
         }
     </style>
 <body>
     <div class="container">
+        <div class="button-container">
+            <div class="col-md-12 text-center">
+                <a href="/admin/dispatching/shipments/all" class="btn btn-primary"> <h5><i class="glyphicon glyphicon-chevron-left"></i> Back</h5></a>
+                <a href="javascript:window.print()" class="btn btn-success"><h5><i class="glyphicon glyphicon-print"></i> Print</h5></a>
+                <hr>
+            </div>
+        </div>
         <div style="text-align: center">
             <img src="/images/logo.png" class="logo"/>
         </div>
