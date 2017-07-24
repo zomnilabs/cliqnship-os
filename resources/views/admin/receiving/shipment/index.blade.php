@@ -40,12 +40,13 @@
             border: solid #efefef 1px;
             padding-top: 10px;
             padding-bottom: 10px;
-            height: 80px;
+            height: 100px;
         }
 
         .stat-item h2 {
             margin: 0;
             padding: 0;
+            font-size: 50px;
         }
 
         .stat-input {
@@ -74,6 +75,21 @@
 @section('scripts')
     <script>
         (function() {
+            /**
+             * Number.prototype.format(n, x, s, c)
+             *
+             * @param integer n: length of decimal
+             * @param integer x: length of whole part
+             * @param mixed   s: sections delimiter
+             * @param mixed   c: decimal delimiter
+             */
+            Number.prototype.format = function(n, x, s, c) {
+                let re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
+                    num = this.toFixed(Math.max(0, ~~n));
+
+                return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
+            };
+
             let shipments = [];
 
             $('#receivedTable thead tr.searchable td').each( function () {
@@ -123,7 +139,7 @@
             });
 
             $('#waybillNumbersInput').on('keyup', function(e) {
-                if (e.keyCode == 13) {
+                if (e.keyCode === 13) {
                     let value = $(this).val();
 
                     $(this).prop('disabled', true);
@@ -178,6 +194,46 @@
                 }
             });
 
+            // Save the transaction
+            $('#saveTransaction').on('click', function(e) {
+                e.preventDefault();
+
+                $(this).prop('disabled', true);
+                $(this).html('<i class="fa fa-spinner fa-spin"></i> &nbsp; Saving transaction...');
+
+                let data = {
+                    shipments: []
+                };
+
+                let riderId = $('#riderId').val();
+
+                for (let shipment of shipments) {
+                    let item = {
+                        shipment_id: shipment.shipment_id,
+                        status: shipment.newStatus ? shipment.newStatus : 'arrived-at-hq',
+                        remitted_amount: shipment.inputtedCOD ? shipment.inputtedCOD : 0
+                    };
+
+                    data.shipments.push(item);
+                }
+
+                let url = `/admin/receiving/rider/remit/${riderId}/shipments`;
+                axios.post(url, data).then((response) => {
+                    console.log(response);
+
+                    $('#transactionSuccess').removeClass('hide');
+                    resetTransactionButton();
+                }).catch((e) => {
+                    $('#transactionError').removeClass('hide');
+                    resetTransactionButton();
+                });
+            });
+
+            function resetTransactionButton() {
+                $('#saveTransaction').prop('disabled', false);
+                $('#saveTransaction').html('Save Transaction');
+            }
+
             // calculate
             function calculateTotals() {
                 let total = 0;
@@ -186,7 +242,18 @@
                     total += shipment.shipment.cod ? shipment.shipment.cod.collect_and_deposit_amount : 0;
                 }
 
-                $('#totalCOD').html(total);
+                $('#totalCOD').html(total.format(2, 3, ',', '.'));
+            }
+
+            // Calculate remittedCOD
+            function calculateRemittedCOD() {
+                let remittedCOD = 0;
+
+                for (let shipment of shipments) {
+                    remittedCOD += shipment.inputtedCOD ? shipment.inputtedCOD : 0;
+                }
+
+                $('#remittedCOD').html(remittedCOD.format(2, 3, ',', '.'));
             }
 
             function addToTable(data) {
@@ -197,9 +264,9 @@
                 html += `<td>${data.tracking_number}</td>`;
                 html += `<td>${data.shipment.cod ? data.shipment.cod.collect_and_deposit_amount : 0}</td>`;
                 html += `<td>0</td>`;
-                html += `<td class="editable-cod-amount">0</td>`;
-                html += `<td class="editable-shipment-fee">0</td>`;
-                html += `<td class="editable-status">${data.shipment.status}</td>`;
+                html += `<td class="editable-cod-amount" data-shipment="${data.shipment.id}">0</td>`;
+                html += `<td class="editable-shipment-fee" data-shipment="${data.shipment.id}">0</td>`;
+                html += `<td class="editable-status" data-shipment="${data.shipment.id}">${data.shipment.status}</td>`;
                 html += '</tr>';
 
                 table.append(html);
@@ -227,20 +294,54 @@
                         }
                     ]
                 }).on('save', function(e, params) {
-                    let bookingId = $(this).data('booking');
+                    let shipmentId = $(this).data('shipment');
+                    let newStatus = params.submitValue;
 
-                    console.log(e);
-                    console.log(params);
+                    let shipmentIndex = searchShipment(shipmentId);
+                    if (shipmentIndex < 0) {
+                        return;
+                    }
+
+                    shipments[shipmentIndex]['newStatus'] = newStatus;
+                    console.log(shipments);
+
                 });
 
                 $('.editable-cod-amount').editable({
                     type: 'number',
                     title: 'Enter COD Amount Remitted'
+                }).on('save', function(e, params) {
+                    let shipmentId = $(this).data('shipment');
+                    let inputtedCOD = parseInt(params.submitValue);
+                    let $row = $(e.target).parent();
+
+                    let shipmentIndex = searchShipment(shipmentId);
+                    if (shipmentIndex < 0) {
+                        return;
+                    }
+
+                    shipments[shipmentIndex]['inputtedCOD'] = inputtedCOD;
+                    shipments[shipmentIndex]['newStatus'] = 'successfully-delivered';
+
+                    if (inputtedCOD < shipments[shipmentIndex].shipment.cod.collect_and_deposit_amount) {
+                        e.target.style.backgroundColor = '#ffcecc';
+                    }
+
+                    $row.find('.editable-status').editable('setValue',"successfully-delivered");
+
+                    calculateRemittedCOD();
                 });
 
                 $('.editable-shipment-fee').editable({
                     type: 'number',
                     title: 'Enter COD Amount Remitted'
+                });
+            }
+
+            // Search thru collection of shipments
+            function searchShipment(shipmentId) {
+                return shipments.findIndex((item) => {
+                    return item.shipment_id === shipmentId;
                 });
             }
 
@@ -419,50 +520,12 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="row text-center cards">
+                            <div class="alert alert-success hide" id="transactionSuccess">
+                                Transaction successfully saved.
+                            </div>
 
-                                <div class="col-md-3">
-                                    <a href="#">
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <h4>Shipments Remitted / Total Shipments</h4>
-                                                <h1>{{ $statistics['remitted'] }} / {{ $statistics['total_shipments'] }}</h1>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <a href="#">
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <h4>New Shipments</h4>
-                                                <h1>{{ $statistics['total_cod_amount'] }}</h1>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <a href="#">
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <h4>Remitted COD / Total COD Shipments</h4>
-                                                <h1>{{ $statistics['remitted_cod'] }} / {{ $statistics['with_cod'] }}</h1>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-3">
-                                    <a href="#">
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <h4>COD Remitted / Total Amount</h4>
-                                                <h1>{{ $statistics['total_cod_amount_remitted'] }} / {{ $statistics['total_cod_amount'] }}</h1>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
+                            <div class="alert alert-danger hide" id="transactionError">
+                                Transaction successfully saved.
                             </div>
                         </div>
                     </div>
@@ -530,7 +593,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-12 stat-button">
-                                    <button class="btn btn-default btn-block">
+                                    <button type="button" id="saveTransaction" class="btn btn-default btn-block">
                                         Save Transaction
                                     </button>
                                 </div>
@@ -667,4 +730,6 @@
             </div>
         </div>
     </div>
+
+    <input type="hidden" id="riderId" value="{{ $riderId }}">
 @endsection

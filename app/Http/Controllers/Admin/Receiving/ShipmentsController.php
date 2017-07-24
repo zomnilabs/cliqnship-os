@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Receiving;
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
 use App\Models\ShipmentAssignment;
+use App\Models\ShipmentCod;
 use App\Models\ShipmentEvent;
 use App\Models\ShipmentReturnLogs;
 use App\Models\ShipmentTrackingNumber;
@@ -195,6 +196,77 @@ class ShipmentsController extends Controller {
         }
 
         return redirect()->back();
+    }
+
+    public function remitShipments(Request $request, $riderId)
+    {
+        $result = [];
+        foreach ($request->get('shipments') as $shipment) {
+            // Check waybill
+            $waybill = Shipment::where('id', $shipment['shipment_id'])
+                ->first();
+
+            // waybill not existing
+            if (! $waybill) {
+                continue;
+            }
+
+            $status = $waybill->status;
+            $remarks = 'Arrived at hq';
+
+            if ($status === 'successfully-delivered') {
+
+                $data = [
+                    'status' => $status,
+                    'pod_date'  => Carbon::today('Asia/Manila')->toDateTimeString()
+                ];
+
+                $waybill->update($data);
+
+                // Update Assignment
+                ShipmentAssignment::where('shipment_id', $waybill->id)
+                    ->where('user_id', $riderId)
+                    ->update(['status' => 'completed']);
+
+                $remarks = 'Successfully delivered shipment';
+
+                // Adjust cod
+                if ($waybill->collect_and_deposit) {
+                    ShipmentCod::where('shipment_id', $waybill->id)
+                        ->update(['remitted_amount' => $shipment['remitted_amount']]);
+                }
+            } else if ($status === 'pending') {
+                $data = [
+                    'status' => 'arrived-at-hq',
+                ];
+
+                $waybill->update($data);
+                $remarks = 'Arrived at hq';
+
+                // Create assignment
+                $shipment = ShipmentAssignment::create([
+                    'shipment_id' => $waybill->id,
+                    'user_id'     => $riderId,
+                    'status'      => 'completed'
+                ]);
+
+                $shipment->delete();
+            }
+
+            // Record Event
+            ShipmentEvent::create([
+                'shipment_id'   => $waybill->id,
+                'event_source'  => 'warehouse',
+                'event'         => 'status_change',
+                'value'         => $status,
+                'remarks'       => $remarks,
+                'user_id'       => $request->user()->id
+            ]);
+
+            $result[] = $waybill;
+        }
+
+        return response()->json($result, 200);
     }
 
     public function doNewRemit(Request $request, $riderId)
