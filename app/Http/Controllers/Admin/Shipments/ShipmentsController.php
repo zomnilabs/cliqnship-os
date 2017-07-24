@@ -182,9 +182,9 @@ class ShipmentsController extends Controller
             'city'                   => $shipment['from_municipality'],
             'province'               => $shipment['from_province'],
             'zip_code'               => $shipment['from_zip_code'],
-            'landmarks'              => $shipment['from_landmarks'],
-            'first_name'             => $shipment['from_first_name'],
-            'last_name'              => $shipment['from_last_name'] ? $shipment['from_last_name'] : '',
+            'landmarks'              => isset($shipment['from_landmarks']) ? $shipment['from_landmarks'] : '',
+            'first_name'             => isset($shipment['from_first_name']) ? $shipment['from_first_name'] : '',
+            'last_name'              => isset($shipment['from_last_name']) ? $shipment['from_last_name'] : '',
         ];
 
         $result = null;
