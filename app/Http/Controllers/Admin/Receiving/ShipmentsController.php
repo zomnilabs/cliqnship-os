@@ -236,7 +236,7 @@ class ShipmentsController extends Controller {
                 // Adjust cod
                 if ($waybill->collect_and_deposit) {
                     ShipmentCod::where('shipment_id', $waybill->id)
-                        ->update(['remitted_amount' => $shipment['remitted_amount']]);
+                        ->update(['remitted_amount' => $shipment['remitted_amount'], 'status' => 'collected']);
                 }
             } else if ($status === 'arrived-at-hq' || $status === 'pending') {
                 $data = [
