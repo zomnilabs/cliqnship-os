@@ -306,13 +306,13 @@ class ShipmentsController extends Controller {
 
             if ($request->get('status') === 'arrived-at-hq') {
 
-                $shipment = ShipmentAssignment::create([
+                $assignment = ShipmentAssignment::create([
                     'shipment_id' => $shipment->id,
                     'user_id'     => $riderId,
                     'status'      => 'completed'
                 ]);
 
-                $shipment->delete();
+                $assignment->delete();
 
                 $status = 'arrived-at-hq';
                 $remarks = 'shipment arrived at warehouse';
