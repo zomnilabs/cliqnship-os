@@ -36,7 +36,13 @@ class DashboardController extends Controller {
             'pendingItemRequests'   => $pendingItemRequests
         ];
 
+        $shipments = Shipment::where('status', '=', 'successfully-delivered')
+            ->orderBy('created_at', 'desc')
+            ->limit(10)
+            ->get();
+
         return view('admin.dashboard')
-            ->witH('counts', $counts);
+            ->with('counts', $counts)
+            ->with('shipments', $shipments);
     }
 }
