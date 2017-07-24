@@ -201,7 +201,9 @@ class ShipmentsController extends Controller {
     public function remitShipments(Request $request, $riderId)
     {
         $result = [];
-        foreach ($request->get('shipments') as $shipment) {
+        $shipments = $request->get('shipments');
+
+        foreach ($shipments as $shipment) {
             // Check waybill
             $waybill = Shipment::where('id', $shipment['shipment_id'])
                 ->first();
@@ -211,7 +213,8 @@ class ShipmentsController extends Controller {
                 continue;
             }
 
-            $status = $waybill->status;
+            $status = $shipment['status'];
+
             $remarks = 'Arrived at hq';
 
             if ($status === 'successfully-delivered') {
@@ -235,7 +238,7 @@ class ShipmentsController extends Controller {
                     ShipmentCod::where('shipment_id', $waybill->id)
                         ->update(['remitted_amount' => $shipment['remitted_amount']]);
                 }
-            } else if ($status === 'pending') {
+            } else if ($status === 'arrived-at-hq' || $status === 'pending') {
                 $data = [
                     'status' => 'arrived-at-hq',
                 ];
@@ -251,6 +254,8 @@ class ShipmentsController extends Controller {
                 ]);
 
                 $shipment->delete();
+            } else {
+                return response()->json(['invalid status'], 400);
             }
 
             // Record Event

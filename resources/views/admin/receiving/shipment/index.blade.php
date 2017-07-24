@@ -194,6 +194,10 @@
                 }
             });
 
+            $('#addWaybill').on('hidden.bs.modal', function(e) {
+                $('.alert').addClass('hide');
+            });
+
             // Save the transaction
             $('#saveTransaction').on('click', function(e) {
                 e.preventDefault();
@@ -208,10 +212,11 @@
                 let riderId = $('#riderId').val();
 
                 for (let shipment of shipments) {
+                    console.log(shipment.newStatus);
                     let item = {
                         shipment_id: shipment.shipment_id,
-                        status: shipment.newStatus ? shipment.newStatus : 'arrived-at-hq',
-                        remitted_amount: shipment.inputtedCOD ? shipment.inputtedCOD : 0
+                        status: shipment.newStatus ? shipment.newStatus : 'pending',
+                        remitted_amount: typeof shipment.inputtedCOD !== 'undefined' ? shipment.inputtedCOD : 0
                     };
 
                     data.shipments.push(item);
@@ -223,11 +228,21 @@
 
                     $('#transactionSuccess').removeClass('hide');
                     resetTransactionButton();
+                    resetForm();
                 }).catch((e) => {
                     $('#transactionError').removeClass('hide');
                     resetTransactionButton();
                 });
             });
+
+            function resetForm() {
+                shipments = [];
+                $('#noContent').show();
+                let table = $('#shipmentReceiveTable tbody');
+                table.children('.shipment-item').remove();
+                calculateTotals();
+                calculateRemittedCOD();
+            }
 
             function resetTransactionButton() {
                 $('#saveTransaction').prop('disabled', false);
@@ -260,7 +275,7 @@
                 $('#noContent').hide();
 
                 let table = $('#shipmentReceiveTable tbody');
-                let html = '<tr>';
+                let html = '<tr class="shipment-item">';
                 html += `<td>${data.tracking_number}</td>`;
                 html += `<td>${data.shipment.cod ? data.shipment.cod.collect_and_deposit_amount : 0}</td>`;
                 html += `<td>0</td>`;
