@@ -168,7 +168,11 @@
                                 <tr>
                                     <td class="hide">{{ $shipment->id }}</td>
                                     <td>{{ $shipment->trackingNumbers()->mainTrackingNumber()->tracking_number }}</td>
-                                    <td>{{ $shipment->address->address_line_1 }} {{ $shipment->address->barangay }} {{ $shipment->address->city }}, {{ $shipment->address->province }}. {{ $shipment->address->zip_code }}</td>
+                                    <td>
+                                        @if ($shipment->address)
+                                            {{ $shipment->address->address_line_1 }} {{ $shipment->address->barangay }} {{ $shipment->address->city }}, {{ $shipment->address->province }}. {{ $shipment->address->zip_code }}
+                                        @endif
+                                    </td>
                                     <td>
                                         Account Name: {{ $shipment->cod->account_name }} <br/>
                                         Account Number: {{ $shipment->cod->account_number }} <br/>

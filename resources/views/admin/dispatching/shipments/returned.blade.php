@@ -107,7 +107,11 @@
                             <td class="hide">{{$shipment->id}}</td>
                             <td>{{ $shipment->trackingNumbers()->mainTrackingNumber($shipment->id)->tracking_number}}</td>
                             <td>{{ $shipment->user->profile->first_name}} {{$shipment->user->profile->middle_name}} {{$shipment->user->profile->last_name}}</td>
-                            <td>{{ $shipment->address->address_line_1 }} {{ $shipment->address->barangay }} {{ $shipment->address->city }}, {{ $shipment->address->province }}. {{ $shipment->address->zip_code }}</td>
+                            <td>
+                                @if ($shipment->address)
+                                    {{ $shipment->address->address_line_1 }} {{ $shipment->address->barangay }} {{ $shipment->address->city }}, {{ $shipment->address->province }}. {{ $shipment->address->zip_code }}
+                                @endif
+                            </td>
                             <td></td>
                             <td>{{ $shipment->returnLogs()->orderBy('created_at', 'DESC')->count() ?  $shipment->returnLogs()->orderBy('created_at', 'DESC')->first()->reason : '' }}</td>
                             <td>{{ $shipment->returnLogs()->orderBy('created_at', 'DESC')->count() }}</td>

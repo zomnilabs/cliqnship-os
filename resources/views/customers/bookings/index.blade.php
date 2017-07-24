@@ -172,7 +172,11 @@
                                     <td class="hide">{{ $booking->id }}</td>
                                     <td>{{ $booking->booking_no }}</td>
                                     <td>{{ $booking->pickup_date }}</td>
-                                    <td>{{ $booking->address->address_line_1 }} {{ $booking->address->barangay }} {{ $booking->address->city }}, {{ $booking->address->province }}. {{ $booking->address->zip_code }}</td>
+                                    <td>
+                                        @if ($booking->address)
+                                            {{ $booking->address->address_line_1 }} {{ $booking->address->barangay }} {{ $booking->address->city }}, {{ $booking->address->province }}. {{ $booking->address->zip_code }}
+                                        @endif
+                                    </td>
                                     <td>{{ $booking->remarks }}</td>
                                     <td>{{ $booking->status }}</td>
                                     <th>
