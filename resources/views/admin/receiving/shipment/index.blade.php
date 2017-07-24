@@ -504,7 +504,11 @@
                                     <tr>
                                         <td class="hide">{{ $assignment->id }}</td>
                                         <td>{{ $assignment->shipment->trackingNumbers()->mainTrackingNumber()->tracking_number }}</td>
-                                        <td>{{ $assignment->shipment->address->address_line_1 }} {{ $assignment->shipment->address->barangay }} {{ $assignment->shipment->address->city }}, {{ $assignment->shipment->address->province }}. {{ $assignment->shipment->address->zip_code }}</td>
+                                        <td>
+                                            @if ($assignment->shipment->address)
+                                                {{ $assignment->shipment->address->address_line_1 }} {{ $assignment->shipment->address->barangay }} {{ $assignment->shipment->address->city }}, {{ $assignment->shipment->address->province }}. {{ $assignment->shipment->address->zip_code }}
+                                            @endif
+                                        </td>
                                         <td>{{ $assignment->shipment->collect_and_deposit ? 'Yes' : 'No' }}</td>
                                         <td>{{ $assignment->shipment->collect_and_deposit_amount }}</td>
                                         <td>{{ $assignment->shipment->service_type }}</td>
