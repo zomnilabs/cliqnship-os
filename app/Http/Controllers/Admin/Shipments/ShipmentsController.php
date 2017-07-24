@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin\Shipments;
 
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
+use App\Models\ShipmentCod;
 use App\Models\ShipmentRemarks;
 use App\Models\ShipmentTrackingNumber;
 use App\Models\UserAddressbook;
@@ -135,9 +136,6 @@ class ShipmentsController extends Controller
             'collect_and_deposit'       => $shipment['collect_and_deposit'],
             'insurance_declared_value'  => $shipment['insurance_declared_value'],
             'insurance_amount'          => $shipment['insurance_amount'],
-            'collect_and_deposit_amount'    => $shipment['collect_and_deposit_amount'],
-            'account_name'                  => $shipment['account_name'],
-            'account_number'            => $shipment['account_number'],
             'bank'                      => $shipment['bank'],
             'charge_to'                 => $shipment['charge_to'],
             'pay_thru'                  => $shipment['pay_thru'],
@@ -151,6 +149,12 @@ class ShipmentsController extends Controller
             'cod_fee'                   => $shipment['cod_fee'],
             'pod_received_by'           => $shipment['pod_received_by'],
             'pod_date'                  => $shipment['pod_date']
+        ];
+
+        $cod = [
+            'collect_and_deposit_amount'    => $shipment['collect_and_deposit_amount'],
+            'account_name'                  => $shipment['account_name'],
+            'account_number'                => $shipment['account_number']
         ];
 
 //        $remarks = [
@@ -194,11 +198,26 @@ class ShipmentsController extends Controller
         $result = null;
         $remarks = null;
 
-        \DB::transaction(function() use (&$result, $data, $remarks, $otherWaybill, $address, $from_address, $tracking, $user) {
+        \DB::transaction(function() use (&$result, $data, $remarks, $cod, $otherWaybill, $address, $from_address, $tracking, $user) {
             $data['to'] = $this->findOrCreateAddress($address);
             $data['from'] = $this->findOrCreateAddress($from_address);
 
             $result = Shipment::where('id', $tracking->shipment_id)->update($data);
+
+            // Update Cod
+            if (! empty($cod)) {
+                $cod = ShipmentCod::where('shipment_id', $tracking->shipment_id)
+                    ->first();
+
+                $cod['shipment_id'] = $tracking->shipment_id;
+
+                if (! $cod) {
+
+                    ShipmentCod::create($cod);
+                } else {
+                    $cod->update($cod);
+                }
+            }
 
             if ($remarks['remarks']) {
                 $oldRemarks = ShipmentRemarks::where('shipment_id', $tracking->shipment_id)
