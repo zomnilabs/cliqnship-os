@@ -206,12 +206,12 @@ class ShipmentsController extends Controller
 
             // Update Cod
             if (! empty($cod)) {
-                $cod = ShipmentCod::where('shipment_id', $tracking->shipment_id)
+                $scod = ShipmentCod::where('shipment_id', $tracking->shipment_id)
                     ->first();
 
                 $cod['shipment_id'] = $tracking->shipment_id;
 
-                if (! $cod) {
+                if (! $scod) {
 
                     ShipmentCod::create($cod);
                 } else {
