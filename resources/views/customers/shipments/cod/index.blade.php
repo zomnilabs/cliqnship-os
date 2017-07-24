@@ -139,6 +139,7 @@
                                 <td>Delivery Address</td>
                                 <td>Account Details</td>
                                 <td>COD Amount</td>
+                                <td>Remitted Amount</td>
                                 <td>Status</td>
                             </tr>
                             </tfoot>
@@ -150,6 +151,7 @@
                                 <th>Delivery Address</th>
                                 <th>Account Details</th>
                                 <th>COD Amount</th>
+                                <th>Remitted Amount</th>
                                 <th>Status</th>
                             </tr>
                             </thead>
@@ -170,6 +172,7 @@
                                             Bank: {{ $shipment->cod->bank }} <br/>
                                         </td>
                                         <td>{{ number_format($shipment->cod->collect_and_deposit_amount, 2) }}</td>
+                                        <td>{{ number_format($shipment->cod->remitted_amount, 2) }}</td>
                                         <td>{{ $shipment->cod->status }}</td>
                                     </tr>
                                 @endforeach

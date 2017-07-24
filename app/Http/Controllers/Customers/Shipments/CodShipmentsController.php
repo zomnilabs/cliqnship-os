@@ -22,7 +22,11 @@ class CodShipmentsController extends Controller {
         ];
 
         foreach ($shipments as $shipment) {
-            $amounts[$shipment->cod->status] += $shipment->cod->collect_and_deposit_amount;
+            if ($shipment->cod->status === 'collected') {
+                $amounts['collected'] += $shipment->cod->remitted_amount;
+            } else {
+                $amounts[$shipment->cod->status] += $shipment->cod->collect_and_deposit_amount;
+            }
         }
 
         return view('customers.shipments.cod.index', compact('shipments', 'amounts'));

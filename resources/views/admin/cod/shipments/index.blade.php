@@ -144,6 +144,7 @@
                                 <td>Delivery Address</td>
                                 <td>Account Details</td>
                                 <td>COD Amount</td>
+                                <td>Remitted Amount</td>
                                 <td>Deposit Date</td>
                                 <td>Status</td>
                                 <td class="hide"></td>
@@ -157,6 +158,7 @@
                                 <th>Delivery Address</th>
                                 <th>Account Details</th>
                                 <th>COD Amount</th>
+                                <td>Remitted Amount</td>
                                 <th>Deposit Date</th>
                                 <th>Status</th>
                                 <th class="hide">Action</th>
@@ -179,6 +181,7 @@
                                         Bank: {{ $shipment->cod->bank }} <br/>
                                     </td>
                                     <td>{{ number_format($shipment->cod->collect_and_deposit_amount, 2) }}</td>
+                                    <td>{{ number_format($shipment->cod->remitted_amount, 2) }}</td>
                                     <td>{{ $shipment->cod->deposit_date ? \Carbon\Carbon::createFromTimestamp(strtotime($shipment->cod->deposit_date))->toFormattedDateString() : '' }}</td>
                                     <td>{{ $shipment->cod->status }}</td>
                                     <td class="hide">

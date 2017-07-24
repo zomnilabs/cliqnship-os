@@ -141,7 +141,7 @@ class ShipmentsController extends Controller {
             });
         }
 
-        return redirect()->back();
+        return redirect()->to('/admin/dispatching/shipments/'.$request->get('rider_id').'/preview');
     }
 
     public function printDispatch($riderId)
