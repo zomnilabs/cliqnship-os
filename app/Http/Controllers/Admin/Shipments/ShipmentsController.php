@@ -205,6 +205,8 @@ class ShipmentsController extends Controller
 
             $result = Shipment::where('id', $tracking->shipment_id)->update($data);
 
+            return $cod;
+
             // Update Cod
             if (! empty($cod) && $data['collect_and_deposit']) {
                 $scod = ShipmentCod::where('shipment_id', $tracking->shipment_id)
