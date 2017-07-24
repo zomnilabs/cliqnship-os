@@ -187,7 +187,8 @@ class ShipmentsController extends Controller
             'landmarks'              => isset($shipment['from_landmarks']) ? $shipment['from_landmarks'] : '',
             'first_name'             => isset($shipment['from_first_name']) ? $shipment['from_first_name'] : '',
             'last_name'              => isset($shipment['from_last_name']) ? $shipment['from_last_name'] : '',
-            'email'              => isset($shipment['from_email']) ? $shipment['from_email'] : '',
+            'contact_number'              => isset($shipment['from_contact_number']) ? $shipment['from_contact_number'] : '',
+            'email'              => isset($shipment['to_email']) ? $shipment['to_email'] : '',
         ];
 
         $result = null;
