@@ -30,6 +30,7 @@ class ShipmentsController extends Controller {
 
         $pendingShipment = Shipment::doesntHave('rider')
             ->where('status', 'arrived-at-hq')
+            ->where('to', '<>', 0)
             ->count();
 
         $assignedShipment = Shipment::has('rider')
