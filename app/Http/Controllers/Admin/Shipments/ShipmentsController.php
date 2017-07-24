@@ -136,7 +136,6 @@ class ShipmentsController extends Controller
             'collect_and_deposit'       => $shipment['collect_and_deposit'],
             'insurance_declared_value'  => $shipment['insurance_declared_value'],
             'insurance_amount'          => $shipment['insurance_amount'],
-            'bank'                      => $shipment['bank'],
             'charge_to'                 => $shipment['charge_to'],
             'pay_thru'                  => $shipment['pay_thru'],
             'package_type'              => $shipment['package_type'],
@@ -154,7 +153,8 @@ class ShipmentsController extends Controller
         $cod = [
             'collect_and_deposit_amount'    => $shipment['collect_and_deposit_amount'],
             'account_name'                  => $shipment['account_name'],
-            'account_number'                => $shipment['account_number']
+            'account_number'                => $shipment['account_number'],
+            'bank'                      => $shipment['bank']
         ];
 
 //        $remarks = [
