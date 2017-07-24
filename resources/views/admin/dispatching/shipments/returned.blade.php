@@ -26,9 +26,11 @@
 //                $('.loading-data').removeClass('hide');
             });
 
-            $('#returnShipmentLogsBtn').on('click', function() {
+            $('.returned-shipment-logs-btn').on('click', function() {
                 $('.loading-data').removeClass('hide');
                 $('.content-data').addClass('hide');
+
+                $('#resolutionLogs').children().remove();
 
                 let resolutionId = $(this).data('resolution');
                 let url = `/admin/resolutions/shipments/returned/${resolutionId}`;
@@ -164,7 +166,7 @@
                                         data-shipment="{{ $shipment->shipment->id }}" data-toggle="modal" data-target="#returnShipment" >
                                     <i class="fa fa-refresh"></i></button>
 
-                                <button class="btn btn-default" id="returnShipmentLogsBtn"
+                                <button class="btn btn-default returned-shipment-logs-btn" id="returnShipmentLogsBtn"
                                         data-resolution="{{ $shipment->id }}"
                                         data-shipment="{{ $shipment->shipment->id }}" data-toggle="modal" data-target="#returnShipmentLogs" >
                                     <i class="fa fa-eye"></i></button>
