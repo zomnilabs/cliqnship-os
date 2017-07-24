@@ -173,6 +173,8 @@ class ShipmentsController extends Controller
             'landmarks'              => $shipment['to_landmarks'],
             'first_name'             => $shipment['to_first_name'],
             'last_name'              => $shipment['to_last_name'] ? $shipment['to_last_name'] : '',
+            'contact_number'              => isset($shipment['to_contact_number']) ? $shipment['to_contact_number'] : '',
+            'email'              => isset($shipment['to_email']) ? $shipment['to_email'] : '',
         ];
 
         $from_address = [
@@ -185,6 +187,7 @@ class ShipmentsController extends Controller
             'landmarks'              => isset($shipment['from_landmarks']) ? $shipment['from_landmarks'] : '',
             'first_name'             => isset($shipment['from_first_name']) ? $shipment['from_first_name'] : '',
             'last_name'              => isset($shipment['from_last_name']) ? $shipment['from_last_name'] : '',
+            'email'              => isset($shipment['from_email']) ? $shipment['from_email'] : '',
         ];
 
         $result = null;
