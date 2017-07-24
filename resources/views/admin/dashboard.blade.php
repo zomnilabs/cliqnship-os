@@ -161,7 +161,7 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th>Booking Number</th>
+                                <th>Tracking Number</th>
                                 <th>Item Description</th>
                                 <th>Service Type</th>
                                 <th>Remarks</th>
@@ -169,34 +169,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>58AD64AEDA281</td>
-                                <td>T-shirt</td>
-                                <td>Metro Manila</td>
-                                <td>Testing</td>
-                                <td>Completed</td>
-                            </tr>
-                            <tr>
-                                <td>58AD64AEDA255</td>
-                                <td>Food</td>
-                                <td>Metro Manila</td>
-                                <td>Handle with Care</td>
-                                <td>Completed</td>
-                            </tr>
-                            <tr>
-                                <td>58HFA4AEDA281</td>
-                                <td>Testing</td>
-                                <td>Metro Manila</td>
-                                <td>Fragile</td>
-                                <td>Completed</td>
-                            </tr>
-                            <tr>
-                                <td>58AD64AEHNN62</td>
-                                <td>Testttttt</td>
-                                <td>Metro Manila</td>
-                                <td>Handle with Care</td>
-                                <td>Completed</td>
-                            </tr>
+                            @foreach($shipments as $shipment)
+                                <tr>
+                                    <td>{{ $shipment->trackingNumbers[0]->tracking_number }}</td>
+                                    <td>{{ $shipment->item_description }}</td>
+                                    <td>{{ $shipment->service_type }}</td>
+                                    <td>
+                                        @foreach($shipment->remarks as $r)
+                                            {{ $r->remarks }},
+                                        @endforeach
+                                    </td>
+                                    <td>{{ ucwords($shipment->status) }}</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
