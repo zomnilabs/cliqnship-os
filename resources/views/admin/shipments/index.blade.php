@@ -23,14 +23,16 @@
 
                             break;
                         case 'Status':
-                            let selectHTML = '<select class="form-control filter" style="width: 100%">';
+                            let selectHTML = '<select class="form-control filter filter-status" style="width: 100%">';
                             selectHTML += '<option value="">Filter Status</option>';
                             selectHTML += '<option value="pending">Pending</option>';
                             selectHTML += '<option value="for-pickup">For Pickup</option>';
                             selectHTML += '<option value="courier-picked-up">Courier Picked Up</option>';
                             selectHTML += '<option value="arrived-at-hq">Arrived at HQ</option>';
+                            selectHTML += '<option value="for encoding">Arrived at HQ - For Encoding</option>';
                             selectHTML += '<option value="enroute">En Route</option>';
                             selectHTML += '<option value="successfully-delivered">Successfully Delivered</option>';
+                            selectHTML += '<option value="Waiting For POD">Successfully Delivered - NO POD</option>';
                             selectHTML += '<option value="returned">Returned</option>';
                             selectHTML += '</select>';
 
@@ -180,7 +182,7 @@
 
                     <a href="#" id="btnExport" class="btn btn-primary">
                         <i class="glyphicon glyphicon-plus"></i>
-                        Export Shipments Waiting for Encoding</a>
+                        Export Shipments</a>
                 </div>
             </div>
         </div>
@@ -225,6 +227,8 @@
                                 <td>Services Add-Ons</td>
                                 <td>Charge To</td>
                                 <td>Remarks</td>
+                                <td>POD</td>
+                                <td>POD Date</td>
                                 <td>Status</td>
                                 <td></td>
                             </tr>
@@ -239,6 +243,8 @@
                                 <th>Services Add-Ons</th>
                                 <th>Charge To</th>
                                 <th>Remarks</th>
+                                <td>POD</td>
+                                <td>POD Date</td>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -278,13 +284,25 @@
                                             @endif
                                         </ul>
                                     </td>
-                                    <td>{{ $shipment->status }}</td>
-                                    <th>
+                                    <td>{{ $shipment->pod }}</td>
+                                    <td>{{ $shipment->pod_date }}</td>
+                                    <td c>
+                                        @if ($shipment->address)
+                                            @if ($shipment->status === 'successfully-delivered' && !$shipment->pod)
+                                                Waiting For POD
+                                            @else
+                                                {{ ucwords($shipment->status) }}
+                                            @endif
+                                        @else
+                                            For Encoding
+                                        @endif
+                                    </td>
+                                    <td style="min-width: 150px;">
                                         <button class="btn btn-danger delBooking" value="{{ $shipment->id }}"><i class="fa fa-trash"></i></button>
                                         <button class="btn btn-default"><i class="fa fa-edit"></i></button>
                                         <button class="btn btn-default" onclick="$('iframe').attr('src','/customers/shipments/{{ $shipment->id }}/preview');
                                                 frames['frame'].print();"><i class="fa fa-print"></i></button>
-                                    </th>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
