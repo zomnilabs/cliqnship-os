@@ -15,7 +15,7 @@ class ShipmentsController extends Controller
 {
     public function index()
     {
-    	$shipments = Shipment::with('trackingNumbers')->get();
+    	$shipments = Shipment::with('trackingNumbers', 'cod')->get();
 
         return view('admin.shipments.index')
             ->with('shipments', $shipments);
@@ -81,8 +81,8 @@ class ShipmentsController extends Controller
                 'number_of_items'           => $shipment->number_of_items,
                 'service_type'              => $shipment->service_type,
                 'is_international'          => $shipment->is_international,
-                'collect_and_deposit'       => $shipment->collect_and_deposit,
-                'insurance_declared_value'  => $shipment->insurance_declared_value,
+                'collect_and_deposit'       => $shipment->collect_and_deposit ? 'YES' : 'NO',
+                'insurance_declared_value'  => $shipment->insurance_declared_value ? 'YES' : 'NO',
                 'insurance_amount'          => $shipment->insurance_amount,
                 'collect_and_deposit_amount'    => $shipment->collect_and_deposit_amount,
                 'account_name'                  => $shipment->account_name,
@@ -133,8 +133,8 @@ class ShipmentsController extends Controller
             'number_of_items'           => $shipment['number_of_items'],
             'service_type'              => $shipment['service_type'],
             'is_international'          => $shipment['is_international'],
-            'collect_and_deposit'       => $shipment['collect_and_deposit'],
-            'insurance_declared_value'  => $shipment['insurance_declared_value'],
+            'collect_and_deposit'       => isset($shipment['collect_and_deposit']) && $shipment['collect_and_deposit'] === 'yes' ? 1 : 0,
+            'insurance_declared_value'  => isset($shipment['insurance_declared_value']) && $shipment['insurance_declared_value'] === 'yes' ? 1 : 0,
             'insurance_amount'          => $shipment['insurance_amount'],
             'charge_to'                 => $shipment['charge_to'],
             'pay_thru'                  => $shipment['pay_thru'],
@@ -204,8 +204,6 @@ class ShipmentsController extends Controller
             $data['from'] = $this->findOrCreateAddress($from_address);
 
             $result = Shipment::where('id', $tracking->shipment_id)->update($data);
-
-            return $cod;
 
             // Update Cod
             if (! empty($cod) && $data['collect_and_deposit']) {

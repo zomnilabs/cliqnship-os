@@ -227,6 +227,7 @@
                                 <td>Services Add-Ons</td>
                                 <td>Charge To</td>
                                 <td>Remarks</td>
+                                <td>COD Amount</td>
                                 <td>POD</td>
                                 <td>POD Date</td>
                                 <td>Status</td>
@@ -243,6 +244,7 @@
                                 <th>Services Add-Ons</th>
                                 <th>Charge To</th>
                                 <th>Remarks</th>
+                                <th>COD Amount</th>
                                 <td>POD</td>
                                 <td>POD Date</td>
                                 <th>Status</th>
@@ -284,6 +286,7 @@
                                             @endif
                                         </ul>
                                     </td>
+                                    <td>{{ $shipment->cod ? $shipment->cod->collect_and_deposit_amount : '0' }}</td>
                                     <td>{{ $shipment->pod }}</td>
                                     <td>{{ $shipment->pod_date }}</td>
                                     <td c>
