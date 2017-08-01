@@ -34,7 +34,7 @@ class AddressbookTransformer extends TransformerAbstract implements Transformera
             'country'           => $addressbook->country,
             'address_type'      => $addressbook->address_type,
             'landmarks'         => $addressbook->landmarks,
-            'primary'           => (Boolean) $addressbook->primary,
+            'primary'           => $addressbook->primary,
             'links'   => [
                 [
                     'rel'   => 'self',
