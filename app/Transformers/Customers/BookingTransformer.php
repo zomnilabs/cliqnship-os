@@ -22,6 +22,7 @@ class BookingTransformer extends TransformerAbstract implements Transformerable
             'id'            => (int) $booking->id,
             'user_id'       => (int) $booking->user_id,
             'pickup_date'   => Carbon::createFromTimestamp(strtotime($booking->pickup_date))->toDateString(),
+            'image'         => $booking->image ? "https://files.cliqnship.com/{$booking->image}" : null,
             'source'    => [
                 'id'    => $booking->source->id,
                 'name'  => $booking->source->name

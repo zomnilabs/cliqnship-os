@@ -17,8 +17,11 @@ class UserTransformer extends TransformerAbstract implements Transformerable
     {
         return [
             'id'            => (int) $user->id,
+            'account_id'    => $user->account_id,
             'email'         => $user->email,
             'user_group'    => $user->userGroup->name,
+            'image'         => $user->profile->image ? "https://files.cliqnship.com/{$user->profile->image}" : null,
+            'primary_address'   => $user->addressbook()->getPrimaryAddress(),
             'profile'   => [
                 'first_name'    => $user->profile->first_name,
                 'last_name'     => $user->profile->last_name,

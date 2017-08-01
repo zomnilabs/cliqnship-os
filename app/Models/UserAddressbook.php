@@ -64,4 +64,11 @@ class UserAddressbook extends Model
         return ucwords($this->attributes['first_name'] . ' ' . $this->attributes['last_name']);
     }
 
+    public function scopeGetPrimaryAddress($query)
+    {
+        return $query->where('primary', 1)
+            ->where('type', 'booking')
+            ->first();
+    }
+
 }

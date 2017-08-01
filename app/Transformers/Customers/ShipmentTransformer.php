@@ -22,6 +22,7 @@ class ShipmentTransformer extends TransformerAbstract implements Transformerable
             'id'            => (int) $shipment->id,
             'user_id'       => (int) $shipment->user_id,
             'tracking_number'   => $shipment->trackingNumbers()->mainTrackingNumber()->tracking_number,
+            'image'         => $shipment->image ? "https://files.cliqnship.com/{$shipment->image}" : null,
             'source'        => [
                 'id'    => $shipment->source->id,
                 'name'  => $shipment->source->name

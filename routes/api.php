@@ -24,6 +24,7 @@ Route::group(['namespace' => 'Api'], function() {
     Route::post('/v1/customers', 'Customers\CustomersController@store');
     Route::group(['prefix' => 'v1/customers', 'middleware' => 'auth:api'], function () {
         Route::get('/{userId}', 'Customers\CustomersController@show');
+        Route::put('/{userId}', 'Customers\CustomersController@update');
 
         // Customer Addressbooks
         Route::get('/{userId}/addressbooks', 'Customers\AddressbooksController@all');

@@ -16,7 +16,6 @@ class CustomerRegistrationRequests extends AbstractAPIRequest
             'password'      => 'required|min:3',
             'first_name'    => 'required',
             'last_name'     => 'required',
-            'image.id'      => 'exists:images,id'
         ];
     }
 }
