@@ -95,41 +95,52 @@ class BookingsController extends AbstractAPIController {
 
         $result = null;
 
-        // check address
-        if (isset($input['address']) && is_array($input['address'])) {
-            if (isset($input['address']['id'])) {
-                $address = UserAddressbook::find($input['address']['id']);
+        \DB::transaction(function() use ($input, &$result, $request, $userId) {
 
-                if (! $address) {
-                    return $this->responseBadRequest(['invalid selected address']);
+            // check address
+            if (isset($input['address']) && is_array($input['address'])) {
+                if (isset($input['address']['id'])) {
+                    $address = UserAddressbook::find($input['address']['id']);
+
+                    if (! $address) {
+                        return $this->responseBadRequest(['invalid selected address']);
+                    }
+
+                    $input['address'] = $address->id;
+                } else {
+                    $addressData = $input['address'];
+                    $addressData['user_id'] = $userId;
+                    $addressData['type'] = 'booking';
+
+                    if (isset($addressData['primary']) && $addressData['primary'] && $addressData['type'] === 'booking') {
+                        $addressData['primary'] = 0;
+                    }
+
+                    $address = UserAddressbook::create($addressData);
+
+                    // Check if newly added address is a primary address
+                    if ($address->primary && $address->type === 'shipment') {
+                        // Update other primary
+                        UserAddressbook::where('user_id', $userId)
+                            ->where('primary', 1)
+                            ->where('id', '!=', $address->id)
+                            ->update(['primary' => 0]);
+                    }
+
+                    $input['address'] = $address->id;
                 }
-
-                $input['address'] = $address->id;
-            } else {
-                $addressData = $input['address'];
-                $addressData['user_id'] = $userId;
-                $addressData['type'] = 'booking';
-
-                if (isset($addressData['primary']) && $addressData['primary'] && $addressData['type'] === 'booking') {
-                    $addressData['primary'] = 0;
-                }
-
-                $address = UserAddressbook::create($addressData);
-
-                // Check if newly added address is a primary address
-                if ($address->primary && $address->type === 'shipment') {
-                    // Update other primary
-                    UserAddressbook::where('user_id', $userId)
-                        ->where('primary', 1)
-                        ->where('id', '!=', $address->id)
-                        ->update(['primary' => 0]);
-                }
-
-                $input['address'] = $address->id;
             }
-        }
 
-        \DB::transaction(function() use ($input, &$result) {
+            // Image Upload
+            $image = null;
+            if ($request->hasFile('image')) {
+                if (getenv('APP_ENV') === 'production') {
+                    $image =  $request->file('image')->store('prod/bookings', 's3');
+                } else {
+                    $image =  $request->file('image')->store('dev/bookings', 's3');
+                }
+            }
+
             $bookingData = [
                 'user_id'           => $input['user_id'],
                 'user_addressbook_id'   => $input['address'],
@@ -145,6 +156,10 @@ class BookingsController extends AbstractAPIController {
                 'weight'            => isset($input['weight']) ? $input['weight'] : 0,
                 'status'            => 'pending'
             ];
+
+            if ($image) {
+                $bookingData['image'] = $image;
+            }
 
             $result = Booking::create($bookingData);
         });
@@ -187,40 +202,51 @@ class BookingsController extends AbstractAPIController {
 
         $result = null;
 
-        // check address
-        if (isset($input['address']) && is_array($input['address'])) {
-            if (isset($input['address']['id'])) {
-                $address = UserAddressbook::find($input['address']['id']);
+        \DB::transaction(function() use ($input, $userId, $bookingId, &$result, $request) {
 
-                if (! $address) {
-                    return $this->responseBadRequest(['invalid selected address']);
+            // check address
+            if (isset($input['address']) && is_array($input['address'])) {
+                if (isset($input['address']['id'])) {
+                    $address = UserAddressbook::find($input['address']['id']);
+
+                    if (! $address) {
+                        return $this->responseBadRequest(['invalid selected address']);
+                    }
+
+                    $input['address'] = $address->id;
+                } else {
+                    $addressData = $input['address'];
+                    $addressData['user_id'] = $userId;
+
+                    if (isset($addressData['primary']) && $addressData['primary'] && $addressData['type'] === 'booking') {
+                        $addressData['primary'] = 0;
+                    }
+
+                    $address = UserAddressbook::create($addressData);
+
+                    // Check if newly added address is a primary address
+                    if ($address->primary && $address->type === 'shipment') {
+                        // Update other primary
+                        UserAddressbook::where('user_id', $userId)
+                            ->where('primary', 1)
+                            ->where('id', '!=', $address->id)
+                            ->update(['primary' => 0]);
+                    }
+
+                    $input['address'] = $address->id;
                 }
-
-                $input['address'] = $address->id;
-            } else {
-                $addressData = $input['address'];
-                $addressData['user_id'] = $userId;
-
-                if (isset($addressData['primary']) && $addressData['primary'] && $addressData['type'] === 'booking') {
-                    $addressData['primary'] = 0;
-                }
-
-                $address = UserAddressbook::create($addressData);
-
-                // Check if newly added address is a primary address
-                if ($address->primary && $address->type === 'shipment') {
-                    // Update other primary
-                    UserAddressbook::where('user_id', $userId)
-                        ->where('primary', 1)
-                        ->where('id', '!=', $address->id)
-                        ->update(['primary' => 0]);
-                }
-
-                $input['address'] = $address->id;
             }
-        }
 
-        \DB::transaction(function() use ($input, $userId, $bookingId, &$result) {
+            // Image Upload
+            $image = null;
+            if ($request->hasFile('image')) {
+                if (getenv('APP_ENV') === 'production') {
+                    $image =  $request->file('image')->store('prod/bookings', 's3');
+                } else {
+                    $image =  $request->file('image')->store('dev/bookings', 's3');
+                }
+            }
+
             $bookingData = [
                 'user_addressbook_id'   => $input['address'],
                 'remarks'           => isset($input['remarks']) ? $input['remarks'] : '',
@@ -232,6 +258,10 @@ class BookingsController extends AbstractAPIController {
                 'height'            => isset($input['height']) ? $input['height'] : 0,
                 'weight'            => isset($input['weight']) ? $input['weight'] : 0,
             ];
+
+            if ($image) {
+                $bookingData['image'] = $image;
+            }
 
             $booking = Booking::where('user_id', $userId)
                 ->where('id', $bookingId)
