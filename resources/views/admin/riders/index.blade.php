@@ -132,31 +132,58 @@
                 type = 'PUT';
                 url += this.value;
             }
-            console.log(list);
-            $.ajax({
-                type: type,
-                url: url,
-                data: list,
-                success: function () {
-                    location.reload();
-                },
-                error: function(data) {
-                    console.log('Error:', data);
-                }
-            }).always(function(err){
+
+            axios.post(url, list).then((res) => {
+
                 resetModalFormErrors();
                 //checking for errors and display it
-                if (err.status == 422) {
-                    var errors = $.parseJSON(err.responseText);
-                    var arr = Object.keys(errors);
+                checkError(res);
+
+                if (res.isOk()) {
+                    location.reload();
+                }
+
+            }).catch(err => {
+                console.log('Error:', data);
+            });
+
+            function checkError(res) {
+                if (res.status === 422) {
+                    let errors = $.parseJSON(err.responseText);
+                    let arr = Object.keys(errors);
                     $.each(errors, function(field, message) {
                         console.error(field + ': ' + message);
-                        var formGroup = $('[name='+field+']').closest('.form-group');
+                        let formGroup = $('[name='+field+']').closest('.form-group');
                         formGroup.addClass('has-error').append('<p class="help-block">'+message+'</p>');
                     });
                     $('[name='+arr[0]+']').focus();
                 }
-            });
+            }
+
+//            $.ajax({
+//                type: type,
+//                url: url,
+//                data: list,
+//                success: function () {
+//                    location.reload();
+//                },
+//                error: function(data) {
+//                    console.log('Error:', data);
+//                }
+//            }).always(function(err){
+//                resetModalFormErrors();
+//                //checking for errors and display it
+//                if (err.status == 422) {
+//                    var errors = $.parseJSON(err.responseText);
+//                    var arr = Object.keys(errors);
+//                    $.each(errors, function(field, message) {
+//                        console.error(field + ': ' + message);
+//                        var formGroup = $('[name='+field+']').closest('.form-group');
+//                        formGroup.addClass('has-error').append('<p class="help-block">'+message+'</p>');
+//                    });
+//                    $('[name='+arr[0]+']').focus();
+//                }
+//            });
         }
 
         (function() {
