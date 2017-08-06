@@ -109,7 +109,7 @@
             //used to determine the http verb to use [add=POST], [update=PUT]
             var state = this.name;
             var type = 'POST'; //for creating new resource
-            var url = '/admin/items/';
+            var url = '/admin/items';
 
             if (state == "edit"){
                 type = 'PUT';
