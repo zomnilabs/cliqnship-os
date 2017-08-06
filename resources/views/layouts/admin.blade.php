@@ -52,7 +52,7 @@
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="http://lorempixel.com/500/500/people" class="user-image" alt="User Image">
+                            <img src="//lorempixel.com/500/500/people" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             @if (! Auth::guest())
                             <span class="hidden-xs">{{ Auth::user()->profile->full_name }} <span style="font-size: 0.8em;">[{{ Auth::user()->account_id }}]</span> <span class="caret"></span></span>
@@ -90,7 +90,7 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="http://lorempixel.com/500/500/people" class="img-circle" alt="User Image">
+                    <img src="//lorempixel.com/500/500/people" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     @if (! Auth::guest())
