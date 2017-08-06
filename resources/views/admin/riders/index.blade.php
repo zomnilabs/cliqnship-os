@@ -126,6 +126,7 @@
             var state = this.name;
             var type = 'POST'; //for creating new resource
             var url = `${baseURL}/admin/riders/`;
+            console.log(url);
 
             if (state === "edit"){
                 type = 'PUT';
