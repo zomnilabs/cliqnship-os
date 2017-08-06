@@ -13,6 +13,8 @@
 
 @section('scripts')
     <script>
+        var baseURL = location.origin;
+
         // Prepare reset.
         function resetModalFormErrors() {
             $('.form-group').removeClass('has-error');
@@ -49,7 +51,7 @@
                 
                 $.ajax({
                     type: "delete",
-                    url: '/admin/riders/'+ deleteId,
+                    url: `${baseURL}/admin/riders/${deleteId}`,
                     beforeSend: function() {
                         rowSelected.css('backgroundColor','#fb6c6c');
                     },
@@ -123,9 +125,9 @@
             //used to determine the http verb to use [add=POST], [update=PUT]
             var state = this.name;
             var type = 'POST'; //for creating new resource
-            var url = '/admin/riders/';
+            var url = `${baseURL}/admin/riders/`;
 
-            if (state == "edit"){
+            if (state === "edit"){
                 type = 'PUT';
                 url += this.value;
             }
