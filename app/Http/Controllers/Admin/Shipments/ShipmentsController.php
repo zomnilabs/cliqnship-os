@@ -34,14 +34,17 @@ class ShipmentsController extends Controller
 
         $file = $request->file('file');
 
-        \Excel::load($file, function($reader) {
+        $data = [];
+        \Excel::load($file, function($reader) use (&$data) {
             $results = $reader->get();
 
             foreach ($results as $shipment) {
-                $this->updateShipment($shipment);
+                $data[] = $this->updateShipment($shipment);
+//                $data[] = $shipment->toArray();
             }
         });
 
+//        print_r($data);exit;
         return redirect()->back();
     }
 
@@ -118,7 +121,7 @@ class ShipmentsController extends Controller
         $user = User::where('account_id', $shipment['account_id'])->first();
 
         if (! $user) {
-            return null;
+            return;
         }
 
         $tracking = ShipmentTrackingNumber::where('tracking_number', $shipment['waybill_number'])->first();

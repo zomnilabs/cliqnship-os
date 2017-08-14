@@ -119,6 +119,7 @@
             }
 
             function buildReturnLogs(items) {
+                console.log(items);
                 for (let item of items) {
                     shipmentReturnLogs.row.add([
                         `${item.user.profile.first_name} ${item.user.profile.last_name}`,
