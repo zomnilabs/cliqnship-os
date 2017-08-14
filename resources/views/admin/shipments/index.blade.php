@@ -109,7 +109,7 @@
                     console.log(response.data);
                     let shipment = response.data;
 
-                    buildReturnLogs(shipment.return_logs);
+                    buildReturnLogs(shipment.return_logs.logs);
                     buildEvents(shipment.events);
                     populateShipmentDetails(shipment);
 
@@ -119,7 +119,7 @@
             }
 
             function buildReturnLogs(items) {
-                for (let item of items.logs) {
+                for (let item of items) {
                     shipmentReturnLogs.row.add([
                         `${item.user.profile.first_name} ${item.user.profile.last_name}`,
                         `${item.reason}`,
