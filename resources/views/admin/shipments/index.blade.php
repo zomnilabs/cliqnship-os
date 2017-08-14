@@ -119,7 +119,7 @@
             }
 
             function buildReturnLogs(items) {
-                for (let item of items) {
+                for (let item of items.logs) {
                     shipmentReturnLogs.row.add([
                         `${item.user.profile.first_name} ${item.user.profile.last_name}`,
                         `${item.reason}`,
