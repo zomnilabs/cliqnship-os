@@ -109,8 +109,10 @@
                     console.log(response.data);
                     let shipment = response.data;
 
-                    console.log(shipment.return_logs);
-                    buildReturnLogs(shipment.return_logs);
+                    if (shipment.return_logs.length > 0) {
+                        buildReturnLogs(shipment.return_logs[0].logs);
+                    }
+
                     buildEvents(shipment.events);
                     populateShipmentDetails(shipment);
 
