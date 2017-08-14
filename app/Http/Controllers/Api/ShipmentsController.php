@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class ShipmentsController extends Controller {
     public function show($shipmentId)
     {
-        $shipment = Shipment::with('returnLogs.user.profile', 'events.user.profile', 'senderAddress', 'address')
+        $shipment = Shipment::with('returnLogs.logs.user.profile', 'events.user.profile', 'senderAddress', 'address')
             ->where('id', $shipmentId)->first();
 
         return response()->json($shipment, 200);
