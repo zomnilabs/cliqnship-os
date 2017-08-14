@@ -50,8 +50,34 @@ Route::group(['namespace' => 'Api'], function() {
         Route::get('/{trackingNumber}', 'Customers\ShipmentsController@tracking');
     });
 
+    // admin api endpoints
+    Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {
+        Route::get('/customers', 'Admin\CustomersController@show');
+        Route::get('/customers/{userId}', 'Admin\CustomersController@show');
+        Route::put('/customers/{userId}', 'Admin\CustomersController@update');
+
+        // Customer Addressbooks
+        Route::get('/{userId}/addressbooks', 'Admin\AddressbooksController@all');
+        Route::post('/{userId}/addressbooks', 'Admin\AddressbooksController@store');
+        Route::get('/{userId}/addressbooks/{addressbookId}', 'Admin\AddressbooksController@show');
+        Route::put('/{userId}/addressbooks/{addressbookId}', 'Admin\AddressbooksController@update');
+
+        // Customer Bookings
+        Route::get('/{userId}/bookings', 'Admin\BookingsController@all');
+        Route::post('/{userId}/bookings', 'Admin\BookingsController@store');
+        Route::get('/{userId}/bookings/{bookingId}', 'Admin\BookingsController@show');
+        Route::put('/{userId}/bookings/{bookingId}', 'Admin\BookingsController@update');
+
+        // Customer Shipments
+        Route::get('/{userId}/shipments', 'Admin\ShipmentsController@all');
+        Route::post('/{userId}/shipments', 'Admin\ShipmentsController@store');
+        Route::get('/{userId}/shipments/{shipmentId}', 'Admin\ShipmentsController@show');
+        Route::put('/{userId}/shipments/{shipmentId}', 'Admin\ShipmentsController@update');
+
+    });
+
     // Frontend specific customer api
-    Route::group(['prefix' => 'v1/customers'], function () {
+    Route::group(['prefix' => 'web/customers'], function () {
 
         Route::group(['prefix' => 'bookings'], function () {
             Route::post('/', 'BookingController@store');
@@ -64,18 +90,18 @@ Route::group(['namespace' => 'Api'], function() {
     });
 
     // Shipments
-    Route::group(['prefix' => 'v1/shipments'], function () {
+    Route::group(['prefix' => 'web/shipments'], function () {
         Route::get('/check/{waybillNumber}', 'ShipmentsController@checkWaybill');
         Route::get('/{shipmentId}', 'ShipmentsController@show');
     });
 
     // Bookings
-    Route::group(['prefix' => 'v1/bookings'], function () {
+    Route::group(['prefix' => 'web/bookings'], function () {
         Route::post('/{bookingId}/update-rider', 'BookingController@updateRider');
     });
 
     // Address book
-    Route::group(['prefix' => 'v1/address-books'], function() {
+    Route::group(['prefix' => 'web/address-books'], function() {
         Route::get('/{userId}', 'AddressBookController@index');
     });
 });

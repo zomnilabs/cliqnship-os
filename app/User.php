@@ -36,6 +36,11 @@ class User extends Authenticatable
         'account_type', 'login_type'
     ];
 
+    public static $filterables = [
+        'email', 'id', 'account_id',
+        'user_group_id'
+    ];
+
     public function profile()
     {
         return $this->hasOne(UserProfile::class);

@@ -112,7 +112,7 @@
                 let newValue = waybills[waybills.length - 1];
                 console.log('new value', newValue);
 
-                fetch(`/api/v1/shipments/check/${newValue}`).then((res) => {
+                fetch(`/api/web/shipments/check/${newValue}`).then((res) => {
                     if (! res.ok) {
                         let html = `<p><span class="text-danger">${newValue}</span> is not a valid waybill</p>`;
                         $('.error-container').append(html);
@@ -161,7 +161,7 @@
                         return;
                     }
 
-                    fetch(`/api/v1/shipments/check/${value}`).then((res) => {
+                    fetch(`/api/web/shipments/check/${value}`).then((res) => {
                         if (! res.ok) {
                             let html = `<p><span class="text-danger">${value}</span> is not a valid waybill</p>`;
                             $('#errorContainer').html(html);

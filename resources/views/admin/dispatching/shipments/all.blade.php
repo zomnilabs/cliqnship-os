@@ -58,7 +58,7 @@
                     return;
                 }
 
-                fetch(`/api/v1/shipments/check/${newValue}?status=arrived-at-hq`).then((res) => {
+                fetch(`/api/web/shipments/check/${newValue}?status=arrived-at-hq`).then((res) => {
                     if (! res.ok) {
                         res.json().then((json) => {
 
@@ -108,7 +108,7 @@
 
             // functions
             function getShipmentDetails(shipmentId) {
-                axios.get(`/api/v1/shipments/${shipmentId}`).then((response) => {
+                axios.get(`/api/web/shipments/${shipmentId}`).then((response) => {
                     console.log(response.data);
                     let shipment = response.data;
 

@@ -105,7 +105,7 @@
 
             // functions
             function getShipmentDetails(shipmentId) {
-                axios.get(`/api/v1/shipments/${shipmentId}`).then((response) => {
+                axios.get(`/api/web/shipments/${shipmentId}`).then((response) => {
                     console.log(response.data);
                     let shipment = response.data;
 

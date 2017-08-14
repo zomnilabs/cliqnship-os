@@ -64,7 +64,7 @@
                     }).on('save', function(e, params) {
                         let bookingId = $(this).data('booking');
 
-                        fetch(`/api/v1/bookings/${bookingId}/update-rider`, {
+                        fetch(`/api/web/bookings/${bookingId}/update-rider`, {
                             method: 'POST',
                             headers: {
                                 'Accept': 'application/json, text/plain, */*',

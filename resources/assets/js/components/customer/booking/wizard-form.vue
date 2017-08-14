@@ -421,7 +421,7 @@
                 this.tabPage--;
             },
             getAddress() {
-                axios.get(`/api/v1/address-books/${this.user_id}?type=booking`).then(response => {
+                axios.get(`/api/web/address-books/${this.user_id}?type=booking`).then(response => {
                     let addressbooks = response.data;
 
                     for (let address of addressbooks) {
@@ -448,7 +448,7 @@
                     user_id: this.user_id,
                 };
 
-                let url = `/api/v1/customers/bookings`;
+                let url = `/api/web/customers/bookings`;
                 axios.post(url, data).then(response => {
                     console.log(response)
 

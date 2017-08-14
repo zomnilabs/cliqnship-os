@@ -499,7 +499,7 @@
                 this.tabPage--;
             },
             getBookingAddress() {
-                axios.get(`/api/v1/address-books/${this.user_id}?type=booking`).then(response => {
+                axios.get(`/api/web/address-books/${this.user_id}?type=booking`).then(response => {
                     let from = response.data;
 
                     for (let address of from) {
@@ -510,7 +510,7 @@
                 });
             },
             getAddress() {
-                axios.get(`/api/v1/address-books/${this.user_id}?type=shipment`).then(response => {
+                axios.get(`/api/web/address-books/${this.user_id}?type=shipment`).then(response => {
                     let addressbooks = response.data;
 
                     for (let address of addressbooks) {
@@ -563,7 +563,7 @@
                     insurance_amount: this.insurance_amount,
                 }
 
-                let url = `/api/v1/customers/shipments`;
+                let url = `/api/web/customers/shipments`;
                 console.log(data);
                 axios.post(url, data).then(response => {
                     console.log(response)
