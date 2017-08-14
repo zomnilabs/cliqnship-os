@@ -22,7 +22,7 @@ class CreateShipmentsTable extends Migration
             $table->text('item_description')->nullable();
             $table->integer('number_of_items')->nullable();
             $table->enum('service_type', ['metro_manila', 'provincial', 'international', 'others']);
-            $table->enum('is_international', ['express', 'ems', 'postal']);
+            $table->enum('is_international', ['express', 'ems', 'postal'])->nullable();
             $table->tinyInteger('collect_and_deposit')->nullable();
             $table->tinyInteger('insurance_declared_value')->nullable();
             $table->double('insurance_amount')->nullable();
