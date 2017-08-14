@@ -66,7 +66,7 @@ class Shipment extends Model
 
     public function returnLogs()
     {
-        return $this->hasMany(ShipmentResolution::class);
+        return $this->hasMany(ShipmentResolution::class, 'shipment_id');
     }
 
     public function remarks()

@@ -10,7 +10,7 @@ class ShipmentResolution extends Model
     protected $guarded = ['id'];
 
     public function shipment() {
-        return $this->belongsTo(Shipment::class);
+        return $this->belongsTo(Shipment::class, 'shipment_id');
     }
 
     public function logs() {
