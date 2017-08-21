@@ -174,6 +174,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        Vinkla\Hashids\HashidsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -235,7 +236,8 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
-        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        'Hashids' => Vinkla\Hashids\Facades\Hashids::class
     ],
 
 ];

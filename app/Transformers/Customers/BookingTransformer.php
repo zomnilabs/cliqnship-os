@@ -20,6 +20,7 @@ class BookingTransformer extends TransformerAbstract implements Transformerable
 
         return [
             'id'            => (int) $booking->id,
+            'booking_no'    => \Hashids::encode($booking->id),
             'user_id'       => (int) $booking->user_id,
             'pickup_date'   => Carbon::createFromTimestamp(strtotime($booking->pickup_date))->toDateString(),
             'image'         => $booking->image ? "https://files.cliqnship.com/{$booking->image}" : null,
