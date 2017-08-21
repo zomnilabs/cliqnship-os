@@ -93,9 +93,7 @@ class BookingsController extends AbstractAPIController {
 
         $input['user_id'] = $userId;
 
-        $result = null;
-
-        \DB::transaction(function() use ($input, &$result, $request, $userId) {
+        $result = \DB::transaction(function() use ($input, $request, $userId) {
 
             // check address
             if (isset($input['address']) && is_array($input['address'])) {
@@ -164,10 +162,14 @@ class BookingsController extends AbstractAPIController {
             }
 
             $result = Booking::create($bookingData);
+
+            // Transform Result
+            return $this->transformItem($result, new BookingTransformer);
         });
 
-        // Transform Result
-        $result = $this->transformItem($result, new BookingTransformer);
+        if (! $result) {
+            return $this->responseBadRequest(['There is an error with your request']);
+        }
 
         // Return response
         return $this->responseCreated($result->toArray());
