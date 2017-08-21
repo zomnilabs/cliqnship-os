@@ -100,7 +100,9 @@ class BookingsController extends AbstractAPIController {
             // check address
             if (isset($input['address']) && is_array($input['address'])) {
                 if (isset($input['address']['id'])) {
-                    $address = UserAddressbook::find($input['address']['id']);
+                    $address = UserAddressbook::where('id', $input['address']['id'])
+                        ->where('user_id', $userId)
+                        ->where('type', 'booking')->first();
 
                     if (! $address) {
                         return $this->responseBadRequest(['invalid selected address']);
