@@ -93,97 +93,82 @@ class BookingsController extends AbstractAPIController {
 
         $input['user_id'] = $userId;
 
-        $result = \DB::transaction(function() use ($input, $request, $userId) {
-            try {
-                // check address
-                if (isset($input['address']) && is_array($input['address'])) {
-                    if (isset($input['address']['id'])) {
-                        $address = UserAddressbook::where('id', $input['address']['id'])
-                            ->where('user_id', $userId)
-                            ->where('type', 'booking')->first();
+        $result = null;
 
-                        if (! $address) {
-                            throw new \Exception("Invalid address");
-                        }
+        \DB::transaction(function() use ($input, &$result, $request, $userId) {
 
-                        $input['address'] = $address->id;
-                    } else {
-                        $addressData = $input['address'];
-                        $addressData['user_id'] = $userId;
-                        $addressData['type'] = 'booking';
+            // check address
+            if (isset($input['address']) && is_array($input['address'])) {
+                if (isset($input['address']['id'])) {
+                    $address = UserAddressbook::find($input['address']['id']);
 
-                        if (isset($addressData['primary']) && $addressData['primary'] && $addressData['type'] === 'booking') {
-                            $addressData['primary'] = 0;
-                        }
-
-                        $address = UserAddressbook::create($addressData);
-
-                        // Check if newly added address is a primary address
-                        if ($address->primary && $address->type === 'shipment') {
-                            // Update other primary
-                            UserAddressbook::where('user_id', $userId)
-                                ->where('primary', 1)
-                                ->where('id', '!=', $address->id)
-                                ->update(['primary' => 0]);
-                        }
-
-                        $input['address'] = $address->id;
+                    if (! $address) {
+                        return $this->responseBadRequest(['invalid selected address']);
                     }
-                }
 
-                // Image Upload
-                $image = null;
-                if ($request->hasFile('image')) {
-                    if (getenv('APP_ENV') === 'production') {
-                        $image =  $request->file('image')->store('prod/bookings', 's3');
-                    } else {
-                        $image =  $request->file('image')->store('dev/bookings', 's3');
+                    $input['address'] = $address->id;
+                } else {
+                    $addressData = $input['address'];
+                    $addressData['user_id'] = $userId;
+                    $addressData['type'] = 'booking';
+
+                    if (isset($addressData['primary']) && $addressData['primary'] && $addressData['type'] === 'booking') {
+                        $addressData['primary'] = 0;
                     }
+
+                    $address = UserAddressbook::create($addressData);
+
+                    // Check if newly added address is a primary address
+                    if ($address->primary && $address->type === 'shipment') {
+                        // Update other primary
+                        UserAddressbook::where('user_id', $userId)
+                            ->where('primary', 1)
+                            ->where('id', '!=', $address->id)
+                            ->update(['primary' => 0]);
+                    }
+
+                    $input['address'] = $address->id;
                 }
-
-                $bookingData = [
-                    'user_id'           => $input['user_id'],
-                    'user_addressbook_id'   => $input['address'],
-                    'source_id'         => 3,
-                    'booking_no'        => uniqid(),
-                    'remarks'           => isset($input['remarks']) ? $input['remarks'] : '',
-                    'pickup_date'       => Carbon::createFromTimestamp(strtotime($input['pickup_date'])),
-                    'number_of_items'   => isset($input['number_of_items']) ? $input['number_of_items'] : 0,
-                    'type_of_items'     => isset($input['type_of_items']) ? $input['type_of_items'] : '',
-                    'length'            => isset($input['length']) ? $input['length'] : 0,
-                    'width'             => isset($input['width']) ? $input['width'] : 0,
-                    'height'            => isset($input['height']) ? $input['height'] : 0,
-                    'weight'            => isset($input['weight']) ? $input['weight'] : 0,
-                    'status'            => 'pending'
-                ];
-
-                if ($image) {
-                    $bookingData['image'] = $image;
-                }
-
-                $result = Booking::create($bookingData);
-
-                // Transform Result
-                return [
-                    'status'    => 'success',
-                    'data'      => $this->transformItem($result, new BookingTransformer)->toArray()
-                ];
-            } catch (\Exception $e) {
-                \Log::alert("Creating Booking Error", [$e->getMessage()]);
-
-                return [
-                    'status'    => 'failed',
-                    'message'   => $e->getMessage()
-                ];
             }
+
+            // Image Upload
+            $image = null;
+            if ($request->hasFile('image')) {
+                if (getenv('APP_ENV') === 'production') {
+                    $image =  $request->file('image')->store('prod/bookings', 's3');
+                } else {
+                    $image =  $request->file('image')->store('dev/bookings', 's3');
+                }
+            }
+
+            $bookingData = [
+                'user_id'           => $input['user_id'],
+                'user_addressbook_id'   => $input['address'],
+                'source_id'         => 3,
+                'booking_no'        => uniqid(),
+                'remarks'           => isset($input['remarks']) ? $input['remarks'] : '',
+                'pickup_date'       => Carbon::createFromTimestamp(strtotime($input['pickup_date'])),
+                'number_of_items'   => isset($input['number_of_items']) ? $input['number_of_items'] : 0,
+                'type_of_items'     => isset($input['type_of_items']) ? $input['type_of_items'] : '',
+                'length'            => isset($input['length']) ? $input['length'] : 0,
+                'width'             => isset($input['width']) ? $input['width'] : 0,
+                'height'            => isset($input['height']) ? $input['height'] : 0,
+                'weight'            => isset($input['weight']) ? $input['weight'] : 0,
+                'status'            => 'pending'
+            ];
+
+            if ($image) {
+                $bookingData['image'] = $image;
+            }
+
+            $result = Booking::create($bookingData);
         });
 
-        if ($result['status'] === 'failed') {
-            return $this->responseBadRequest([$result['message']]);
-        }
+        // Transform Result
+        $result = $this->transformItem($result, new BookingTransformer);
 
         // Return response
-        return $this->responseCreated($result['data']);
+        return $this->responseCreated($result->toArray());
     }
 
     /**
