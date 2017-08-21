@@ -103,7 +103,7 @@ class BookingsController extends AbstractAPIController {
                         ->where('type', 'booking')->first();
 
                     if (! $address) {
-                        return $this->responseBadRequest(['invalid selected address']);
+                        throw new \Exception("Invalid address");
                     }
 
                     $input['address'] = $address->id;
@@ -167,8 +167,8 @@ class BookingsController extends AbstractAPIController {
             return $this->transformItem($result, new BookingTransformer);
         });
 
-        if (! $result) {
-            return $this->responseBadRequest(['There is an error with your request']);
+        if ($result instanceof \Exception) {
+            return $this->responseBadRequest([$result->getMessage()]);
         }
 
         // Return response
