@@ -94,136 +94,165 @@ class ShipmentsController extends AbstractAPIController {
 
         $input['user_id'] = $userId;
 
-        $result = null;
+        $result = \DB::transaction(function() use ($input, $request, $userId) {
+            try {
+                // check from address
+                if (isset($input['from']) && is_array($input['from'])) {
+                    if (isset($input['from']['id'])) {
+                        $address = UserAddressbook::where('id', $input['from']['id'])
+                            ->where('user_id', $userId)
+                            ->where('type', 'booking')->first();
 
-        // check from address
-        if (isset($input['from']) && is_array($input['from'])) {
-            if (isset($input['from']['id'])) {
-                $address = UserAddressbook::find($input['from']['id']);
+                        if (! $address) {
+                            throw new \Exception('Invalid from address');
+                        }
 
-                if (! $address) {
-                    return $this->responseBadRequest(['invalid selected address']);
+                        $input['from'] = $address->id;
+                    } else {
+                        $addressData = $input['from'];
+                        $addressData['user_id'] = $userId;
+                        $addressData['type'] = 'booking';
+
+                        if (isset($addressData['primary']) && $addressData['primary'] && $addressData['type'] === 'booking') {
+                            $addressData['primary'] = 0;
+                        }
+
+                        $address = UserAddressbook::create($addressData);
+
+                        // Check if newly added address is a primary address
+                        if ($address->primary && $address->type === 'shipment') {
+                            // Update other primary
+                            UserAddressbook::where('user_id', $userId)
+                                ->where('primary', 1)
+                                ->where('id', '!=', $address->id)
+                                ->update(['primary' => 0]);
+                        }
+
+                        $input['from'] = $address->id;
+                    }
                 }
 
-                $input['from'] = $address->id;
-            } else {
-                $addressData = $input['from'];
-                $addressData['user_id'] = $userId;
-                $addressData['type'] = 'booking';
+                // check to address
+                if (isset($input['to']) && is_array($input['to'])) {
+                    if (isset($input['to']['id'])) {
+                        $address = UserAddressbook::where('id', $input['to']['id'])
+                            ->where('user_id', $userId)
+                            ->where('type', 'shipment')->first();
 
-                if (isset($addressData['primary']) && $addressData['primary'] && $addressData['type'] === 'booking') {
-                    $addressData['primary'] = 0;
+                        if (! $address) {
+                            throw new \Exception('Invalid to address');
+                        }
+
+                        $input['to'] = $address->id;
+                    } else {
+                        $addressData = $input['to'];
+                        $addressData['user_id'] = $userId;
+                        $addressData['type'] = 'booking';
+
+                        if (isset($addressData['primary']) && $addressData['primary'] && $addressData['type'] === 'booking') {
+                            $addressData['primary'] = 0;
+                        }
+
+                        $address = UserAddressbook::create($addressData);
+
+                        // Check if newly added address is a primary address
+                        if ($address->primary && $address->type === 'shipment') {
+                            // Update other primary
+                            UserAddressbook::where('user_id', $userId)
+                                ->where('primary', 1)
+                                ->where('id', '!=', $address->id)
+                                ->update(['primary' => 0]);
+                        }
+
+                        $input['to'] = $address->id;
+                    }
                 }
 
-                $address = UserAddressbook::create($addressData);
-
-                // Check if newly added address is a primary address
-                if ($address->primary && $address->type === 'shipment') {
-                    // Update other primary
-                    UserAddressbook::where('user_id', $userId)
-                        ->where('primary', 1)
-                        ->where('id', '!=', $address->id)
-                        ->update(['primary' => 0]);
+                // Image Upload
+                $image = null;
+                if ($request->hasFile('image')) {
+                    if (getenv('APP_ENV') === 'production') {
+                        $image =  $request->file('image')->store('prod/bookings', 's3');
+                    } else {
+                        $image =  $request->file('image')->store('dev/bookings', 's3');
+                    }
                 }
 
-                $input['from'] = $address->id;
-            }
-        }
-
-        // check to address
-        if (isset($input['to']) && is_array($input['to'])) {
-            if (isset($input['to']['id'])) {
-                $address = UserAddressbook::find($input['to']['id']);
-
-                if (! $address) {
-                    return $this->responseBadRequest(['invalid selected address']);
-                }
-
-                $input['to'] = $address->id;
-            } else {
-                $addressData = $input['to'];
-                $addressData['user_id'] = $userId;
-                $addressData['type'] = 'booking';
-
-                if (isset($addressData['primary']) && $addressData['primary'] && $addressData['type'] === 'booking') {
-                    $addressData['primary'] = 0;
-                }
-
-                $address = UserAddressbook::create($addressData);
-
-                // Check if newly added address is a primary address
-                if ($address->primary && $address->type === 'shipment') {
-                    // Update other primary
-                    UserAddressbook::where('user_id', $userId)
-                        ->where('primary', 1)
-                        ->where('id', '!=', $address->id)
-                        ->update(['primary' => 0]);
-                }
-
-                $input['to'] = $address->id;
-            }
-        }
-
-        \DB::transaction(function() use ($input, &$result) {
-            $shipmentData = [
-                'user_id'           => $input['user_id'],
-                'from'              => $input['from'],
-                'to'                => $input['to'],
-                'source_id'         => 3,
-                'item_description'  => isset($input['item_description']) ? $input['item_description'] : '',
-                'number_of_items'   => isset($input['number_of_items']) ? $input['number_of_items'] : 0,
-                'service_type'      => isset($input['service_type']) ? $input['service_type'] : 'metro_manila',
+                $shipmentData = [
+                    'user_id'           => $input['user_id'],
+                    'from'              => $input['from'],
+                    'to'                => $input['to'],
+                    'source_id'         => 3,
+                    'item_description'  => isset($input['item_description']) ? $input['item_description'] : '',
+                    'number_of_items'   => isset($input['number_of_items']) ? $input['number_of_items'] : 0,
+                    'service_type'      => isset($input['service_type']) ? $input['service_type'] : 'metro_manila',
 //                'is_international'      => isset($input['is_international']) ? $input['is_international'] : '',
-                'collect_and_deposit'   => isset($input['collect_and_deposit']) ? $input['collect_and_deposit'] : 0,
-                'insurance_declared_value'   => isset($input['insurance_declared_value']) ? $input['insurance_declared_value'] : 0,
-                'insurance_amount'           => isset($input['insurance_amount']) ? $input['insurance_amount'] : 0,
-                'status'            => 'pending',
-                'charge_to'         => isset($input['charge_to']) ? $input['charge_to'] : 'sender',
-                'pay_thru'          => isset($input['pay_thru']) ? $input['pay_thru'] : 'cash',
-                'package_type'      => isset($input['package_type']) ? $input['package_type'] : 'own-packaging',
-                'length'      => isset($input['length']) ? $input['length'] : 0,
-                'width'      => isset($input['width']) ? $input['width'] : 0,
-                'height'      => isset($input['height']) ? $input['height'] : 0,
-                'weight'      => isset($input['weight']) ? $input['weight'] : 0,
-            ];
-
-            $result = Shipment::create($shipmentData);
-
-            if ($result->collect_and_deposit) {
-                $cod = [
-                    'collect_and_deposit_amount'    => isset($input['collect_and_deposit_amount']) ? $input['collect_and_deposit_amount'] : 0,
-                    'account_name'                  => isset($input['account_name']) ? $input['account_name'] : '',
-                    'account_number'                => isset($input['account_number']) ? $input['account_number'] : '',
-                    'bank'                          => isset($input['bank']) ? $input['bank'] : '',
-                    'status'                        => 'pending',
-                    'cod_fee'                       => 0
+                    'collect_and_deposit'   => isset($input['collect_and_deposit']) ? $input['collect_and_deposit'] : 0,
+                    'insurance_declared_value'   => isset($input['insurance_declared_value']) ? $input['insurance_declared_value'] : 0,
+                    'insurance_amount'           => isset($input['insurance_amount']) ? $input['insurance_amount'] : 0,
+                    'status'            => 'pending',
+                    'charge_to'         => isset($input['charge_to']) ? $input['charge_to'] : 'sender',
+                    'pay_thru'          => isset($input['pay_thru']) ? $input['pay_thru'] : 'cash',
+                    'package_type'      => isset($input['package_type']) ? $input['package_type'] : 'own-packaging',
+                    'length'            => isset($input['length']) ? $input['length'] : 0,
+                    'width'             => isset($input['width']) ? $input['width'] : 0,
+                    'height'            => isset($input['height']) ? $input['height'] : 0,
+                    'weight'            => isset($input['weight']) ? $input['weight'] : 0,
+                    'image'             => $image
                 ];
 
-                $result->cod()->create($cod);
+                $shipment = Shipment::create($shipmentData);
+
+                if ($shipment->collect_and_deposit) {
+                    $cod = [
+                        'collect_and_deposit_amount'    => isset($input['collect_and_deposit_amount']) ? $input['collect_and_deposit_amount'] : 0,
+                        'account_name'                  => isset($input['account_name']) ? $input['account_name'] : '',
+                        'account_number'                => isset($input['account_number']) ? $input['account_number'] : '',
+                        'bank'                          => isset($input['bank']) ? $input['bank'] : '',
+                        'status'                        => 'pending',
+                        'cod_fee'                       => 0
+                    ];
+
+                    $shipment->cod()->create($cod);
+                }
+
+                // Create Tracking Number
+                ShipmentTrackingNumber::create([
+                    'tracking_number'   => $this->createTrackingNumber(),
+                    'shipment_id'       => $shipment->id
+                ]);
+
+                // Record Event
+                ShipmentEvent::create([
+                    'shipment_id'   => $shipment->id,
+                    'event_source'  => 'customer',
+                    'event'         => 'status_change',
+                    'value'         => 'pending',
+                    'remarks'       => 'shipment created',
+                    'user_id'       => $input['user_id']
+                ]);
+
+                // Transform Result
+                $result = $this->transformItem($shipment, new ShipmentTransformer);
+
+                return [
+                    'status'    => 'success',
+                    'data'      => $result->toArray()
+                ];
+            } catch (\Exception $e) {
+                return [
+                    'status'    => 'failed',
+                    'message'   => $e->getMessage()
+                ];
             }
-
-            // Create Tracking Number
-            ShipmentTrackingNumber::create([
-                'tracking_number'   => $this->createTrackingNumber(),
-                'shipment_id'       => $result->id
-            ]);
-
-            // Record Event
-            ShipmentEvent::create([
-                'shipment_id'   => $result->id,
-                'event_source'  => 'customer',
-                'event'         => 'status_change',
-                'value'         => 'pending',
-                'remarks'       => 'shipment created',
-                'user_id'       => $input['user_id']
-            ]);
         });
 
-        // Transform Result
-        $result = $this->transformItem($result, new ShipmentTransformer);
+        if ($result['status'] === 'failed') {
+            return $this->responseBadRequest([$result['message']]);
+        }
 
         // Return response
-        return $this->responseCreated($result->toArray());
+        return $this->responseCreated($result['data']);
     }
 
     /**
