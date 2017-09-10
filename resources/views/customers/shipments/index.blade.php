@@ -85,6 +85,24 @@
         </div>
     </div>
 
+    @if (session()->has('error'))
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <h4>There's an error with your import</h4>
+            <ul>
+                @foreach(session()->get('error') as $error)
+                    <li>
+                        <strong>Item #{{ $error['item'] }}</strong>
+                        <ul>
+                            @foreach($error['messages'] as $key => $message)
+                                <li><strong>{{ $key }}</strong>: {{ $message[0] }}</li>
+                            @endforeach
+                        </ul>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
