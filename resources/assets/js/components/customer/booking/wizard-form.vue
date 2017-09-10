@@ -342,6 +342,10 @@
         mounted() {
             this.user_id = $('#user_id').val();
 
+            $('[type="date"]').prop('min', function(){
+                return new Date().toJSON().split('T')[0];
+            });
+
             this.getAddress()
         },
         methods: {
