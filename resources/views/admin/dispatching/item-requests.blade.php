@@ -99,8 +99,13 @@
                                     <td>{{ $itemRequest->quantity }}</td>
                                     <td>{{ $itemRequest->source->name or ''}}</td>
                                     <td>
-                                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                        <button class="btn btn-default"><i class="fa fa-edit"></i></button>
+                                        <button class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                                                title="Reject Item Request">
+                                            <i class="fa fa-times"></i></button>
+
+                                        <button class="btn btn-default" data-toggle="tooltip" data-placement="top"
+                                                title="Approve Item Request">
+                                            <i class="fa fa-check"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
