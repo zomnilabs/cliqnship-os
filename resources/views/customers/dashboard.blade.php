@@ -405,10 +405,6 @@
                             @endforeach
                             </tbody>
                         </table>
-
-                        <div class="chart" style="height: 120px">
-                            <canvas id="shipmentsChartWithCod"></canvas>
-                        </div>
                     </div>
                 </div>
             </div>
