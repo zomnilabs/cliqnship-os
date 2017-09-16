@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\ShipmentResolutionMessage;
 use Illuminate\Database\Eloquent\Model;
 
 class ShipmentResolution extends Model
@@ -15,5 +16,9 @@ class ShipmentResolution extends Model
 
     public function logs() {
         return $this->hasMany(ShipmentReturnLogs::class);
+    }
+
+    public function messages() {
+        return $this->hasMany(ShipmentResolutionMessage::class);
     }
 }

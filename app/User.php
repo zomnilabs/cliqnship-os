@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\BookingAssignment;
 use App\Models\ShipmentAssignment;
 use App\Models\ShipmentEvent;
+use App\Models\ShipmentResolutionMessage;
 use App\Models\ShipmentReturnLogs;
 use App\Models\UserAddressbook;
 use App\Models\UserGroup;
@@ -79,6 +80,11 @@ class User extends Authenticatable
     public function returnLogs()
     {
         return $this->hasMany(ShipmentReturnLogs::class, 'user_id');
+    }
+
+    public function resolutionMessages()
+    {
+        return $this->hasMany(ShipmentResolutionMessage::class);
     }
 
     // Mutator

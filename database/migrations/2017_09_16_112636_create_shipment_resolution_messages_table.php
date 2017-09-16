@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShipmentResolutionsTable extends Migration
+class CreateShipmentResolutionMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateShipmentResolutionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('shipment_resolutions', function (Blueprint $table) {
+        Schema::create('shipment_resolution_messages', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('shipment_id')->unsigned();
-            $table->text('remarks');
-            $table->enum('state', ['unread', 'read']);
-            $table->enum('status', ['unresolved', 'resolving', 'resolved']);
+            $table->integer('user_id')->unsigned();
+            $table->text('message');
+            $table->
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +31,6 @@ class CreateShipmentResolutionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shipment_resolutions');
+        Schema::dropIfExists('shipment_resolution_messages');
     }
 }
