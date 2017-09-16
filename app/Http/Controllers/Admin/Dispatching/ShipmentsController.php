@@ -50,37 +50,6 @@ class ShipmentsController extends Controller {
             ->with('shipments',$shipments);
     }
 
-    public function returned(Request $request)
-    {
-
-        if ($request->has('status')) {
-            $problematicShipments = ShipmentResolution::with('shipment')
-                ->where('status', $request->get('status'))
-                ->get();
-        } else {
-            $problematicShipments = ShipmentResolution::with('shipment')->where('status', 'unresolved')
-                ->get();
-        }
-
-        $resolved = ShipmentResolution::where('status', 'resolved')->count();
-        $unresolved = ShipmentResolution::where('status', 'unresolved')->count();
-        $resolving = ShipmentResolution::where('status', 'resolving')->count();
-
-        return view('admin.dispatching.shipments.returned')
-            ->with('resolved', $resolved)
-            ->with('unresolved', $unresolved)
-            ->with('resolving', $resolving)
-            ->with('shipments', $problematicShipments);
-    }
-
-    public function getReturnLogs(Request $request, $resolutionId)
-    {
-        $logs = ShipmentReturnLogs::with('user.profile', 'user.userGroup')->where('shipment_resolution_id', $resolutionId)
-            ->get();
-
-        return response()->json($logs, 200);
-    }
-
     /**
      * Redispatch returned shipments
      *

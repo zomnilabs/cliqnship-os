@@ -16,7 +16,7 @@
                             <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                                 <label for="status">Select Status: </label>
                                 <select name="status" id="status" class="form-control">
-                                    <option value="re-dispatch">Re-dispatch</option>
+                                    <option value="resolving">resolving</option>
                                     <option value="return-to-sender">Return to sender</option>
                                 </select>
 

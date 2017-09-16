@@ -94,9 +94,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
         Route::get('item-requests', 'ItemRequestsController@index');
     });
 
-    Route::group(['prefix' => 'resolutions', 'namespace' => 'Dispatching'], function() {
-        Route::get('shipments/returned', 'ShipmentsController@returned');
-        Route::get('shipments/returned/{resolutionId}', 'ShipmentsController@getReturnLogs');
+    Route::group(['prefix' => 'resolutions', 'namespace' => 'Resolution'], function() {
+        Route::get('shipments/returned', 'ResolutionsController@returned');
+        Route::get('shipments/returned/{resolutionId}', 'ResolutionsController@getReturnLogs');
     });
 
     Route::group(['prefix' => 'cash-on-delivery', 'namespace' => 'COD'], function() {

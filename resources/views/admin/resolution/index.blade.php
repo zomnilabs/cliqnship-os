@@ -178,6 +178,6 @@
             </div>
         </div>
     </div>
-    @include('admin.dispatching.shipments.modals.refresh-shipment')
-    @include('admin.dispatching.shipments.modals.return-logs')
+    @include('admin.resolution.modals.refresh-shipment')
+    @include('admin.resolution.modals.return-logs')
 @endsection
