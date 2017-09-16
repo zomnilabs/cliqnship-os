@@ -195,17 +195,19 @@
                     </div>
 
                     <div class="timeline-footer">
-                        <a class="btn btn-primary btn-xs">...</a>
+
                     </div>
                 </div>
             </li>
         </ul>
 
-        <div style="margin-bottom: 50px;">
-            <form action="" method="POST">
-                <textarea class="form-control" rows="3"></textarea>
-                <button class="btn btn-default pull-right">Send Message</button>
-            </form>
+        <div class="row" style="margin-bottom: 50px;">
+            <div class="col-md-12 col-xs-12">
+                <form action="" method="POST">
+                    <textarea class="form-control" rows="3"></textarea>
+                    <button class="btn btn-default pull-right">Send Message</button>
+                </form>
+            </div>
         </div>
 
     </div>
