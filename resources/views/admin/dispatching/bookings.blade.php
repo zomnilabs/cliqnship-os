@@ -103,11 +103,11 @@
                 <div class="breadcrumbs">
                     <ol class="breadcrumb">
                         <li><a href="/admin">Dashboard</a></li>
-                        <li class="active">Dispatching</li>
+                        <li class="active">Dispatching Bookings</li>
                     </ol>
                 </div>
                 <div class="header-title pull-left">
-                    <h1>Dispatching</h1>
+                    <h1>Dispatching Bookings</h1>
                 </div>
 
                 <div class="page-actions pull-right">
