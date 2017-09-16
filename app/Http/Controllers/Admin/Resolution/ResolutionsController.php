@@ -46,4 +46,10 @@ class ResolutionsController extends Controller {
 
         return response()->json($logs, 200);
     }
+
+    public function newMessage(Request $request, $resolutionId)
+    {
+        // TODO: Create a new message
+        // update resolution state
+    }
 }
