@@ -7,7 +7,7 @@ use App\Models\ShipmentReturnLogs;
 use Illuminate\Http\Request;
 
 class ResolutionsController extends Controller {
-    public function returned(Request $request)
+    public function index(Request $request)
     {
 
         if ($request->has('status')) {
@@ -28,6 +28,15 @@ class ResolutionsController extends Controller {
             ->with('unresolved', $unresolved)
             ->with('resolving', $resolving)
             ->with('shipments', $problematicShipments);
+    }
+
+    public function show(Request $request, $resolutionId)
+    {
+        $resolution = ShipmentResolution::with('shipment')->where('id', $resolutionId)
+            ->first();
+
+        return view('admin.resolution.show')
+            ->with('resolution', $resolution);
     }
 
     public function getReturnLogs(Request $request, $resolutionId)

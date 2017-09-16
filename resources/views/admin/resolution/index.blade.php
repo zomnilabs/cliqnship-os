@@ -148,28 +148,30 @@
                     </thead>
 
                     <tbody>
-                    @foreach($shipments as $shipment)
-                        <tr id="shipment-{{$shipment->shipment->id}}">
-                            <td class="hide">{{$shipment->shipment->id}}</td>
-                            <td>{{ $shipment->shipment->trackingNumbers()->mainTrackingNumber($shipment->shipment->id)->tracking_number}}</td>
-                            <td>{{ $shipment->shipment->user->profile->first_name}} {{$shipment->shipment->user->profile->middle_name}} {{$shipment->shipment->user->profile->last_name}}</td>
+                    @foreach($shipments as $resolution)
+                        <tr id="shipment-{{$resolution->shipment->id}}">
+                            <td class="hide">{{$resolution->shipment->id}}</td>
+                            <td>{{ $resolution->shipment->trackingNumbers()->mainTrackingNumber($resolution->shipment->id)->tracking_number }}</td>
+                            <td>{{ $resolution->shipment->user->profile->first_name}} {{$resolution->shipment->user->profile->middle_name}} {{$resolution->shipment->user->profile->last_name}}</td>
                             <td>
-                                @if ($shipment->shipment->address)
-                                    {{ $shipment->shipment->address->address_line_1 }} {{ $shipment->shipment->address->barangay }} {{ $shipment->shipment->address->city }}, {{ $shipment->shipment->address->province }}. {{ $shipment->shipment->address->zip_code }}
+                                @if ($resolution->shipment->address)
+                                    {{ $resolution->shipment->address->address_line_1 }} {{ $resolution->shipment->address->barangay }} {{ $resolution->shipment->address->city }}, {{ $resolution->shipment->address->province }}. {{ $resolution->shipment->address->zip_code }}
                                 @endif
                             </td>
-                            <td>{{ $shipment->logs()->first()->reason }}</td>
-                            <td>{{ $shipment->shipment->returnLogs()->orderBy('created_at', 'DESC')->count() }}</td>
-                            <td>{{ $shipment->status }}</td>
+                            <td>{{ $resolution->logs()->first()->reason }}</td>
+                            <td>{{ $resolution->shipment->returnLogs()->orderBy('created_at', 'DESC')->count() }}</td>
+                            <td>{{ $resolution->status }}</td>
                             <td>
-                                <button class="btn btn-default" id="returnShipmentBtn"
-                                        data-shipment="{{ $shipment->shipment->id }}" data-toggle="modal" data-target="#returnShipment" >
-                                    <i class="fa fa-refresh"></i></button>
+                                {{--<button class="btn btn-default" id="returnShipmentBtn"--}}
+                                        {{--data-shipment="{{ $shipment->shipment->id }}" data-toggle="modal" data-target="#returnShipment" >--}}
+                                    {{--<i class="fa fa-refresh"></i></button>--}}
 
-                                <button class="btn btn-default returned-shipment-logs-btn" id="returnShipmentLogsBtn"
-                                        data-resolution="{{ $shipment->id }}"
-                                        data-shipment="{{ $shipment->shipment->id }}" data-toggle="modal" data-target="#returnShipmentLogs" >
-                                    <i class="fa fa-eye"></i></button>
+                                {{--<button class="btn btn-default returned-shipment-logs-btn" id="returnShipmentLogsBtn"--}}
+                                        {{--data-resolution="{{ $shipment->id }}"--}}
+                                        {{--data-shipment="{{ $shipment->shipment->id }}" data-toggle="modal" data-target="#returnShipmentLogs" >--}}
+                                    {{--<i class="fa fa-eye"></i></button>--}}
+
+                                <a href="/admin/resolutions/{{ $resolution->id }}" class="btn btn-default"><i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
                     @endforeach

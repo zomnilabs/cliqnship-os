@@ -151,7 +151,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <li class="{{ set_active(['admin/resolutions*']) }} dropdown treeview">
-                                <a href="/admin/resolutions/shipments/returned">Returned Shipments</a>
+                                <a href="/admin/resolutions">Returned Shipments</a>
                             </li>
                         </ul>
                     </li>
