@@ -16,7 +16,8 @@ class ResolutionsController extends Controller {
                 ->where('status', $request->get('status'))
                 ->get();
         } else {
-            $problematicShipments = ShipmentResolution::with('shipment')->where('status', 'unresolved')
+            $problematicShipments = ShipmentResolution::with('shipment')
+                ->where('status', 'unresolved')
                 ->get();
         }
 
@@ -33,7 +34,8 @@ class ResolutionsController extends Controller {
 
     public function show(Request $request, $resolutionId)
     {
-        $resolution = ShipmentResolution::with('shipment', 'messages')->where('id', $resolutionId)
+        $resolution = ShipmentResolution::with('shipment', 'messages')
+            ->where('id', $resolutionId)
             ->first();
 
         return view('admin.resolution.show')
@@ -42,7 +44,8 @@ class ResolutionsController extends Controller {
 
     public function getReturnLogs(Request $request, $resolutionId)
     {
-        $logs = ShipmentReturnLogs::with('user.profile', 'user.userGroup')->where('shipment_resolution_id', $resolutionId)
+        $logs = ShipmentReturnLogs::with('user.profile', 'user.userGroup')
+            ->where('shipment_resolution_id', $resolutionId)
             ->get();
 
         return response()->json($logs, 200);
