@@ -81,13 +81,13 @@
                 tokenSeparators: [',', ' '],
                 placeholder: "Input waybill number/s",
                 allowClear: true
-            }).on('change', function(value) {
+            }).on('change', function(e) {
                 let waybills = $(this).val();
                 let newValue = waybills[waybills.length - 1];
 
                 if (! newValue) {
                     return;
-                }
+                };
 
                 fetch(`/api/web/resolutions/check/${newValue}`).then((res) => {
                     if (! res.ok) {
@@ -95,6 +95,9 @@
 
                             let html = `<p><span class="text-danger">${newValue}</span> : ${json}</p>`;
                             $('.error-container').append(html);
+
+                            waybills.splice(waybills.length - 1, 1);
+                            $(this).val(waybills).trigger('change.select2');;
                         });
 
                         return;
@@ -102,6 +105,8 @@
                 }).catch((error) => {
                     let html = `<p><span class="text-danger">${newValue}</span> is not a valid waybill</p>`;
                     $('.error-container').append(html);
+
+                    // remove last element
                 });
             });
 

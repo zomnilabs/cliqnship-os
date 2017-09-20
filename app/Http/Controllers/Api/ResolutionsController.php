@@ -13,27 +13,18 @@ class ResolutionsController extends Controller {
     // Check waybill number
     public function checkWaybill(Request $request, $waybillNumber)
     {
-        $shipment = ShipmentTrackingNumber::with('shipment.cod')->where('tracking_number', $waybillNumber)
+        $tracking = ShipmentTrackingNumber::with('shipment')->where('tracking_number', $waybillNumber)
             ->where('provider', 'cliqnship')
             ->first();
 
-        if (! $shipment) {
+        if (! $tracking) {
             return response()->json('Invalid shipment', 400);
         }
 
-        if ($request->has('status')) {
-            if ($shipment->shipment->status === 'returned') {
-                return response()->json('Returned shipments must be reviewed first', 400);
-            }
-
-            if ($shipment->shipment->status !== 'arrived-at-hq'
-                && $shipment->shipment->status !== 'enroute') {
-
-                return response()->json('Shipment not in hq yet', 400);
-            }
-
+        if ($tracking->shipment->status !== 'returned') {
+            return response()->json('Only Returned Shipment are eligible for RTS', 400);
         }
 
-        return response()->json($shipment, 200);
+        return response()->json($tracking, 200);
     }
 }
