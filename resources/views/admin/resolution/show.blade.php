@@ -113,7 +113,15 @@
                         </div>
 
                         <div class="col-md-6 col-xs-12">
-                            <p>Resolution Status: <small class="label bg-red">{{ $resolution->status }}</small></p>
+                            <p>Resolution Status:
+                                @if ($resolution->status === 'resolving')
+                                    <small class="label bg-orange">{{ $resolution->status }}</small>
+                                @elseif ($resolution->status === 'resolved')
+                                    <small class="label bg-green">{{ $resolution->status }}</small>
+                                @else
+                                    <small class="label bg-red">{{ $resolution->status }}</small>
+                                @endif
+                            </p>
                             <p>Last Updated: <strong>{{ $resolution->updated_at->toFormattedDateString() }}</strong></p>
                         </div>
                     </div>
