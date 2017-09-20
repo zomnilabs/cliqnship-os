@@ -1,48 +1,63 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@section('stylesheets')
+    <link rel="stylesheet" href="{{ asset('css/wizard.css') }}">
+@endsection
 
 @section('scripts')
     <script>
         (function() {
-            $('#shippingTable tfoot tr.searchable td').each( function () {
-                let title = $(this).text();
+            $('#tableResolution thead tr.searchable th').each( function () {
+                var title = $(this).text();
                 if (title) {
-                    switch (title) {
-                        case 'Pickup Date':
-                            $(this).html( '<input type="date" class="form-control filter" style="width: 100%" placeholder="Search '+title+'" />' );
-
-                            break;
-                        case 'Status':
-                            let selectHTML = '<select class="form-control filter" style="width: 100%">';
-                            selectHTML += '<option value="">Filter Status</option>';
-                            selectHTML += '<option value="pending">Pending</option>';
-                            selectHTML += '<option value="accepted">Accepted</option>';
-                            selectHTML += '<option value="completed">Completed</option>';
-                            selectHTML += '<option value="rejected">Rejected</option>';
-                            selectHTML += '</select>';
-
-                            $(this).html(selectHTML);
-                            break;
-                        default:
-                            $(this).html( '<input class="form-control filter" type="text" style="width: 100%" placeholder="Search '+title+'" />' );
-                    }
-
+                    $(this).html( '<input type="text" style="width: 100%" placeholder="Search '+title+'" />' );
                 }
             });
 
-            let table = $('#shippingTable').DataTable();
+            $('#tableResolution').dataTable();
 
-            // Apply the search
-            table.columns().every( function () {
-                let that = this;
-                $( '.filter', this.footer() ).on( 'keyup change', function () {
-                    if ( that.search() !== this.value ) {
-                        console.log(that.data());
-                        that
-                            .search( this.value )
-                            .draw();
+            $('#returnShipmentBtn').click(function(){
+                id = $(this).attr('data-shipment');
+                action = '/admin/dispatching/shipments/returned/'+ id +'/redispatch';
+                $('#redispatch-form').attr('action', action);
+            });
+
+            $('#returnShipmentLogs').on('shown.bs.modal', function() {
+//                $('.loading-data').removeClass('hide');
+            });
+
+            $('.returned-shipment-logs-btn').on('click', function() {
+                $('.loading-data').removeClass('hide');
+                $('.content-data').addClass('hide');
+
+                $('#resolutionLogs').children().remove();
+
+                let resolutionId = $(this).data('resolution');
+                let url = `/admin/resolutions/shipments/returned/${resolutionId}`;
+
+                axios.get(url).then((response) => {
+                    console.log(response.data);
+
+                    for (let log of response.data) {
+                        addToTable(log);
                     }
-                } );
-            } );
+
+                    $('.content-data').removeClass('hide');
+                    $('.loading-data').addClass('hide');
+                });
+            });
+
+            function addToTable(log) {
+                let html = '<tr>';
+                html += `<td>${log.user.profile.first_name} ${log.user.profile.last_name}</td>`;
+                html += `<td>${log.user.user_group.name}</td>`;
+                html += `<td>${log.reason}</td>`;
+                html += `<td>${log.created_at}</td>`;
+                html += '</tr>';
+
+                $('#resolutionLogs').append(html);
+            }
+
         }())
     </script>
 @endsection
@@ -54,84 +69,70 @@
                 <div class="breadcrumbs">
                     <ol class="breadcrumb">
                         <li><a href="/customers">Dashboard</a></li>
-                        <li><a href="/customers/shipments">Shipments</a></li>
                         <li class="active">Returned Shipments</li>
                     </ol>
                 </div>
                 <div class="header-title pull-left">
                     <h1>Returned Shipments</h1>
                 </div>
+
                 <div class="page-actions pull-right">
-                    <button class="btn btn-primary">
-                        <i class="fa fa-download"></i>
-                        Export Shipments</button>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="hide">
-                            <div class="filter-categories">
-                                <div class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-sm btn-default active">
-                                        <input type="radio" name="filter" id="option1" value="all" autocomplete="off" checked> [{{ number_of_bookings(Auth::user()->id, 'all') }}] All
-                                    </label>
-                                    <label class="btn btn-sm btn-warning">
-                                        <input type="radio" name="filter" id="option2" value="pending" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'pending') }}] Pending
-                                    </label>
-                                    <label class="btn btn-sm btn-primary">
-                                        <input type="radio" name="filter" id="option3" value="accepted" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'accepted') }}] Accepted
-                                    </label>
-
-                                    <label class="btn btn-sm btn-success">
-                                        <input type="radio" name="filter" id="option3" value="completed" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'completed') }}] Completed
-                                    </label>
-
-                                    <label class="btn btn-sm btn-danger">
-                                        <input type="radio" name="filter" id="option3" value="rejected" autocomplete="off"> [{{ number_of_bookings(Auth::user()->id, 'rejected') }}] Rejected
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <table class="table table-bordered" id="shippingTable" style="width: 100%">
-                            <tfoot class="filter-footer">
-                            <tr class="searchable">
-                                <td class="hide">Id #</td>
-                                <td>Booking #</td>
-                                <td>Pickup Date</td>
-                                <td>Pickup Address</td>
-                                <td># of Items</td>
-                                <td>Remarks</td>
-                                <td>Status</td>
-                                <td></td>
-                            </tr>
-                            </tfoot>
-
-                            <thead>
-                            <tr>
-                                <th class="hide">Id #</th>
-                                <th>Booking #</th>
-                                <th>Pickup Date</th>
-                                <th>Pickup Address</th>
-                                <th># of Items</th>
-                                <th>Remarks</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                    </div>
+        <div class="box box-primary">
+            <div class="box-header">
+                <div class="box-title pull-left">
+                    <h1>Returned Shipments</h1>
                 </div>
+
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered" id="tableResolution">
+                    <thead>
+                    <tr>
+                        <th class="hide">Shipment #</th>
+                        <th>Tracking #</th>
+                        <th>Delivery Address</th>
+                        <th>Reason</th>
+                        <th>Returned Times</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    @foreach($shipments as $resolution)
+                        <tr id="shipment-{{$resolution->shipment->id}}">
+                            <td class="hide">{{$resolution->shipment->id}}</td>
+                            <td>{{ $resolution->shipment->trackingNumbers()->mainTrackingNumber($resolution->shipment->id)->tracking_number }}</td>
+                            <td>
+                                @if ($resolution->shipment->address)
+                                    {{ $resolution->shipment->address->address_line_1 }} {{ $resolution->shipment->address->barangay }} {{ $resolution->shipment->address->city }}, {{ $resolution->shipment->address->province }}. {{ $resolution->shipment->address->zip_code }}
+                                @endif
+                            </td>
+                            <td>{{ $resolution->logs()->first()->reason }}</td>
+                            <td>{{ $resolution->shipment->returnLogs()->orderBy('created_at', 'DESC')->count() }}</td>
+                            <td>{{ $resolution->status }}</td>
+                            <td>
+                                {{--<button class="btn btn-default" id="returnShipmentBtn"--}}
+                                {{--data-shipment="{{ $shipment->shipment->id }}" data-toggle="modal" data-target="#returnShipment" >--}}
+                                {{--<i class="fa fa-refresh"></i></button>--}}
+
+                                {{--<button class="btn btn-default returned-shipment-logs-btn" id="returnShipmentLogsBtn"--}}
+                                {{--data-resolution="{{ $shipment->id }}"--}}
+                                {{--data-shipment="{{ $shipment->shipment->id }}" data-toggle="modal" data-target="#returnShipmentLogs" >--}}
+                                {{--<i class="fa fa-eye"></i></button>--}}
+
+                                <a href="/customers/shipments/returned/{{ $resolution->id }}" class="btn btn-default"><i class="fa fa-eye"></i></a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
