@@ -146,10 +146,10 @@ class ShipmentsController extends Controller {
                 if ($request->get('status') === 'returned') {
 
                     // Check if there is already a resolution on-going
-                    $currentResolution = ShipmentResolution::where('shipment_id', $waybill->shipment_id)->first();
+                    $resolution = ShipmentResolution::where('shipment_id', $waybill->shipment_id)->first();
 
                     // If there is none
-                    if (! $currentResolution) {
+                    if (! $resolution) {
                         // Save return log
                         $resolution = ShipmentResolution::create([
                             'shipment_id'   => $waybill->shipment_id,
@@ -157,12 +157,10 @@ class ShipmentsController extends Controller {
                             'status'        => 'unresolved'
                         ]);
                     } else {
-                        $currentResolution->update([
+                        $resolution->update([
                             'remarks'       => $request->has('reason') ? $request->get('reason') : '',
                             'status' => 'unresolved'
                         ]);
-
-                        $resolution = $currentResolution;
                     }
 
 
