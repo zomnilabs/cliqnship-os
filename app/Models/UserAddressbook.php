@@ -54,7 +54,7 @@ class UserAddressbook extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getFullAddressAttribute()
+    public function getFullAddress()
     {
         return ucwords($this->attributes['identifier'] . ': ' . $this->attributes['address_line_1'] . ', ' . $this->attributes['barangay'] . ', ' . $this->attributes['city']);
     }

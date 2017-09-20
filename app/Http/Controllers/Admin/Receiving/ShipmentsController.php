@@ -145,12 +145,26 @@ class ShipmentsController extends Controller {
                 // Check if returned item
                 if ($request->get('status') === 'returned') {
 
-                    // Save return log
-                    $resolution = ShipmentResolution::create([
-                        'shipment_id'   => $waybill->shipment_id,
-                        'remarks'       => $request->has('reason') ? $request->get('reason') : '',
-                        'status'        => 'unresolved'
-                    ]);
+                    // Check if there is already a resolution on-going
+                    $currentResolution = ShipmentResolution::where('shipment_id', $waybill->shipment_id)->first();
+
+                    // If there is none
+                    if (! $currentResolution) {
+                        // Save return log
+                        $resolution = ShipmentResolution::create([
+                            'shipment_id'   => $waybill->shipment_id,
+                            'remarks'       => $request->has('reason') ? $request->get('reason') : '',
+                            'status'        => 'unresolved'
+                        ]);
+                    } else {
+                        $currentResolution->update([
+                            'remarks'       => $request->has('reason') ? $request->get('reason') : '',
+                            'status' => 'unresolved'
+                        ]);
+
+                        $resolution = $currentResolution;
+                    }
+
 
                     $resolution->logs()->create([
                         'user_id'       => $riderId,
@@ -158,9 +172,12 @@ class ShipmentsController extends Controller {
                     ]);
 
                     // Update Assignment
-                    ShipmentAssignment::where('shipment_id', $waybill->shipment_id)
+                    $assignment = ShipmentAssignment::where('shipment_id', $waybill->shipment_id)
                         ->where('user_id', $riderId)
-                        ->update(['status' => 'completed', 'action' => 'returned']);
+                        ->first();
+
+                    $assignment->update(['status' => 'completed', 'action' => 'returned']);
+                    $assignment->delete();
 
                     $status = 'returned';
                     $remarks = 'failed to deliver shipment';

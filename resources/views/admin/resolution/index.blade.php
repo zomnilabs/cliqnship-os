@@ -98,7 +98,7 @@
                     </div>
 
                     <div class="col-md-3">
-                        <a href="?status=resolved">
+                        <a href="?status=resolving">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <h4>Resolving Issues</h4>
