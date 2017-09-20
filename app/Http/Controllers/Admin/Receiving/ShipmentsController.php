@@ -7,7 +7,6 @@ use App\Models\ShipmentAssignment;
 use App\Models\ShipmentCod;
 use App\Models\ShipmentEvent;
 use App\Models\ShipmentResolution;
-use App\Models\ShipmentReturnLogs;
 use App\Models\ShipmentTrackingNumber;
 use App\User;
 use Carbon\Carbon;
@@ -172,6 +171,10 @@ class ShipmentsController extends Controller {
                     ShipmentAssignment::where('shipment_id', $waybill->shipment_id)
                         ->where('user_id', $riderId)
                         ->update(['status' => 'completed']);
+
+                    // Update all resolution to resolved
+                    ShipmentResolution::where('shipment_id', $waybill->shipment_id)
+                        ->update(['status' => 'resolved']);
                 }
             }
 
