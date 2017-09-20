@@ -15,10 +15,9 @@ class CreateShipmentResolutionMessagesTable extends Migration
     {
         Schema::create('shipment_resolution_messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('shipment_id')->unsigned();
+            $table->integer('shipment_resolution_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->text('message');
-            $table->
             $table->timestamps();
             $table->softDeletes();
         });

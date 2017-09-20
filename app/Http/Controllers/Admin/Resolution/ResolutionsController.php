@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin\Resolution;
 
 use App\Http\Controllers\Controller;
 use App\Models\ShipmentResolution;
+use App\Models\ShipmentResolutionMessage;
 use App\Models\ShipmentReturnLogs;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,7 @@ class ResolutionsController extends Controller {
 
     public function show(Request $request, $resolutionId)
     {
-        $resolution = ShipmentResolution::with('shipment')->where('id', $resolutionId)
+        $resolution = ShipmentResolution::with('shipment', 'messages')->where('id', $resolutionId)
             ->first();
 
         return view('admin.resolution.show')
@@ -49,7 +50,20 @@ class ResolutionsController extends Controller {
 
     public function newMessage(Request $request, $resolutionId)
     {
-        // TODO: Create a new message
-        // update resolution state
+        $input = $request->all();
+        $userId = $request->user()->id;
+
+        \Validator::make($input, [
+            'message'   => 'required|min:3'
+        ]);
+
+        // Create message
+        $message = ShipmentResolutionMessage::create([
+            'shipment_resolution_id'    => $resolutionId,
+            'user_id'                   => $userId,
+            'message'                   => $input['message']
+        ]);
+
+        return redirect()->back();
     }
 }

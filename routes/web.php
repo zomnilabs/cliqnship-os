@@ -97,7 +97,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
     Route::group(['prefix' => 'resolutions', 'namespace' => 'Resolution'], function() {
         Route::get('/', 'ResolutionsController@index');
         Route::get('/{resolutionId}', 'ResolutionsController@show');
-        Route::post('/{resolutionId}/message', 'ResolutionsController@newMessage');
+        Route::post('/{resolutionId}', 'ResolutionsController@newMessage');
     });
 
     Route::group(['prefix' => 'cash-on-delivery', 'namespace' => 'COD'], function() {

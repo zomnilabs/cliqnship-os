@@ -10,6 +10,8 @@ class ShipmentResolutionMessage extends Model
 {
     use SoftDeletes;
 
+    protected $guarded = ['id'];
+
     public function resolution()
     {
         return $this->belongsTo(ShipmentResolution::class);

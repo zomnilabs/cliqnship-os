@@ -95,7 +95,7 @@
                             Actions <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="#">Update Shipment Information</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#updateShipmentAddress">Update Shipment Address</a></li>
                             <li><a href="#">Re-dispatch Shipment</a></li>
                         </ul>
                     </div>
@@ -118,51 +118,6 @@
                         </div>
                     </div>
                 </div>
-
-                {{--<table class="table table-bordered" id="tableResolution">--}}
-                    {{--<thead>--}}
-                    {{--<tr>--}}
-                        {{--<th class="hide">Shipment #</th>--}}
-                        {{--<th>Tracking #</th>--}}
-                        {{--<th>Customer</th>--}}
-                        {{--<th>Delivery Address</th>--}}
-                        {{--<th>Reason</th>--}}
-                        {{--<th>Returned Times</th>--}}
-                        {{--<th>Status</th>--}}
-                        {{--<th>Actions</th>--}}
-                    {{--</tr>--}}
-                    {{--</thead>--}}
-
-                    {{--<tbody>--}}
-                    {{--@foreach($shipments as $shipment)--}}
-                        {{--<tr id="shipment-{{$shipment->shipment->id}}">--}}
-                            {{--<td class="hide">{{$shipment->shipment->id}}</td>--}}
-                            {{--<td>{{ $shipment->shipment->trackingNumbers()->mainTrackingNumber($shipment->shipment->id)->tracking_number}}</td>--}}
-                            {{--<td>{{ $shipment->shipment->user->profile->first_name}} {{$shipment->shipment->user->profile->middle_name}} {{$shipment->shipment->user->profile->last_name}}</td>--}}
-                            {{--<td>--}}
-                                {{--@if ($shipment->shipment->address)--}}
-                                    {{--{{ $shipment->shipment->address->address_line_1 }} {{ $shipment->shipment->address->barangay }} {{ $shipment->shipment->address->city }}, {{ $shipment->shipment->address->province }}. {{ $shipment->shipment->address->zip_code }}--}}
-                                {{--@endif--}}
-                            {{--</td>--}}
-                            {{--<td>{{ $shipment->logs()->first()->reason }}</td>--}}
-                            {{--<td>{{ $shipment->shipment->returnLogs()->orderBy('created_at', 'DESC')->count() }}</td>--}}
-                            {{--<td>{{ $shipment->status }}</td>--}}
-                            {{--<td>--}}
-                                {{--<button class="btn btn-default" id="returnShipmentBtn"--}}
-                                {{--data-shipment="{{ $shipment->shipment->id }}" data-toggle="modal" data-target="#returnShipment" >--}}
-                                {{--<i class="fa fa-refresh"></i></button>--}}
-
-                                {{--<button class="btn btn-default returned-shipment-logs-btn" id="returnShipmentLogsBtn"--}}
-                                {{--data-resolution="{{ $shipment->id }}"--}}
-                                {{--data-shipment="{{ $shipment->shipment->id }}" data-toggle="modal" data-target="#returnShipmentLogs" >--}}
-                                {{--<i class="fa fa-eye"></i></button>--}}
-
-                                {{--<a href="" class="btn btn-default"><i class="fa fa-eye"></i></a>--}}
-                            {{--</td>--}}
-                        {{--</tr>--}}
-                    {{--@endforeach--}}
-                    {{--</tbody>--}}
-                {{--</table>--}}
             </div>
         </div>
     </div>
@@ -173,42 +128,53 @@
         <hr>
         <ul class="timeline">
 
-            <!-- timeline time label -->
-            <li class="time-label">
+            <?php $lastDate = null ?>
+            @foreach ($resolution->messages as $message)
+
+                @if ($lastDate != $message->created_at->toDateString())
+                    <!-- timeline time label -->
+                    <li class="time-label">
                         <span class="bg-red">
-                            10 Feb. 2014
+                            {{ $message->created_at->format('d M. Y') }}
                         </span>
-            </li>
-            <!-- /.timeline-label -->
+                    </li>
 
-            <!-- timeline item -->
-            <li>
-                <!-- timeline icon -->
-                <i class="fa fa-comments bg-green"></i>
-                <div class="timeline-item">
-                    <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+                    <?php $lastDate = $message->created_at->toDateString() ?>
+                @endif
 
-                    <h3 class="timeline-header"><a href="#">Support Team</a></h3>
+                <li>
+                    <!-- timeline icon -->
+                    <i class="fa fa-comments bg-green"></i>
+                    <div class="timeline-item">
+                        <span class="time"><i class="fa fa-clock-o"></i> {{ $message->created_at->format('h:i A') }}</span>
 
-                    <div class="timeline-body">
-                        We can't locate the address specified on the shipment, please double check
+                        <h3 class="timeline-header"><a href="#">{{ $message->user->user_group_id == 5 ? $message->user->profile->full_name : 'Support Team' }}</a></h3>
+
+                        <div class="timeline-body">
+                            {{ $message->message }}
+                        </div>
+
+                        <div class="timeline-footer">
+
+                        </div>
                     </div>
+                </li>
+            @endforeach
 
-                    <div class="timeline-footer">
 
-                    </div>
-                </div>
-            </li>
         </ul>
 
         <div class="row" style="margin-bottom: 50px;">
             <div class="col-md-12 col-xs-12">
-                <form action="" method="POST">
-                    <textarea class="form-control" rows="3"></textarea>
-                    <button class="btn btn-default pull-right">Send Message</button>
+                <form method="POST">
+                    {{ csrf_field() }}
+                    <textarea class="form-control" rows="3" name="message"></textarea>
+                    <button type="submit" class="btn btn-default pull-right">Send Message</button>
                 </form>
             </div>
         </div>
 
     </div>
+
+    @include('admin.resolution.modals.shipment-form')
 @endsection
