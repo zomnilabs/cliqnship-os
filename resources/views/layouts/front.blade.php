@@ -53,11 +53,12 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="tracking-search">
-                        <form action="#" method="get" style="width: 200px; margin: 10px 20px;">
+                        <form action="/tracking" method="GET" style="width: 200px; margin: 10px 20px;">
                             <div class="input-group">
-                                <input type="text" name="q" class="form-control" placeholder="Tracking number...">
+                                <input type="text" name="waybill"
+                                       class="form-control" placeholder="Tracking number...">
                                 <span class="input-group-btn">
-                                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                                    <button type="submit" id="search-btn" class="btn btn-flat">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
