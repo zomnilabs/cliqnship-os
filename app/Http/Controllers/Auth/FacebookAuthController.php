@@ -42,7 +42,7 @@ class FacebookAuthController extends Controller {
                 'account_id'    => strtoupper(uniqid()),
                 'user_group_id' => 5,
                 'account_type'  => 'individual',
-                'login_type'    => 'email'
+                'login_type'    => 'facebook'
             ]);
 
             $newUser->profile()->create([

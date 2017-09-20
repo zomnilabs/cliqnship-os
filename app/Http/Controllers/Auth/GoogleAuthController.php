@@ -42,7 +42,7 @@ class GoogleAuthController extends Controller {
                 'account_id'    => strtoupper(uniqid()),
                 'user_group_id' => 5,
                 'account_type'  => 'individual',
-                'login_type'    => 'email'
+                'login_type'    => 'google'
             ]);
 
             $newUser->profile()->create([
