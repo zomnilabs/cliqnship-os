@@ -14,10 +14,16 @@ class ReturnShipmentsController extends Controller {
 
         if ($request->has('status')) {
             $problematicShipments = ShipmentResolution::with('shipment')
+                ->whereHas('shipment', function($q) use ($user) {
+                    $q->where('user_id', $user['id']);
+                })
                 ->where('status', $request->get('status'))
                 ->get();
         } else {
             $problematicShipments = ShipmentResolution::with('shipment')
+                ->whereHas('shipment', function($q) use ($user) {
+                    $q->where('user_id', $user['id']);
+                })
                 ->where('status', 'unresolved')
                 ->get();
         }
