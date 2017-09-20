@@ -96,7 +96,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li><a href="#" data-toggle="modal" data-target="#updateShipmentAddress">Update Shipment Address</a></li>
-                            <li><a href="#">Re-dispatch Shipment</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#redispatchShipment">Re-dispatch Shipment</a></li>
                         </ul>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                 <div class="row">
                     <div class="col-md-8 col-xs-12">
                         <div class="col-md-6 col-xs-12">
-                            <p>Shipment Status: <small class="label bg-red">{{ $resolution->shipment->status }}</small></p>
+                            <p>Shipment Status: <small class="label {{ $resolution->shipment->status === 'returned' ? 'bg-red' : 'bg-green' }}">{{ $resolution->shipment->status }}</small></p>
                             <p>Customer: <strong>{{ $resolution->shipment->user->profile->full_name }}</strong></p>
                             <p>Customer Account Id: <strong>{{ $resolution->shipment->user->account_id }}</strong></p>
                             <p>Customer Address: <strong>{{ $resolution->shipment->senderAddress->full_address_without_identifier }}</strong></p>
@@ -177,4 +177,5 @@
     </div>
 
     @include('admin.resolution.modals.shipment-form')
+    @include('admin.resolution.modals.redispatch-confirmation')
 @endsection

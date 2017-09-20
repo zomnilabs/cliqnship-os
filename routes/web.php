@@ -98,6 +98,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function(){
         Route::get('/', 'ResolutionsController@index');
         Route::get('/{resolutionId}', 'ResolutionsController@show');
         Route::post('/{resolutionId}', 'ResolutionsController@newMessage');
+        Route::post('/{resolutionId}/redispatch', 'ResolutionsController@redispatch');
     });
 
     Route::group(['prefix' => 'cash-on-delivery', 'namespace' => 'COD'], function() {
