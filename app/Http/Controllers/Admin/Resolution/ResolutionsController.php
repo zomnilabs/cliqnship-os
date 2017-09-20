@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Admin\Resolution;
 
 use App\Http\Controllers\Controller;
+use App\Models\Shipment;
+use App\Models\ShipmentEvent;
 use App\Models\ShipmentResolution;
 use App\Models\ShipmentResolutionMessage;
 use App\Models\ShipmentReturnLogs;
@@ -60,12 +62,48 @@ class ResolutionsController extends Controller {
             'message'   => 'required|min:3'
         ]);
 
+        // Update resolution status
+        ShipmentResolution::where('id', $resolutionId)
+            ->update(['status' => 'resolving']);
+
         // Create message
         $message = ShipmentResolutionMessage::create([
             'shipment_resolution_id'    => $resolutionId,
             'user_id'                   => $userId,
             'message'                   => $input['message']
         ]);
+
+        if ($message) {
+            $request->session()->flash('success', 'Successfully posted a new message');
+        } else {
+            $request->session()->flash('error', 'Failed to post a new message');
+        }
+
+        return redirect()->back();
+    }
+
+    public function redispatch(Request $request, $resolutionId)
+    {
+        $resolution = ShipmentResolution::find($resolutionId);
+        $shipment = Shipment::find($resolution->shipment_id);
+
+        $updated = $shipment->update(['status' => 'arrived-at-hq']);
+
+        // Record event
+        ShipmentEvent::create([
+            'shipment_id'   => $shipment->id,
+            'event_source'  => 'warehouse',
+            'event'         => 'status_change',
+            'value'         => 'arrived-at-hq',
+            'remarks'       => 're-dispatched shipment',
+            'user_id'       => $request->user()->id
+        ]);
+
+        if ($updated) {
+            $request->session()->flash('success', 'Successfully redispatched this shipment');
+        } else {
+            $request->session()->flash('error', 'Failed to redispatch shipment');
+        }
 
         return redirect()->back();
     }
