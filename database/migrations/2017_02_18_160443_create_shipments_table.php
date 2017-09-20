@@ -30,7 +30,8 @@ class CreateShipmentsTable extends Migration
             $table->string('account_name')->nullable();
             $table->string('account_number')->nullable();
             $table->string('bank')->nullable();
-            $table->enum('status', ['pending', 'shipment-cancelled','for-pickup','courier-picked-up','arrived-at-hq','enroute','successfully-delivered','returned'])->default('pending');
+            $table->enum('status', ['pending', 'shipment-cancelled','for-pickup','courier-picked-up',
+                'arrived-at-hq','enroute','successfully-delivered','returned'])->default('pending');
             $table->enum('charge_to', ['sender','consignee'])->default('sender');
             $table->enum('pay_thru', ['cash','account','others'])->default('cash');
             $table->string('if_pay_others')->nullable();

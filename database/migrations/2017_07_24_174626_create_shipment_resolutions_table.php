@@ -17,8 +17,10 @@ class CreateShipmentResolutionsTable extends Migration
             $table->increments('id');
             $table->integer('shipment_id')->unsigned();
             $table->text('remarks');
-            $table->enum('state', ['unread', 'read']);
+            $table->enum('state', ['waiting-for-disposition-from-consignee',
+                'waiting-for-disposition-from-consignee', 'waiting-for-action']);
             $table->enum('status', ['unresolved', 'resolving', 'resolved']);
+            $table->enum('resolution', ['return-to-sender', 're-forward to 3PL']);
             $table->timestamps();
             $table->softDeletes();
         });
