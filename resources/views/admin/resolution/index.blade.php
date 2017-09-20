@@ -2,6 +2,34 @@
 
 @section('stylesheets')
     <link rel="stylesheet" href="{{ asset('css/wizard.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
+    <style>
+        .select2-container {
+            width: 100% !important;
+            font-size: 20px;
+        }
+
+        .select2-search__field, .select2-search {
+            width: 100% !important;
+        }
+
+        .waybill-input {
+            font-size: 20px;
+        }
+
+        .select2-selection__choice {
+            background-color: #3c8dbc !important;
+            border-color: #357CA5 !important;
+            font-size: 20px;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+            color: #224F69 !important;
+            margin-right: 10px !important;
+        }
+    </style>
 @endsection
 
 @section('scripts')
@@ -44,6 +72,36 @@
 
                     $('.content-data').removeClass('hide');
                     $('.loading-data').addClass('hide');
+                });
+            });
+
+            // Select 2
+            $(".waybill-input").select2({
+                tags: true,
+                tokenSeparators: [',', ' '],
+                placeholder: "Input waybill number/s",
+                allowClear: true
+            }).on('change', function(value) {
+                let waybills = $(this).val();
+                let newValue = waybills[waybills.length - 1];
+
+                if (! newValue) {
+                    return;
+                }
+
+                fetch(`/api/web/resolutions/check/${newValue}`).then((res) => {
+                    if (! res.ok) {
+                        res.json().then((json) => {
+
+                            let html = `<p><span class="text-danger">${newValue}</span> : ${json}</p>`;
+                            $('.error-container').append(html);
+                        });
+
+                        return;
+                    }
+                }).catch((error) => {
+                    let html = `<p><span class="text-danger">${newValue}</span> is not a valid waybill</p>`;
+                    $('.error-container').append(html);
                 });
             });
 
@@ -131,6 +189,13 @@
                     <h1>Returned Shipments</h1>
                 </div>
 
+                <div class="box-title pull-right">
+                    <button class="btn btn-primary"
+                            data-toggle="modal"
+                            data-target="#createRTS"
+                            style="margin-top: 30px">Create an RTS Shipment</button>
+                </div>
+
             </div>
             <div class="box-body">
                 <table class="table table-bordered" id="tableResolution">
@@ -140,7 +205,7 @@
                         <th>Tracking #</th>
                         <th>Customer</th>
                         <th>Delivery Address</th>
-                        <th>Reason</th>
+                        <th>Last Reason</th>
                         <th>Returned Times</th>
                         <th>Status</th>
                         <th>Actions</th>
@@ -159,7 +224,7 @@
                                 @endif
                             </td>
                             <td>{{ $resolution->logs()->first()->reason }}</td>
-                            <td>{{ $resolution->shipment->returnLogs()->orderBy('created_at', 'DESC')->count() }}</td>
+                            <td>{{ $resolution->logs()->count() }}</td>
                             <td>{{ $resolution->status }}</td>
                             <td>
                                 {{--<button class="btn btn-default" id="returnShipmentBtn"--}}
@@ -180,6 +245,6 @@
             </div>
         </div>
     </div>
-    @include('admin.resolution.modals.refresh-shipment')
-    @include('admin.resolution.modals.return-logs')
+
+    @include('admin.resolution.modals.create-rts')
 @endsection

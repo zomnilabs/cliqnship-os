@@ -95,6 +95,11 @@ Route::group(['namespace' => 'Api'], function() {
         Route::get('/{shipmentId}', 'ShipmentsController@show');
     });
 
+    // Resolution
+    Route::group(['prefix' => 'web/resolutions'], function () {
+        Route::get('/check/{waybillNumber}', 'ResolutionsController@checkWaybill');
+    });
+
     // Bookings
     Route::group(['prefix' => 'web/bookings'], function () {
         Route::post('/{bookingId}/update-rider', 'BookingController@updateRider');
