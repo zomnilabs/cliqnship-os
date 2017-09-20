@@ -8,23 +8,26 @@
                 <h4 class="modal-title" id="modalTitle">Resolution Log</h4>
             </div>
             <div class="modal-body">
-                <div class="loading-data">
-                    <h1><i class="fa fa-spin fa-spinner" style="font-size: 30px;"></i> Please wait...</h1>
-                </div>
-
-                <div class="content-data hide">
+                <div class="content-data">
                     <table class="table table-bordered">
                         <thead>
                         <tr>
                             <th>User</th>
                             <th>User Type</th>
-                            <th>Remarks</th>
+                            <th>Reason</th>
                             <th>Date</th>
                         </tr>
                         </thead>
 
                         <tbody id="resolutionLogs">
-
+                            @foreach ($resolution->logs as $log)
+                                <tr>
+                                    <td>{{ $log->user->profile->full_name }}</td>
+                                    <td>{{ $log->user->userGroup->name }}</td>
+                                    <td>{{ $log->reason }}</td>
+                                    <td>{{ $log->created_at }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

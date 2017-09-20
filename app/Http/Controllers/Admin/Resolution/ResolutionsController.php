@@ -36,7 +36,7 @@ class ResolutionsController extends Controller {
 
     public function show(Request $request, $resolutionId)
     {
-        $resolution = ShipmentResolution::with('shipment', 'messages')
+        $resolution = ShipmentResolution::with('shipment', 'messages', 'logs')
             ->where('id', $resolutionId)
             ->first();
 

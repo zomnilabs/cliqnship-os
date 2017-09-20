@@ -95,6 +95,7 @@
                             Actions <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="#" data-toggle="modal" data-target="#returnShipmentLogs">View Return Logs</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#updateShipmentAddress">Update Shipment Address</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#redispatchShipment">Re-dispatch Shipment</a></li>
                         </ul>
@@ -185,5 +186,6 @@
     </div>
 
     @include('admin.resolution.modals.shipment-form')
+    @include('admin.resolution.modals.return-logs')
     @include('admin.resolution.modals.redispatch-confirmation')
 @endsection
