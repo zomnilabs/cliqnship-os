@@ -273,6 +273,8 @@ class ShipmentsController extends AbstractAPIController {
         }
 
         $events = ShipmentEvent::where('shipment_id', $tracking->shipment_id)
+            ->where('event_source', '<>', 'customer')
+            ->where('event', 'status_change')
             ->get();
 
         $result = [];
