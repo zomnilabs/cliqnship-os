@@ -23,6 +23,7 @@ Route::get('/pricing', function () {
 Route::get('/faqs', function () {
     return view('faqs');
 });
+Route::get('/tracking/{id}', 'HomeController@tracking');
 
 Auth::routes();
 
